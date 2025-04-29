@@ -103,7 +103,7 @@ class _ConsultaPageState extends State<ConsultaPage> {
 
   Future<void> _fetchData() async {
     //
-   final response = await http.get(Uri.parse('https://sincere-magnificent-cobweb.glitch.me/datetime'));
+   final response = await http.get(Uri.parse('https://animated-occipital-buckthorn.glitch.me/datetime'));
   if (response.statusCode == 200) {
     setState(() {
       _responseText = response.body;
