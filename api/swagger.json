@@ -1,0 +1,83 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API Exemplo com Swagger",
+      "version": "1.0.0",
+      "description": "API para retornar data/hora e concatenar valores"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000"
+      }
+    ],
+    "paths": {
+      "/datetime": {
+        "get": {
+          "summary": "Retorna data e hora do servidor",
+          "responses": {
+            "200": {
+              "description": "Data e hora atual",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "datetime": {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/concat": {
+        "post": {
+          "summary": "Concatena valor com frase fixa",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["value"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Resultado da concatenação",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "result": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Erro - valor não fornecido"
+            }
+          }
+        }
+      }
+    }
+  }
+  

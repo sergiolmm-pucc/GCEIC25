@@ -1,0 +1,121 @@
+name: Deploy Flutter Web to FTP (Integrator)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'web/**'          # Só roda se houver alterações em arquivos dentro de lib/
+      - 'assets/**'       # Ou se houver alterações na pasta assets/
+      # Adicione outras pastas ou arquivos conforme necessário
+
+
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Environment
+        type: choice
+        required: true
+        default: dev
+        options:
+              - web
+              - macOs
+              - android
+jobs:
+  set-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set environment from branch or input
+        id: branch_check
+        run: |
+          if [ -n "${{ github.event.inputs.environment }}" ]; then
+            if  [ "${{ github.event.inputs.environment }}" = "macOs" ]; then
+              echo "env_name=${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT              
+            else
+              echo "Error: Invalid target"
+              exit 1
+            fi  
+          else
+            echo "Error: Invalid target"
+            exit 1
+          fi
+    outputs:
+      env_name: ${{ steps.branch_check.outputs.env_name }}
+
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: web/gcseic25  # Define o diretório base para todos os comandos
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Flutter Web
+        run: flutter build web
+
+
+      
+          
+      #- name: Archive APK
+      #  uses: actions/upload-artifact@v2
+      #  with:
+      #    name: release-apk
+      #    # Try running the build locally with the build command to be sure of this path
+      #    path: build/app/outputs/flutter-apk/app-dev-release.apk
+
+      - name: Upload to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: web/gcseic25/build/web/
+          server-dir: /
+
+
+  macOSdeploy:
+    needs: [set-environment]
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: web/gcseic25  # Define o diretório base para todos os comandos
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build macOS release
+        run: flutter build macos 
+
+
+      - name: Zip macOS .app bundle
+        run: |
+          cd build/macos/Build/Products/Release
+          zip -r FlutterApp.zip gcseic25.app
+      
+
+      - name: Upload macOS build as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: flutter-macos-app
+          path: web/gcseic25/build/macos/Build/Products/Release/FlutterApp.zip

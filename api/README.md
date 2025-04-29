@@ -1,12 +1,9 @@
-# GCEIC25
-Repositorio para aula de GCEIC 2025 github actions 
+# GCEIC25-102
+Repositorio para aula de GCEIC 2025 github actions turma 102
 
 Repositorio glitch para API
 
-https://animated-occipital-buckthorn.glitch.me/
-
-Repositorio para Flutter 
-A ser disponibilizado.
+https://sincere-magnificent-cobweb.glitch.me/
 
 Repositorio para Flutter A ser disponibilizado.
 
@@ -34,5 +31,5 @@ http://localhost:3000/api-docs
 
 Apos deploy
 
-https://animated-occipital-buckthorn.glitch.me/datetime
+https://sincere-magnificent-cobweb.glitch.me/datetime
 
