@@ -1,6 +1,9 @@
 # GCEIC25
 Repositorio para aula de GCEIC 2025 github actions 
 
+para teste da pagina  -> sergio.dev.br
+
+
 Repositorio glitch para API
 
 https://animated-occipital-buckthorn.glitch.me/
