@@ -1,8 +1,10 @@
 name: Deploy DEV branch
+
 on:
   push:
-    branches: 
-      - 'dev'
+    branches-ignore:
+      - 'dev/web'
+      - 'main'
 #    paths:
 #      - 'api/**'          # Só roda se houver alterações em arquivos dentro de api/
 
