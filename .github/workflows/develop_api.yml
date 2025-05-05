@@ -1,0 +1,78 @@
+name: Deploy Flutter Web to FTP (Integrator)
+
+on:
+  push:
+    branches:
+      - dev
+    paths:
+      - 'api/**'          # Só roda se houver alterações em arquivos dentro de api/
+
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Environment
+        type: choice
+        required: true
+        default: dev
+        options:
+              - dev
+
+jobs:
+  set-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set environment from branch or input
+        id: branch_check
+        run: |
+          if [ -n "${{ github.event.inputs.environment }}" ]; then
+            if  [ "${{ github.event.inputs.environment }}" = "dev" ]; then
+              echo "env_name=${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT              
+            else
+              echo "Error: Invalid target"
+              exit 1
+            fi  
+          else
+            echo "Error: Invalid target"
+            exit 1
+          fi
+    outputs:
+      env_name: ${{ steps.branch_check.outputs.env_name }}
+
+
+  build_test:
+    #needs: getCode
+    permissions: write-all
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api  # Define o diretório base para todos os comandos
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - name: Get Code from repository
+        uses: actions/checkout@v3
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Instala Dependencias
+        run: npm ci
+
+  Deploy:
+    needs: build_test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api  # Define o diretório base para todos os comandos    
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Faz sincronismo com o Glitch
+        uses: kanadgupta/glitch-sync@v3.0.1
+        with:
+          auth-token: "${{ secrets.authTokenDev }}"
+          project-id: "${{ secrets.projectIdDev }}"
+          path: 'api'
+      
