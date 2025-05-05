@@ -5,7 +5,7 @@ Repositorio glitch para API
 
 https://sincere-magnificent-cobweb.glitch.me/
 
-by SLMM
+by SLMM 2025
 
 Repositorio para Flutter A ser disponibilizado.
 
