@@ -2,9 +2,9 @@ name: Deploy DEV branch
 on:
   push:
     branches: 
-      - 'dev/**'
-    paths:
-      - 'api/**'          # Só roda se houver alterações em arquivos dentro de api/
+      - 'dev'
+#    paths:
+#      - 'api/**'          # Só roda se houver alterações em arquivos dentro de api/
 
   workflow_dispatch:
     inputs:
