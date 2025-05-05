@@ -1,5 +1,4 @@
-name: Deploy Flutter Web to FTP (Integrator)
-
+name: Deploy DEV branch
 on:
   push:
     branches: 
