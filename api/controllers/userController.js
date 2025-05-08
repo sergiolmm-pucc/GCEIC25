@@ -4,7 +4,8 @@ exports.listUsers = (req, res) => {
   res.json({
     datetime: now.toISOString(),
     usuario: "sergio", 
-    turma: "101"
+    turma: "101",
+    aula: "presencial"
   });
   };
   
