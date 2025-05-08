@@ -30,7 +30,7 @@ class _SplashScreenState1 extends State<SplashScreen1> {
     return Scaffold(
       body: Center(
         child: Text(
-          'Loading...',
+          'Carregando...',
           style: TextStyle(fontSize: 24),
         ),
       ),
@@ -76,7 +76,7 @@ class _ConsultaPageState1 extends State<ConsultaPage1> {
           children: [
             ElevatedButton(
               onPressed: _fetchData,
-              child: Text('Consultar API'),
+              child: Text('Consultar API turma 101'),
             ),
             SizedBox(height: 20),
             Container(
