@@ -1,0 +1,20 @@
+{
+  "name": "gceic25-grupo5",
+  "version": "1.0.0",
+  "description": "Repositorio para aula de GCEIC 2025 github actions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guildpuc/GCEIC25-Grupo5.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guildpuc/GCEIC25-Grupo5/issues"
+  },
+  "homepage": "https://github.com/guildpuc/GCEIC25-Grupo5#readme"
+}

@@ -2,6 +2,8 @@ const express = require('express');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 const cors = require('cors');
+const ipiRoutes = require('./routes/ipiRoutes');
+
 
 
 const app = express();
@@ -16,6 +18,8 @@ app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/', baseRoutes);
 app.use('/users', userRoutes);
+app.use('/impostos', ipiRoutes);
+
 
 
 app.listen(port, () => {
