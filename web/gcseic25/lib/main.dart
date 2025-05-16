@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
-import 'package:gcseic25/equipes/equipe8/multiplier-markup.dart';
+import 'package:gcseic25/equipes/CI_CD_8/multiplier-markup.dart';
 
 void main() {
   runApp(MyApp());
