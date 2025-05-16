@@ -1,10 +1,17 @@
-
-// Calcula o multiplicador do markup
-exports.calcMultiplierMarkup = (req, res) => {
+function calcMultiplierMarkup(req, res) {
     const despesasVariaveis = req.body.despesasVariaveis;
     const despesasFixas = req.body.despesasFixas;
     const margemLucro = req.body.margemLucro;
-    const markup = (100 / (100 - (despesasVariaveis + despesasFixas + margemLucro))).toFixed(2);
+    
+    const markup = calcularMarkup(despesasVariaveis, despesasFixas, margemLucro);
+    res.send(markup.toString());
+}
 
-    res.send(markup);
+function calcularMarkup(despesasVariaveis, despesasFixas, margemLucro) {
+    return Number((100 / (100 - (despesasVariaveis + despesasFixas + margemLucro))).toFixed(2));
+}
+
+module.exports = {
+    calcMultiplierMarkup,
+    calcularMarkup
 };
