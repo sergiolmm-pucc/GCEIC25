@@ -77,6 +77,79 @@
             }
           }
         }
+      },
+      "/MKP2/calcMultiplierMarkup": {
+        "post": {
+          "tags": ["Markup"],
+          "summary": "Calcula o multiplicador do markup",
+          "description": "Calcula o multiplicador do markup com base nas despesas variáveis, fixas e margem de lucro",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "despesasVariaveis": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100,
+                      "description": "Percentual de despesas variáveis"
+                    },
+                    "despesasFixas": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100,
+                      "description": "Percentual de despesas fixas"
+                    },
+                    "margemLucro": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100,
+                      "description": "Percentual da margem de lucro"
+                    }
+                  },
+                  "required": ["despesasVariaveis", "despesasFixas", "margemLucro"]
+                },
+                "example": {
+                  "despesasVariaveis": 20,
+                  "despesasFixas": 30,
+                  "margemLucro": 10
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Multiplicador do markup calculado com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "string",
+                    "description": "Valor do multiplicador do markup",
+                    "example": "2.50"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Erro nos parâmetros fornecidos",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Todos os valores devem estar entre 0 e 100"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

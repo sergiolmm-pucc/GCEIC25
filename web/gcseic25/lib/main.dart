@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
+import 'package:gcseic25/equipes/equipe8/multiplier-markup.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/splash1': (context) => SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
         '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
+        '/markup-calculator': (context) => MultiplierMarkupPage(),
       },
     );
   }
@@ -47,6 +49,13 @@ class HomePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/splash2');
               },
               child: Text('Abrir Consulta 2'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/markup-calculator');
+              },
+              child: Text('Calculadora de Markup'),
             ),
           ],
         ),
