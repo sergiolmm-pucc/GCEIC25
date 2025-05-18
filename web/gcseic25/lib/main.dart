@@ -3,6 +3,7 @@ import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
 import 'package:gcseic25/equipes/CI_CD_8/multiplier-markup.dart';
+import 'package:gcseic25/equipes/CI_CD_8/divisor_markup.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         '/splash1': (context) => SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
         '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
         '/markup-calculator': (context) => MultiplierMarkupPage(),
+        '/divisor-markup-calculator': (context) => DivisorMarkupPage(),
       },
     );
   }
@@ -57,6 +59,12 @@ class HomePage extends StatelessWidget {
               },
               child: Text('Calculadora de Markup'),
             ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/divisor-markup-calculator');
+              },
+              child: Text('Calculadora de Divisor de Markup'),)
           ],
         ),
       ),
