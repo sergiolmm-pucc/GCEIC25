@@ -30,5 +30,5 @@ test('Teste de divisão de markup com valores zero', () => {
 });
 
 test('Teste de divisão de markup com valores decimais', () => {
-    expect(markup2.calcularMarkupDivisor(100.5, 50.25)).toBe(0.49);
+    expect(markup2.calcularMarkupDivisor(100.5, 50.25)).toBe(0.5);
 });

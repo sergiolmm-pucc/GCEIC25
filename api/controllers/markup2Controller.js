@@ -20,7 +20,9 @@ function calcularMarkup(despesasVariaveis, despesasFixas, margemLucro) {
 }
 
 function calcularMarkupDivisor(precoVenda, custoTotalVendas) {
-    return Number(((precoVenda-custoTotalVendas)/100).toFixed(2));
+    if (precoVenda === 0) return 0;
+    const resultado = Math.abs((precoVenda - custoTotalVendas) / precoVenda);
+    return Number(resultado.toFixed(2));
 }
 
 module.exports = {
