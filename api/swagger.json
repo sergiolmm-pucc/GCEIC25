@@ -150,6 +150,70 @@
             }
           }
         }
+      },
+      "/MKP2/calcDivisorMarkup": {
+        "post": {
+          "tags": ["Markup"],
+          "summary": "Calcula o divisor do markup",
+          "description": "Calcula o divisor do markup com base no preço de venda e custo total de vendas",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "precoVenda": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Preço de venda do produto"
+                    },
+                    "custoTotalVendas": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Custo total de vendas do produto"
+                    }
+                  },
+                  "required": ["precoVenda", "custoTotalVendas"]
+                },
+                "example": {
+                  "precoVenda": 150.00,
+                  "custoTotalVendas": 100.00
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Divisor do markup calculado com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "string",
+                    "description": "Valor do divisor do markup",
+                    "example": "0.50"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Erro nos parâmetros fornecidos",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Os valores devem ser maiores que zero"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
