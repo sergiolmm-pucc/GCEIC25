@@ -150,6 +150,68 @@
             }
           }
         }
+      },
+      "/MKP2/auth": {
+        "post": {
+          "tags": ["Autenticação"],
+          "summary": "Verifica email e senha",
+          "description": "Autentica um usuário com base em credenciais fixas (email e senha). Retorna se o acesso está liberado ou negado.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "example": "admin@exemplo.com"
+                    },
+                    "senha": {
+                      "type": "string",
+                      "example": "123456"
+                    }
+                  },
+                  "required": ["email", "senha"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Credenciais corretas - acesso liberado",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "acesso": {
+                        "type": "string",
+                        "example": "liberado"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Credenciais incorretas - acesso negado",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "acesso": {
+                        "type": "string",
+                        "example": "negado"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
