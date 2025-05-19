@@ -9,15 +9,11 @@
     </testcase>
     <testcase classname=" Teste de multiplicação de markup com valores zero" name=" Teste de multiplicação de markup com valores zero" time="0.001">
     </testcase>
-    <testcase classname=" Teste de multiplicação de markup com valores decimais" name=" Teste de multiplicação de markup com valores decimais" time="0.001">
+    <testcase classname=" Teste de multiplicação de markup com valores decimais" name=" Teste de multiplicação de markup com valores decimais" time="0">
     </testcase>
-    <testcase classname=" POST to /MKP2/calcMultiplierMarkup should return 201" name=" POST to /MKP2/calcMultiplierMarkup should return 201" time="0.036">
-      <failure>TypeError: fetch failed
-    at Object.fetch (node:internal/deps/undici/undici:14062:11)
-    at processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at Object.&lt;anonymous&gt; (C:\Users\tiagu\OneDrive\Documentos\Engenharia_de_Software\Semestres\5 Semestre\GCEIC\Tarefas\Tafera CI CD\GCEIC25\api\testes\markup2.test.js:23:22)</failure>
+    <testcase classname=" POST to /MKP2/calcMultiplierMarkup should return 201" name=" POST to /MKP2/calcMultiplierMarkup should return 201" time="0.017">
     </testcase>
-    <testcase classname=" Teste de multiplicação de markup com valores não numéricos" name=" Teste de multiplicação de markup com valores não numéricos" time="0">
+    <testcase classname=" Teste de multiplicação de markup com valores não numéricos" name=" Teste de multiplicação de markup com valores não numéricos" time="0.001">
     </testcase>
     <testcase classname=" Teste de multiplicação de markup com valores numeros e não numéricos" name=" Teste de multiplicação de markup com valores numeros e não numéricos" time="0">
     </testcase>
