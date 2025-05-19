@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
+import 'package:gcseic25/equipes/CI_CD_8/auth/login.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/splash1': (context) => SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
         '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
+        '/CI_CD_8': (context) => LoginPage(), 
       },
     );
   }
@@ -47,6 +49,13 @@ class HomePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/splash2');
               },
               child: Text('Abrir Consulta 2'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/CI_CD_8');
+              },
+              child: Text('Grupo CI_CD_8'),
             ),
           ],
         ),
