@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-// Rota para cálculo de IPI 
+// Rota para cálculo de IPI   
 router.post('/ipi', (req, res) => {
   const { valorProduto, aliquotaIPI } = req.body;
 
