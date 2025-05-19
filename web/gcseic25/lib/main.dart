@@ -3,7 +3,6 @@ import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
 import 'package:gcseic25/equipes/CI_CD_8/auth/login.dart';
-import 'package:gcseic25/equipes/CI_CD_8/multiplier-markup.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,7 +21,6 @@ class MyApp extends StatelessWidget {
         '/splash1': (context) => SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
         '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
         '/CI_CD_8': (context) => LoginPage(), 
-        '/markup-calculator': (context) => MultiplierMarkupPage(),
       },
     );
   }
@@ -58,9 +56,6 @@ class HomePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/CI_CD_8');
               },
               child: Text('Grupo CI_CD_8'),
-                Navigator.pushNamed(context, '/markup-calculator');
-              },
-              child: Text('Calculadora de Markup'),
             ),
           ],
         ),
