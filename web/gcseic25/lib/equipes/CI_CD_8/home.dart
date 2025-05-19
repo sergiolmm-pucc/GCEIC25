@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gcseic25/equipes/CI_CD_8/multiplier-markup.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -22,9 +23,12 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () {
-                // Aqui o membro 1 pode colocar sua rota
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MultiplierMarkupPage()),
+                );
               },
-              child: const Text('Módulo do Membro 1'),
+              child: const Text('Calculadora de Markup'),
             ),
             const SizedBox(height: 12),
             ElevatedButton(
