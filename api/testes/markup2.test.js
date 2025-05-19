@@ -33,7 +33,6 @@ test('Teste de divisão de markup com valores decimais', () => {
     expect(markup2.calcularMarkupDivisor(100.5, 50.25)).toBe(0.5);
 });
 
-
 // NOVOS TESTES USANDO TDD - Tiago
 // Teste para a rota POST /MKP2/calcMultiplierMarkup
 test("POST to /MKP2/calcMultiplierMarkup should return 201", async () => {
@@ -64,6 +63,4 @@ test('Teste de multiplicação de markup com valores não numéricos', () => {
 
 test('Teste de multiplicação de markup com valores numeros e não numéricos', () => {
     expect(markup2.calcularMarkup(10, 'b', 30)).toBe("Erro");
-
 });
-
