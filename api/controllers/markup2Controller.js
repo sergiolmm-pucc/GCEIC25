@@ -12,9 +12,26 @@ function calcularMarkup(despesasVariaveis, despesasFixas, margemLucro) {
         return "Erro";
     }
     return Number((100 / (100 - (despesasVariaveis + despesasFixas + margemLucro))).toFixed(2));
+    
 }
+
+// POST /auth
+function auth (req, res) {
+  const { email, senha } = req.body;
+
+  // Credenciais fixas para autenticação
+  const EMAIL_CORRETO = "admin@exemplo.com";
+  const SENHA_CORRETA = "123456";
+
+  if (email === EMAIL_CORRETO && senha === SENHA_CORRETA) {
+    return res.json({ acesso: 'liberado' });
+  } else {
+    return res.status(401).json({ acesso: 'negado' });
+  }
+};
 
 module.exports = {
     calcMultiplierMarkup,
-    calcularMarkup
+    calcularMarkup,
+    auth
 };
