@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
-import 'package:gcseic25/equipes/CI_CD_8/multiplier-markup.dart';
-import 'package:gcseic25/equipes/CI_CD_8/divisor_markup.dart';
+import 'package:gcseic25/equipes/CI_CD_8/auth/login.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,8 +20,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/splash1': (context) => SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
         '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
-        '/markup-calculator': (context) => MultiplierMarkupPage(),
-        '/divisor-markup-calculator': (context) => DivisorMarkupPage(),
+        '/CI_CD_8': (context) => LoginPage(), 
       },
     );
   }
@@ -55,16 +53,10 @@ class HomePage extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/markup-calculator');
+                Navigator.pushNamed(context, '/CI_CD_8');
               },
-              child: Text('Calculadora de Markup'),
+              child: Text('Grupo CI_CD_8'),
             ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/divisor-markup-calculator');
-              },
-              child: Text('Calculadora de Divisor de Markup'),)
           ],
         ),
       ),
