@@ -8,6 +8,9 @@ function calcMultiplierMarkup(req, res) {
 }
 
 function calcularMarkup(despesasVariaveis, despesasFixas, margemLucro) {
+    if (typeof despesasVariaveis !== 'number' || typeof despesasFixas !== 'number' || typeof margemLucro !== 'number') {
+        return "Erro";
+    }
     return Number((100 / (100 - (despesasVariaveis + despesasFixas + margemLucro))).toFixed(2));
 }
 
