@@ -60,6 +60,20 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Instala Dependencias
         run: npm ci
+      - name: Roda eslint
+        run: npm run lint
+
+      - name: Roda testes
+        run: npm test
+
+      - name: Gera relatotio de testes 
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: Jest tests
+          path: j*.xml
+          reporter: jest-junit
+
 
   Deploy:
     needs: build_test
