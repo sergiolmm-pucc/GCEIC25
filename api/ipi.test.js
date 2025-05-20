@@ -4,7 +4,7 @@ const app = require('./server'); // importa o app configurado
 describe('Testa rota de cálculo de IPI', () => {
   it('deve calcular corretamente o IPI', async () => {
     const res = await request(app)
-      .post('/impostos/ipi')  // <-- corrigido aqui
+      .post('/impostos/ipi')  // <-- corrigido aqui 
       .send({ valorProduto: 100, aliquotaIPI: 10 });
 
     expect(res.statusCode).toBe(200);

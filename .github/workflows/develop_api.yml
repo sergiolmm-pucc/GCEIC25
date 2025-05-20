@@ -75,19 +75,19 @@ jobs:
           reporter: jest-junit
 
 
-  Deploy:
-    needs: build_test
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: api  # Define o diretório base para todos os comandos    
-    steps:
-      - name: Get Code
-        uses: actions/checkout@v3
-      - name: Faz sincronismo com o Glitch
-        uses: kanadgupta/glitch-sync@v3.0.1
-        with:
-          auth-token: "${{ secrets.authTokenDev }}"
-          project-id: "${{ secrets.projectIdDev }}"
-          path: 'api'
+#  Deploy:
+#    needs: build_test
+#    runs-on: ubuntu-latest
+#    defaults:
+#      run:
+#        working-directory: api  # Define o diretório base para todos os comandos    
+#    steps:
+#      - name: Get Code
+#        uses: actions/checkout@v3
+#      - name: Faz sincronismo com o Glitch
+#        uses: kanadgupta/glitch-sync@v3.0.1
+#        with:
+#          auth-token: "${{ secrets.authTokenDev }}"
+#          project-id: "${{ secrets.projectIdDev }}"
+#          path: 'api'
       
