@@ -79,13 +79,13 @@ jobs:
       #- name: Roda os testes
       #  run: npm test
 
-      - name: Create reports directory
+      - name: Cria diretório reports
         run: |
             mkdir -p reports  # Cria ./api/reports 
+            echo "Diretório criado em: $(pwd)/reports"
 
       - name: Run Tests
-        run: |
-            npm test
+        run: npm test
 
       - name: Verificar relatório
         run: |
@@ -96,10 +96,10 @@ jobs:
 
       - name: Gera o Relatório dos testes
         uses: dorny/test-reporter@v1
-        if: success() || failure()
+        if: always()
         with:
           name: JEST tests
-          path: reports/jest-junit.xml
+          path: api/reports/jest-junit.xml
           reporter: jest-junit
 
 

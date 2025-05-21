@@ -5,7 +5,7 @@
     "main": "server.js",
     "scripts": {
         "start": "node server.js",
-        "test": "mkdir -p reports && jest --reporters=default --reporters=jest-junit",
+        "test": "jest --reporters=default --reporters=jest-junit",
         "lint": "eslint ."
     },
     "dependencies": {
