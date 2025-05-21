@@ -11,6 +11,43 @@
       }
     ],
     "paths": {
+      "/MOB3/calcular": {
+        "post": {
+          "summary": "Calcular custos de construção e manutenção da piscina",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "largura": { "type": "number" },
+                    "comprimento": { "type": "number" },
+                    "profundidade": { "type": "number" },
+                    "precoAgua": { "type": "number" },
+                    "custoEletrico": { "type": "number" },
+                    "custoHidraulico": { "type": "number" },
+                    "custoManutencaoMensal": { "type": "number" }
+                  },
+                  "required": ["largura", "comprimento", "profundidade", "precoAgua", "custoEletrico", "custoHidraulico", "custoManutencaoMensal"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Resultado dos cálculos",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "/datetime": {
         "get": {
           "summary": "Retorna data e hora do servidor",
