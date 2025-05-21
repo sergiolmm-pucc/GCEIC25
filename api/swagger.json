@@ -77,6 +77,57 @@
             }
           }
         }
+      },
+      "/ETEC/calcularCustoMensal": {
+        "post": {
+          "tags":["ETEC"],
+          "summary": "Calcula o salário mensal",
+          "description": "Calcula o salário mensal bruto com base no salário líquido informado",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "salario": {
+                      "type": "number"
+                    }
+                  },
+                  "required": ["value"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Resultado do cálculo do salário mensal",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "salarioMensal": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Erro - valor não fornecido"
+            }
+          }
+        }
       }
     }
   }

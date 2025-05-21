@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="1" failures="0" errors="0" time="0.873">
+  <testsuite name="Testes para o cálculo do ETEC" errors="0" failures="0" skipped="0" timestamp="2025-05-21T15:29:07" time="0.738" tests="1">
+    <testcase classname="Testes para o cálculo do ETEC Calcular o custo mensal da empregada" name="Testes para o cálculo do ETEC Calcular o custo mensal da empregada" time="0.004">
+    </testcase>
+  </testsuite>
+</testsuites>
