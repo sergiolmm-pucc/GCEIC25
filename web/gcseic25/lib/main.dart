@@ -12,13 +12,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'App de Navegação',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: HomePage(),
       routes: {
-        '/splash1': (context) => SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
-        '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
+        '/splash1':
+            (context) =>
+                SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
+        '/splash2':
+            (context) =>
+                SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
       },
     );
   }
@@ -29,24 +31,38 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tela Inicial'),
+        title: const Text('Tarefa CI/CD - Grupo 10'),
+        centerTitle: true,
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/splash1');
-              },
-              child: Text('Abrir Base 1'),
+            const Text(
+              'Cálculo de Encargos trabalhistas - Empregada doméstica',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 40),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/splash2');
+                Navigator.pushNamed(context, '/login');
               },
-              child: Text('Abrir Consulta 2'),
+              child: const Text('Login'),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/help');
+              },
+              child: const Text('Ajuda'),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/equipe');
+              },
+              child: const Text('Equipe'),
             ),
           ],
         ),
@@ -80,10 +96,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(
-          'Carregando...',
-          style: TextStyle(fontSize: 24),
-        ),
+        child: Text('Carregando...', style: TextStyle(fontSize: 24)),
       ),
     );
   }
@@ -103,32 +116,29 @@ class _ConsultaPageState extends State<ConsultaPage> {
 
   Future<void> _fetchData() async {
     //
-   final response = await http.get(Uri.parse('https://animated-occipital-buckthorn.glitch.me/datetime'));
-  if (response.statusCode == 200) {
-    setState(() {
-      _responseText = response.body;
-    });
-  } else {
-    setState(() {
-      _responseText = 'Erro ao consultar API.';
-    });
-  }
+    final response = await http.get(
+      Uri.parse('https://animated-occipital-buckthorn.glitch.me/datetime'),
+    );
+    if (response.statusCode == 200) {
+      setState(() {
+        _responseText = response.body;
+      });
+    } else {
+      setState(() {
+        _responseText = 'Erro ao consultar API.';
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: AppBar(title: Text(widget.title)),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            ElevatedButton(
-              onPressed: _fetchData,
-              child: Text('Consultar API'),
-            ),
+            ElevatedButton(onPressed: _fetchData, child: Text('Consultar API')),
             SizedBox(height: 20),
             Container(
               width: double.infinity,
@@ -137,10 +147,7 @@ class _ConsultaPageState extends State<ConsultaPage> {
                 border: Border.all(color: Colors.blueAccent),
                 borderRadius: BorderRadius.circular(8.0),
               ),
-              child: Text(
-                _responseText,
-                style: TextStyle(fontSize: 16),
-              ),
+              child: Text(_responseText, style: TextStyle(fontSize: 16)),
             ),
           ],
         ),
