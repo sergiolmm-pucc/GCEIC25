@@ -76,10 +76,15 @@ jobs:
       #   run:
       #     npm run lint
       # aqui uma entrada para cada teste
-      - name: Roda os testes
-        run: npm test
+      #- name: Roda os testes
+      #  run: npm test
 
-      - name: lista
+      - name: Rodar testes e gerar relatório
+        run: |
+            npm test
+            ls -la reports/  # Verifica se o arquivo foi criado (debug)
+
+      - name: Lista
         run: ls -la
 
       - name: Gera o Relatório dos testes
