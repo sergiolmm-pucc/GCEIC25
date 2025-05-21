@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
+import 'package:gcseic25/equipes/CI_CD_10/login.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         '/splash2':
             (context) =>
                 SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
+        '/CI_CD_10': (context) => LoginPage(),
       },
     );
   }
@@ -30,39 +32,30 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tarefa CI/CD - Grupo 10'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text('Tela Inicial')),
       body: Center(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Cálculo de Encargos trabalhistas - Empregada doméstica',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-            ),
-            const SizedBox(height: 40),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/login');
+                Navigator.pushNamed(context, '/splash1');
               },
-              child: const Text('Login'),
+              child: Text('Abrir Base 1'),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/help');
+                Navigator.pushNamed(context, '/splash2');
               },
-              child: const Text('Ajuda'),
+              child: Text('Abrir Consulta 2'),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/equipe');
+                Navigator.pushNamed(context, '/CI_CD_10');
               },
-              child: const Text('Equipe'),
+              child: Text('Grupo CI_CD_10'),
             ),
           ],
         ),
