@@ -20,6 +20,33 @@ function calcularMarkup(despesasVariaveis, despesasFixas, margemLucro) {
         return "Erro";
     }
     return Number((100 / (100 - (despesasVariaveis + despesasFixas + margemLucro))).toFixed(2));
+    
+}
+
+// POST /auth
+function auth (req, res) {
+  const { email, senha } = req.body;
+
+  // Credenciais fixas para autenticação
+
+  const isAuth = autentication(email, senha)
+
+  if (isAuth) {
+    return res.json({ acesso: 'liberado' });
+  } else {
+    return res.status(401).json({ acesso: 'negado' });
+  }
+};
+
+function autentication(email, password) {
+    const EMAIL_CORRETO = "admin@exemplo.com";
+    const SENHA_CORRETA = "123456";
+
+    if (email === EMAIL_CORRETO && password === SENHA_CORRETA) {
+      return true
+    } else {
+      return false
+    }
 }
 
 function calcularMarkupDivisor(precoVenda, custoTotalVendas) {
@@ -31,6 +58,8 @@ function calcularMarkupDivisor(precoVenda, custoTotalVendas) {
 module.exports = {
     calcMultiplierMarkup,
     calcularMarkup,
+    auth,
+    autentication
     calcularMarkupDivisor,
     calcDivisorMarkup
 };

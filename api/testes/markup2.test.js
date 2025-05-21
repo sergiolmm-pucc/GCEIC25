@@ -65,3 +65,27 @@ test('Teste de multiplicação de markup com valores não numéricos', () => {
 test('Teste de multiplicação de markup com valores numeros e não numéricos', () => {
     expect(markup2.calcularMarkup(10, 'b', 30)).toBe("Erro");
 });
+
+test('Teste de autenticação', () => {
+    expect(markup2.autentication('admin@exemplo.com', "123456")).toBe(true)
+})
+
+test('Teste de autenticação', () => {
+    expect(markup2.autentication(1, 12)).toBe(false)
+})
+
+test('Teste de autenticação', () => {
+    expect(markup2.autentication('vinicius@exemplo.com', "123456")).toBe(false)
+})
+
+test('Teste de autenticação', () => {
+    expect(markup2.autentication('admin@exemplo.com', "123")).toBe(false)
+})
+
+test('Teste de autenticação', () => {
+    expect(markup2.autentication('', "")).toBe(false)
+})
+
+test('Teste de autenticação', () => {
+    expect(markup2.autentication(null, null)).toBe(false)
+})
