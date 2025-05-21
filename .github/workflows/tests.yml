@@ -79,10 +79,12 @@ jobs:
       #- name: Roda os testes
       #  run: npm test
 
+      - name: Create reports directory
+        run: |
+            mkdir -p reports  # Cria ./api/reports 
+
       - name: Run Tests
         run: |
-            mkdir -p reports
-            chmod 777 reports  # Garante permissões de escrita
             npm test
 
       - name: Verificar relatório
@@ -97,7 +99,7 @@ jobs:
         if: success() || failure()
         with:
           name: JEST tests
-          path: api/reports/jest-junit.xml
+          path: reports/jest-junit.xml
           reporter: jest-junit
 
 
