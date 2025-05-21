@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="7" failures="1" errors="0" time="0.457">
-  <testsuite name="undefined" errors="0" failures="1" skipped="0" timestamp="2025-05-18T22:08:19" time="0.359" tests="7">
+<testsuites name="jest tests" tests="13" failures="0" errors="0" time="0.212">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2025-05-21T14:20:15" time="0.18" tests="13">
     <testcase classname=" Teste de multiplicação de markup" name=" Teste de multiplicação de markup" time="0.001">
     </testcase>
-    <testcase classname=" Teste de multiplicação de markup com valores negativos" name=" Teste de multiplicação de markup com valores negativos" time="0">
+    <testcase classname=" Teste de multiplicação de markup com valores negativos" name=" Teste de multiplicação de markup com valores negativos" time="0.001">
     </testcase>
     <testcase classname=" Teste de multiplicação de markup com valores zero" name=" Teste de multiplicação de markup com valores zero" time="0">
     </testcase>
-    <testcase classname=" Teste de multiplicação de markup com valores decimais" name=" Teste de multiplicação de markup com valores decimais" time="0.001">
+    <testcase classname=" Teste de multiplicação de markup com valores decimais" name=" Teste de multiplicação de markup com valores decimais" time="0">
     </testcase>
-    <testcase classname=" POST to /MKP2/calcMultiplierMarkup should return 201" name=" POST to /MKP2/calcMultiplierMarkup should return 201" time="0.036">
-      <failure>TypeError: fetch failed
-    at Object.fetch (node:internal/deps/undici/undici:14062:11)
-    at processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at Object.&lt;anonymous&gt; (C:\Users\tiagu\OneDrive\Documentos\Engenharia_de_Software\Semestres\5 Semestre\GCEIC\Tarefas\Tafera CI CD\GCEIC25\api\testes\markup2.test.js:23:22)</failure>
+    <testcase classname=" POST to /MKP2/calcMultiplierMarkup should return 201" name=" POST to /MKP2/calcMultiplierMarkup should return 201" time="0.027">
     </testcase>
     <testcase classname=" Teste de multiplicação de markup com valores não numéricos" name=" Teste de multiplicação de markup com valores não numéricos" time="0">
     </testcase>
     <testcase classname=" Teste de multiplicação de markup com valores numeros e não numéricos" name=" Teste de multiplicação de markup com valores numeros e não numéricos" time="0">
+    </testcase>
+    <testcase classname=" Teste de autenticação" name=" Teste de autenticação" time="0.001">
+    </testcase>
+    <testcase classname=" Teste de autenticação" name=" Teste de autenticação" time="0">
+    </testcase>
+    <testcase classname=" Teste de autenticação" name=" Teste de autenticação" time="0">
+    </testcase>
+    <testcase classname=" Teste de autenticação" name=" Teste de autenticação" time="0">
+    </testcase>
+    <testcase classname=" Teste de autenticação" name=" Teste de autenticação" time="0">
+    </testcase>
+    <testcase classname=" Teste de autenticação" name=" Teste de autenticação" time="0">
     </testcase>
   </testsuite>
 </testsuites>
