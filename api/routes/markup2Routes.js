@@ -5,5 +5,6 @@ const markup2Controller = require('../controllers/markup2Controller');
 
 router.post('/calcMultiplierMarkup', markup2Controller.calcMultiplierMarkup);
 router.post('/auth', markup2Controller.auth);
+router.post('/calcDivisorMarkup', markup2Controller.calcDivisorMarkup);
 
 module.exports = router;

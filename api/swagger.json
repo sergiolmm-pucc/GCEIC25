@@ -151,11 +151,11 @@
           }
         }
       },
-      "/MKP2/auth": {
+      "/MKP2/calcDivisorMarkup": {
         "post": {
-          "tags": ["Autenticação"],
-          "summary": "Verifica email e senha",
-          "description": "Autentica um usuário com base em credenciais fixas (email e senha). Retorna se o acesso está liberado ou negado.",
+          "tags": ["Markup"],
+          "summary": "Calcula o divisor do markup",
+          "description": "Calcula o divisor do markup com base no preço de venda e custo total de vendas",
           "requestBody": {
             "required": true,
             "content": {
@@ -163,47 +163,49 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "email": {
-                      "type": "string",
-                      "example": "admin@exemplo.com"
+                    "precoVenda": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Preço de venda do produto"
                     },
-                    "senha": {
-                      "type": "string",
-                      "example": "123456"
+                    "custoTotalVendas": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Custo total de vendas do produto"
                     }
                   },
-                  "required": ["email", "senha"]
+                  "required": ["precoVenda", "custoTotalVendas"]
+                },
+                "example": {
+                  "precoVenda": 150.00,
+                  "custoTotalVendas": 100.00
                 }
               }
             }
           },
           "responses": {
             "200": {
-              "description": "Credenciais corretas - acesso liberado",
+              "description": "Divisor do markup calculado com sucesso",
               "content": {
                 "application/json": {
                   "schema": {
-                    "type": "object",
-                    "properties": {
-                      "acesso": {
-                        "type": "string",
-                        "example": "liberado"
-                      }
-                    }
+                    "type": "string",
+                    "description": "Valor do divisor do markup",
+                    "example": "0.50"
                   }
                 }
               }
             },
-            "401": {
-              "description": "Credenciais incorretas - acesso negado",
+            "400": {
+              "description": "Erro nos parâmetros fornecidos",
               "content": {
                 "application/json": {
                   "schema": {
                     "type": "object",
                     "properties": {
-                      "acesso": {
+                      "error": {
                         "type": "string",
-                        "example": "negado"
+                        "example": "Os valores devem ser maiores que zero"
                       }
                     }
                   }

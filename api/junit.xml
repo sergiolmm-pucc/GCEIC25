@@ -10,6 +10,15 @@
     <testcase classname=" Teste de multiplicação de markup com valores decimais" name=" Teste de multiplicação de markup com valores decimais" time="0">
     </testcase>
     <testcase classname=" POST to /MKP2/calcMultiplierMarkup should return 201" name=" POST to /MKP2/calcMultiplierMarkup should return 201" time="0.027">
+    <testcase classname=" Teste de divisão de markup" name=" Teste de divisão de markup" time="0">
+    </testcase>
+    <testcase classname=" Teste de divisão de markup com valores negativos" name=" Teste de divisão de markup com valores negativos" time="0">
+    </testcase>
+    <testcase classname=" Teste de divisão de markup com valores zero" name=" Teste de divisão de markup com valores zero" time="0">
+    </testcase>
+    <testcase classname=" Teste de divisão de markup com valores decimais" name=" Teste de divisão de markup com valores decimais" time="0">
+    </testcase>
+    <testcase classname=" POST to /MKP2/calcMultiplierMarkup should return 201" name=" POST to /MKP2/calcMultiplierMarkup should return 201" time="0.059">
     </testcase>
     <testcase classname=" Teste de multiplicação de markup com valores não numéricos" name=" Teste de multiplicação de markup com valores não numéricos" time="0">
     </testcase>
