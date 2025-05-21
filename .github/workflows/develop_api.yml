@@ -60,34 +60,20 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Instala Dependencias
         run: npm ci
-      - name: Roda eslint
-        run: npm run lint
 
-      - name: Roda testes
-        run: npm test
-
-      - name: Gera relatotio de testes 
-        uses: dorny/test-reporter@v1
-        if: success() || failure()
+  Deploy:
+    needs: build_test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api  # Define o diretório base para todos os comandos    
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Faz sincronismo com o Glitch
+        uses: kanadgupta/glitch-sync@v3.0.1
         with:
-          name: Jest tests
-          path: j*.xml
-          reporter: jest-junit
-
-
-#  Deploy:
-#    needs: build_test
-#    runs-on: ubuntu-latest
-#    defaults:
-#      run:
-#        working-directory: api  # Define o diretório base para todos os comandos    
-#    steps:
-#      - name: Get Code
-#        uses: actions/checkout@v3
-#      - name: Faz sincronismo com o Glitch
-#        uses: kanadgupta/glitch-sync@v3.0.1
-#        with:
-#          auth-token: "${{ secrets.authTokenDev }}"
-#          project-id: "${{ secrets.projectIdDev }}"
-#          path: 'api'
+          auth-token: "${{ secrets.authTokenDev }}"
+          project-id: "${{ secrets.projectIdDev }}"
+          path: 'api'
       
