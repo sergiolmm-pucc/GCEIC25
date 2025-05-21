@@ -79,13 +79,18 @@ jobs:
       #- name: Roda os testes
       #  run: npm test
 
-      - name: Rodar testes e gerar relatório
+      - name: Run Tests
         run: |
+            mkdir -p reports
+            chmod 777 reports  # Garante permissões de escrita
             npm test
-            ls -la reports/  # Verifica se o arquivo foi criado (debug)
 
-      - name: Lista
-        run: ls -la
+      - name: Verificar relatório
+        run: |
+            echo "Conteúdo do diretório:"
+            ls -la
+            echo "Conteúdo de reports/:"
+            ls -la reports/ || echo "Pasta reports não existe"
 
       - name: Gera o Relatório dos testes
         uses: dorny/test-reporter@v1
