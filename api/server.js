@@ -2,7 +2,7 @@ const express = require('express');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 const cors = require('cors');
-const ipiRoutes = require('./routes/ipiRoutes');
+const ipiRoutes = require('./routes/ipiRoutes5');
 const userRoutes = require('./routes/userRoutes');
 const baseRoutes = require('./routes/baseRoutes');
 

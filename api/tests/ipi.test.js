@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('./server'); // importa o app configurado
+const app = require('../server'); // importa o app configurado
 
 describe('Testa rota de cálculo de IPI', () => {
   it('deve calcular corretamente o IPI', async () => {
@@ -12,11 +12,11 @@ describe('Testa rota de cálculo de IPI', () => {
   });
 
   it('deve retornar erro se faltar campos', async () => {
-    const res = await request(app)
-      .post('/impostos/ipi')  // <-- corrigido aqui
-      .send({ valorProduto: 100 });
+  const res = await request(app)
+    .post('/impostos/ipi')
+    .send({ valorProduto: 100 });
 
-    expect(res.statusCode).toBe(400);
-    expect(res.body.erro).toBe('Informe valorProduto e aliquotaIPI');
+  expect(res.statusCode).toBe(400);
+  expect(res.body.erro).toBe('valorProduto e aliquotaIPI são obrigatórios'); // Atualizado aqui
   });
 });
