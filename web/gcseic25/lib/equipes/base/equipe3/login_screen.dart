@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -11,15 +14,29 @@ class _LoginScreenState extends State<LoginScreen> {
   final _senha = TextEditingController();
   String? erro;
 
-  void _login() {
-    if (_usuario.text == 'aluno' && _senha.text == '1234') {
+  Future<void> _login() async {
+    final url = Uri.parse('http://10.0.2.2:3000/login'); 
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'email': _usuario.text,
+        'senha': _senha.text,
+      }),
+    );
+
+    if (response.statusCode == 200) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => HomeScreen()),
       );
-    } else {
+    } else if (response.statusCode == 401) {
       setState(() {
         erro = 'Usuário ou senha inválidos.';
+      });
+    } else {
+      setState(() {
+        erro = 'Erro ao conectar ao servidor.';
       });
     }
   }

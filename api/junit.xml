@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="3" failures="0" errors="0" time="1.267">
+  <testsuite name="Teste de cálculo de piscina" errors="0" failures="0" skipped="0" timestamp="2025-05-21T14:04:11" time="1.174" tests="3">
+    <testcase classname="Teste de cálculo de piscina Calcula corretamente os valores" name="Teste de cálculo de piscina Calcula corretamente os valores" time="0.006">
+    </testcase>
+    <testcase classname="Teste da rota POST /login Login com credenciais válidas retorna 200" name="Teste da rota POST /login Login com credenciais válidas retorna 200" time="0.064">
+    </testcase>
+    <testcase classname="Teste da rota POST /login Login com credenciais inválidas retorna 401" name="Teste da rota POST /login Login com credenciais inválidas retorna 401" time="0.006">
+    </testcase>
+  </testsuite>
+</testsuites>

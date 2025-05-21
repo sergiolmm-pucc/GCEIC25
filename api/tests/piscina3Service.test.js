@@ -1,3 +1,7 @@
+const request = require('supertest');
+const app = require('../server');  // seu app Express exportado
+
+// Teste da função calcularTodosCustos
 const piscinaService = require('../services/piscina3Service');
 
 describe('Teste de cálculo de piscina', () => {
@@ -18,5 +22,37 @@ describe('Teste de cálculo de piscina', () => {
     expect(resultado.custoAgua).toBe('120.00');
     expect(resultado.custoConstrucao).toBe('2620.00');
     expect(resultado.manutencaoMensal).toBe('200.00');
+  });
+});
+
+// Teste da rota POST /login
+describe('Teste da rota POST /login', () => {
+  test('Login com credenciais válidas retorna 200', async () => {
+    const dadosLogin = {
+      email: 'usuario1@email.com',
+      senha: '123456'
+    };
+
+    const response = await request(app)
+      .post('/MOB3/login')
+      .send(dadosLogin)
+      .expect(200);
+
+    expect(response.body).toHaveProperty('token');
+  });
+
+  test('Login com credenciais inválidas retorna 401', async () => {
+    const dadosLogin = {
+      email: 'usuario@example.com',
+      senha: 'senhaErrada'
+    };
+
+    const response = await request(app)
+      .post('/MOB3/login')
+      .send(dadosLogin)
+      .expect(401);
+
+    expect(response.body).toHaveProperty('erro');
+    expect(response.body.erro).toBe('Usuário ou senha inválidos');
   });
 });

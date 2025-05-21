@@ -48,6 +48,70 @@
           }
         }
       },
+      "/MOB3/login": {
+        "post": {
+          "summary": "Realiza login do usuário",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "example": "usuario@email.com"
+                    },
+                    "senha": {
+                      "type": "string",
+                      "example": "123456"
+                    }
+                  },
+                  "required": ["email", "senha"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Login realizado com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "sucesso": { "type": "boolean" },
+                      "mensagem": { "type": "string" },
+                      "usuario": {
+                        "type": "object",
+                        "properties": {
+                          "email": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Falha de autenticação",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "erro": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Erro interno no servidor"
+            }
+          }
+        }
+      },
       "/datetime": {
         "get": {
           "summary": "Retorna data e hora do servidor",
