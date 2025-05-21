@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gcseic25/equipes/CI_CD_6/login_screen.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
@@ -8,6 +9,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,14 +20,19 @@ class MyApp extends StatelessWidget {
       ),
       home: HomePage(),
       routes: {
-        '/splash1': (context) => SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
-        '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
+        '/splash1': (context) =>
+            SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
+        '/splash2': (context) =>
+            SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
+        '/CI_CD_6': (context) => LoginScreen()
       },
     );
   }
 }
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +56,13 @@ class HomePage extends StatelessWidget {
               },
               child: Text('Abrir Consulta 2'),
             ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/CI_CD_6');
+              },
+              child: Text('Cálculo do ETEC[CI/CD 6]'),
+            )
           ],
         ),
       ),
@@ -58,7 +73,7 @@ class HomePage extends StatelessWidget {
 class SplashScreen extends StatefulWidget {
   final Widget nextPage;
 
-  const SplashScreen({required this.nextPage});
+  const SplashScreen({super.key, required this.nextPage});
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -92,7 +107,7 @@ class _SplashScreenState extends State<SplashScreen> {
 class ConsultaPage extends StatefulWidget {
   final String title;
 
-  const ConsultaPage({required this.title});
+  const ConsultaPage({super.key, required this.title});
 
   @override
   _ConsultaPageState createState() => _ConsultaPageState();
@@ -103,16 +118,17 @@ class _ConsultaPageState extends State<ConsultaPage> {
 
   Future<void> _fetchData() async {
     //
-   final response = await http.get(Uri.parse('https://animated-occipital-buckthorn.glitch.me/datetime'));
-  if (response.statusCode == 200) {
-    setState(() {
-      _responseText = response.body;
-    });
-  } else {
-    setState(() {
-      _responseText = 'Erro ao consultar API.';
-    });
-  }
+    final response = await http.get(
+        Uri.parse('https://animated-occipital-buckthorn.glitch.me/datetime'));
+    if (response.statusCode == 200) {
+      setState(() {
+        _responseText = response.body;
+      });
+    } else {
+      setState(() {
+        _responseText = 'Erro ao consultar API.';
+      });
+    }
   }
 
   @override
