@@ -93,6 +93,33 @@
                 }
               }
             },
+            "/MOB3/sobre": {
+              "post": {
+                "summary": "Retorna a foto do time",
+                "responses": {
+                  "200": {
+                    "description": "Foto do time retornada com sucesso",
+                    "content": {
+                        "application/json": {
+                          "schema": {
+                            "type": "object",
+                            "properties": {
+                            "sucesso": { "type": "boolean" },
+                            "mensagem": { "type": "string" },
+                            "url": { "type": "string", "format": "uri" }
+                            },
+                            "example": {
+                              "sucesso": true,
+                              "mensagem": "Foto do time",
+                              "url": "https://sep-bucket-prod.s3.amazonaws.com/wp-content/uploads/2022/11/51981800313_fb744fd72d_o.jpg"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
             "401": {
               "description": "Falha de autenticação",
               "content": {

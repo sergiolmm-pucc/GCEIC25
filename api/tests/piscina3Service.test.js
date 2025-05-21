@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../app');  
+const app = require('../app');
 
 // Teste da função calcularTodosCustos
 const piscinaService = require('../services/piscina3Service');
@@ -54,5 +54,16 @@ describe('Teste da rota POST /login', () => {
 
     expect(response.body).toHaveProperty('erro');
     expect(response.body.erro).toBe('Usuário ou senha inválidos');
+  });
+});
+
+describe('Teste da rota POST /sobre', () => {
+  test('Retorna a URL da imagem corretamente', async () => {
+    const response = await request(app)
+      .post('/MOB3/sobre')
+      .expect(200);
+
+    expect(response.body).toHaveProperty('foto');
+    expect(response.body.foto).toBe('https://sep-bucket-prod.s3.amazonaws.com/wp-content/uploads/2022/11/51981800313_fb744fd72d_o.jpg');
   });
 });

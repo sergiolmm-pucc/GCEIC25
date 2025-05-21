@@ -24,3 +24,9 @@ exports.realizarLogin = (req, res) => {
     res.status(500).json({ erro: 'Erro ao realizar login', detalhes: error.message });
   }
 };
+
+exports.sobre = (req, res) => {
+  res.status(200).json({
+    foto: "https://sep-bucket-prod.s3.amazonaws.com/wp-content/uploads/2022/11/51981800313_fb744fd72d_o.jpg"
+  });
+};

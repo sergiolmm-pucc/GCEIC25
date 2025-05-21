@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const SECRET_KEY = 'seusegredoaqui';
 
+
 exports.calcularTodosCustos = ({ largura, comprimento, profundidade, precoAgua, custoEletrico, custoHidraulico, custoManutencaoMensal }) => {
   const volume = largura * comprimento * profundidade;
   const custoAgua = volume * precoAgua;
@@ -50,4 +51,14 @@ exports.loginUser = ({ email, senha }) => {
     },
     token 
   };
+};
+
+exports.sobre = (req, res) => {
+  const urlFoto = 'https://sep-bucket-prod.s3.amazonaws.com/wp-content/uploads/2022/11/51981800313_fb744fd72d_o.jpg';
+
+  res.json({
+    sucesso: true,
+    mensagem: 'Foto do time',
+    url: urlFoto
+  });
 };
