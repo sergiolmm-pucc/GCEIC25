@@ -33,6 +33,51 @@ exports.calcularFerias = ({ salario }) => {
 
 exports.calcularRecisao = () => {}
 
-exports.calcularDecimoTerceiro = () => {}
+exports.calcularDecimoTerceiro = ({ salario, mesesTrabalhados }) => {
+  if (!salario || typeof salario !== 'number' || salario <= 0) {
+    throw new Error("Salário inválido.");
+  }
+
+  if (mesesTrabalhados < 0 || mesesTrabalhados > 12) {
+    throw new Error("Meses trabalhados deve estar entre 0 e 12.");
+  }
+
+  const decimoTerceiroBruto = (salario / 12) * mesesTrabalhados;
+
+  const calcularINSS = (valor) => {
+    let inss = 0;
+    const faixas = [
+      { limite: 1412.00, aliquota: 0.075 },
+      { limite: 2666.68, aliquota: 0.09 },
+      { limite: 4000.03, aliquota: 0.12 },
+      { limite: 7786.02, aliquota: 0.14 }
+    ];
+
+    let restante = valor;
+    let anterior = 0;
+
+    for (let i = 0; i < faixas.length; i++) {
+      const { limite, aliquota } = faixas[i];
+      if (valor > limite) {
+        inss += (limite - anterior) * aliquota;
+        anterior = limite;
+      } else {
+        inss += (restante) * aliquota;
+        break;
+      }
+    }
+
+    return inss;
+  };
+
+  const inss = calcularINSS(decimoTerceiroBruto);
+  const decimoTerceiroLiquido = decimoTerceiroBruto - inss;
+
+  return {
+    bruto: decimoTerceiroBruto.toFixed(2),
+    inss: inss.toFixed(2),
+    liquido: decimoTerceiroLiquido.toFixed(2)
+  };
+};
 
 exports.calcularESocial = () => {}

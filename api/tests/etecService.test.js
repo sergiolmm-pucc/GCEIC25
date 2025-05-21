@@ -1,10 +1,9 @@
-const etecService = require('../services/etecService');
+const etecService = require("../services/etecService");
 
-describe('Testes para o cálculo do ETEC', () => {
-
-  test('Calcular o custo mensal da empregada', () => {
+describe("Testes para o cálculo do ETEC", () => {
+  test("Calcular o custo mensal da empregada", () => {
     const dados = {
-        salario: 1518
+      salario: 1518,
     };
 
     const resultado = etecService.calcularCustoMensal(dados);
@@ -20,5 +19,20 @@ describe('Testes para o cálculo do ETEC', () => {
     const resultado = etecService.calcularFerias(dados);
 
     expect(resultado).toBe(202.4);
+  });
+
+  test("Calcular décimo terceiro proporcional", () => {
+    const dados = {
+      salario: 1518,
+      mesesTrabalhados: 10,
+    };
+
+    const resultado = etecService.calcularDecimoTerceiro(dados);
+
+    expect(resultado).toEqual({
+      bruto: "1265.00",
+      inss: "94.88",
+      liquido: "1170.13",
+    });
   });
 });
