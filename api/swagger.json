@@ -128,6 +128,57 @@
             }
           }
         }
+      },
+      "/ETEC/calcularFerias": {
+        "post": {
+          "tags":["ETEC"],
+          "summary": "Calcula férias mensal",
+          "description": "Calcula férias mensal com base no salário informado",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "salario": {
+                      "type": "number"
+                    }
+                  },
+                  "required": ["value"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Resultado do cálculo das férias",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "feriasMensal": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Erro - valor não fornecido"
+            }
+          }
+        }
       }
     }
   }

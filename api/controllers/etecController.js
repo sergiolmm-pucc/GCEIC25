@@ -17,3 +17,21 @@ exports.calcularCustoMensal = (req,res) => {
         });
     }
 }
+
+exports.calcularFerias = (req, res) => {
+    try {
+        const dados = req.body;
+        const feriasMensal = etecService.calcularFerias(dados);
+        res.status(200).json({
+          status: "success",
+          data: {
+            feriasMensal,
+          },
+        });
+    } catch (error) {
+        res.status(500).json({
+        status: "error",
+        message: error.message,
+        });
+    }
+};

@@ -18,7 +18,18 @@ exports.calcularCustoMensal = ({ salario }) => {
     return salario + FGTS + indenizacaoCompensatoria + seguroAcidentes + INSSEmpregador + INSS;
 }
 
-exports.calcularFerias = () => {}
+exports.calcularFerias = ({ salario }) => {
+    const ferias = salario / 12;
+    const abonoFerias = ferias / 3;
+    const INSSEmpregador = (ferias + abonoFerias) * 0.08;
+    const seguroAcidentes = (ferias + abonoFerias) * 0.008;
+    const FGTS = (ferias + abonoFerias) * 0.08;
+    const indenizacaoCompensatoria = (ferias + abonoFerias) * 0.032;
+
+    const totalMensal = ferias + abonoFerias + INSSEmpregador + seguroAcidentes + FGTS + indenizacaoCompensatoria;
+
+    return totalMensal
+}
 
 exports.calcularRecisao = () => {}
 
