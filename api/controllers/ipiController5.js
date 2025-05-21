@@ -1,14 +1,12 @@
-// ipiController.js
+const { calcularIPI } = require('../services/impostoService5');
 
-function calcularIPI(req, res) {
-  const { valorProduto, aliquotaIPI } = req.body;
-
-  if (valorProduto == null || aliquotaIPI == null) {
-    return res.status(400).json({ erro: 'Informe valorProduto e aliquotaIPI' });
+function calcularIPIHandler(req, res) {
+  try {
+    const resultado = calcularIPI(req.body);
+    res.json(resultado);
+  } catch (error) {
+    res.status(400).json({ erro: error.message });
   }
-
-  const ipi = (valorProduto * aliquotaIPI) / 100;
-  return res.json({ imposto: ipi.toFixed(2) });
 }
 
-module.exports = { calcularIPI };
+module.exports = { calcularIPI: calcularIPIHandler };
