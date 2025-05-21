@@ -35,6 +35,7 @@ test('Teste de divisão de markup com valores decimais', () => {
 
 // NOVOS TESTES USANDO TDD - Tiago
 // Teste para a rota POST /MKP2/calcMultiplierMarkup
+// API tem que estar rodando para testar
 test("POST to /MKP2/calcMultiplierMarkup should return 201", async () => {
     const response = await fetch('http://localhost:3000/MKP2/calcMultiplierMarkup', {
         method: 'POST',
