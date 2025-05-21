@@ -3,7 +3,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 const cors = require('cors');
 
-const app = express();
+const app = require('./app');
 const port = 3000;
 
 // importa as rotas

@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../server');  // seu app Express exportado
+const app = require('../app');  
 
 // Teste da função calcularTodosCustos
 const piscinaService = require('../services/piscina3Service');
