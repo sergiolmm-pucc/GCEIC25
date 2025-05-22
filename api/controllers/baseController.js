@@ -37,6 +37,16 @@ exports.salarioLiquido = (req, res) => {
   res.json({ salarioLiquido: liquido.toFixed(2) });
 };
 
+// POST /total-mensal
+exports.totalMensal = (req, res) => {
+  const { salarioBruto } = req.body;
+  const inss = salarioBruto * 0.08;
+  const fgts = salarioBruto * 0.08;
+  const fgtsExtra = salarioBruto * 0.032;
+  const total = salarioBruto + inss + fgts + fgtsExtra;
+  res.json({ totalMensal: total.toFixed(2) });
+};
+
 // POST /inss
 exports.inss = (req, res) => {
   const { salarioBruto } = req.body;
