@@ -29,3 +29,23 @@ exports.concat = (req, res) => {
   });
 };
 
+// POST /salario-liquido
+exports.salarioLiquido = (req, res) => {
+  const { salarioBruto } = req.body;
+  const inssEmpregado = salarioBruto * 0.08;
+  const liquido = salarioBruto - inssEmpregado;
+  res.json({ salarioLiquido: liquido.toFixed(2) });
+};
+
+// POST /inss
+exports.inss = (req, res) => {
+  const { salarioBruto } = req.body;
+  const inssEmpregado = salarioBruto * 0.08;
+  const inssEmpregador = salarioBruto * 0.08;
+  res.json({
+    inssEmpregado: inssEmpregado.toFixed(2),
+    inssEmpregador: inssEmpregador.toFixed(2)
+  });
+};
+
+
