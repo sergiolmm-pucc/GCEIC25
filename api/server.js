@@ -3,7 +3,6 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 const cors = require('cors');
 
-
 const app = express();
 const port = 3000;
 
@@ -17,7 +16,7 @@ app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/', baseRoutes);
 app.use('/users', userRoutes);
-app.use('/APOS', aposRoutes);
+app.use('/APOS', aposRoutes); // Grupo 09 - Cálculo de Aposentadoria
 
 
 app.listen(port, () => {

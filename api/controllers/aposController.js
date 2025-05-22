@@ -1,3 +1,6 @@
+// Controller Grupo 09 - Cálculo de Aposentadoria
+
+// Isabella Tressino
 function calcularAposentadoria(req, res) {
   const { idade, contribuicao, sexo } = req.body;
 
@@ -34,6 +37,7 @@ function calcularAposentadoria(req, res) {
   }
 }
 
+// Izabelle Oliveira
 function calcularRegra(req, res) {
   const { sexo, idade, tempoContribuicao, categoria } = req.body;
 
@@ -88,5 +92,11 @@ function calcularRegra(req, res) {
 
   return res.json({ regras: regrasAplicaveis });
 }
+
+// Emilly Ferro
+
+// Gabriel Cardoso
+
+// Guilherme Maia
 
 module.exports = { calcularAposentadoria, calcularRegra };
