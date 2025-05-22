@@ -13,6 +13,6 @@ class AjudaScreen extends StatelessWidget {
           style: TextStyle(fontSize: 16),
         ),
       ),
-    );
+    ) ;
   }
 }
