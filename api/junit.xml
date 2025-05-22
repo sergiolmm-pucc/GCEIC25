@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="8" failures="0" errors="0" time="0.385">
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2025-05-18T16:44:14" time="0.324" tests="8">
-    <testcase classname=" Teste de multiplicação de markup" name=" Teste de multiplicação de markup" time="0.002">
-    </testcase>
-    <testcase classname=" Teste de multiplicação de markup" name=" Teste de multiplicação de markup" time="0.001">
+<testsuites name="jest tests" tests="12" failures="0" errors="0" time="0.794">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2025-05-22T01:47:14" time="0.69" tests="12">
+    <testcase classname=" Teste de multiplicação de markup" name=" Teste de multiplicação de markup" time="0.003">
     </testcase>
     <testcase classname=" Teste de multiplicação de markup com valores negativos" name=" Teste de multiplicação de markup com valores negativos" time="0">
     </testcase>
@@ -11,19 +9,21 @@
     </testcase>
     <testcase classname=" Teste de multiplicação de markup com valores decimais" name=" Teste de multiplicação de markup com valores decimais" time="0">
     </testcase>
-    <testcase classname=" POST to /MKP2/calcMultiplierMarkup should return 201" name=" POST to /MKP2/calcMultiplierMarkup should return 201" time="0.017">
-    </testcase>
-    <testcase classname=" Teste de multiplicação de markup com valores não numéricos" name=" Teste de multiplicação de markup com valores não numéricos" time="0.001">
-    </testcase>
-    <testcase classname=" Teste de multiplicação de markup com valores numeros e não numéricos" name=" Teste de multiplicação de markup com valores numeros e não numéricos" time="0">
-    </testcase>
-    <testcase classname=" Teste de divisão de markup" name=" Teste de divisão de markup" time="0">
+    <testcase classname=" Teste de divisão de markup" name=" Teste de divisão de markup" time="0.001">
     </testcase>
     <testcase classname=" Teste de divisão de markup com valores negativos" name=" Teste de divisão de markup com valores negativos" time="0">
     </testcase>
     <testcase classname=" Teste de divisão de markup com valores zero" name=" Teste de divisão de markup com valores zero" time="0">
     </testcase>
-    <testcase classname=" Teste de divisão de markup com valores decimais" name=" Teste de divisão de markup com valores decimais" time="0">
+    <testcase classname=" Teste de divisão de markup com valores decimais" name=" Teste de divisão de markup com valores decimais" time="0.001">
+    </testcase>
+    <testcase classname=" POST to /MKP2/calcMultiplierMarkup should return 201" name=" POST to /MKP2/calcMultiplierMarkup should return 201" time="0.043">
+    </testcase>
+    <testcase classname=" Teste de multiplicação de markup com valores não numéricos" name=" Teste de multiplicação de markup com valores não numéricos" time="0.001">
+    </testcase>
+    <testcase classname=" Teste de multiplicação de markup com valores numeros e não numéricos" name=" Teste de multiplicação de markup com valores numeros e não numéricos" time="0">
+    </testcase>
+    <testcase classname=" Teste da função sobre não retornar as strings" name=" Teste da função sobre não retornar as strings" time="0.001">
     </testcase>
   </testsuite>
 </testsuites>

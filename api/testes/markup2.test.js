@@ -64,3 +64,26 @@ test('Teste de multiplicação de markup com valores não numéricos', () => {
 test('Teste de multiplicação de markup com valores numeros e não numéricos', () => {
     expect(markup2.calcularMarkup(10, 'b', 30)).toBe("Erro");
 });
+
+//Enzo
+test("Teste da função sobre não retornar as strings", () => {
+
+    const req = {};
+    const res = {
+        json: jest.fn()
+    };
+
+    markup2.retornarSobre(req, res);
+
+    expect(res.json).toHaveBeenCalled();
+
+    const chamadoCom = res.json.mock.calls[0][0];
+    expect(chamadoCom).not.toBeUndefined();
+
+    expect(Object.keys(chamadoCom).length).toBeGreaterThan(0);
+
+        for (const [key, value] of Object.entries(chamadoCom)) {
+        expect(key).not.toBe('');
+        expect(value).not.toBe('');
+    }
+});
