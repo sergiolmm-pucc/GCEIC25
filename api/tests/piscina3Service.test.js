@@ -67,3 +67,16 @@ describe('Teste da rota POST /sobre', () => {
     expect(response.body.foto).toBe('https://sep-bucket-prod.s3.amazonaws.com/wp-content/uploads/2022/11/51981800313_fb744fd72d_o.jpg');
   });
 });
+
+// Verifica o Get da tela ajuda
+describe('Teste da rota GET /ajuda', () => {
+  test('Retorna o texto de ajuda corretamente', async () => {
+    const response = await request(app)
+      .get('/MOB3/ajuda')
+      .expect(200);
+
+    expect(response.body).toHaveProperty('titulo', 'Ajuda');
+    expect(response.body).toHaveProperty('texto');
+    expect(response.body.texto).toMatch(/Preencha os dados da piscina/);
+  });
+});
