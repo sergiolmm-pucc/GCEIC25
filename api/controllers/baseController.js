@@ -69,4 +69,21 @@ exports.fgts = (req, res) => {
   });
 };
 
+// POST /decimo
+exports.decimo = (req, res) => {
+  const { salarioBruto, mesesTrabalhados } = req.body;
+  const decimo = (salarioBruto / 12) * mesesTrabalhados;
+  res.json({ decimoTerceiro: decimo.toFixed(2) });
+};
+
+// POST /ferias
+exports.ferias = (req, res) => {
+  const { salarioBruto, mesesTrabalhados } = req.body;
+  const baseFerias = (salarioBruto / 12) * mesesTrabalhados;
+  const adicionalTerco = baseFerias / 3;
+  const totalFerias = baseFerias + adicionalTerco;
+  res.json({ ferias: totalFerias.toFixed(2) });
+};
+
+
 
