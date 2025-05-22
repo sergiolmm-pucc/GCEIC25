@@ -1,4 +1,6 @@
 import 'dart:ui';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gcseic25/equipes/CI_CD_8/home.dart';
 
@@ -28,18 +30,39 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  void _login() {
-    if (!_formKey.currentState!.validate()) return;
-    if (_emailCtrl.text.trim() == 'admin@email.com' &&
-        _passCtrl.text == '123456') {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const HomeScreen()),
-      );
+  void _login() async {
+  if (!_formKey.currentState!.validate()) return;
+
+  final url = Uri.parse('http://localhost:3000/MKP2/auth'); // ou http://IP_DO_SERVIDOR:PORTA/auth
+  final body = jsonEncode({
+    'email': _emailCtrl.text.trim(),
+    'senha': _passCtrl.text.trim(),
+  });
+
+  try {
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: body,
+    );
+
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+      if (json['acesso'] == 'liberado') {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const HomeScreen()),
+        );
+      } else {
+        setState(() => _error = 'Acesso negado');
+      }
     } else {
       setState(() => _error = 'Email ou senha inválidos');
     }
+  } catch (e) {
+    setState(() => _error = 'Erro na conexão: $e');
   }
+}
 
   @override
   Widget build(BuildContext context) {

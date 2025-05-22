@@ -277,6 +277,46 @@
             }
           }
         }
+    },
+    "/MKP2/sobre": {
+      "get": {
+        "tags": ["Informações"],
+        "summary": "Retorna informações dos autores",
+        "description": "Retorna um objeto contendo os nomes e os RAs dos autores do projeto",
+        "responses": {
+          "200": {
+            "description": "Informações dos autores retornadas com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "CAIO ACOSTA GONÇALVES": {
+                      "type": "string",
+                      "example": "23008203"
+                    },
+                    "ENZO CINTO QUATROCHI": {
+                      "type": "string",
+                      "example": "23015904"
+                    },
+                    "JOÃO GABRIEL BIAZON FERREIRA": {
+                      "type": "string",
+                      "example": "23004430"
+                    },
+                    "VINICIUS MENDES DA CUNHA": {
+                      "type": "string",
+                      "example": "23015801"
+                    },
+                    "TIAGO PEREIRA DA SILVA": {
+                      "type": "string",
+                      "example": "23012171"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
