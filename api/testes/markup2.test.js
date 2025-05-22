@@ -35,6 +35,7 @@ test('Teste de divisão de markup com valores decimais', () => {
 
 // NOVOS TESTES USANDO TDD - Tiago
 // Teste para a rota POST /MKP2/calcMultiplierMarkup
+// API tem que estar rodando para testar
 test("POST to /MKP2/calcMultiplierMarkup should return 201", async () => {
     const response = await fetch('http://localhost:3000/MKP2/calcMultiplierMarkup', {
         method: 'POST',
@@ -87,3 +88,27 @@ test("Teste da função sobre não retornar as strings", () => {
         expect(value).not.toBe('');
     }
 });
+
+test('Teste de autenticação', () => {
+    expect(markup2.autentication('admin@exemplo.com', "123456")).toBe(true)
+})
+
+test('Teste de autenticação', () => {
+    expect(markup2.autentication(1, 12)).toBe(false)
+})
+
+test('Teste de autenticação', () => {
+    expect(markup2.autentication('vinicius@exemplo.com', "123456")).toBe(false)
+})
+
+test('Teste de autenticação', () => {
+    expect(markup2.autentication('admin@exemplo.com', "123")).toBe(false)
+})
+
+test('Teste de autenticação', () => {
+    expect(markup2.autentication('', "")).toBe(false)
+})
+
+test('Teste de autenticação', () => {
+    expect(markup2.autentication(null, null)).toBe(false)
+})
