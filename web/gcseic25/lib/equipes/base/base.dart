@@ -94,6 +94,7 @@ class _ConsultaPageState1 extends State<ConsultaPage1> {
                      onPressed: _fetchData,
                       child: Text('Consultar API'),
                 ),
+            ),
             SizedBox(height: 20),
             Container(
               width: double.infinity,

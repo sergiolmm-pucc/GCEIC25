@@ -118,8 +118,23 @@ const { Options } = require('selenium-webdriver/chrome');
       });
   await driver.sleep(1000);  
   console.log('Input text');
+ const buttonXPath3 = "//flt-semantics[text()='Concatenar']";
+  const clickMeButton3 = await driver.findElement(By.xpath(buttonXPath3));
+  await clickMeButton3.click();
+  await driver.sleep(5000);  
+ // diretorio deve existir...
+    await driver.takeScreenshot().then((image, err) => {
+        require('fs').writeFile('./fotos/exemplo/resultado-concatenar.png', image, 'base64', function (err) {
+          if (err == null){
+              console.log('Gravou Foto 5');
+          }else{
+              console.log('Erro ->' + err);
+          }
+  
+        });
+      });
 
- await driver.sleep(5000);
+   await driver.sleep(5000);
   driver.quit();    
 })();
   
