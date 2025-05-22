@@ -72,9 +72,9 @@ exports.calcularDecimoTerceiro = ({ salario, mesesTrabalhados }) => {
   const decimoTerceiroLiquido = decimoTerceiroBruto - inss;
 
   return {
-    bruto: decimoTerceiroBruto.toFixed(2),
-    inss: inss.toFixed(2),
-    liquido: decimoTerceiroLiquido.toFixed(2)
+    bruto: parseFloat(decimoTerceiroBruto.toFixed(2)),
+    inss: parseFloat(inss.toFixed(2)),
+    liquido: parseFloat(decimoTerceiroLiquido.toFixed(2))
   };
 };
 

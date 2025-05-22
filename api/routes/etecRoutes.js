@@ -7,6 +7,7 @@ const etecController = require('../controllers/etecController');
 // Define rotas usando as funções do controller
 router.post('/calcularCustoMensal', etecController.calcularCustoMensal);
 router.post("/calcularFerias", etecController.calcularFerias);
+router.post("/calcularDecimoTerceiro", etecController.calcularDecimoTerceiro);
 router.post("/calcularESocial", etecController.calcularESocial);
 
 module.exports = router;

@@ -36,6 +36,26 @@ exports.calcularFerias = (req, res) => {
     }
 };
 
+exports.calcularDecimoTerceiro = (req, res) => {
+  try {
+    const dados = req.body;
+    const DecimoTerceiroData = etecService.calcularDecimoTerceiro(dados);
+    res.status(200).json({
+      status: "success",
+      data: {
+        bruto: DecimoTerceiroData.bruto,
+        inss: DecimoTerceiroData.inss,
+        liquido: DecimoTerceiroData.liquido
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      message: error.message,
+    });
+  }
+};
+
 exports.calcularESocial = (req, res) => {
     try {
         const dados = req.body;
