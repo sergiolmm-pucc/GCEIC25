@@ -1,5 +1,5 @@
 const markup2 = require('../controllers/markup2Controller');
-const { test, expect, jest } = require('@jest/globals');
+const { test, expect } = require('@jest/globals');
 
 test('Teste de multiplicação de markup', () => {
     expect(markup2.calcularMarkup(10, 20, 30)).toBe(2.5);
@@ -68,7 +68,7 @@ test('Teste de multiplicação de markup com valores numeros e não numéricos',
 
 //Enzo
 test("Teste da função sobre não retornar as strings", () => {
-
+    const jest = require('@jest/globals').jest;
     const req = {};
     const res = {
         json: jest.fn()
