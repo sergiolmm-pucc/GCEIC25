@@ -40,9 +40,6 @@ class HomeScreen extends StatelessWidget {
                 );
               },
               child: const Text('Calculadora de Divisão de Markup'),
-                // Aqui o membro 2 pode colocar sua rota
-              },
-              child: const Text('Módulo do Membro 2'),
             ),
             const SizedBox(height: 12),
             ElevatedButton(

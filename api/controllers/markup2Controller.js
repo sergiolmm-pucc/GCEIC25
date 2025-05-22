@@ -59,7 +59,7 @@ module.exports = {
     calcMultiplierMarkup,
     calcularMarkup,
     auth,
-    autentication
+    autentication,
     calcularMarkupDivisor,
     calcDivisorMarkup
 };
