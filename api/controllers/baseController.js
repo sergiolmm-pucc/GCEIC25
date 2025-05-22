@@ -58,4 +58,15 @@ exports.inss = (req, res) => {
   });
 };
 
+// POST /fgts
+exports.fgts = (req, res) => {
+  const { salarioBruto } = req.body;
+  const fgtsMensal = salarioBruto * 0.08;
+  const fgtsRescisorio = salarioBruto * 0.032;
+  res.json({
+    fgtsMensal: fgtsMensal.toFixed(2),
+    fgtsRescisorio: fgtsRescisorio.toFixed(2)
+  });
+};
+
 
