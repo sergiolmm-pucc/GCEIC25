@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gcseic25/equipes/CI_CD_8/multiplier-markup.dart';
-import 'package:gcseic25/equipes/CI_CD_8/divisor-markup.dart';
+import 'package:gcseic25/equipes/CI_CD_8/divisor_markup.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const DivisorMarkupPage()),
+                  MaterialPageRoute(builder: (context) => DivisorMarkupPage()),
                 );
               },
               child: const Text('Calculadora de Divisão de Markup'),
