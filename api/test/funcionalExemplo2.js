@@ -13,7 +13,7 @@ const { Options } = require('selenium-webdriver/chrome');
   console.log('Config chrome');
   const chromeOptions = new Options();
   // comentar as linhas abaixo quando for subir para teste local
- // chromeOptions.addArguments('--headless');
+  chromeOptions.addArguments('--headless');
   chromeOptions.addArguments('--no-sandbox');
   chromeOptions.windowSize(screen);
 
