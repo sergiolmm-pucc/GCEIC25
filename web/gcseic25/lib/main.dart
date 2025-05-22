@@ -25,8 +25,8 @@ class MyApp extends StatelessWidget {
         '/splash2':
             (context) =>
                 SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
-        '/markup': (context) => SplashScreen(nextPage: MultiplierMarkupPage()),
-        '/login': (context) => SplashScreen(nextPage: LoginPage()),
+        '/markup': (context) => MultiplierMarkupPage(),
+        '/login': (context) => LoginPage(),
       },
     );
   }
