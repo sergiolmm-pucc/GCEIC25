@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 
 class CalcularPage extends StatefulWidget {
   const CalcularPage({super.key});
@@ -45,24 +48,47 @@ class _CalcularPageState extends State<CalcularPage> {
     }
   }
 
-  void _calcular() {
-    if (_formKey.currentState!.validate()) {
-      final salario = double.tryParse(_salarioCtrl.text) ?? 0;
-      final meses = int.tryParse(_mesesCtrl.text) ?? 0;
+void _calcular() async {
+  if (!_formKey.currentState!.validate()) return;
 
-      // Simulação de resultados (valores fictícios)
-      setState(() {
-        inssEmpregado = salario * 0.08;
-        inssEmpregador = salario * 0.08;
-        fgtsMensal = salario * 0.08;
-        fgtsRescisorio = salario * 0.032;
-        decimoTerceiro = salario / 12 * meses;
-        ferias = (salario / 12 * meses) + ((salario / 12 * meses) / 3);
-        salarioLiquido = salario - inssEmpregado!;
-        totalMensal = salario + inssEmpregador! + fgtsMensal! + fgtsRescisorio!;
-      });
-    }
+  final salario = double.tryParse(_salarioCtrl.text) ?? 0;
+  final meses = int.tryParse(_mesesCtrl.text) ?? 0;
+  const baseUrl = 'http://localhost:3000/etec'; 
+
+  try {
+    final headers = {'Content-Type': 'application/json'};
+    final body = jsonEncode({
+      'salarioBruto': salario,
+      'mesesTrabalhados': meses,
+    });
+
+    // Faz todas as requisições paralelamente
+    final responses = await Future.wait([
+      http.post(Uri.parse('$baseUrl/salario-liquido'), headers: headers, body: body),
+      http.post(Uri.parse('$baseUrl/inss'), headers: headers, body: body),
+      http.post(Uri.parse('$baseUrl/fgts'), headers: headers, body: body),
+      http.post(Uri.parse('$baseUrl/decimo'), headers: headers, body: body),
+      http.post(Uri.parse('$baseUrl/ferias'), headers: headers, body: body),
+      http.post(Uri.parse('$baseUrl/total-mensal'), headers: headers, body: body),
+    ]);
+
+    setState(() {
+      salarioLiquido = double.parse(jsonDecode(responses[0].body)['salarioLiquido']);
+      inssEmpregado = double.parse(jsonDecode(responses[1].body)['inssEmpregado']);
+      inssEmpregador = double.parse(jsonDecode(responses[1].body)['inssEmpregador']);
+      fgtsMensal = double.parse(jsonDecode(responses[2].body)['fgtsMensal']);
+      fgtsRescisorio = double.parse(jsonDecode(responses[2].body)['fgtsRescisorio']);
+      decimoTerceiro = double.parse(jsonDecode(responses[3].body)['decimoTerceiro']);
+      ferias = double.parse(jsonDecode(responses[4].body)['ferias']);
+      totalMensal = double.parse(jsonDecode(responses[5].body)['totalMensal']);
+    });
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Erro ao calcular: $e')),
+    );
   }
+}
+
 
   Widget _resultado(String titulo, double? valor) {
     return ListTile(
