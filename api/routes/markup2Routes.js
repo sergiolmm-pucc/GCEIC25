@@ -7,5 +7,6 @@ router.post('/calcMultiplierMarkup', markup2Controller.calcMultiplierMarkup);
 router.post('/auth', markup2Controller.auth);
 router.post('/calcDivisorMarkup', markup2Controller.calcDivisorMarkup);
 router.get('/sobre', markup2Controller.retornarSobre);
+router.get('/home', markup2Controller.retornarHome);
 
 module.exports = router;

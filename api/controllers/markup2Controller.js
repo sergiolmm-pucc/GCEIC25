@@ -67,6 +67,14 @@ function retornarSobre(req, res) {
     return;
 }
 
+function retornarHome(req, res) {
+    res.json({
+        "titulo": "Bem vindo! - CI DC - Grupo 8",
+        "sobreMarkup" : "O sistema de markup ajuda a calcular o preço de venda com base no custo e na margem desejada, facilitando a precificação de produtos e serviços.",
+    });
+    return;
+}
+
 module.exports = {
     calcMultiplierMarkup,
     calcularMarkup,
@@ -74,5 +82,6 @@ module.exports = {
     autentication,
     calcularMarkupDivisor,
     calcDivisorMarkup,
-    retornarSobre
+    retornarSobre,
+    retornarHome
 };
