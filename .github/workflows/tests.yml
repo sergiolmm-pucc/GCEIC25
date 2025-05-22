@@ -2,7 +2,7 @@ name: tests
 
 on:
   push:
-    branches: [main, stable, prod, dev]
+    branches: [main, stable, prod, dev, icms-api]
 
   workflow_dispatch:
     inputs:
