@@ -214,6 +214,69 @@
             }
           }
         }
+      },
+      "/auth": {
+        "post": {
+          "tags": ["Autenticação"],
+          "summary": "Autentica o usuário com email e senha",
+          "description": "Valida as credenciais fornecidas e retorna se o acesso está liberado ou negado.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "format": "email",
+                      "example": "admin@email.com"
+                    },
+                    "senha": {
+                      "type": "string",
+                      "example": "123456"
+                    }
+                  },
+                  "required": ["email", "senha"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Credenciais válidas",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "acesso": {
+                        "type": "string",
+                        "example": "liberado"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Credenciais inválidas",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "acesso": {
+                        "type": "string",
+                        "example": "negado"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
