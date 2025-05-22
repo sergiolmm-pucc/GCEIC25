@@ -3,19 +3,20 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 const cors = require('cors');
 
-
 const app = express();
 const port = 3000;
 
 // importa as rotas
 const userRoutes = require('./routes/userRoutes')
 const baseRoutes = require('./routes/baseRoutes')
+const aposRoutes = require('./routes/aposRoutes')
 
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/', baseRoutes);
 app.use('/users', userRoutes);
+app.use('/APOS', aposRoutes); // Grupo 09 - Cálculo de Aposentadoria
 
 
 app.listen(port, () => {

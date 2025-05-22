@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:gcseic25/equipes/APOS/screens/splash_screen.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
 import 'package:flutter/rendering.dart';
-
+import 'package:gcseic25/equipes/APOS/screens/splash_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
@@ -16,13 +17,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'App de Navegação',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: HomePage(),
       routes: {
-        '/splash1': (context) => SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
-        '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
+        '/splash1':
+            (context) =>
+                SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
+        '/splash2':
+            (context) =>
+                SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
+        '/aposSplashScreen': (context) => APOSSplashScreen(),
       },
     );
   }
@@ -32,9 +36,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Tela Inicial'),
-      ),
+      appBar: AppBar(title: Text('Tela Inicial')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -53,20 +55,41 @@ class HomePage extends StatelessWidget {
               child: Text('Abrir Consulta 2'),
             ),
             Semantics(
-                identifier: 'Entrar',
-                label: 'Entrar',
-                button: true,
-                child: SizedBox(
-                  width: 220,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/splash1');
-                    },
-                    child: const Text('Entrar'),
-                  ),
+              identifier: 'Entrar',
+              label: 'Entrar',
+              button: true,
+              child: SizedBox(
+                width: 220,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/splash1');
+                  },
+                  child: const Text('Entrar'),
                 ),
               ),
-
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/aposSplashScreen');
+              },
+              child: Text('Calculadora de Aposentadoria'),
+            ),
+            SizedBox(height: 20),
+            Semantics(
+              identifier: 'Entrar',
+              label: 'Entrar',
+              button: true,
+              child: SizedBox(
+                width: 220,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/aposSplashScreen');
+                  },
+                  child: const Text('Entrar'),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -99,10 +122,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(
-          'Carregando...',
-          style: TextStyle(fontSize: 24),
-        ),
+        child: Text('Carregando...', style: TextStyle(fontSize: 24)),
       ),
     );
   }
@@ -122,32 +142,29 @@ class _ConsultaPageState extends State<ConsultaPage> {
 
   Future<void> _fetchData() async {
     //
-   final response = await http.get(Uri.parse('https://animated-occipital-buckthorn.glitch.me/datetime'));
-  if (response.statusCode == 200) {
-    setState(() {
-      _responseText = response.body;
-    });
-  } else {
-    setState(() {
-      _responseText = 'Erro ao consultar API.';
-    });
-  }
+    final response = await http.get(
+      Uri.parse('https://animated-occipital-buckthorn.glitch.me/datetime'),
+    );
+    if (response.statusCode == 200) {
+      setState(() {
+        _responseText = response.body;
+      });
+    } else {
+      setState(() {
+        _responseText = 'Erro ao consultar API.';
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: AppBar(title: Text(widget.title)),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            ElevatedButton(
-              onPressed: _fetchData,
-              child: Text('Consultar API'),
-            ),
+            ElevatedButton(onPressed: _fetchData, child: Text('Consultar API')),
             SizedBox(height: 20),
             Container(
               width: double.infinity,
@@ -156,10 +173,7 @@ class _ConsultaPageState extends State<ConsultaPage> {
                 border: Border.all(color: Colors.blueAccent),
                 borderRadius: BorderRadius.circular(8.0),
               ),
-              child: Text(
-                _responseText,
-                style: TextStyle(fontSize: 16),
-              ),
+              child: Text(_responseText, style: TextStyle(fontSize: 16)),
             ),
           ],
         ),
