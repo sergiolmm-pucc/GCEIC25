@@ -31,8 +31,6 @@ exports.calcularFerias = ({ salario }) => {
     return totalMensal
 }
 
-exports.calcularRecisao = () => {}
-
 exports.calcularDecimoTerceiro = ({ salario, mesesTrabalhados }) => {
   if (!salario || typeof salario !== 'number' || salario <= 0) {
     throw new Error("Salário inválido.");
@@ -79,5 +77,7 @@ exports.calcularDecimoTerceiro = ({ salario, mesesTrabalhados }) => {
     liquido: decimoTerceiroLiquido.toFixed(2)
   };
 };
+
+exports.calcularRecisao = () => {};
 
 exports.calcularESocial = () => {}
