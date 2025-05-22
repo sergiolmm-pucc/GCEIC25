@@ -179,6 +179,66 @@
             }
           }
         }
+      },
+      "/ETEC/calcularDecimoTerceiro": {
+        "post": {
+          "tags":["ETEC"],
+          "summary": "Calcula décimo terceiro",
+          "description": "Calcula o décimo terceiro com base no salário e na quantidade de meses trabalhados",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "salario": {
+                      "type": "number"
+                    },
+                    "mesesTrabalhados": {
+                      "type": "number"
+                    }
+                  },
+                  "required": ["value"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Resultado do cálculo do décimo terceiro",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "bruto": {
+                            "type": "number"
+                          },
+                          "inss": {
+                            "type": "number"
+                          },
+                          "liquido": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Erro - valor não fornecido"
+            }
+          }
+        }
       }
     }
   }
