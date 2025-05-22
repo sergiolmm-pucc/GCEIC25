@@ -39,7 +39,7 @@ function auth (req, res) {
 };
 
 function autentication(email, password) {
-    const EMAIL_CORRETO = "admin@exemplo.com";
+    const EMAIL_CORRETO = "admin@email.com";
     const SENHA_CORRETA = "123456";
 
     if (email === EMAIL_CORRETO && password === SENHA_CORRETA) {

@@ -90,7 +90,7 @@ test("Teste da função sobre não retornar as strings", () => {
 });
 
 test('Teste de autenticação', () => {
-    expect(markup2.autentication('admin@exemplo.com', "123456")).toBe(true)
+    expect(markup2.autentication('admin@email.com', "123456")).toBe(true)
 })
 
 test('Teste de autenticação', () => {
@@ -102,7 +102,7 @@ test('Teste de autenticação', () => {
 })
 
 test('Teste de autenticação', () => {
-    expect(markup2.autentication('admin@exemplo.com', "123")).toBe(false)
+    expect(markup2.autentication('admin@email.com', "123")).toBe(false)
 })
 
 test('Teste de autenticação', () => {

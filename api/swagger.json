@@ -215,38 +215,61 @@
           }
         }
       },
-      "/MKP2/sobre": {
-      "get": {
-        "tags": ["Informações"],
-        "summary": "Retorna informações dos autores",
-        "description": "Retorna um objeto contendo os nomes e os RAs dos autores do projeto",
-        "responses": {
-          "200": {
-            "description": "Informações dos autores retornadas com sucesso",
+      "/auth": {
+        "post": {
+          "tags": ["Autenticação"],
+          "summary": "Autentica o usuário com email e senha",
+          "description": "Valida as credenciais fornecidas e retorna se o acesso está liberado ou negado.",
+          "requestBody": {
+            "required": true,
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "CAIO ACOSTA GONÇALVES": {
+                    "email": {
                       "type": "string",
-                      "example": "23008203"
+                      "format": "email",
+                      "example": "admin@email.com"
                     },
-                    "ENZO CINTO QUATROCHI": {
+                    "senha": {
                       "type": "string",
-                      "example": "23015904"
-                    },
-                    "JOÃO GABRIEL BIAZON FERREIRA": {
-                      "type": "string",
-                      "example": "23004430"
-                    },
-                    "VINICIUS MENDES DA CUNHA": {
-                      "type": "string",
-                      "example": "23015801"
-                    },
-                    "TIAGO PEREIRA DA SILVA": {
-                      "type": "string",
-                      "example": "23012171"
+                      "example": "123456"
+                    }
+                  },
+                  "required": ["email", "senha"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Credenciais válidas",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "acesso": {
+                        "type": "string",
+                        "example": "liberado"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Credenciais inválidas",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "acesso": {
+                        "type": "string",
+                        "example": "negado"
+                      }
                     }
                   }
                 }
