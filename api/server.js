@@ -11,6 +11,7 @@ const port = 3000;
 const userRoutes = require('./routes/userRoutes')
 const baseRoutes = require('./routes/baseRoutes')
 const markupRoutes = require('./routes/markupRoutes');
+const loginRoutes = require('./routes/loginRoutes');
 
 
 app.use(cors()); // Enable CORS for all routes
@@ -19,6 +20,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/', baseRoutes);
 app.use('/users', userRoutes);
 app.use('/', markupRoutes);
+app.use('/login', loginRoutes);
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
