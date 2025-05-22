@@ -30,9 +30,9 @@ describe("Testes para o cálculo do ETEC", () => {
     const resultado = etecService.calcularDecimoTerceiro(dados);
 
     expect(resultado).toEqual({
-      bruto: "1265.00",
-      inss: "94.88",
-      liquido: "1170.13",
+      bruto: 1265,
+      inss: 94.88,
+      liquido: 1170.13,
     });
   });
 
