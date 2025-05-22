@@ -4,7 +4,8 @@
     "description": "API com Express e Swagger",
     "main": "server.js",
     "scripts": {
-        "start": "node server.js"
+        "start": "node server.js",
+        "funcional2": "node ./test/funcionalExemplo2"
     },
     "dependencies": {
         "cors": "^2.8.5",
@@ -12,15 +13,17 @@
         "swagger-ui-express": "^4.6.3"
     },
     "engines": {
-        "node": "14.x"
+        "node": ">=22.x"
     },
     "repository": {
-      "url": "https://glitch.com/edit/#!/glitch-hello-node"
+        "url": "https://glitch.com/edit/#!/glitch-hello-node"
     },
     "license": "MIT",
     "keywords": [
-      "node",
-      "glitch"
-    ]
+        "node",
+        "glitch"
+    ],
+    "devDependencies": {
+        "@rentready/flutter-selenium-bridge": "^1.0.5"
+    }
 }
-  
