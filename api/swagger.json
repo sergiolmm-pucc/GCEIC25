@@ -179,6 +179,60 @@
             }
           }
         }
+      },
+      "/ETEC/calcularESocial": {
+        "post": {
+          "tags":["ETEC"],
+          "summary": "Calcula o eSocial",
+          "description": "Calcula o total do recolhimento do com base no salário informado e numero de dependentes",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "salario": {
+                      "type": "number"
+                    },
+                    "dependentes": {
+                      "type": "number"
+                    }
+                  },
+                  "required": ["value"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Resultado do cálculo do recolhimento do eSocial",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "eSocial": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Erro - valor inválido"
+            }
+          }
+        }
       }
     }
   }

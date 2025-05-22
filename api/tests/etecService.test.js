@@ -35,4 +35,15 @@ describe("Testes para o cálculo do ETEC", () => {
       liquido: "1170.13",
     });
   });
+
+  test("Calcular do eSocial", () => {
+    const dados = {
+      salario: 1200,
+      dependentes: 2,
+    };
+
+    const resultado = etecService.calcularESocial(dados);
+
+    expect(resultado).toBe(205.92);
+  });
 });

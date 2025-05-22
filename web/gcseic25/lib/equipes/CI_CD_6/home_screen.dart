@@ -67,7 +67,7 @@ class HomeScreen extends StatelessWidget {
                         _navigateTo(context, DecimoTerceiroScreen());
                         break;
                       case 'esocial':
-                        _navigateTo(context, EsocialScreen());
+                        _navigateTo(context, ESocialScreen());
                         break;
                     }
                   },

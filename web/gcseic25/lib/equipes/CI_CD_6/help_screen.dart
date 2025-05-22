@@ -18,7 +18,7 @@ class _HelpScreenState extends State<HelpScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Sobre'),
+            const Text('Ajuda'),
           ],
         ),
       ),
