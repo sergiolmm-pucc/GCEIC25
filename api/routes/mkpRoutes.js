@@ -7,3 +7,5 @@ router.post('/markup-simples', mkpController.calculoSimples);
 
 
 module.exports = router;
+
+router.post('/markup-detalhado', markupController.calculoDetalhado);
