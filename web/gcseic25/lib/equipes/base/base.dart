@@ -48,6 +48,9 @@ class ConsultaPage1 extends StatefulWidget {
 }
 
 class _ConsultaPageState1 extends State<ConsultaPage1> {
+
+  final TextEditingController _controller = TextEditingController();
+
   String _responseText = 'Resultado aparecerá aqui.';
 
   Future<void> _fetchData() async {
@@ -62,6 +65,14 @@ class _ConsultaPageState1 extends State<ConsultaPage1> {
       _responseText = 'Erro ao consultar API.';
     });
   }
+  }
+
+  String _outputText = '';
+
+  void _handleButtonClick() {
+    setState(() {
+      _outputText = '${_controller.text} OK - certo';
+    });
   }
 
   @override
@@ -90,6 +101,7 @@ class _ConsultaPageState1 extends State<ConsultaPage1> {
                 _responseText,
                 style: TextStyle(fontSize: 16),
               ),
+            ),
         // teste funcional    um edit text e um botal e um label      
              Semantics(
                 identifier: 'Enter a search term',
@@ -119,7 +131,7 @@ class _ConsultaPageState1 extends State<ConsultaPage1> {
               _outputText,
               style: const TextStyle(fontSize: 18),
             ),   
-            ),
+            
 
 
 
