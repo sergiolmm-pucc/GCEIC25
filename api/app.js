@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const ipiRoutes = require('./routes/ipiRoutes');
+const ipiRoutes = require('./routes/ipiRoutes5');
+const icmsRoutes = require('./routes/icmsRoutes5'); 
 
 const app = express();
 
@@ -10,11 +11,7 @@ app.use(express.json());
 
 // Rotas
 app.use('/api', ipiRoutes);
-
-// Rota raiz (opcional)
-app.get('/', (req, res) => {
-  res.send('API de Impostos rodando!');
-});
+app.use('/api', icmsRoutes); 
 
 // Exporta o app para ser usado em outro arquivo (ex: server.js ou testes)
 module.exports = app;

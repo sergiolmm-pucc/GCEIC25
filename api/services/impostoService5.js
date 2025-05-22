@@ -16,6 +16,32 @@ exports.calcularIPI = ({ valorProduto, aliquotaIPI }) => {
   };
 };
 
+exports.calcularICMS = ({ valorProduto, aliquotaICMS }) => {
+  if (valorProduto == null || aliquotaICMS == null) {
+    throw new Error('valorProduto e aliquotaICMS são obrigatórios');
+  }
+
+  // Converte para números (caso venham como string)
+  const valor = Number(valorProduto);
+  const aliquota = Number(aliquotaICMS);
+
+  // Verifica se são números válidos
+  if (isNaN(valor) || isNaN(aliquota)) {
+    throw new Error('Os valores devem ser números válidos');
+  }
+
+  // Fórmula do ICMS
+  const icms = (valor * aliquota) / (100 + aliquota);
+
+  return {
+    valorProduto: valor.toFixed(2),
+    aliquotaICMS: aliquota.toFixed(2),
+    imposto: icms.toFixed(2),
+    valorTotal: (valor + icms).toFixed(2) // Opcional: caso queira retornar o valor total
+  };
+};
+
+
 exports.loginUser = ({ email, senha }) => {
   const usuarios = [
     { email: 'guilherme@email.com', senha: 'qwerty' }

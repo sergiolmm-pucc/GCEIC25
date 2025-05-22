@@ -1,7 +1,7 @@
 // ipiRoutes.js
 const express = require('express');
 const router = express.Router();
-const { calcularIPI } = require('../controllers/ipiController5'); // ajuste o caminho conforme a estrutura do seu projeto
+const { calcularIPI } = require('../controllers/impostosController5'); // ajuste o caminho conforme a estrutura do seu projeto
 
 router.post('/ipi', calcularIPI);
 

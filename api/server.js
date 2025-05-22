@@ -5,6 +5,8 @@ const cors = require('cors');
 const ipiRoutes = require('./routes/ipiRoutes5');
 const userRoutes = require('./routes/userRoutes');
 const baseRoutes = require('./routes/baseRoutes');
+const icmsRoutes = require('./routes/icmsRoutes5');
+
 
 const app = express();
 const port = 3000;
@@ -15,6 +17,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/', baseRoutes);
 app.use('/users', userRoutes);
 app.use('/impostos', ipiRoutes);
+app.use('/impostos', icmsRoutes); 
 
 // Só escuta a porta se não estiver em ambiente de testes
 if (process.env.NODE_ENV !== 'test') {
