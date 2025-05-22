@@ -1,11 +1,12 @@
-
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const mkpController = require('../controllers/mkpController');
+const mkpController = require("../controllers/mkpController");
 
-router.post('/markup-simples', mkpController.calculoSimples);
+router.post("/markup-simples", mkpController.calculoSimples);
 
 //Rota do lucro obtido
-router.post('/lucro-obtido', markupController.lucroObtido);
+router.post("/lucro-obtido", markupController.lucroObtido);
+
+router.post("/simulacao", markupController.simulacao);
 
 module.exports = router;
