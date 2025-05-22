@@ -90,7 +90,39 @@ class _ConsultaPageState1 extends State<ConsultaPage1> {
                 _responseText,
                 style: TextStyle(fontSize: 16),
               ),
+        // teste funcional    um edit text e um botal e um label      
+             Semantics(
+                identifier: 'Enter a search term',
+                textField: true,
+                child:  
+                  TextField(
+                    controller: _controller,
+                    decoration: const InputDecoration(
+                      labelText: 'Digite',
+                      hintText: 'Enter a search term',),
+                  ),
             ),
+            const SizedBox(height: 20),
+            
+            Semantics(
+                identifier: 'Concatenar',
+                label: 'Concatenar',
+                button: true,
+                child:
+                  ElevatedButton(
+                    onPressed: _handleButtonClick,
+                    child: const Text('Concatenar'),
+                    ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              _outputText,
+              style: const TextStyle(fontSize: 18),
+            ),   
+            ),
+
+
+
           ],
         ),
       ),

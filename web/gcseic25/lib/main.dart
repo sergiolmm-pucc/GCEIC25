@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
+import 'package:flutter/rendering.dart';
+
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
+  SemanticsBinding.instance.ensureSemantics();
   runApp(MyApp());
 }
 
@@ -48,6 +52,21 @@ class HomePage extends StatelessWidget {
               },
               child: Text('Abrir Consulta 2'),
             ),
+            Semantics(
+                identifier: 'Entrar',
+                label: 'Entrar',
+                button: true,
+                child: SizedBox(
+                  width: 220,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/splash1');
+                    },
+                    child: const Text('Entrar'),
+                  ),
+                ),
+              ),
+
           ],
         ),
       ),
