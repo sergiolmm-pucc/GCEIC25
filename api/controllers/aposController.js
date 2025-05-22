@@ -34,4 +34,59 @@ function calcularAposentadoria(req, res) {
   }
 }
 
-module.exports = { calcularAposentadoria };
+function calcularRegra(req, res) {
+  const { sexo, idade, tempoContribuicao, categoria } = req.body;
+
+  if (!sexo || idade == null || tempoContribuicao == null || !categoria) {
+    return res.status(400).json({ erro: 'Dados incompletos' });
+  }
+
+  const regrasAplicaveis = [];
+
+  const pontuacao = idade + tempoContribuicao;
+  if ((sexo === 'masculino' && pontuacao >= 105) || (sexo === 'feminino' && pontuacao >= 100)) {
+    regrasAplicaveis.push('Pontuação Progressiva');
+  }
+
+  if ((sexo === 'masculino' && tempoContribuicao >= 35) || (sexo === 'feminino' && tempoContribuicao >= 30)) {
+    regrasAplicaveis.push('Tempo mínimo de contribuição');
+  }
+
+  if (categoria === 'professor') {
+    regrasAplicaveis.push('Regra Especial para Professores');
+  }
+
+  if (categoria === 'deficiencia') {
+    regrasAplicaveis.push('Regra Especial para Pessoas com Deficiência');
+  }
+
+  if ((sexo === 'masculino' && idade >= 65) || (sexo === 'feminino' && idade >= 62)) {
+    regrasAplicaveis.push('Idade mínima para aposentadoria');
+  }
+
+  if (categoria === 'rural') {
+    if (tempoContribuicao >= 15) {
+      regrasAplicaveis.push('Aposentadoria Rural: tempo mínimo de contribuição reduzido');
+    }
+    if ((sexo === 'masculino' && idade >= 60) || (sexo === 'feminino' && idade >= 55)) {
+      regrasAplicaveis.push('Aposentadoria Rural: idade mínima reduzida');
+    }
+  }
+
+  if (categoria === 'programada') {
+    if (idade >= 65) {
+      regrasAplicaveis.push('Aposentadoria Programada: idade mínima de 65 anos');
+    }
+  }
+
+  if (categoria === 'incapacidade') {
+    if (tempoContribuicao >= 12) {
+      regrasAplicaveis.push('Aposentadoria por Incapacidade: tempo mínimo reduzido');
+    }
+    regrasAplicaveis.push('Aposentadoria por Incapacidade: sem idade mínima');
+  }
+
+  return res.json({ regras: regrasAplicaveis });
+}
+
+module.exports = { calcularAposentadoria, calcularRegra };

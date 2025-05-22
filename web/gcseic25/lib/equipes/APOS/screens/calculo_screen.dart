@@ -70,7 +70,7 @@ class _CalculoScreenState extends State<CalculoScreen> {
   }
 
   Future<void> calcularAposentadoria() async {
-    final url = Uri.parse('http://localhost:3000/api/calculo');
+    final url = Uri.parse('http://localhost:3000/APOS/calculoAposentadoria');
 
     setState(() {
       carregando = true;
