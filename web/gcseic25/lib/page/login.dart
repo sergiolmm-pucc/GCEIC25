@@ -29,9 +29,7 @@ class _LoginPageState extends State<LoginPage> {
       setState(() {
         mensagem = json.decode(response.body)['mensagem'];
       });
-
-      // Redireciona para a HomePage após login bem-sucedido
-      Navigator.pushReplacementNamed(context, '/home');
+      Navigator.pushReplacementNamed(context, '/markup');
     } else {
       setState(() {
         mensagem = 'Erro: ${json.decode(response.body)['mensagem']}';
