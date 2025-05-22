@@ -30,3 +30,10 @@ exports.sobre = (req, res) => {
     foto: "https://sep-bucket-prod.s3.amazonaws.com/wp-content/uploads/2022/11/51981800313_fb744fd72d_o.jpg"
   });
 };
+
+exports.splashScreen = (req, res) => {
+  res.status(200).json({
+    sucesso: true,
+    mensagem: 'Splash screen carregada'
+  });
+};

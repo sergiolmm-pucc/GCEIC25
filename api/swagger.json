@@ -1,159 +1,150 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-      "title": "API Exemplo com Swagger",
-      "version": "1.0.0",
-      "description": "API para retornar data/hora e concatenar valores"
-    },
-    "servers": [
-      {
-        "url": "http://localhost:3000"
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Exemplo com Swagger",
+    "version": "1.0.0",
+    "description": "API para retornar data/hora e concatenar valores"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/MOB3/calcular": {
+      "post": {
+        "summary": "Calcular custos de construção e manutenção da piscina",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "largura": { "type": "number" },
+                  "comprimento": { "type": "number" },
+                  "profundidade": { "type": "number" },
+                  "precoAgua": { "type": "number" },
+                  "custoEletrico": { "type": "number" },
+                  "custoHidraulico": { "type": "number" },
+                  "custoManutencaoMensal": { "type": "number" }
+                },
+                "required": ["largura", "comprimento", "profundidade", "precoAgua", "custoEletrico", "custoHidraulico", "custoManutencaoMensal"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado dos cálculos",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object" }
+              }
+            }
+          }
+        }
       }
-    ],
-    "paths": {
-      "/MOB3/calcular": {
-        "post": {
-          "summary": "Calcular custos de construção e manutenção da piscina",
-          "requestBody": {
-            "required": true,
+    },
+    "/MOB3/login": {
+      "post": {
+        "summary": "Realiza login do usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string", "example": "usuario@email.com" },
+                  "senha": { "type": "string", "example": "123456" }
+                },
+                "required": ["email", "senha"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login realizado com sucesso",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "largura": { "type": "number" },
-                    "comprimento": { "type": "number" },
-                    "profundidade": { "type": "number" },
-                    "precoAgua": { "type": "number" },
-                    "custoEletrico": { "type": "number" },
-                    "custoHidraulico": { "type": "number" },
-                    "custoManutencaoMensal": { "type": "number" }
-                  },
-                  "required": ["largura", "comprimento", "profundidade", "precoAgua", "custoEletrico", "custoHidraulico", "custoManutencaoMensal"]
+                    "sucesso": { "type": "boolean" },
+                    "mensagem": { "type": "string" },
+                    "usuario": {
+                      "type": "object",
+                      "properties": {
+                        "email": { "type": "string" }
+                      }
+                    }
+                  }
                 }
               }
             }
           },
-          "responses": {
-            "200": {
-              "description": "Resultado dos cálculos",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object"
+          "401": {
+            "description": "Falha de autenticação",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "erro": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno no servidor"
+          }
+        }
+      }
+    },
+    "/MOB3/sobre": {
+      "post": {
+        "summary": "Retorna a splash screen com foto do time",
+        "responses": {
+          "200": {
+            "description": "Foto do time retornada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sucesso": { "type": "boolean" },
+                    "mensagem": { "type": "string" },
+                    "url": { "type": "string", "format": "uri" }
+                  },
+                  "example": {
+                    "sucesso": true,
+                    "mensagem": "Foto do time",
+                    "url": "https://sep-bucket-prod.s3.amazonaws.com/wp-content/uploads/2022/11/51981800313_fb744fd72d_o.jpg"
                   }
                 }
               }
             }
           }
         }
-      },
-      "/MOB3/login": {
-        "post": {
-          "summary": "Realiza login do usuário",
-          "requestBody": {
-            "required": true,
+      }
+    },
+    "/datetime": {
+      "get": {
+        "summary": "Retorna data e hora do servidor",
+        "responses": {
+          "200": {
+            "description": "Data e hora atual",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "email": {
+                    "datetime": {
                       "type": "string",
-                      "example": "usuario@email.com"
-                    },
-                    "senha": {
-                      "type": "string",
-                      "example": "123456"
-                    }
-                  },
-                  "required": ["email", "senha"]
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Login realizado com sucesso",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "sucesso": { "type": "boolean" },
-                      "mensagem": { "type": "string" },
-                      "usuario": {
-                        "type": "object",
-                        "properties": {
-                          "email": { "type": "string" }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "/MOB3/sobre": {
-              "post": {
-                "summary": "Retorna a foto do time",
-                "responses": {
-                  "200": {
-                    "description": "Foto do time retornada com sucesso",
-                    "content": {
-                        "application/json": {
-                          "schema": {
-                            "type": "object",
-                            "properties": {
-                            "sucesso": { "type": "boolean" },
-                            "mensagem": { "type": "string" },
-                            "url": { "type": "string", "format": "uri" }
-                            },
-                            "example": {
-                              "sucesso": true,
-                              "mensagem": "Foto do time",
-                              "url": "https://sep-bucket-prod.s3.amazonaws.com/wp-content/uploads/2022/11/51981800313_fb744fd72d_o.jpg"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "401": {
-              "description": "Falha de autenticação",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "erro": { "type": "string" }
-                    }
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "Erro interno no servidor"
-            }
-          }
-        }
-      },
-      "/datetime": {
-        "get": {
-          "summary": "Retorna data e hora do servidor",
-          "responses": {
-            "200": {
-              "description": "Data e hora atual",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "datetime": {
-                        "type": "string",
-                        "format": "date-time"
-                      }
+                      "format": "date-time"
                     }
                   }
                 }
@@ -161,51 +152,45 @@
             }
           }
         }
-      },
-      "/concat": {
-        "post": {
-          "summary": "Concatena valor com frase fixa",
-          "requestBody": {
-            "required": true,
+      }
+    },
+    "/concat": {
+      "post": {
+        "summary": "Concatena valor com frase fixa",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "value": { "type": "string" }
+                },
+                "required": ["value"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado da concatenação",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "value": {
-                      "type": "string"
-                    }
-                  },
-                  "required": ["value"]
+                    "success": { "type": "boolean" },
+                    "result": { "type": "string" }
+                  }
                 }
               }
             }
           },
-          "responses": {
-            "200": {
-              "description": "Resultado da concatenação",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "success": {
-                        "type": "boolean"
-                      },
-                      "result": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Erro - valor não fornecido"
-            }
+          "400": {
+            "description": "Erro - valor não fornecido"
           }
         }
       }
     }
   }
-  
+}

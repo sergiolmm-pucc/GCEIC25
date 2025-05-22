@@ -2,7 +2,7 @@ name: Unit test
 
 on:
   push:
-    branches: [main, stable, prod, dev, login, sobre]
+    branches: [main, stable, prod, dev, login, sobre,splash]
 
   workflow_dispatch:
     inputs:

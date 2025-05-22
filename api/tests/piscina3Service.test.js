@@ -67,3 +67,14 @@ describe('Teste da rota POST /sobre', () => {
     expect(response.body.foto).toBe('https://sep-bucket-prod.s3.amazonaws.com/wp-content/uploads/2022/11/51981800313_fb744fd72d_o.jpg');
   });
 });
+
+describe('Teste da rota POST /MOB3/splash', () => {
+  test('Retorna sucesso e mensagem da splash screen', async () => {
+    const response = await request(app)
+      .post('/MOB3/splash')
+      .expect(200);
+
+    expect(response.body).toHaveProperty('sucesso', true);
+    expect(response.body).toHaveProperty('mensagem', 'Splash screen carregada');
+  });
+});
