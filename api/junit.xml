@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="4" failures="0" errors="0" time="1.36">
-  <testsuite name="Testa rota de cálculo de ICMS" errors="0" failures="0" skipped="0" timestamp="2025-05-22T00:42:45" time="0.984" tests="2">
-    <testcase classname="Testa rota de cálculo de ICMS deve calcular corretamente o ICMS" name="Testa rota de cálculo de ICMS deve calcular corretamente o ICMS" time="0.042">
+<testsuites name="jest tests" tests="4" failures="0" errors="0" time="1.82">
+  <testsuite name="Testa rota de cálculo de ICMS" errors="0" failures="0" skipped="0" timestamp="2025-05-23T20:06:37" time="1.472" tests="2">
+    <testcase classname="Testa rota de cálculo de ICMS deve calcular corretamente o ICMS" name="Testa rota de cálculo de ICMS deve calcular corretamente o ICMS" time="0.038">
     </testcase>
     <testcase classname="Testa rota de cálculo de ICMS deve retornar erro se faltar campos" name="Testa rota de cálculo de ICMS deve retornar erro se faltar campos" time="0.005">
     </testcase>
   </testsuite>
-  <testsuite name="Testa rota de cálculo de IPI" errors="0" failures="0" skipped="0" timestamp="2025-05-22T00:42:45" time="1.137" tests="2">
-    <testcase classname="Testa rota de cálculo de IPI deve calcular corretamente o IPI" name="Testa rota de cálculo de IPI deve calcular corretamente o IPI" time="0.046">
+  <testsuite name="Testa rota de cálculo de IPI" errors="0" failures="0" skipped="0" timestamp="2025-05-23T20:06:37" time="1.562" tests="2">
+    <testcase classname="Testa rota de cálculo de IPI deve calcular corretamente o IPI" name="Testa rota de cálculo de IPI deve calcular corretamente o IPI" time="0.042">
     </testcase>
     <testcase classname="Testa rota de cálculo de IPI deve retornar erro se faltar campos" name="Testa rota de cálculo de IPI deve retornar erro se faltar campos" time="0.005">
     </testcase>
