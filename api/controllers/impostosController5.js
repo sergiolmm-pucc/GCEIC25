@@ -20,5 +20,5 @@ function calcularICMSHandler(req, res) {
 
 module.exports = { 
   calcularIPI: calcularIPIHandler,
-  calcularIPI: calcularIPIHandler
+  calcularICMS: calcularICMSHandler
  };
