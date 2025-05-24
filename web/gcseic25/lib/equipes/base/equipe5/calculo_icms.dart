@@ -9,12 +9,12 @@ class CalculoIcmsPage extends StatefulWidget {
   State<CalculoIcmsPage> createState() => _CalculoIcmsPageState();
 }
 
-class _CalculoIcmsPageState extends State<CalculoIcmsPage>{
+class _CalculoIcmsPageState extends State<CalculoIcmsPage> {
   final TextEditingController valorProdutoController = TextEditingController();
   final TextEditingController aliquotaController = TextEditingController();
   String? resultado;
 
-  Future<void> calcularIPI() async {
+  Future<void> calcularICMS() async {
     final double? valor = double.tryParse(valorProdutoController.text);
     final double? aliquota = double.tryParse(aliquotaController.text);
 
@@ -23,22 +23,22 @@ class _CalculoIcmsPageState extends State<CalculoIcmsPage>{
       return;
     }
 
-    final url = Uri.parse('http://localhost:3000/api/ipi'); // ajuste se necessário
+    final url = Uri.parse('http://localhost:3000/impostos/icms');
 
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'valorProduto': valor, 'aliquota': aliquota}),
+      body: jsonEncode({'valorProduto': valor, 'aliquotaICMS': aliquota}),
     );
 
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
       setState(() {
-        resultado = 'Valor do IPI: R\$ ${json['ipi'].toStringAsFixed(2)}';
+        resultado = 'Valor do ICMS: R\$ ${json['imposto']}';
       });
     } else {
       setState(() {
-        resultado = 'Erro ao calcular IPI. Tente novamente.';
+        resultado = 'Erro ao calcular ICMS. Tente novamente.';
       });
     }
   }
@@ -46,39 +46,52 @@ class _CalculoIcmsPageState extends State<CalculoIcmsPage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Cálculo de IPI')),
-      body: Center(
-        child: Container(
-          width: 350,
-          padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-            boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 10)],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: valorProdutoController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(labelText: 'Valor do produto'),
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: aliquotaController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(labelText: 'Alíquota (%)'),
-              ),
-              const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: calcularIPI,
-                child: const Text('Calcular IPI'),
-              ),
-              const SizedBox(height: 16),
-              if (resultado != null)
-                Text(resultado!, style: const TextStyle(fontSize: 16)),
-            ],
+      appBar: AppBar(title: const Text('Cálculo de ICMS')),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 16.0),
+            child: Column(
+              children: [
+                Container(
+                  width: 350,
+                  padding: const EdgeInsets.all(24),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 10)],
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TextField(
+                        controller: valorProdutoController,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(labelText: 'Valor do produto'),
+                      ),
+                      const SizedBox(height: 16),
+                      TextField(
+                        controller: aliquotaController,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(labelText: 'Alíquota (%)'),
+                      ),
+                      const SizedBox(height: 24),
+                      ElevatedButton(
+                        onPressed: calcularICMS,
+                        child: const Text('Calcular ICMS'),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 32),
+                if (resultado != null)
+                  Text(
+                    resultado!,
+                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+              ],
+            ),
           ),
         ),
       ),
