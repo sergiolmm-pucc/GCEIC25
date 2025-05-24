@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'calculo_ipi.dart';
+import 'calculo_icms.dart';
+import 'calculo_iss.dart';
+import 'calculo_pis.dart';
+import 'sobre.dart';
+import 'help.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -25,42 +31,61 @@ class SplashScreen extends StatelessWidget {
                 const SizedBox(height: 32),
                 ElevatedButton(
                   onPressed: () {
-                    // Navegar para tela de IPI
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const CalculoIpiPage()),
+                    );
                   },
                   child: const Text('Cálculo de IPI'),
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
-                    // Navegar para tela de ICMS
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const CalculoIcmsPage()),
+                    );
                   },
                   child: const Text('Cálculo de ICMS'),
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
-                    // Navegar para tela de PIS/COFINS
+                    // Assumindo que você também tem calculo_pis.dart
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const CalculoPisPage()),
+                    );
                   },
                   child: const Text('Cálculo de PIS/CONFINS'),
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
-                    // Navegar para tela de ISS
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const CalculoIssPage()),
+                    );
                   },
                   child: const Text('Cálculo de ISS'),
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
-                    // Navegar para "Sobre nós"
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const SobrePage()),
+                    );
                   },
                   child: const Text('Sobre nós'),
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
-                    // Navegar para Help
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const HelpPage()),
+                    );
                   },
                   child: const Text('Help'),
                 ),
