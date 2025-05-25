@@ -94,84 +94,100 @@ exports.calcularDecimoTerceiro = ({ salario, mesesTrabalhados }) => {
 exports.calcularRecisao = ({
   salarioBase,
   mesesTrabalhados,
-  saldoDias,
+  diasTrabalhados,
   motivo = "semJustaCausa",
-  avisoPrevioIndenizado = true,
   feriasVencidas = false,
 }) => {
   if (!salarioBase || typeof salarioBase !== "number" || salarioBase <= 0) {
     throw new Error("Salário base inválido.");
   }
   if (
+    !mesesTrabalhados ||
     typeof mesesTrabalhados !== "number" ||
-    mesesTrabalhados < 0 ||
-    mesesTrabalhados > 12
+    mesesTrabalhados < 0
   ) {
-    throw new Error("Meses trabalhados deve estar entre 0 e 12.");
+    throw new Error("Meses trabalhados inválidos.");
   }
-  if (typeof saldoDias !== "number" || saldoDias < 0 || saldoDias > 31) {
-    throw new Error("Saldo de dias inválido.");
+  if (
+    !diasTrabalhados ||
+    typeof diasTrabalhados !== "number" ||
+    diasTrabalhados < 0 ||
+    diasTrabalhados > 31
+  ) {
+    throw new Error("Dias trabalhados inválidos.");
   }
 
-  // Férias vencidas
-  const valorFeriasVencidas = feriasVencidas
-    ? salarioBase + salarioBase / 3
-    : 0;
-
-  // Férias proporcionais + 1/3
+  let recisao = 0;
+  const saldoSalario = (salarioBase / 30) * diasTrabalhados;
+  const feriasProporcionais = (salarioBase / 12) * (mesesTrabalhados % 12);
   const valorFeriasProporcionais =
-    mesesTrabalhados > 0 ? (salarioBase / 12) * mesesTrabalhados * (4 / 3) : 0;
+    feriasProporcionais + feriasProporcionais / 3;
 
-  // 13º proporcional (usando função já existente)
-  const decimoTerceiro = exports.calcularDecimoTerceiro({
-    salario: salarioBase,
-    mesesTrabalhados: mesesTrabalhados,
-  });
-  const valor13Proporcional = decimoTerceiro.bruto;
+  const decimoTerceiroProporcional =
+    (salarioBase / 12) * (mesesTrabalhados % 12);
+  const fgts = salarioBase * 0.08 * mesesTrabalhados;
+  const multaFgts = fgts * 0.4;
 
-  // Aviso prévio indenizado (30 dias)
-  let avisoPrevio = 0;
-  if (avisoPrevioIndenizado && motivo === "semJustaCausa") {
-    avisoPrevio = salarioBase;
+  switch (motivo) {
+    case "semJustaCausa":
+      recisao =
+        saldoSalario +
+        salarioBase +
+        (feriasVencidas
+          ? valorFeriasProporcionais + salarioBase + salarioBase / 3
+          : valorFeriasProporcionais) +
+        decimoTerceiroProporcional +
+        fgts +
+        multaFgts;
+      return {
+        recisao: parseFloat(recisao.toFixed(2)),
+        avisoPrevio: salarioBase,
+        saldoSalario: parseFloat(saldoSalario.toFixed(2)),
+        ferias: parseFloat(
+          (feriasVencidas
+            ? valorFeriasProporcionais + salarioBase + salarioBase / 3
+            : valorFeriasProporcionais
+          ).toFixed(2)
+        ),
+        decimoTerceiro: parseFloat(decimoTerceiroProporcional.toFixed(2)),
+        fgts: parseFloat(fgts.toFixed(2)),
+        multaFgts: parseFloat(multaFgts.toFixed(2)),
+      };
+    case "JustaCausa":
+      recisao =
+        saldoSalario + (feriasVencidas ? salarioBase + salarioBase / 3 : 0);
+      return {
+        recisao: parseFloat(recisao.toFixed(2)),
+        saldoSalario: parseFloat(saldoSalario.toFixed(2)),
+        ferias: parseFloat(
+          (feriasVencidas ? salarioBase + salarioBase / 3 : 0).toFixed(2)
+        ),
+      };
+    case "PedidoDemissao":
+      recisao =
+        saldoSalario +
+        (feriasVencidas
+          ? salarioBase + salarioBase / 3 + valorFeriasProporcionais
+          : valorFeriasProporcionais) +
+        decimoTerceiroProporcional -
+        salarioBase;
+      return {
+        recisao: parseFloat(recisao.toFixed(2)),
+        saldoSalario: parseFloat(saldoSalario.toFixed(2)),
+        ferias: parseFloat(
+          (feriasVencidas
+            ? salarioBase + salarioBase / 3 + valorFeriasProporcionais
+            : valorFeriasProporcionais
+          ).toFixed(2)
+        ),
+        decimoTerceiro: parseFloat(decimoTerceiroProporcional.toFixed(2)),
+        descontoAvisoPrevio: salarioBase,
+      };
+    default:
+      throw new Error(
+        "Opção de rescisão inválida. Escolha entre 'semJustaCausa', 'JustaCausa' ou 'PedidoDemissao'."
+      );
   }
-
-  // Multa 40% FGTS (apenas sem justa causa)
-  let multaFGTS = 0;
-  if (motivo === "semJustaCausa") {
-    // FGTS total estimado: 8% do salário por mês trabalhado
-    const fgtsTotal = salarioBase * 0.08 * mesesTrabalhados;
-    multaFGTS = fgtsTotal * 0.4;
-  }
-
-  // Saldo de salário (dias trabalhados no mês da demissão)
-  const saldoSalario = (salarioBase / 30) * saldoDias;
-
-  // Soma dos valores
-  let total =
-    saldoSalario +
-    valorFeriasVencidas +
-    valorFeriasProporcionais +
-    valor13Proporcional +
-    avisoPrevio +
-    multaFGTS;
-
-  // Ajustes para pedido de demissão ou justa causa
-  if (motivo === "pedidoDemissao") {
-    total -= avisoPrevio + multaFGTS;
-  }
-  if (motivo === "justaCausa") {
-    total = saldoSalario + valorFeriasVencidas;
-  }
-
-  return {
-    saldoSalario: Number(saldoSalario.toFixed(2)),
-    feriasVencidas: Number(valorFeriasVencidas.toFixed(2)),
-    feriasProporcionais: Number(valorFeriasProporcionais.toFixed(2)),
-    decimoTerceiroProporcional: Number(valor13Proporcional.toFixed(2)),
-    avisoPrevio: Number(avisoPrevio.toFixed(2)),
-    multaFGTS: Number(multaFGTS.toFixed(2)),
-    total: Number(total.toFixed(2)),
-  };
 };
 
 exports.calcularESocial = ({ salario, dependentes = 0 }) => {

@@ -316,10 +316,7 @@
                     "type": "number"
                   },
                   "motivo": {
-                    "type": ["semJustaCausa", "pedidoDemissao", "justaCausa"]
-                  },
-                  "avisoPrevioIndenizado": {
-                    "type": "boolean"
+                    "type": ["semJustaCausa", "JustaCausa", "PedidoDemissao"]
                   },
                   "feriasVencidas": {
                     "type": "boolean"
@@ -345,7 +342,15 @@
                       "type": "object",
                       "properties": {
                         "eSocial": {
-                          "type": "number"
+                          "recisao": {
+                            "recisao": "number",
+                            "avisoPrevio": "number",
+                            "saldoSalario": "number",
+                            "ferias": "number",
+                            "decimoTerceiro": "number",
+                            "fgts": "number",
+                            "multaFgts": "number"
+                          }
                         }
                       }
                     }
