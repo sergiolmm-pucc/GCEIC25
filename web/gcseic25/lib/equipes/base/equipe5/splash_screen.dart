@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'calculo_ipi.dart';
 import 'calculo_icms.dart';
 import 'calculo_iss.dart';
-import 'calculo_pis.dart';
+import 'calculo_irpj.dart';
 import 'sobre.dart';
 import 'help.dart';
 
@@ -54,10 +54,10 @@ class SplashScreen extends StatelessWidget {
                     // Assumindo que você também tem calculo_pis.dart
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => const CalculoPisPage()),
+                      MaterialPageRoute(builder: (_) => const CalculoIrpjPage()),
                     );
                   },
-                  child: const Text('Cálculo de PIS/CONFINS'),
+                  child: const Text('Cálculo de IRPJ'),
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
