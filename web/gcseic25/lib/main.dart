@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gcseic25/equipes/equipe4/home.dart';
+import 'package:gcseic25/equipes/equipe4/splash_screen.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
@@ -23,6 +25,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/splash1': (context) => SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
         '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
+        '/splash_screen_equipe_4': (context) => SplashScreen4(nextPage: HomeScreen4()),
       },
     );
   }
@@ -52,6 +55,18 @@ class HomePage extends StatelessWidget {
               },
               child: Text('Abrir Consulta 2'),
             ),
+            
+            // Botão para splash screen da equipe 4
+            //----------------------------------------------------------
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/splash_screen_equipe_4');
+              },
+              child: Text('Equipe 4'),
+            ),
+            //----------------------------------------------------------
+
             Semantics(
                 identifier: 'Entrar',
                 label: 'Entrar',
