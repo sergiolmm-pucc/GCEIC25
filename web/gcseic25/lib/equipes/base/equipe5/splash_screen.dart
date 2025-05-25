@@ -21,7 +21,7 @@ class SplashScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text(
-                  'Bem-vindo!',
+                  'Calculadora de impostos',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,

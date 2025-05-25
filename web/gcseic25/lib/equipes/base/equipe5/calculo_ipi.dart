@@ -48,53 +48,60 @@ class _CalculoIpiPageState extends State<CalculoIpiPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Cálculo de IPI')),
       body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 16.0),
-            child: Column(
-              children: [
-                Container(
-                  width: 350,
-                  padding: const EdgeInsets.all(24),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 10)],
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height - kToolbarHeight,
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 350,
+                    padding: const EdgeInsets.all(24),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(color: Colors.black26, blurRadius: 10),
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextField(
+                          controller: valorProdutoController,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(labelText: 'Valor do produto'),
+                        ),
+                        const SizedBox(height: 16),
+                        TextField(
+                          controller: aliquotaController,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(labelText: 'Alíquota (%)'),
+                        ),
+                        const SizedBox(height: 24),
+                        ElevatedButton(
+                          onPressed: calcularIPI,
+                          child: const Text('Calcular IPI'),
+                        ),
+                      ],
+                    ),
                   ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextField(
-                        controller: valorProdutoController,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(labelText: 'Valor do produto'),
-                      ),
-                      const SizedBox(height: 16),
-                      TextField(
-                        controller: aliquotaController,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(labelText: 'Alíquota (%)'),
-                      ),
-                      const SizedBox(height: 24),
-                      ElevatedButton(
-                        onPressed: calcularIPI,
-                        child: const Text('Calcular IPI'),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 32),
-                if (resultado != null)
-                  Text(
-                    resultado!,
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
-              ],
+                  const SizedBox(height: 32),
+                  if (resultado != null)
+                    Text(
+                      resultado!,
+                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                ],
+              ),
             ),
           ),
         ),
       ),
     );
   }
+
 }
