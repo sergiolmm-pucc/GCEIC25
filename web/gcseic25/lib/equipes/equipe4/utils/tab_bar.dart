@@ -11,6 +11,7 @@ class MainLayout extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFF347CA5),
         elevation: 4,
+        iconTheme: const IconThemeData(color: Colors.white),
         titleSpacing: 0, 
         title: Row(
           children: [
@@ -18,7 +19,7 @@ class MainLayout extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Image.asset(
                 'assets/equipe4/logo_equipe_4.png',
-                height: 20,
+                height: 23,
               ),
             ),
           ],
