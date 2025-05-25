@@ -45,3 +45,36 @@ exports.calcularICMS = ({ valorProduto, aliquotaICMS }) => {
   };
 };
 
+exports.calcularIRPJ = ({ lucroTributavel, isLucroReal = true }) => {
+  if (lucroTributavel == null) {
+    throw new Error('lucroTributavel é obrigatório');
+  }
+
+  const lucro = Number(lucroTributavel);
+  if (isNaN(lucro)) {
+    throw new Error('O valor deve ser um número válido');
+  }
+
+  let aliquotaIRPJ, valorIRPJ;
+
+  if (isLucroReal) {
+    const baseAdicional = Math.max(0, lucro - 60000);
+    valorIRPJ = (lucro * 0.15) + (baseAdicional * 0.10);
+    aliquotaIRPJ = (lucro <= 60000) ? 15 : 15 + ((baseAdicional / lucro) * 10);
+  } else {
+    aliquotaIRPJ = 15;
+    valorIRPJ = (lucro * aliquotaIRPJ) / 100;
+  }
+
+  return {
+    lucroTributavel: lucro.toFixed(2),
+    aliquotaIRPJ: aliquotaIRPJ.toFixed(2),
+    imposto: valorIRPJ.toFixed(2),
+    regime: isLucroReal ? 'Lucro Real' : 'Lucro Presumido',
+    observacao: isLucroReal
+      ? '15% + 10% sobre excedente de R$ 60k/trimestre'
+      : '15% sobre base presumida'
+  };
+};
+
+

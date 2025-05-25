@@ -6,6 +6,9 @@ const ipiRoutes = require('./routes/ipiRoutes5');
 const userRoutes = require('./routes/userRoutes');
 const baseRoutes = require('./routes/baseRoutes');
 const icmsRoutes = require('./routes/icmsRoutes5');
+const irpjRoutes = require('./routes/irpjRoutes5');
+
+
 
 
 const app = express();
@@ -18,6 +21,7 @@ app.use('/', baseRoutes);
 app.use('/users', userRoutes);
 app.use('/impostos', ipiRoutes);
 app.use('/impostos', icmsRoutes); 
+app.use('/impostos', irpjRoutes);
 
 // Só escuta a porta se não estiver em ambiente de testes
 if (process.env.NODE_ENV !== 'test') {

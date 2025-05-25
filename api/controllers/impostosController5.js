@@ -22,3 +22,16 @@ module.exports = {
   calcularIPI: calcularIPIHandler,
   calcularICMS: calcularICMSHandler
  };
+
+ const { calcularIRPJ } = require('../services/impostoService5');
+
+function calcularIRPJHandler(req, res) {
+  try {
+    const resultado = calcularIRPJ(req.body);
+    res.json(resultado);
+  } catch (error) {
+    res.status(400).json({ erro: error.message });
+  }
+}
+
+module.exports.calcularIRPJ = calcularIRPJHandler;
