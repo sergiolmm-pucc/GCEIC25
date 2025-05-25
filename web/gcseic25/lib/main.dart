@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gcseic25/equipes/equipe4/home.dart';
-import 'package:gcseic25/equipes/equipe4/splash_screen.dart';
+import 'package:gcseic25/equipes/equipe4/screens/home.dart';
+import 'package:gcseic25/equipes/equipe4/screens/splash_screen.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';

@@ -90,4 +90,5 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
   assets:
-      - assets/logo_equipe_4.png
+      - assets/equipe4/logo_equipe_4.png
+      - assets/equipe4/user_team4.png
