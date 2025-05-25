@@ -52,19 +52,22 @@ exports.calcularIRPJ = ({ lucroTributavel, isLucroReal = true }) => {
 
   const lucro = Number(lucroTributavel);
   if (isNaN(lucro)) {
-    throw new Error('O valor deve ser um número válido');
+    throw new Error('O valor deve ser um número válido'); // Mensagem igual ao teste
   }
 
-  let aliquotaIRPJ, valorIRPJ;
+  let valorIRPJ, aliquotaIRPJ;
 
   if (isLucroReal) {
+    const baseNormal = Math.min(lucro, 60000);
     const baseAdicional = Math.max(0, lucro - 60000);
-    valorIRPJ = (lucro * 0.15) + (baseAdicional * 0.10);
-    aliquotaIRPJ = (lucro <= 60000) ? 15 : 15 + ((baseAdicional / lucro) * 10);
+    valorIRPJ = (baseNormal * 0.15) + (baseAdicional * 0.10); // 10% adicional
+    aliquotaIRPJ = (valorIRPJ / lucro) * 100;
   } else {
-    aliquotaIRPJ = 15;
-    valorIRPJ = (lucro * aliquotaIRPJ) / 100;
-  }
+  const baseNormal = Math.min(lucro, 60000);
+  const baseAdicional = Math.max(0, lucro - 60000);
+  valorIRPJ = (baseNormal * 0.15) + (baseAdicional * 0.10);
+  aliquotaIRPJ = (valorIRPJ / lucro) * 100;
+}
 
   return {
     lucroTributavel: lucro.toFixed(2),

@@ -18,11 +18,6 @@ function calcularICMSHandler(req, res) {
   }
 }
 
-module.exports = { 
-  calcularIPI: calcularIPIHandler,
-  calcularICMS: calcularICMSHandler
- };
-
  const { calcularIRPJ } = require('../services/impostoService5');
 
 function calcularIRPJHandler(req, res) {
@@ -34,4 +29,11 @@ function calcularIRPJHandler(req, res) {
   }
 }
 
-module.exports.calcularIRPJ = calcularIRPJHandler;
+module.exports = { 
+  calcularIPI: calcularIPIHandler,
+  calcularICMS: calcularICMSHandler,
+  calcularIRPJ: calcularIRPJHandler
+ };
+
+
+
