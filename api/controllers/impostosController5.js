@@ -1,4 +1,4 @@
-const { calcularIPI, calcularICMS } = require('../services/impostoService5');
+const { calcularIPI, calcularICMS} = require('../services/impostoService5');
 
 function calcularIPIHandler(req, res) {
   try {
@@ -28,6 +28,8 @@ function calcularIRPJHandler(req, res) {
     res.status(400).json({ erro: error.message });
   }
 }
+
+const { calcularIRPJ } = require('../services/impostoService5');
 
 function calcularISSHandler(req, res) {
   try {
