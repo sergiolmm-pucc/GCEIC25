@@ -68,7 +68,19 @@ class MainLayout extends StatelessWidget {
           SizedBox(width: 30),
         ],
       ),
-      body: child,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          
+          image: DecorationImage(
+            image: AssetImage('assets/equipe4/apis_background.png'),
+            fit: BoxFit.cover,
+          ),
+
+        ),
+        child: child,
+      ),
     );
   }
 }
