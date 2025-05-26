@@ -87,3 +87,7 @@ export function calcularManutencaoMensal(req, res) {
 export function calcularMob(req, res) {
 
 }
+
+export function login(req, res) {
+    
+}
