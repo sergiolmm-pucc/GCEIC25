@@ -29,7 +29,7 @@ function calcularIRPJHandler(req, res) {
   }
 }
 
-const { calcularIRPJ } = require('../services/impostoService5');
+const { calcularISS } = require('../services/impostoService5');
 
 function calcularISSHandler(req, res) {
   try {
