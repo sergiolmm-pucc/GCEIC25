@@ -7,7 +7,7 @@ const userRoutes = require('./routes/userRoutes');
 const baseRoutes = require('./routes/baseRoutes');
 const icmsRoutes = require('./routes/icmsRoutes5');
 const irpjRoutes = require('./routes/irpjRoutes5');
-
+const issRoutes = require('./routes/issRoutes5');
 
 
 
@@ -22,6 +22,7 @@ app.use('/users', userRoutes);
 app.use('/impostos', ipiRoutes);
 app.use('/impostos', icmsRoutes); 
 app.use('/impostos', irpjRoutes);
+app.use('/impostos', issRoutes);
 
 // Só escuta a porta se não estiver em ambiente de testes
 if (process.env.NODE_ENV !== 'test') {

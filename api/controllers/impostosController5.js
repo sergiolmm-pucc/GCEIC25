@@ -29,10 +29,21 @@ function calcularIRPJHandler(req, res) {
   }
 }
 
+function calcularISSHandler(req, res) {
+  try {
+    const resultado = calcularISS(req.body);
+    res.json(resultado);
+  } catch (error) {
+    res.status(400).json({ erro: error.message });
+  }
+}
+
+
 module.exports = { 
   calcularIPI: calcularIPIHandler,
   calcularICMS: calcularICMSHandler,
-  calcularIRPJ: calcularIRPJHandler
+  calcularIRPJ: calcularIRPJHandler,
+  calcularISS: calcularISSHandler
  };
 
 

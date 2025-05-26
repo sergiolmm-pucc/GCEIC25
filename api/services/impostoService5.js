@@ -80,4 +80,26 @@ exports.calcularIRPJ = ({ lucroTributavel, isLucroReal = true }) => {
   };
 };
 
+exports.calcularISS = ({ valorServico, aliquotaISS }) => {
+  if (valorServico == null || aliquotaISS == null) {
+    throw new Error('valorServico e aliquotaISS são obrigatórios');
+  }
 
+  // Converte para números (caso venham como string)
+  const valor = Number(valorServico);
+  const aliquota = Number(aliquotaISS);
+
+  // Verifica se são números válidos
+  if (isNaN(valor) || isNaN(aliquota)) {
+    throw new Error('Os valores devem ser números válidos');
+  }
+
+  // Fórmula do ISS (diferente do ICMS, o ISS é calculado diretamente sobre o valor do serviço)
+  const iss = valor * (aliquota / 100);
+
+  return {
+    valorServico: valor.toFixed(2),
+    aliquotaISS: aliquota.toFixed(2),
+    imposto: iss.toFixed(2)
+  };
+};
