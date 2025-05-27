@@ -1,25 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="9" failures="0" errors="0" time="1.336">
-  <testsuite name="Testa rota de cálculo de ICMS" errors="0" failures="0" skipped="0" timestamp="2025-05-25T22:43:06" time="0.931" tests="2">
+<testsuites name="jest tests" tests="12" failures="0" errors="0" time="1.614">
+  <testsuite name="Testa rota de cálculo de ICMS" errors="0" failures="0" skipped="0" timestamp="2025-05-27T19:04:23" time="1.042" tests="2">
     <testcase classname="Testa rota de cálculo de ICMS deve calcular corretamente o ICMS" name="Testa rota de cálculo de ICMS deve calcular corretamente o ICMS" time="0.042">
     </testcase>
-    <testcase classname="Testa rota de cálculo de ICMS deve retornar erro se faltar campos" name="Testa rota de cálculo de ICMS deve retornar erro se faltar campos" time="0.007">
+    <testcase classname="Testa rota de cálculo de ICMS deve retornar erro se faltar campos" name="Testa rota de cálculo de ICMS deve retornar erro se faltar campos" time="0.005">
     </testcase>
   </testsuite>
-  <testsuite name="Testa rota de cálculo de IRPJ" errors="0" failures="0" skipped="0" timestamp="2025-05-25T22:43:06" time="1.094" tests="5">
-    <testcase classname="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Real (abaixo do limite)" name="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Real (abaixo do limite)" time="0.04">
+  <testsuite name="Testa rota de cálculo de ISS" errors="0" failures="0" skipped="0" timestamp="2025-05-27T19:04:23" time="1.078" tests="3">
+    <testcase classname="Testa rota de cálculo de ISS deve calcular corretamente o ISS" name="Testa rota de cálculo de ISS deve calcular corretamente o ISS" time="0.042">
+    </testcase>
+    <testcase classname="Testa rota de cálculo de ISS deve retornar erro se faltar campos" name="Testa rota de cálculo de ISS deve retornar erro se faltar campos" time="0.006">
+    </testcase>
+    <testcase classname="Testa rota de cálculo de ISS deve retornar erro se os valores não forem numéricos" name="Testa rota de cálculo de ISS deve retornar erro se os valores não forem numéricos" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="Testa rota de cálculo de IRPJ" errors="0" failures="0" skipped="0" timestamp="2025-05-27T19:04:23" time="1.327" tests="5">
+    <testcase classname="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Real (abaixo do limite)" name="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Real (abaixo do limite)" time="0.037">
     </testcase>
     <testcase classname="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Real (acima do limite)" name="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Real (acima do limite)" time="0.005">
     </testcase>
-    <testcase classname="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Presumido" name="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Presumido" time="0.006">
+    <testcase classname="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Presumido" name="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Presumido" time="0.005">
     </testcase>
-    <testcase classname="Testa rota de cálculo de IRPJ deve retornar erro se faltar campo obrigatório" name="Testa rota de cálculo de IRPJ deve retornar erro se faltar campo obrigatório" time="0.005">
+    <testcase classname="Testa rota de cálculo de IRPJ deve retornar erro se faltar campo obrigatório" name="Testa rota de cálculo de IRPJ deve retornar erro se faltar campo obrigatório" time="0.008">
     </testcase>
-    <testcase classname="Testa rota de cálculo de IRPJ deve retornar erro se valor não for numérico" name="Testa rota de cálculo de IRPJ deve retornar erro se valor não for numérico" time="0.004">
+    <testcase classname="Testa rota de cálculo de IRPJ deve retornar erro se valor não for numérico" name="Testa rota de cálculo de IRPJ deve retornar erro se valor não for numérico" time="0.01">
     </testcase>
   </testsuite>
-  <testsuite name="Testa rota de cálculo de IPI" errors="0" failures="0" skipped="0" timestamp="2025-05-25T22:43:06" time="1.09" tests="2">
-    <testcase classname="Testa rota de cálculo de IPI deve calcular corretamente o IPI" name="Testa rota de cálculo de IPI deve calcular corretamente o IPI" time="0.041">
+  <testsuite name="Testa rota de cálculo de IPI" errors="0" failures="0" skipped="0" timestamp="2025-05-27T19:04:23" time="1.331" tests="2">
+    <testcase classname="Testa rota de cálculo de IPI deve calcular corretamente o IPI" name="Testa rota de cálculo de IPI deve calcular corretamente o IPI" time="0.049">
     </testcase>
     <testcase classname="Testa rota de cálculo de IPI deve retornar erro se faltar campos" name="Testa rota de cálculo de IPI deve retornar erro se faltar campos" time="0.006">
     </testcase>

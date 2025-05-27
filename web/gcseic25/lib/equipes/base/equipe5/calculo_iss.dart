@@ -9,13 +9,13 @@ class CalculoIssPage extends StatefulWidget {
   State<CalculoIssPage> createState() => _CalculoIssPageState();
 }
 
-class _CalculoIssPageState extends State<CalculoIssPage>{
-  final TextEditingController valorProdutoController = TextEditingController();
+class _CalculoIssPageState extends State<CalculoIssPage> {
+  final TextEditingController valorServicoController = TextEditingController();
   final TextEditingController aliquotaController = TextEditingController();
   String? resultado;
 
-  Future<void> calcularIPI() async {
-    final double? valor = double.tryParse(valorProdutoController.text);
+  Future<void> calcularISS() async {
+    final double? valor = double.tryParse(valorServicoController.text);
     final double? aliquota = double.tryParse(aliquotaController.text);
 
     if (valor == null || aliquota == null) {
@@ -23,22 +23,22 @@ class _CalculoIssPageState extends State<CalculoIssPage>{
       return;
     }
 
-    final url = Uri.parse('http://localhost:3000/api/ipi'); // ajuste se necessário
+    final url = Uri.parse('http://localhost:3000/impostos/iss');
 
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'valorProduto': valor, 'aliquota': aliquota}),
+      body: jsonEncode({'valorServico': valor, 'aliquotaISS': aliquota}),
     );
 
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
       setState(() {
-        resultado = 'Valor do IPI: R\$ ${json['ipi'].toStringAsFixed(2)}';
+        resultado = 'Valor do ISS: R\$ ${json['imposto']}';
       });
     } else {
       setState(() {
-        resultado = 'Erro ao calcular IPI. Tente novamente.';
+        resultado = 'Erro ao calcular ISS. Tente novamente.';
       });
     }
   }
@@ -46,39 +46,58 @@ class _CalculoIssPageState extends State<CalculoIssPage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Cálculo de IPI')),
-      body: Center(
-        child: Container(
-          width: 350,
-          padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-            boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 10)],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: valorProdutoController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(labelText: 'Valor do produto'),
+      appBar: AppBar(title: const Text('Cálculo de ISS')),
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height - kToolbarHeight,
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 350,
+                    padding: const EdgeInsets.all(24),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(color: Colors.black26, blurRadius: 10),
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextField(
+                          controller: valorServicoController,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(labelText: 'Valor do serviço'),
+                        ),
+                        const SizedBox(height: 16),
+                        TextField(
+                          controller: aliquotaController,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(labelText: 'Alíquota (%)'),
+                        ),
+                        const SizedBox(height: 24),
+                        ElevatedButton(
+                          onPressed: calcularISS,
+                          child: const Text('Calcular ISS'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+                  if (resultado != null)
+                    Text(
+                      resultado!,
+                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                ],
               ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: aliquotaController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(labelText: 'Alíquota (%)'),
-              ),
-              const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: calcularIPI,
-                child: const Text('Calcular IPI'),
-              ),
-              const SizedBox(height: 16),
-              if (resultado != null)
-                Text(resultado!, style: const TextStyle(fontSize: 16)),
-            ],
+            ),
           ),
         ),
       ),
