@@ -1,35 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="12" failures="0" errors="0" time="1.614">
-  <testsuite name="Testa rota de cálculo de ICMS" errors="0" failures="0" skipped="0" timestamp="2025-05-27T19:04:23" time="1.042" tests="2">
-    <testcase classname="Testa rota de cálculo de ICMS deve calcular corretamente o ICMS" name="Testa rota de cálculo de ICMS deve calcular corretamente o ICMS" time="0.042">
-    </testcase>
-    <testcase classname="Testa rota de cálculo de ICMS deve retornar erro se faltar campos" name="Testa rota de cálculo de ICMS deve retornar erro se faltar campos" time="0.005">
-    </testcase>
-  </testsuite>
-  <testsuite name="Testa rota de cálculo de ISS" errors="0" failures="0" skipped="0" timestamp="2025-05-27T19:04:23" time="1.078" tests="3">
-    <testcase classname="Testa rota de cálculo de ISS deve calcular corretamente o ISS" name="Testa rota de cálculo de ISS deve calcular corretamente o ISS" time="0.042">
+<testsuites name="jest tests" tests="13" failures="0" errors="0" time="1.772">
+  <testsuite name="Testa rota de cálculo de ISS" errors="0" failures="0" skipped="0" timestamp="2025-05-27T19:25:09" time="1.187" tests="3">
+    <testcase classname="Testa rota de cálculo de ISS deve calcular corretamente o ISS" name="Testa rota de cálculo de ISS deve calcular corretamente o ISS" time="0.054">
     </testcase>
     <testcase classname="Testa rota de cálculo de ISS deve retornar erro se faltar campos" name="Testa rota de cálculo de ISS deve retornar erro se faltar campos" time="0.006">
     </testcase>
-    <testcase classname="Testa rota de cálculo de ISS deve retornar erro se os valores não forem numéricos" name="Testa rota de cálculo de ISS deve retornar erro se os valores não forem numéricos" time="0.004">
+    <testcase classname="Testa rota de cálculo de ISS deve retornar erro se os valores não forem numéricos" name="Testa rota de cálculo de ISS deve retornar erro se os valores não forem numéricos" time="0.009">
     </testcase>
   </testsuite>
-  <testsuite name="Testa rota de cálculo de IRPJ" errors="0" failures="0" skipped="0" timestamp="2025-05-27T19:04:23" time="1.327" tests="5">
-    <testcase classname="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Real (abaixo do limite)" name="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Real (abaixo do limite)" time="0.037">
+  <testsuite name="Testa rota de cálculo de ICMS" errors="0" failures="0" skipped="0" timestamp="2025-05-27T19:25:09" time="1.201" tests="2">
+    <testcase classname="Testa rota de cálculo de ICMS deve calcular corretamente o ICMS" name="Testa rota de cálculo de ICMS deve calcular corretamente o ICMS" time="0.044">
+    </testcase>
+    <testcase classname="Testa rota de cálculo de ICMS deve retornar erro se faltar campos" name="Testa rota de cálculo de ICMS deve retornar erro se faltar campos" time="0.007">
+    </testcase>
+  </testsuite>
+  <testsuite name="Testa rota de cálculo de IRPJ" errors="0" failures="0" skipped="0" timestamp="2025-05-27T19:25:09" time="1.368" tests="5">
+    <testcase classname="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Real (abaixo do limite)" name="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Real (abaixo do limite)" time="0.045">
     </testcase>
     <testcase classname="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Real (acima do limite)" name="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Real (acima do limite)" time="0.005">
     </testcase>
     <testcase classname="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Presumido" name="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Presumido" time="0.005">
     </testcase>
-    <testcase classname="Testa rota de cálculo de IRPJ deve retornar erro se faltar campo obrigatório" name="Testa rota de cálculo de IRPJ deve retornar erro se faltar campo obrigatório" time="0.008">
+    <testcase classname="Testa rota de cálculo de IRPJ deve retornar erro se faltar campo obrigatório" name="Testa rota de cálculo de IRPJ deve retornar erro se faltar campo obrigatório" time="0.004">
     </testcase>
-    <testcase classname="Testa rota de cálculo de IRPJ deve retornar erro se valor não for numérico" name="Testa rota de cálculo de IRPJ deve retornar erro se valor não for numérico" time="0.01">
+    <testcase classname="Testa rota de cálculo de IRPJ deve retornar erro se valor não for numérico" name="Testa rota de cálculo de IRPJ deve retornar erro se valor não for numérico" time="0.005">
     </testcase>
   </testsuite>
-  <testsuite name="Testa rota de cálculo de IPI" errors="0" failures="0" skipped="0" timestamp="2025-05-27T19:04:23" time="1.331" tests="2">
-    <testcase classname="Testa rota de cálculo de IPI deve calcular corretamente o IPI" name="Testa rota de cálculo de IPI deve calcular corretamente o IPI" time="0.049">
+  <testsuite name="Testa rota de cálculo de IPI" errors="0" failures="0" skipped="0" timestamp="2025-05-27T19:25:09" time="1.499" tests="3">
+    <testcase classname="Testa rota de cálculo de IPI deve calcular corretamente o IPI com valorProduto e aliquotaIPI" name="Testa rota de cálculo de IPI deve calcular corretamente o IPI com valorProduto e aliquotaIPI" time="0.036">
     </testcase>
-    <testcase classname="Testa rota de cálculo de IPI deve retornar erro se faltar campos" name="Testa rota de cálculo de IPI deve retornar erro se faltar campos" time="0.006">
+    <testcase classname="Testa rota de cálculo de IPI deve calcular corretamente o IPI incluindo frete e despesas acessórias" name="Testa rota de cálculo de IPI deve calcular corretamente o IPI incluindo frete e despesas acessórias" time="0.005">
+    </testcase>
+    <testcase classname="Testa rota de cálculo de IPI deve retornar erro se faltar campos obrigatórios" name="Testa rota de cálculo de IPI deve retornar erro se faltar campos obrigatórios" time="0.004">
     </testcase>
   </testsuite>
 </testsuites>

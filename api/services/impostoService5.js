@@ -1,4 +1,4 @@
-exports.calcularIPI = ({ valorProduto, aliquotaIPI }) => {
+exports.calcularIPI = ({ valorProduto, aliquotaIPI, frete = 0, despesasAcessorias = 0 }) => {
   if (valorProduto == null || aliquotaIPI == null) {
     throw new Error('valorProduto e aliquotaIPI são obrigatórios');
   }
@@ -6,16 +6,25 @@ exports.calcularIPI = ({ valorProduto, aliquotaIPI }) => {
   // Converte para números (caso venham como string)
   const valor = Number(valorProduto);
   const aliquota = Number(aliquotaIPI);
+  const valorFrete = Number(frete);
+  const valorDespesas = Number(despesasAcessorias);
 
   // Verifica se são números válidos
-  if (isNaN(valor) || isNaN(aliquota)) {
-    throw new Error('Os valores devem ser números válidos');
+  if ([valor, aliquota, valorFrete, valorDespesas].some(isNaN)) {
+    throw new Error('Todos os valores devem ser números válidos');
   }
 
-  const ipi = (valor * aliquota) / 100;
+  // Calcula a base de cálculo
+  const baseCalculo = valor + valorFrete + valorDespesas;
+
+  // Calcula o IPI
+  const ipi = (baseCalculo * aliquota) / 100;
 
   return {
     valorProduto: valor.toFixed(2),
+    frete: valorFrete.toFixed(2),
+    despesasAcessorias: valorDespesas.toFixed(2),
+    baseCalculo: baseCalculo.toFixed(2),
     aliquotaIPI: aliquota.toFixed(2),
     imposto: ipi.toFixed(2),
   };

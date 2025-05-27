@@ -12,14 +12,19 @@ class CalculoIpiPage extends StatefulWidget {
 class _CalculoIpiPageState extends State<CalculoIpiPage> {
   final TextEditingController valorProdutoController = TextEditingController();
   final TextEditingController aliquotaController = TextEditingController();
+  final TextEditingController freteController = TextEditingController();
+  final TextEditingController despesasController = TextEditingController();
+
   String? resultado;
 
   Future<void> calcularIPI() async {
     final double? valor = double.tryParse(valorProdutoController.text);
     final double? aliquota = double.tryParse(aliquotaController.text);
+    final double? frete = double.tryParse(freteController.text);
+    final double? despesas = double.tryParse(despesasController.text);
 
     if (valor == null || aliquota == null) {
-      setState(() => resultado = 'Preencha os valores corretamente.');
+      setState(() => resultado = 'Preencha pelo menos valor do produto e alíquota.');
       return;
     }
 
@@ -28,13 +33,19 @@ class _CalculoIpiPageState extends State<CalculoIpiPage> {
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'valorProduto': valor, 'aliquotaIPI': aliquota}),
+      body: jsonEncode({
+        'valorProduto': valor,
+        'aliquotaIPI': aliquota,
+        'frete': frete ?? 0,
+        'despesasAcessorias': despesas ?? 0,
+      }),
     );
 
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
       setState(() {
-        resultado = 'Valor do IPI: R\$ ${json['imposto']}';
+        resultado =
+            'Base de cálculo: R\$ ${json['baseCalculo']}\nValor do IPI: R\$ ${json['imposto']}';
       });
     } else {
       setState(() {
@@ -80,6 +91,18 @@ class _CalculoIpiPageState extends State<CalculoIpiPage> {
                           keyboardType: TextInputType.number,
                           decoration: const InputDecoration(labelText: 'Alíquota (%)'),
                         ),
+                        const SizedBox(height: 16),
+                        TextField(
+                          controller: freteController,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(labelText: 'Frete'),
+                        ),
+                        const SizedBox(height: 16),
+                        TextField(
+                          controller: despesasController,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(labelText: 'Despesas acessórias'),
+                        ),
                         const SizedBox(height: 24),
                         ElevatedButton(
                           onPressed: calcularIPI,
@@ -103,5 +126,4 @@ class _CalculoIpiPageState extends State<CalculoIpiPage> {
       ),
     );
   }
-
 }
