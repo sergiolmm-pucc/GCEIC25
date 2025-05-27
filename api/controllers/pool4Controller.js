@@ -89,5 +89,12 @@ export function calcularMob(req, res) {
 }
 
 export function login(req, res) {
-    
+    const { email, senha } = req.body;
+
+    if (email === 'adm@adm.com' && senha === 'adm') {
+        return res.status(200).json({ sucesso: true, mensagem: 'Login realizado com sucesso!' });
+    }
+
+    return res.status(401).json({ sucesso: false, mensagem: 'E-mail ou senha inválidos.' });
 }
+
