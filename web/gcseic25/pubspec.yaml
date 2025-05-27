@@ -93,3 +93,7 @@ flutter:
       - assets/equipe4/logo_equipe_4.png
       - assets/equipe4/user_team4.png
       - assets/equipe4/apis_background.png
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-VariableFont_wght.ttf
