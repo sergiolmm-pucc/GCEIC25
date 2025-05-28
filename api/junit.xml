@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="2" failures="0" errors="0" time="0.625">
+  <testsuite name="Testes da rota /calcular-volume" errors="0" failures="0" skipped="0" timestamp="2025-05-28T22:45:12" time="0.588" tests="2">
+    <testcase classname="Testes da rota /calcular-volume Deve calcular volume de piscina retangular corretamente" name="Testes da rota /calcular-volume Deve calcular volume de piscina retangular corretamente" time="0.103">
+    </testcase>
+    <testcase classname="Testes da rota /calcular-volume Deve retornar erro se faltar tipo de piscina" name="Testes da rota /calcular-volume Deve retornar erro se faltar tipo de piscina" time="0.006">
+    </testcase>
+  </testsuite>
+</testsuites>
