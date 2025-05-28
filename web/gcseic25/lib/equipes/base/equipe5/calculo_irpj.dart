@@ -21,7 +21,7 @@ class _CalculoIrpjPageState extends State<CalculoIrpjPage> {
       return;
     }
 
-    final url = Uri.parse('http://localhost:3000/impostos/irpj'); // ajuste se necessário
+    final url = Uri.parse('http://localhost:3000/impostos/irpj');
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
@@ -64,40 +64,65 @@ class _CalculoIrpjPageState extends State<CalculoIrpjPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              TextField(
-                controller: lucroController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(labelText: 'Lucro Tributável'),
+              Semantics(
+                label: 'Campo de lucro tributável',
+                textField: true,
+                child: TextField(
+                  controller: lucroController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(labelText: 'Lucro Tributável'),
+                ),
               ),
               const SizedBox(height: 16),
-              Row(
-                children: [
-                  const Text('Regime:'),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: DropdownButton<bool>(
-                      value: isLucroReal,
-                      onChanged: (value) {
-                        setState(() {
-                          isLucroReal = value!;
-                        });
-                      },
-                      items: const [
-                        DropdownMenuItem(value: true, child: Text('Lucro Real')),
-                        DropdownMenuItem(value: false, child: Text('Lucro Presumido')),
-                      ],
+              Semantics(
+                label: 'Selecione o regime tributário',
+                child: Row(
+                  children: [
+                    const Text('Regime:'),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: DropdownButton<bool>(
+                        value: isLucroReal,
+                        onChanged: (value) {
+                          setState(() {
+                            isLucroReal = value!;
+                          });
+                        },
+                        items: const [
+                          DropdownMenuItem(
+                            value: true,
+                            child: Text('Lucro Real'),
+                          ),
+                          DropdownMenuItem(
+                            value: false,
+                            child: Text('Lucro Presumido'),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: calcularIRPJ,
-                child: const Text('Calcular IRPJ'),
+              Semantics(
+                label: 'Botão para calcular IRPJ',
+                button: true,
+                child: ElevatedButton(
+                  onPressed: calcularIRPJ,
+                  child: const Text('Calcular IRPJ'),
+                ),
               ),
               const SizedBox(height: 16),
               if (resultado != null)
-                Text(resultado!, style: const TextStyle(fontSize: 14)),
+                Semantics(
+                  label: 'Resultado do cálculo do IRPJ',
+                  readOnly: true,
+                  child: Text(
+                    resultado!,
+                    style: const TextStyle(fontSize: 14),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
             ],
           ),
         ),

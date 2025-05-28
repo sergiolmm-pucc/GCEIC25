@@ -67,21 +67,33 @@ class _CalculoIcmsPageState extends State<CalculoIcmsPage> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        TextField(
-                          controller: valorProdutoController,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(labelText: 'Valor do produto'),
+                        Semantics(
+                          label: 'Valor do produto',
+                          textField: true,
+                          child: TextField(
+                            controller: valorProdutoController,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(labelText: 'Valor do produto'),
+                          ),
                         ),
                         const SizedBox(height: 16),
-                        TextField(
-                          controller: aliquotaController,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(labelText: 'Alíquota (%)'),
+                        Semantics(
+                          label: 'Alíquota',
+                          textField: true,
+                          child: TextField(
+                            controller: aliquotaController,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(labelText: 'Alíquota (%)'),
+                          ),
                         ),
                         const SizedBox(height: 24),
-                        ElevatedButton(
-                          onPressed: calcularICMS,
-                          child: const Text('Calcular ICMS'),
+                        Semantics(
+                          label: 'Calcular ICMS',
+                          button: true,
+                          child: ElevatedButton(
+                            onPressed: calcularICMS,
+                            child: const Text('Calcular ICMS'),
+                          ),
                         ),
                       ],
                     ),
@@ -101,5 +113,4 @@ class _CalculoIcmsPageState extends State<CalculoIcmsPage> {
       ),
     );
   }
-
 }

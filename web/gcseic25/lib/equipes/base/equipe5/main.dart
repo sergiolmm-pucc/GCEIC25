@@ -1,7 +1,10 @@
-import 'package:flutter/material.dart';
 import 'login.dart'; // Caminho relativo porque está na mesma pasta
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
+  SemanticsBinding.instance.ensureSemantics();
   runApp(const MeuApp());
 }
 

@@ -80,33 +80,53 @@ class _CalculoIpiPageState extends State<CalculoIpiPage> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        TextField(
-                          controller: valorProdutoController,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(labelText: 'Valor do produto'),
+                        Semantics(
+                          label: 'Valor do produto',
+                          textField: true,
+                          child: TextField(
+                            controller: valorProdutoController,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(labelText: 'Valor do produto'),
+                          ),
                         ),
                         const SizedBox(height: 16),
-                        TextField(
-                          controller: aliquotaController,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(labelText: 'Alíquota (%)'),
+                        Semantics(
+                          label: 'Alíquota',
+                          textField: true,
+                          child: TextField(
+                            controller: aliquotaController,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(labelText: 'Alíquota (%)'),
+                          ),
                         ),
                         const SizedBox(height: 16),
-                        TextField(
-                          controller: freteController,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(labelText: 'Frete'),
+                        Semantics(
+                          label: 'Frete',
+                          textField: true,
+                          child: TextField(
+                            controller: freteController,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(labelText: 'Frete'),
+                          ),
                         ),
                         const SizedBox(height: 16),
-                        TextField(
-                          controller: despesasController,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(labelText: 'Despesas acessórias'),
+                        Semantics(
+                          label: 'Despesas acessórias',
+                          textField: true,
+                          child: TextField(
+                            controller: despesasController,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(labelText: 'Despesas acessórias'),
+                          ),
                         ),
                         const SizedBox(height: 24),
-                        ElevatedButton(
-                          onPressed: calcularIPI,
-                          child: const Text('Calcular IPI'),
+                        Semantics(
+                          label: 'Calcular IPI',
+                          button: true,
+                          child: ElevatedButton(
+                            onPressed: calcularIPI,
+                            child: const Text('Calcular IPI'),
+                          ),
                         ),
                       ],
                     ),

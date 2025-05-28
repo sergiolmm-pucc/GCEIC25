@@ -6,7 +6,8 @@
     "scripts": {
         "start": "node server.js",
         "test": "jest --reporters=default --reporters=jest-junit",
-        "lint": "eslint ."
+        "lint": "eslint .",
+        "funcional5": "node .tests/funcional5"
     },
     "dependencies": {
         "cors": "^2.8.5",

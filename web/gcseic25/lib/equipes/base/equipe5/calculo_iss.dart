@@ -69,31 +69,47 @@ class _CalculoIssPageState extends State<CalculoIssPage> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        TextField(
-                          controller: valorServicoController,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(labelText: 'Valor do serviço'),
+                        Semantics(
+                          label: 'Campo para inserir o valor do serviço',
+                          textField: true,
+                          child: TextField(
+                            controller: valorServicoController,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(labelText: 'Valor do serviço'),
+                          ),
                         ),
                         const SizedBox(height: 16),
-                        TextField(
-                          controller: aliquotaController,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(labelText: 'Alíquota (%)'),
+                        Semantics(
+                          label: 'Campo para inserir a alíquota do ISS em porcentagem',
+                          textField: true,
+                          child: TextField(
+                            controller: aliquotaController,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(labelText: 'Alíquota (%)'),
+                          ),
                         ),
                         const SizedBox(height: 24),
-                        ElevatedButton(
-                          onPressed: calcularISS,
-                          child: const Text('Calcular ISS'),
+                        Semantics(
+                          label: 'Botão para calcular o ISS',
+                          button: true,
+                          child: ElevatedButton(
+                            onPressed: calcularISS,
+                            child: const Text('Calcular ISS'),
+                          ),
                         ),
                       ],
                     ),
                   ),
                   const SizedBox(height: 32),
                   if (resultado != null)
-                    Text(
-                      resultado!,
-                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
+                    Semantics(
+                      label: 'Resultado do cálculo do ISS',
+                      readOnly: true,
+                      child: Text(
+                        resultado!,
+                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                 ],
               ),
