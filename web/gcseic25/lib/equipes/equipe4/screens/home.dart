@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:gcseic25/equipes/equipe4/screens/login.dart';
 import 'package:gcseic25/equipes/equipe4/screens/water_volume.dart';
 import 'package:gcseic25/equipes/equipe4/screens/maintenance.dart';
+import 'package:gcseic25/equipes/equipe4/screens/mob.dart';
 import '../utils/tab_bar.dart';
+
 
 class HomeScreen4 extends StatelessWidget {
   const HomeScreen4({super.key});
@@ -46,7 +48,20 @@ class HomeScreen4 extends StatelessWidget {
                 },
                 child: const Text('Login'),
               ),
-               const SizedBox(height: 12),
+              const SizedBox(height: 12),
+
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MOBPage(),
+                    ),
+                  );
+                },
+                child: const Text('MOB'),
+              ),
+              const SizedBox(height: 12),
 
               ElevatedButton(
                 onPressed: () {

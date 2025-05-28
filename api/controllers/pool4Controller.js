@@ -98,7 +98,39 @@ export function calcularManutencaoMensal(req, res) {
 }
 
 export function calcularMob(req, res) {
+    const { transporte, instalacao, maoDeObra, equipamentos } = req.body;
 
+    // Verificação se todos os campos foram preenchidos
+    if (
+      !transporte?.toString().trim() ||
+      !instalacao?.toString().trim() ||
+      !maoDeObra?.toString().trim() ||
+      !equipamentos?.toString().trim()
+    ) {
+      return res.status(400).json({ error: "Todos os campos são obrigatórios." });
+    }
+
+    // Conversão e validação dos valores numéricos
+    const t = parseFloat(transporte);
+    const i = parseFloat(instalacao);
+    const m = parseFloat(maoDeObra);
+    const e = parseFloat(equipamentos);
+
+    if ([t, i, m, e].some(val => isNaN(val) || val < 0)) {
+      return res.status(400).json({ error: "Todos os valores devem ser números válidos e positivos." });
+    }
+
+    // Cálculo total
+    const total = t + i + m + e;
+
+    return res.status(200).json({
+      transporte: t,
+      instalacao: i,
+      maoDeObra: m,
+      equipamentos: e,
+      total,
+      mensagem: `O custo total de MOB é R$ ${total.toFixed(2).replace('.', ',')}`
+    });
 }
 
 export function login(req, res) {
