@@ -101,15 +101,22 @@ export function calcularCustoDAgua(req, res) {
   function tratarNumero(valor) {
     if (typeof valor !== 'string') valor = valor.toString();
 
-    // Remove pontos de milhar apenas se vírgula estiver presente (ex: "1.234,56")
+    // Caso especial: número com vírgula como decimal e ponto como milhar
     if (valor.includes(',') && valor.includes('.')) {
       valor = valor.replace(/\./g, '').replace(',', '.');
-    } else if (valor.includes(',')) {
+    }
+    // Caso comum no Brasil: número apenas com vírgula (decimal)
+    else if (valor.includes(',')) {
       valor = valor.replace(',', '.');
+    }
+    // Caso com apenas ponto (milhar) — vamos remover o ponto nesse caso também
+    else if (/^\d{1,3}(\.\d{3})+$/.test(valor)) {
+      valor = valor.replace(/\./g, '');
     }
 
     return parseFloat(valor);
   }
+
 
   const volumeFloat = tratarNumero(volume);
   const tarifaFloat = tratarNumero(tarifa);
@@ -138,21 +145,29 @@ export function calcularManutencaoMensal(req, res) {
   function tratarNumero(valor) {
     if (typeof valor !== 'string') valor = valor.toString();
 
-    // Remove pontos de milhar apenas se vírgula estiver presente (ex: "1.234,56")
+    // Caso especial: número com vírgula como decimal e ponto como milhar
     if (valor.includes(',') && valor.includes('.')) {
       valor = valor.replace(/\./g, '').replace(',', '.');
-    } else if (valor.includes(',')) {
+    }
+    // Caso comum no Brasil: número apenas com vírgula (decimal)
+    else if (valor.includes(',')) {
       valor = valor.replace(',', '.');
+    }
+    // Caso com apenas ponto (milhar) — vamos remover o ponto nesse caso também
+    else if (/^\d{1,3}(\.\d{3})+$/.test(valor)) {
+      valor = valor.replace(/\./g, '');
     }
 
     return parseFloat(valor);
   }
+
   const volumeFloat = tratarNumero(volume);
   const produtosQuimicosFloat = tratarNumero(produtos_quimicos);
   const energiaBombaFloat = tratarNumero(energia_bomba);
   const maoObraFloat = tratarNumero(mao_obra);
 
-  const custoTotal = volumeFloat * produtosQuimicosFloat + energiaBombaFloat + maoObraFloat;
+const custoTotal = volumeFloat * (produtosQuimicosFloat + energiaBombaFloat + maoObraFloat);
+
 
   res.json({
     custo_mensal: custoTotal.toFixed(2)
