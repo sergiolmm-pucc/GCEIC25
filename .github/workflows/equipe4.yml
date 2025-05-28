@@ -33,4 +33,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-reports
-          path: ./test 
+          path: ./test/equipe4

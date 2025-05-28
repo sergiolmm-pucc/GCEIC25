@@ -35,3 +35,31 @@ describe('Testes da rota /calcular-volume', () => {
     expect(response.body).toHaveProperty('error', 'Tipo de piscina é obrigatório.');
   });
 });
+
+describe('Testes da rota /login', () => {
+  it('Deve realizar login com sucesso usando credenciais válidas', async () => {
+    const response = await request(app)
+      .post('/pool4/login')
+      .send({
+        email: 'adm@adm.com',
+        senha: 'adm'
+      });
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toHaveProperty('sucesso', true);
+    expect(response.body).toHaveProperty('mensagem', 'Login realizado com sucesso!');
+  });
+
+  it('Deve falhar no login com credenciais inválidas', async () => {
+    const response = await request(app)
+      .post('/pool4/login')
+      .send({
+        email: 'user@teste.com',
+        senha: '123456'
+      });
+
+    expect(response.statusCode).toBe(401);
+    expect(response.body).toHaveProperty('sucesso', false);
+    expect(response.body).toHaveProperty('mensagem', 'E-mail ou senha inválidos.');
+  });
+});
