@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import '../utils/tab_bar.dart'; // importa o MainLayout
+import '../utils/tab_bar.dart'; 
 
 class MOBPage extends StatefulWidget {
   const MOBPage({super.key});

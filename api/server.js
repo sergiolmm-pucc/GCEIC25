@@ -11,7 +11,6 @@ const port = 3000;
 const userRoutes = require('./routes/userRoutes')
 const baseRoutes = require('./routes/baseRoutes')
 const pool4Routes = require('./routes/pool4Routes')
-const mobRoutes = require('./routes/mobRoutes');
 
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json());
@@ -19,7 +18,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/', baseRoutes);
 app.use('/users', userRoutes);
 app.use('/CCP', pool4Routes);
-app.use('/api', mobRoutes);
 
 
 app.listen(port, () => {

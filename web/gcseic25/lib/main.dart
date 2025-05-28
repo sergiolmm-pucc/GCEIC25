@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gcseic25/equipes/equipe4/screens/home.dart';
 import 'package:gcseic25/equipes/equipe4/screens/splash_screen.dart';
-import 'package:gcseic25/equipes/equipe4/screens/mob.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
@@ -27,7 +26,6 @@ class MyApp extends StatelessWidget {
         '/splash1': (context) => SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
         '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
         '/splash_screen_equipe_4': (context) => SplashScreen4(nextPage: HomeScreen4()),
-        '/mob': (context) => const MOBPage(),
       },
     );
   }
