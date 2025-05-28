@@ -2,11 +2,11 @@
 
 const express = require('express');
 const router = express.Router();
-const { calcularAposentadoria, calcularRegra } = require('../controllers/aposController');
+const { calcularAposentadoria, calcularRegra, calcularPontuacao} = require('../controllers/aposController');
 
 router.post('/calculoAposentadoria', calcularAposentadoria); // Isabella Maria
 router.post('/calculoRegra', calcularRegra); // Izabelle Oliveira
-// router.post(); // Emilly Ferro
+router.post('/calculoPontuacao', calcularPontuacao); // Emilly Bó 
 // router.post(); // Gabriel Cardoso
 // router.post(); // Guilherme Maia
 

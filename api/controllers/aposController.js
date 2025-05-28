@@ -94,9 +94,57 @@ function calcularRegra(req, res) {
 }
 
 // Emilly Ferro
+function calcularPontuacao(req, res) {
+  let { idade, contribuicao, sexo } = req.body;
+
+  // Validação de entrada
+  if (idade == null || typeof idade !== 'number' || idade < 0 ||
+      contribuicao == null || typeof contribuicao !== 'number' || contribuicao < 0 ||
+      !sexo || (sexo !== 'F' && sexo !== 'M')) {
+    return res.status(400).json({
+      erro: true,
+      mensagem: 'Por favor, envie idade, contribuicao válidos e sexo ("M" ou "F").'
+    });
+  }
+
+  const pontuacaoAlvoHomem = 105;
+  const pontuacaoAlvoMulher = 100;
+  const pontuacaoAlvo = sexo === 'F' ? pontuacaoAlvoMulher : pontuacaoAlvoHomem;
+
+  const pontuacaoAtual = idade + contribuicao;
+
+  if (pontuacaoAtual >= pontuacaoAlvo) {
+    return res.json({
+      pontuacaoAtual: pontuacaoAtual,
+      anosRestantes: 0,
+      mensagem: `Parabéns! Você já tem pontuação suficiente (${pontuacaoAtual}) para se aposentar pela regra de pontos.`
+    });
+  } else {
+    let anosRestantes = 0;
+    let tempIdade = idade;
+    let tempContribuicao = contribuicao;
+    let tempPontuacao = pontuacaoAtual;
+
+    // A cada ano que passa, a idade aumenta em 1 e a contribuição aumenta em 1.
+    // Isso adiciona 2 pontos por ano na pontuação total.
+    while (tempPontuacao < pontuacaoAlvo) {
+      anosRestantes++;
+      tempIdade++;
+      tempContribuicao++;
+      tempPontuacao = tempIdade + tempContribuicao; // Recalcula a pontuação
+    }
+    
+
+    return res.json({
+      pontuacaoAtual: pontuacaoAtual,
+      anosRestantes: anosRestantes,
+      mensagem: `Faltam aproximadamente ${anosRestantes} ano(s) de contribuição e idade para atingir a pontuação necessária (${pontuacaoAlvo}).`
+    });
+  }
+}
 
 // Gabriel Cardoso
 
 // Guilherme Maia
 
-module.exports = { calcularAposentadoria, calcularRegra };
+module.exports = { calcularAposentadoria, calcularRegra, calcularPontuacao };
