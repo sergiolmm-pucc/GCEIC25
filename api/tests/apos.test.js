@@ -1,6 +1,6 @@
 // Teste Unitário Grupo 09 - Cálculo de Aposentadoria
 
-const { calcularAposentadoria, calcularRegra } = require('../controllers/aposController');
+const { calcularAposentadoria, calcularRegra, calcularTempoAposentadoria, obterHistorico } = require('../controllers/aposController');
 
 function mockResponse() {
   const res = {};
@@ -276,3 +276,66 @@ describe('Função calcularPontuacao', () => {
 // Gabriel Cardoso
 
 // Guilherme Maia
+describe('Função calcularTempoAposentadoria', () => {
+  test('Pessoa que já pode se aposentar', () => {
+    const req = { body: { idade: 65, contribuicao: 15, sexo: 'M' } };
+    const res = mockResponse();
+
+    calcularTempoAposentadoria(req, res);
+
+    expect(res.json).toHaveBeenCalledWith(expect.objectContaining({
+      anosPrevistosParaAposentar: 0,
+      mensagem: 'Você já pode se aposentar!'
+    }));
+  });
+
+  test('Pessoa que falta tempo para idade mínima', () => {
+    const req = { body: { idade: 60, contribuicao: 15, sexo: 'M' } };
+    const res = mockResponse();
+    const anoAtual = new Date().getFullYear();
+
+    calcularTempoAposentadoria(req, res);
+
+    expect(res.json).toHaveBeenCalledWith(expect.objectContaining({
+      anosPrevistosParaAposentar: 5,
+      anoPrevisoAposentadoria: anoAtual + 5,
+      detalhes: {
+        idadeAtual: 60,
+        idadeNaAposentadoria: 65,
+        contribuicaoAtual: 15,
+        contribuicaoNaAposentadoria: 20
+      }
+    }));
+  });
+
+  test('Pessoa que falta tempo de contribuição', () => {
+    const req = { body: { idade: 65, contribuicao: 10, sexo: 'M' } };
+    const res = mockResponse();
+    const anoAtual = new Date().getFullYear();
+
+    calcularTempoAposentadoria(req, res);
+
+    expect(res.json).toHaveBeenCalledWith(expect.objectContaining({
+      anosPrevistosParaAposentar: 5,
+      anoPrevisoAposentadoria: anoAtual + 5,
+      detalhes: {
+        idadeAtual: 65,
+        idadeNaAposentadoria: 70,
+        contribuicaoAtual: 10,
+        contribuicaoNaAposentadoria: 15
+      }
+    }));
+  });
+
+  test('Dados incompletos', () => {
+    const req = { body: { idade: 60 } }; // Faltando contribuicao e sexo
+    const res = mockResponse();
+
+    calcularTempoAposentadoria(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({
+      erro: 'Dados incompletos'
+    });
+  });
+});

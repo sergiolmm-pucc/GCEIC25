@@ -145,6 +145,49 @@ function calcularPontuacao(req, res) {
 
 // Gabriel Cardoso
 
-// Guilherme Maia
+// Guilherme Maia - Cálculo do Tempo para Aposentadoria
+function calcularTempoAposentadoria(req, res) {
+  const { idade, contribuicao, sexo } = req.body;
 
-module.exports = { calcularAposentadoria, calcularRegra, calcularPontuacao };
+  if (idade == null || contribuicao == null || !sexo) {
+    return res.status(400).json({ erro: 'Dados incompletos' });
+  }
+
+  const idadeMinima = sexo === 'F' ? 62 : 65;
+  const contribuicaoMinima = 15;
+
+  const anosParaIdadeMinima = Math.max(idadeMinima - idade, 0);
+  const anosParaContribuicaoMinima = Math.max(contribuicaoMinima - contribuicao, 0);
+
+  const anosNecessarios = Math.max(anosParaIdadeMinima, anosParaContribuicaoMinima);
+  const anoAtual = new Date().getFullYear();
+  const anoAposentadoria = anoAtual + anosNecessarios;
+
+  let resposta = {
+    anosPrevistosParaAposentar: anosNecessarios,
+    anoPrevisoAposentadoria: anoAposentadoria,
+    detalhes: {
+      idadeAtual: idade,
+      idadeNaAposentadoria: idade + anosNecessarios,
+      contribuicaoAtual: contribuicao,
+      contribuicaoNaAposentadoria: contribuicao + anosNecessarios
+    }
+  };
+
+  if (anosNecessarios === 0) {
+    resposta.mensagem = "Você já pode se aposentar!";
+  } else {
+    const requisitos = [];
+    if (anosParaIdadeMinima > 0) {
+      requisitos.push(`${anosParaIdadeMinima} anos para atingir a idade mínima`);
+    }
+    if (anosParaContribuicaoMinima > 0) {
+      requisitos.push(`${anosParaContribuicaoMinima} anos para atingir o tempo mínimo de contribuição`);
+    }
+    resposta.mensagem = `Faltam ${anosNecessarios} anos para sua aposentadoria. Requisitos pendentes: ${requisitos.join(' e ')}.`;
+  }
+
+  return res.json(resposta);
+}
+
+module.exports = { calcularAposentadoria, calcularRegra, calcularPontuacao, calcularTempoAposentadoria };
