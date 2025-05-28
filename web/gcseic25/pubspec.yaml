@@ -106,5 +106,14 @@ flutter:
   fonts:
     - family: Montserrat
       fonts:
+<<<<<<< HEAD
         - asset: assets/fonts/Montserrat-VariableFont_wght.ttf
 >>>>>>> origin/main
+=======
+        - asset: assets/fonts/Montserrat-Regular.ttf
+          weight: 200
+        - asset: assets/fonts/Montserrat-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Montserrat-Medium.ttf
+          weight: 400
+>>>>>>> origin/maintenance
