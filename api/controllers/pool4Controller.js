@@ -73,8 +73,60 @@ export function calcularMaterialEletrico(req, res) {
 }
 
 export function calcularMaterialHidraulico(req, res) {
+ const {
+        comprimentoTubos,
+        custoPorMetro,
+        qtdValvulas,
+        custoValvula,
+        custoBomba,
+        custoFiltro,
+        tipoTubulacao
+    } = req.query;
 
+    // Validação de preenchimento
+    if (
+        comprimentoTubos === undefined || custoPorMetro === undefined ||
+        qtdValvulas === undefined || custoValvula === undefined ||
+        custoBomba === undefined || custoFiltro === undefined ||
+        !tipoTubulacao
+    ) {
+        return res.status(400).json({ error: "Preencha todos os campos antes de prosseguir." });
+    }
+
+    // Conversão para números
+    const comprimento = parseFloat(comprimentoTubos);
+    const precoMetro = parseFloat(custoPorMetro);
+    const qtdConexoes = parseInt(qtdValvulas);
+    const precoValvula = parseFloat(custoValvula);
+    const precoBomba = parseFloat(custoBomba);
+    const precoFiltro = parseFloat(custoFiltro);
+
+    const camposNumericos = [comprimento, precoMetro, qtdConexoes, precoValvula, precoBomba, precoFiltro];
+    const algumInvalido = camposNumericos.some(num => isNaN(num) || num < 0);
+
+    if (algumInvalido) {
+        return res.status(400).json({ error: "Todos os campos numéricos devem ser números válidos e não negativos." });
+    }
+
+    // Cálculo
+    const custoTubos = comprimento * precoMetro;
+    const custoValvulasTotal = qtdConexoes * precoValvula;
+    const custoTotal = custoTubos + custoValvulasTotal + precoBomba + precoFiltro;
+
+    // Retorno das informações 
+    return res.status(200).json({
+        tipo_tubulacao: tipoTubulacao.toLowerCase(),
+        comprimentoTubos: comprimento,
+        custoPorMetro: precoMetro,
+        qtdValvulas: qtdConexoes,
+        custoValvula: precoValvula,
+        custoBomba: precoBomba,
+        custoFiltro: precoFiltro,
+        total: parseFloat(custoTotal.toFixed(2)),
+        mensagem: `O custo total estimado para os materiais hidráulicos é R$ ${custoTotal.toFixed(2)}.`
+    });
 }
+
 
 export function calcularCustoDAgua(req, res) {
 
