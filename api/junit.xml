@@ -1,13 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="4" failures="0" errors="0" time="0.589">
-  <testsuite name="Testes da rota /calcular-volume" errors="0" failures="0" skipped="0" timestamp="2025-05-28T22:55:37" time="0.551" tests="4">
-    <testcase classname="Testes da rota /calcular-volume Deve calcular volume de piscina retangular corretamente" name="Testes da rota /calcular-volume Deve calcular volume de piscina retangular corretamente" time="0.048">
+<testsuites name="jest tests" tests="10" failures="1" errors="0" time="0.659">
+  <testsuite name="Testes da rota /calcular-volume" errors="0" failures="1" skipped="0" timestamp="2025-05-28T23:04:51" time="0.623" tests="10">
+    <testcase classname="Testes da rota /calcular-volume Deve calcular volume de piscina retangular corretamente" name="Testes da rota /calcular-volume Deve calcular volume de piscina retangular corretamente" time="0.045">
     </testcase>
-    <testcase classname="Testes da rota /calcular-volume Deve retornar erro se faltar tipo de piscina" name="Testes da rota /calcular-volume Deve retornar erro se faltar tipo de piscina" time="0.006">
+    <testcase classname="Testes da rota /calcular-volume Deve retornar erro se faltar tipo de piscina" name="Testes da rota /calcular-volume Deve retornar erro se faltar tipo de piscina" time="0.005">
     </testcase>
-    <testcase classname="Testes da rota /login Deve realizar login com sucesso usando credenciais válidas" name="Testes da rota /login Deve realizar login com sucesso usando credenciais válidas" time="0.002">
+    <testcase classname="Testes da rota /login Deve realizar login com sucesso usando credenciais válidas" name="Testes da rota /login Deve realizar login com sucesso usando credenciais válidas" time="0.003">
     </testcase>
-    <testcase classname="Testes da rota /login Deve falhar no login com credenciais inválidas" name="Testes da rota /login Deve falhar no login com credenciais inválidas" time="0.002">
+    <testcase classname="Testes da rota /login Deve falhar no login com credenciais inválidas" name="Testes da rota /login Deve falhar no login com credenciais inválidas" time="0.003">
+    </testcase>
+    <testcase classname="Testes da rota /agua Deve calcular corretamente o custo da água" name="Testes da rota /agua Deve calcular corretamente o custo da água" time="0.003">
+    </testcase>
+    <testcase classname="Testes da rota /agua Deve aceitar números com vírgula no formato brasileiro" name="Testes da rota /agua Deve aceitar números com vírgula no formato brasileiro" time="0.003">
+    </testcase>
+    <testcase classname="Testes da rota /agua Deve retornar erro se faltar parâmetros" name="Testes da rota /agua Deve retornar erro se faltar parâmetros" time="0.002">
+    </testcase>
+    <testcase classname="Testes da rota /manutencao Deve calcular corretamente o custo de manutenção mensal" name="Testes da rota /manutencao Deve calcular corretamente o custo de manutenção mensal" time="0.002">
+    </testcase>
+    <testcase classname="Testes da rota /manutencao Deve aceitar números no formato brasileiro (vírgula)" name="Testes da rota /manutencao Deve aceitar números no formato brasileiro (vírgula)" time="0.006">
+      <failure>Error: expect(received).toHaveProperty(path, value)
+
+Expected path: &quot;custo_mensal&quot;
+
+Expected value: &quot;1351.19&quot;
+Received value: &quot;1353.13&quot;
+    at Object.toHaveProperty (C:\Users\laisa\OneDrive\Desktop\GCEIC25\api\test\equipe4\pool4.test.js:130:27)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)</failure>
+    </testcase>
+    <testcase classname="Testes da rota /manutencao Deve retornar erro se faltar parâmetros" name="Testes da rota /manutencao Deve retornar erro se faltar parâmetros" time="0.003">
     </testcase>
   </testsuite>
 </testsuites>
