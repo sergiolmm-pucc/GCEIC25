@@ -24,7 +24,9 @@ class _MultiplierMarkupPageState extends State<MultiplierMarkupPage> {
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode({
             'custo': double.parse(_custoController.text),
-            'despesasVariaveis': double.parse(_despesasVariaveisController.text),
+            'despesasVariaveis': double.parse(
+              _despesasVariaveisController.text,
+            ),
             'despesasFixas': double.parse(_despesasFixasController.text),
             'margemLucro': double.parse(_margemLucroController.text),
           }),
@@ -33,7 +35,8 @@ class _MultiplierMarkupPageState extends State<MultiplierMarkupPage> {
         if (response.statusCode == 200) {
           final data = jsonDecode(response.body);
           setState(() {
-            _resultado = 'Markup: ${data['markup']}\nPreço de Venda: R\$ ${data['precoVenda']}';
+            _resultado =
+                'Markup: ${data['markup']}\nPreço de Venda: R\$ ${data['precoVenda']}';
           });
         } else {
           final data = jsonDecode(response.body);
@@ -72,84 +75,95 @@ class _MultiplierMarkupPageState extends State<MultiplierMarkupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        title: Text('Calculadora de Markup Multiplicador'),
+        title: const Text('Calculadora de Markup Multiplicador'),
+        centerTitle: true,
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            children: [
-              TextFormField(
-                controller: _custoController,
-                decoration: InputDecoration(
-                  labelText: 'Custo',
-                  border: OutlineInputBorder(),
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildInputField(controller: _custoController, label: 'Custo'),
+                const SizedBox(height: 16),
+                _buildInputField(
+                  controller: _despesasVariaveisController,
+                  label: 'Despesas Variáveis (%)',
                 ),
-                keyboardType: TextInputType.number,
-                validator: _validarCampo,
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _despesasVariaveisController,
-                decoration: InputDecoration(
-                  labelText: 'Despesas Variáveis (%)',
-                  border: OutlineInputBorder(),
+                const SizedBox(height: 16),
+                _buildInputField(
+                  controller: _despesasFixasController,
+                  label: 'Despesas Fixas (%)',
                 ),
-                keyboardType: TextInputType.number,
-                validator: _validarCampo,
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _despesasFixasController,
-                decoration: InputDecoration(
-                  labelText: 'Despesas Fixas (%)',
-                  border: OutlineInputBorder(),
+                const SizedBox(height: 16),
+                _buildInputField(
+                  controller: _margemLucroController,
+                  label: 'Margem de Lucro (%)',
                 ),
-                keyboardType: TextInputType.number,
-                validator: _validarCampo,
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller: _margemLucroController,
-                decoration: InputDecoration(
-                  labelText: 'Margem de Lucro (%)',
-                  border: OutlineInputBorder(),
-                ),
-                keyboardType: TextInputType.number,
-                validator: _validarCampo,
-              ),
-              SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: _calcularMarkup,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    'Calcular',
-                    style: TextStyle(fontSize: 18),
+                const SizedBox(height: 24),
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: _calcularMarkup,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        side: const BorderSide(color: Colors.blue),
+                      ),
+                      elevation: 3,
+                    ),
+                    child: const Text(
+                      'Calcular',
+                      style: TextStyle(fontSize: 18),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 24),
-              if (_resultado.isNotEmpty)
-                Container(
-                  padding: EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.green.shade50,
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.green),
+                const SizedBox(height: 24),
+                if (_resultado.isNotEmpty)
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade50,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.green),
+                    ),
+                    child: Text(
+                      _resultado,
+                      style: const TextStyle(fontSize: 18),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                  child: Text(
-                    _resultado,
-                    style: TextStyle(fontSize: 18),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildInputField({
+    required TextEditingController controller,
+    required String label,
+  }) {
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: label,
+        filled: true,
+        fillColor: Colors.white,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+      ),
+      keyboardType: TextInputType.number,
+      validator: _validarCampo,
     );
   }
 }
