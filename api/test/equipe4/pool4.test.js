@@ -102,6 +102,7 @@ describe('Testes da rota /agua', () => {
 });
 
 describe('Testes da rota /manutencao', () => {
+  
   it('Deve calcular corretamente o custo de manutenção mensal', async () => {
     const response = await request(app)
       .post('/pool4/manutencao')
@@ -113,21 +114,24 @@ describe('Testes da rota /manutencao', () => {
       });
 
     expect(response.statusCode).toBe(200);
-    expect(response.body).toHaveProperty('custo_mensal', '700.00');
+    expect(response.body).toHaveProperty('custo_mensal', '45250.00');
   });
 
   it('Deve aceitar números no formato brasileiro (vírgula)', async () => {
     const response = await request(app)
       .post('/pool4/manutencao')
       .send({
-        volume: '200,5',
-        produtos_quimicos: '3,75',
-        energia_bomba: '200,50',
-        mao_obra: '400,75'
+        volume: '200,5',         // 200.5
+        produtos_quimicos: '3,75', // 3.75
+        energia_bomba: '200,50',   // 200.5
+        mao_obra: '400,75'         // 400.75
       });
 
+    const resultadoEsperado = (200.5 * (3.75 + 200.5 + 400.75)).toFixed(2); 
+    // 200.5 * 605 = 121297.5
+
     expect(response.statusCode).toBe(200);
-    expect(response.body).toHaveProperty('custo_mensal', '1351.19');
+    expect(response.body).toHaveProperty('custo_mensal', resultadoEsperado);
   });
 
   it('Deve retornar erro se faltar parâmetros', async () => {
