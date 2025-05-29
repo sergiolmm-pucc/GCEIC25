@@ -14,7 +14,7 @@ class _ConsultaScreenState extends State<ConsultaScreen> {
   final _profundidade = TextEditingController();
 
   Future<void> _consultarAPI() async {
-    final url = Uri.parse('http://10.0.2.2:3000/MOB3/calcular'); // Para emulador Android
+    final url = Uri.parse('http://localhost:3000/MOB3/calcular'); // Para emulador Android
     final response = await http.post(
       url,
       headers: {"Content-Type": "application/json"},

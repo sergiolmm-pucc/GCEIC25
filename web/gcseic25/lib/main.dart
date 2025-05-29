@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gcseic25/equipes/base/equipe3/login_screen.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
@@ -19,6 +20,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/splash1': (context) => SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
         '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
+        '/splash3': (context) => SplashScreen(nextPage: LoginScreen()), // splash antes do login
+          '/login': (context) => LoginScreen(),
       },
     );
   }
@@ -32,23 +35,32 @@ class HomePage extends StatelessWidget {
         title: Text('Tela Inicial'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/splash1');
-              },
-              child: Text('Abrir Base 1'),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/splash2');
-              },
-              child: Text('Abrir Consulta 2'),
-            ),
-          ],
+        child: SingleChildScrollView( // <-- Adiciona rolagem
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/splash1');
+                },
+                child: Text('Abrir Base 1'),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/splash2');
+                },
+                child: Text('Abrir Consulta 2'),
+              ),
+              SizedBox(height: 20), // <-- Aqui estava faltando
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/splash3');
+                },
+                child: Text('Ir para Login'),
+              ),
+            ],
+          ),
         ),
       ),
     );

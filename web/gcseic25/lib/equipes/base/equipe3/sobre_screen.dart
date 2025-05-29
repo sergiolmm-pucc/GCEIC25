@@ -19,7 +19,7 @@ class _SobreScreenState extends State<SobreScreen> {
   }
 
   Future<void> _consultarSobreAPI() async {
-    final url = Uri.parse('http://10.0.2.2:3000/MOB3/sobre'); // Para emulador Android
+    final url = Uri.parse('http://localhost:3000/MOB3/sobre'); 
 
     final response = await http.post(
       url,

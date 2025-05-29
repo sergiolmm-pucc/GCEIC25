@@ -15,7 +15,10 @@ class _LoginScreenState extends State<LoginScreen> {
   String? erro;
 
   Future<void> _login() async {
-    final url = Uri.parse('http://10.0.2.2:3000/login'); 
+  print('Iniciando login...');
+  final url = Uri.parse('http://localhost:3000/MOB3/login');
+
+  try {
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
@@ -24,6 +27,9 @@ class _LoginScreenState extends State<LoginScreen> {
         'senha': _senha.text,
       }),
     );
+
+    print('Status code: ${response.statusCode}');
+    print('Resposta: ${response.body}');
 
     if (response.statusCode == 200) {
       Navigator.pushReplacement(
@@ -39,7 +45,14 @@ class _LoginScreenState extends State<LoginScreen> {
         erro = 'Erro ao conectar ao servidor.';
       });
     }
+  } catch (e) {
+    print('Erro durante a requisição: $e');
+    setState(() {
+      erro = 'Erro inesperado: $e';
+    });
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
