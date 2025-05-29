@@ -38,32 +38,21 @@ class HomeScreen4 extends StatelessWidget {
                 child: const Text('Cálculo do Volume'),
               ),
 
-                      ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const HydraulicCostPage(),
-                              ),
-                            );
-                          },
-                          child: const Text('Material Hidraúlico'),
-                        ),
-
-              const SizedBox(height: 12), // Espaço entre os botões
+              const SizedBox(height: 12),
 
               ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginPage4(),
-                    ),
-                  );
-                },
-                child: const Text('Login'),
-              ),
-               const SizedBox(height: 12),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HydraulicCostPage(),
+                      ),
+                    );
+                  },
+                  child: const Text('Material Hidraúlico'),
+                ),
+
+              const SizedBox(height: 12),
 
               ElevatedButton(
                 onPressed: () {
@@ -76,6 +65,9 @@ class HomeScreen4 extends StatelessWidget {
                 },
                 child: const Text('Manutenção'),
               ),
+
+              const SizedBox(height: 12),
+
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -87,17 +79,23 @@ class HomeScreen4 extends StatelessWidget {
                 },
                 child: const Text('Custo da água'),
               ),
-                ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => About(),
-                    ),
-                  );
-                },
-                child: const Text('Sobre'),
+
+              const SizedBox(height: 12),
+
+              ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => About(),
+                  ),
+                );
+              },
+              child: const Text('Sobre'),
               ),
+
+              const SizedBox(height: 12),
+
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -109,6 +107,9 @@ class HomeScreen4 extends StatelessWidget {
                 },
                 child: const Text('MOB'),
               ),
+
+              const SizedBox(height: 12),
+              
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(

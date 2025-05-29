@@ -227,13 +227,41 @@ describe('Testes da função calcularMob', () => {
   });
 });
 
-describe('Testes da rota /material-eletrico', () => {
-  it('Deve calcular corretamente o custo de material elétrico com valores válidos', async () => {
+describe('Testes da rota /eletrico', () => {
+  
+  it('Deve calcular corretamente com dados válidos', async () => {
     const response = await request(app)
-      .post('/pool4/material-eletrico')
+      .post('/pool4/eletrico')
       .send({
         luminaria_qtd: 10,
-        luminaria_preco: 50,
+        luminaria_preco: '50,5',
+        fio_metros: 100,
+        fio_preco: '2,25',
+        comando_qtd: 5,
+        comando_preco: '30',
+        disjuntor_qtd: 3,
+        disjuntor_preco: '40.75',
+        programador_qtd: 2,
+        programador_preco: '150,5'
+      });
+
+    const total = 
+      (10 * 50.5) + 
+      (100 * 2.25) + 
+      (5 * 30) + 
+      (3 * 40.75) + 
+      (2 * 150.5);
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toHaveProperty('custo_mensal', total.toFixed(2).replace('.', ','));
+  });
+
+  it('Deve retornar erro se uma quantidade tiver vírgula', async () => {
+    const response = await request(app)
+      .post('/pool4/eletrico')
+      .send({
+        luminaria_qtd: '10,5', // inválido
+        luminaria_preco: '50',
         fio_metros: 100,
         fio_preco: 2,
         comando_qtd: 5,
@@ -244,25 +272,19 @@ describe('Testes da rota /material-eletrico', () => {
         programador_preco: 150
       });
 
-    const custoEsperado = (
-      (10 * 50) + 
-      (100 * 2) + 
-      (5 * 30) + 
-      (3 * 40) + 
-      (2 * 150)
-    ).toFixed(2); // 500 + 200 + 150 + 120 + 300 = 1270.00
-
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toHaveProperty('custo_mensal', custoEsperado);
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toHaveProperty('error');
+    expect(response.body.error).toMatch(/luminaria_qtd/);
   });
 
-  it('Deve retornar erro se faltar algum campo obrigatório', async () => {
+  it('Deve retornar erro se uma quantidade tiver ponto', async () => {
     const response = await request(app)
-      .post('/pool4/material-eletrico')
+      .post('/pool4/eletrico')
       .send({
-        luminaria_qtd: 10,
-        luminaria_preco: 50,
-        // faltando fio_metros e fio_preco
+        luminaria_qtd: '10.5', // inválido
+        luminaria_preco: '50',
+        fio_metros: 100,
+        fio_preco: 2,
         comando_qtd: 5,
         comando_preco: 30,
         disjuntor_qtd: 3,
@@ -272,12 +294,59 @@ describe('Testes da rota /material-eletrico', () => {
       });
 
     expect(response.statusCode).toBe(400);
-    expect(response.body).toHaveProperty('error', 'Todos os campos são obrigatórios.');
+    expect(response.body).toHaveProperty('error');
+    expect(response.body.error).toMatch(/luminaria_qtd/);
   });
 
-  it('Deve retornar erro se algum valor for inválido (não numérico)', async () => {
+  it('Deve aceitar preços no formato brasileiro com milhar e vírgula', async () => {
     const response = await request(app)
-      .post('/pool4/material-eletrico')
+      .post('/pool4/eletrico')
+      .send({
+        luminaria_qtd: 1,
+        luminaria_preco: '1.500,75', // formato brasileiro
+        fio_metros: 10,
+        fio_preco: '2,50',
+        comando_qtd: 2,
+        comando_preco: '30',
+        disjuntor_qtd: 1,
+        disjuntor_preco: '40',
+        programador_qtd: 1,
+        programador_preco: '100'
+      });
+
+    const total = 
+      (1 * 1500.75) +
+      (10 * 2.5) +
+      (2 * 30) +
+      (1 * 40) +
+      (1 * 100);
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toHaveProperty('custo_mensal', total.toFixed(2).replace('.', ','));
+  });
+
+  it('Deve retornar erro se faltar algum campo', async () => {
+    const response = await request(app)
+      .post('/pool4/eletrico')
+      .send({
+        luminaria_qtd: 10,
+        luminaria_preco: 50,
+        fio_metros: 100,
+        fio_preco: 2,
+        comando_qtd: 5,
+        comando_preco: 30,
+        // falta disjuntor_qtd e disjuntor_preco
+        programador_qtd: 2,
+        programador_preco: 150
+      });
+
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toHaveProperty('error');
+  });
+
+  it('Deve retornar erro se algum campo tiver texto inválido', async () => {
+    const response = await request(app)
+      .post('/pool4/eletrico')
       .send({
         luminaria_qtd: 'dez', // inválido
         luminaria_preco: 50,
@@ -291,36 +360,102 @@ describe('Testes da rota /material-eletrico', () => {
         programador_preco: 150
       });
 
-    expect(response.statusCode).toBe(500);
-    expect(response.body).toHaveProperty('error', 'Erro ao processar os dados.');
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toHaveProperty('error');
   });
 
-  it('Deve calcular corretamente usando números no formato string que representam números válidos', async () => {
-    const response = await request(app)
-      .post('/pool4/material-eletrico')
-      .send({
-        luminaria_qtd: '10',
-        luminaria_preco: '50',
-        fio_metros: '100',
-        fio_preco: '2',
-        comando_qtd: '5',
-        comando_preco: '30',
-        disjuntor_qtd: '3',
-        disjuntor_preco: '40',
-        programador_qtd: '2',
-        programador_preco: '150'
-      });
-
-    const custoEsperado = (
-      (10 * 50) + 
-      (100 * 2) + 
-      (5 * 30) + 
-      (3 * 40) + 
-      (2 * 150)
-    ).toFixed(2); // 1270.00
-
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toHaveProperty('custo_mensal', custoEsperado);
-  });
 });
 
+describe('Testes da rota /hidraulico', () => {
+    
+    test('Deve calcular corretamente com dados válidos', async () => {
+        const response = await request(app)
+            .post('/pool4/hidraulico')
+            .query({
+                comprimentoTubos: '50',
+                custoPorMetro: '10',
+                qtdValvulas: '4',
+                custoValvula: '15',
+                custoBomba: '500',
+                custoFiltro: '300',
+                tipoTubulacao: 'PVC'
+            });
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toHaveProperty('total');
+        expect(response.body.total).toBe(50 * 10 + 4 * 15 + 500 + 300);
+        expect(response.body.tipo_tubulacao).toBe('pvc');
+    });
+
+    test('Deve retornar erro se faltar algum campo', async () => {
+        const response = await request(app)
+            .post('/pool4/hidraulico')
+            .query({
+                comprimentoTubos: '50',
+                custoPorMetro: '10',
+                // faltando qtdValvulas
+                custoValvula: '15',
+                custoBomba: '500',
+                custoFiltro: '300',
+                tipoTubulacao: 'PVC'
+            });
+
+        expect(response.statusCode).toBe(400);
+        expect(response.body).toHaveProperty('error');
+        expect(response.body.error).toMatch(/Preencha todos os campos/);
+    });
+
+    test('Deve retornar erro se algum campo for texto inválido', async () => {
+        const response = await request(app)
+            .post('/pool4/hidraulico')
+            .query({
+                comprimentoTubos: 'abc', // inválido
+                custoPorMetro: '10',
+                qtdValvulas: '4',
+                custoValvula: '15',
+                custoBomba: '500',
+                custoFiltro: '300',
+                tipoTubulacao: 'PVC'
+            });
+
+        expect(response.statusCode).toBe(400);
+        expect(response.body).toHaveProperty('error');
+        expect(response.body.error).toMatch(/números válidos/);
+    });
+
+    test('Deve retornar erro se valores forem negativos', async () => {
+        const response = await request(app)
+            .post('/pool4/hidraulico')
+            .query({
+                comprimentoTubos: '-10',
+                custoPorMetro: '10',
+                qtdValvulas: '4',
+                custoValvula: '15',
+                custoBomba: '500',
+                custoFiltro: '300',
+                tipoTubulacao: 'PVC'
+            });
+
+        expect(response.statusCode).toBe(400);
+        expect(response.body).toHaveProperty('error');
+        expect(response.body.error).toMatch(/não negativos/);
+    });
+
+    test('Deve retornar tipo de tubulação sempre em minúsculo', async () => {
+        const response = await request(app)
+            .post('/pool4/hidraulico')
+            .query({
+                comprimentoTubos: '10',
+                custoPorMetro: '20',
+                qtdValvulas: '2',
+                custoValvula: '30',
+                custoBomba: '100',
+                custoFiltro: '50',
+                tipoTubulacao: 'PEAD'
+            });
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.tipo_tubulacao).toBe('pead');
+    });
+
+});
