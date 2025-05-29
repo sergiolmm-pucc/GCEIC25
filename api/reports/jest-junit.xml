@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="1" failures="0" errors="0" time="0.436">
+  <testsuite name="Teste de cálculo de piscina" errors="0" failures="0" skipped="0" timestamp="2025-05-20T23:36:24" time="0.345" tests="1">
+    <testcase classname="Teste de cálculo de piscina Calcula corretamente os valores" name="Teste de cálculo de piscina Calcula corretamente os valores" time="0.003">
+    </testcase>
+  </testsuite>
+</testsuites>
