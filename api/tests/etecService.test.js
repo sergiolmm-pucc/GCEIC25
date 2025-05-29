@@ -46,4 +46,25 @@ describe("Testes para o cálculo do ETEC", () => {
 
     expect(resultado).toBe(205.92);
   });
+
+  test("Calcular valor de rescisão", () => {
+    const dados = {
+      salarioBase: 2000,
+      mesesTrabalhados: 13,
+      diasTrabalhados: 18,
+      motivo: "semJustaCausa",
+      feriasVencidas: true,
+    };
+
+    const resultado = etecService.calcularRecisao(dados);
+    expect(resultado).toBe({
+      recisao: 9167.56,
+      avisoPrevio: 2000,
+      saldoSalario: 1200,
+      ferias: 2888.89,
+      decimoTerceiro: 166.67,
+      fgts: 2080,
+      multaFgts: 832,
+    });
+  });
 });
