@@ -5,6 +5,14 @@ exports.calculoSimples = (req, res) => {
     res.json({ precoVenda: precoVenda.toFixed(2) });
   };
 
+exports.calculoDetalhado = (req, res) => {
+  const { custo, lucro, despesas, impostos } = req.body;
+  if ([custo, lucro, despesas, impostos].some(v => v === undefined))
+    return res.status(400).json({ error: 'Campos obrigatórios: custo, lucro, despesas, impostos' });
+
+  const precoVenda = custo * (1 + despesas + impostos + lucro);
+  res.json({ precoVenda: precoVenda.toFixed(2) });
+  
 exports.sugestaoPreco = (req, res) => {
   const { custo, concorrentes } = req.body;
   if (!custo || !Array.isArray(concorrentes) || concorrentes.length === 0)
