@@ -74,7 +74,7 @@ class _RegrasScreenState extends State<RegrasScreen> {
     }
 
     // Se chegou aqui, está tudo válido, pode continuar com a requisição
-    final url = Uri.parse('http://localhost:3000/APOS/calculoRegra');
+    final url = Uri.parse('https://animated-occipital-buckthorn.glitch.me/APOS/calculoRegra');
 
     setState(() {
       carregando = true;

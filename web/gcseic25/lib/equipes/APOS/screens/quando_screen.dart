@@ -19,7 +19,7 @@ class _QuandoScreenState extends State<QuandoScreen> {
   String? _erro;
 
   Future<void> _calcularTempoAposentadoria() async {
-    final url = Uri.parse('http://localhost:3000/APOS/calculoTempoAposentadoria');
+    final url = Uri.parse('https://animated-occipital-buckthorn.glitch.me/APOS/calculoTempoAposentadoria');
     if (!_formKey.currentState!.validate()) return;
 
     setState(() {
