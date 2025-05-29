@@ -318,6 +318,180 @@
           }
         }
       }
+    },
+    "/MOB3/calcular": {
+      "post": {
+        "summary": "Calcular custos de construção e manutenção da piscina",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "largura": { "type": "number" },
+                  "comprimento": { "type": "number" },
+                  "profundidade": { "type": "number" },
+                  "precoAgua": { "type": "number" },
+                  "custoEletrico": { "type": "number" },
+                  "custoHidraulico": { "type": "number" },
+                  "custoManutencaoMensal": { "type": "number" }
+                },
+                "required": ["largura", "comprimento", "profundidade", "precoAgua", "custoEletrico", "custoHidraulico", "custoManutencaoMensal"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado dos cálculos",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MOB3/login": {
+      "post": {
+        "summary": "Realiza login do usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string", "example": "usuario@email.com" },
+                  "senha": { "type": "string", "example": "123456" }
+                },
+                "required": ["email", "senha"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login realizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sucesso": { "type": "boolean" },
+                    "mensagem": { "type": "string" },
+                    "usuario": {
+                      "type": "object",
+                      "properties": {
+                        "email": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Falha de autenticação",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "erro": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno no servidor"
+          }
+        }
+      }
+    },
+    "/MOB3/sobre": {
+      "post": {
+        "summary": "Retorna a splash screen com foto do time",
+        "responses": {
+          "200": {
+            "description": "Foto do time retornada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sucesso": { "type": "boolean" },
+                    "mensagem": { "type": "string" },
+                    "url": { "type": "string", "format": "uri" }
+                  },
+                  "example": {
+                    "sucesso": true,
+                    "mensagem": "Foto do time",
+                    "url": "https://sep-bucket-prod.s3.amazonaws.com/wp-content/uploads/2022/11/51981800313_fb744fd72d_o.jpg"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MOB3/ajuda": {
+      "get": {
+        "summary": "Retorna informações da tela de ajuda",
+        "responses": {
+          "200": {
+            "description": "Texto de ajuda retornado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "titulo": {
+                      "type": "string",
+                      "example": "Ajuda"
+                    },
+                    "texto": {
+                      "type": "string",
+                      "example": "Preencha os dados da piscina e toque em 'Calcular' para ver o custo estimado.\n\nCaso tenha dúvidas, entre em contato com a equipe MOB3."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MOB3/splash": {
+      "post": {
+        "summary": "Retorna splash screen da aplicação",
+        "responses": {
+          "200": {
+            "description": "Splash screen carregada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sucesso": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "mensagem": {
+                      "type": "string",
+                      "example": "Splash screen carregada"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
