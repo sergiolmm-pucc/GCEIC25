@@ -58,7 +58,7 @@ class _SobreScreenState extends State<SobreScreen> {
                     radius: 60,
                     backgroundImage: imageUrl != null
                         ? NetworkImage(imageUrl!)
-                        : AssetImage('assets/foto.png') as ImageProvider,
+                        : AssetImage('image/Imagem teste.jpg') as ImageProvider,
                   ),
                   SizedBox(height: 16),
                   Text("Equipe MOB 3", style: TextStyle(fontSize: 18)),

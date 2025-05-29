@@ -57,7 +57,7 @@ class HomePage extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushNamed(context, '/splash3');
                 },
-                child: Text('Ir para Login'),
+                child: Text('MOB3'),
               ),
             ],
           ),

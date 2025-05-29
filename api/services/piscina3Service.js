@@ -3,22 +3,20 @@ const jwt = require('jsonwebtoken');
 const SECRET_KEY = 'seusegredoaqui';
 
 
-exports.calcularTodosCustos = ({ largura, comprimento, profundidade, precoAgua, custoEletrico, custoHidraulico, custoManutencaoMensal }) => {
+exports.calcularTodosCustos = ({ largura, comprimento, profundidade, precoAgua, custoEletrico, custoHidraulico, custoManutencaoMensal, mesesManutencao = 12 }) => {
   const volume = largura * comprimento * profundidade;
   const custoAgua = volume * precoAgua;
 
-  const custoTotal = custoAgua + custoEletrico + custoHidraulico;
-  const custoMensal = custoManutencaoMensal;
+  const custoConstrucao = custoAgua + custoEletrico + custoHidraulico;
+  const custoManutencaoTotal = custoManutencaoMensal * mesesManutencao;
+
+  const custoTotalPiscina = custoConstrucao + custoManutencaoTotal;
 
   return {
-    volume: volume.toFixed(2) + ' m³',
-    custoAgua: custoAgua.toFixed(2),
-    custoEletrico: custoEletrico.toFixed(2),
-    custoHidraulico: custoHidraulico.toFixed(2),
-    custoConstrucao: custoTotal.toFixed(2),
-    manutencaoMensal: custoMensal.toFixed(2)
+    custoTotalPiscina: custoTotalPiscina.toFixed(2)
   };
 };
+
 
 exports.loginUser = ({ email, senha }) => {
   const usuariosFake = [
