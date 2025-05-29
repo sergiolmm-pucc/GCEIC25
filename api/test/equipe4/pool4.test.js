@@ -226,3 +226,101 @@ describe('Testes da função calcularMob', () => {
     expect(response.body).toHaveProperty('error', 'Todos os valores devem ser números válidos e positivos.');
   });
 });
+
+describe('Testes da rota /material-eletrico', () => {
+  it('Deve calcular corretamente o custo de material elétrico com valores válidos', async () => {
+    const response = await request(app)
+      .post('/pool4/material-eletrico')
+      .send({
+        luminaria_qtd: 10,
+        luminaria_preco: 50,
+        fio_metros: 100,
+        fio_preco: 2,
+        comando_qtd: 5,
+        comando_preco: 30,
+        disjuntor_qtd: 3,
+        disjuntor_preco: 40,
+        programador_qtd: 2,
+        programador_preco: 150
+      });
+
+    const custoEsperado = (
+      (10 * 50) + 
+      (100 * 2) + 
+      (5 * 30) + 
+      (3 * 40) + 
+      (2 * 150)
+    ).toFixed(2); // 500 + 200 + 150 + 120 + 300 = 1270.00
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toHaveProperty('custo_mensal', custoEsperado);
+  });
+
+  it('Deve retornar erro se faltar algum campo obrigatório', async () => {
+    const response = await request(app)
+      .post('/pool4/material-eletrico')
+      .send({
+        luminaria_qtd: 10,
+        luminaria_preco: 50,
+        // faltando fio_metros e fio_preco
+        comando_qtd: 5,
+        comando_preco: 30,
+        disjuntor_qtd: 3,
+        disjuntor_preco: 40,
+        programador_qtd: 2,
+        programador_preco: 150
+      });
+
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toHaveProperty('error', 'Todos os campos são obrigatórios.');
+  });
+
+  it('Deve retornar erro se algum valor for inválido (não numérico)', async () => {
+    const response = await request(app)
+      .post('/pool4/material-eletrico')
+      .send({
+        luminaria_qtd: 'dez', // inválido
+        luminaria_preco: 50,
+        fio_metros: 100,
+        fio_preco: 2,
+        comando_qtd: 5,
+        comando_preco: 30,
+        disjuntor_qtd: 3,
+        disjuntor_preco: 40,
+        programador_qtd: 2,
+        programador_preco: 150
+      });
+
+    expect(response.statusCode).toBe(500);
+    expect(response.body).toHaveProperty('error', 'Erro ao processar os dados.');
+  });
+
+  it('Deve calcular corretamente usando números no formato string que representam números válidos', async () => {
+    const response = await request(app)
+      .post('/pool4/material-eletrico')
+      .send({
+        luminaria_qtd: '10',
+        luminaria_preco: '50',
+        fio_metros: '100',
+        fio_preco: '2',
+        comando_qtd: '5',
+        comando_preco: '30',
+        disjuntor_qtd: '3',
+        disjuntor_preco: '40',
+        programador_qtd: '2',
+        programador_preco: '150'
+      });
+
+    const custoEsperado = (
+      (10 * 50) + 
+      (100 * 2) + 
+      (5 * 30) + 
+      (3 * 40) + 
+      (2 * 150)
+    ).toFixed(2); // 1270.00
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toHaveProperty('custo_mensal', custoEsperado);
+  });
+});
+

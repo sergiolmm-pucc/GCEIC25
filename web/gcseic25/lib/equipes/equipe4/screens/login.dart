@@ -4,14 +4,14 @@ import 'dart:convert';
 
 import 'package:gcseic25/equipes/equipe4/screens/home.dart'; // Certifique-se de ter essa tela
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class LoginPage4 extends StatefulWidget {
+  const LoginPage4({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<LoginPage4> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage4> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController senhaController = TextEditingController();
 
