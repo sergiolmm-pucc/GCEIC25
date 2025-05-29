@@ -306,13 +306,13 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "salario": {
+                  "salarioBase": {
                     "type": "number"
                   },
                   "mesesTrabalhados": {
                     "type": "number"
                   },
-                  "saldoDias": {
+                  "diasTrabalhados": {
                     "type": "number"
                   },
                   "motivo": {
