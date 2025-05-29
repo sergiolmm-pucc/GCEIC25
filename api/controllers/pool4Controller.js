@@ -89,13 +89,77 @@ export function calcularMaterialHidraulico(req, res) {
 
 }
 
-export function calcularCustoDAgua(req, res) {
 
+
+export function calcularCustoDAgua(req, res) {
+  const { volume, tarifa } = req.body;
+
+  if (!volume || !tarifa) {
+    return res.status(400).json({ error: 'Volume e tarifa são obrigatórios.' });
+  }
+
+  function tratarNumero(valor) {
+    if (typeof valor !== 'string') valor = valor.toString();
+
+    // Remove pontos de milhar apenas se vírgula estiver presente (ex: "1.234,56")
+    if (valor.includes(',') && valor.includes('.')) {
+      valor = valor.replace(/\./g, '').replace(',', '.');
+    } else if (valor.includes(',')) {
+      valor = valor.replace(',', '.');
+    }
+
+    return parseFloat(valor);
+  }
+
+  const volumeFloat = tratarNumero(volume);
+  const tarifaFloat = tratarNumero(tarifa);
+
+  const custo = volumeFloat * tarifaFloat;
+
+  res.json({
+    custo_agua: custo.toFixed(2)
+  });
 }
 
 export function calcularManutencaoMensal(req, res) {
+  const { volume, produtos_quimicos, energia_bomba, mao_obra } = req.body;
 
+  if (
+    volume == null ||
+    produtos_quimicos == null ||
+    energia_bomba == null ||
+    mao_obra == null
+  ) {
+    return res.status(400).json({
+      error: 'Todos os campos (volume, produtos_quimicos, energia_bomba, mao_obra) são obrigatórios.'
+    });
+  }
+
+  function tratarNumero(valor) {
+    if (typeof valor !== 'string') valor = valor.toString();
+
+    // Remove pontos de milhar apenas se vírgula estiver presente (ex: "1.234,56")
+    if (valor.includes(',') && valor.includes('.')) {
+      valor = valor.replace(/\./g, '').replace(',', '.');
+    } else if (valor.includes(',')) {
+      valor = valor.replace(',', '.');
+    }
+
+    return parseFloat(valor);
+  }
+  const volumeFloat = tratarNumero(volume);
+  const produtosQuimicosFloat = tratarNumero(produtos_quimicos);
+  const energiaBombaFloat = tratarNumero(energia_bomba);
+  const maoObraFloat = tratarNumero(mao_obra);
+
+  const custoTotal = volumeFloat * produtosQuimicosFloat + energiaBombaFloat + maoObraFloat;
+
+  res.json({
+    custo_mensal: custoTotal.toFixed(2)
+  });
 }
+
+
 
 export function calcularMob(req, res) {
 
