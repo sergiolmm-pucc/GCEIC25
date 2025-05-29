@@ -3,6 +3,8 @@ import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
 import 'package:gcseic25/equipes/CI_CD_8/auth/login.dart';
+import 'package:gcseic25/equipes/CI_CD_8/splashscreen.dart' as ciSplash;
+
 
 void main() {
   runApp(MyApp());
@@ -20,7 +22,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/splash1': (context) => SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
         '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
-        '/CI_CD_8': (context) => LoginPage(), 
+        '/CI_CD_8': (context) => ciSplash.SplashScreen(nextPage: const LoginPage()),
       },
     );
   }
