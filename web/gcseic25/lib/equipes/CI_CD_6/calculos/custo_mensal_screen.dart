@@ -34,7 +34,7 @@ class _CustoMensalScreenState extends State<CustoMensalScreen> {
     });
 
     try {
-      final uri = Uri.parse('http://localhost:3000/ETEC/calcularCustoMensal');
+      final uri = Uri.parse('https://animated-occipital-buckthorn.glitch.me/ETEC/calcularCustoMensal');
       final response = await http.post(
         uri,
         headers: {'Content-Type': 'application/json'},

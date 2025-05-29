@@ -39,7 +39,7 @@ class _RecisaoScreenState extends State<RecisaoScreen> {
     });
 
     try {
-      final uri = Uri.parse('http://localhost:3000/ETEC/calcularRescisao');
+      final uri = Uri.parse('https://animated-occipital-buckthorn.glitch.me/ETEC/calcularRescisao');
       final response = await http.post(
         uri,
         headers: {'Content-Type': 'application/json'},

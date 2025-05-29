@@ -47,7 +47,7 @@ class _DecimoTerceiroScreenState extends State<DecimoTerceiroScreen> {
 
     try {
       final uri = Uri.parse(
-        'http://localhost:3000/ETEC/calcularDecimoTerceiro',
+        'https://animated-occipital-buckthorn.glitch.me/ETEC/calcularDecimoTerceiro',
       );
       final response = await http.post(
         uri,

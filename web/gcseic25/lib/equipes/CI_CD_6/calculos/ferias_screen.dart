@@ -34,7 +34,7 @@ class _FeriasScreenState extends State<FeriasScreen> {
     });
 
     try {
-      final uri = Uri.parse('http://localhost:3000/ETEC/calcularFerias');
+      final uri = Uri.parse('https://animated-occipital-buckthorn.glitch.me/ETEC/calcularFerias');
       final response = await http.post(
         uri,
         headers: {'Content-Type': 'application/json'},

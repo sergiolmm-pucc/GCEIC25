@@ -39,7 +39,7 @@ class _ESocialScreenState extends State<ESocialScreen> {
     });
 
     try {
-      final uri = Uri.parse('http://localhost:3000/ETEC/calcularESocial');
+      final uri = Uri.parse('https://animated-occipital-buckthorn.glitch.me/ETEC/calcularESocial');
       final response = await http.post(
         uri,
         headers: {'Content-Type': 'application/json'},
