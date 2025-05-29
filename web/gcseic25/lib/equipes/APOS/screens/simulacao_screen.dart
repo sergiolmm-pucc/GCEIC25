@@ -20,7 +20,7 @@ class _SimulacaoScreenState extends State<SimulacaoScreen> {
   bool _isLoading = false;
 
   // URL do seu backend Node.js.
-  final String _backendUrl = 'http://localhost:3000'; // Ajuste conforme seu ambiente!
+  final String _backendUrl = 'https://animated-occipital-buckthorn.glitch.me';
 
   @override
   void dispose() {

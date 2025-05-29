@@ -23,7 +23,7 @@ class _HistoricoScreenState extends State<HistoricoScreen> {
   Future<void> fetchHistorico({String? tipo}) async {
     setState(() => isLoading = true);
 
-    final uri = Uri.parse('http://localhost:3000/APOS/historico')
+    final uri = Uri.parse('https://animated-occipital-buckthorn.glitch.me/APOS/historico')
         .replace(queryParameters: tipo != null ? {'tipo': tipo} : null);
 
     final response = await http.get(uri);
