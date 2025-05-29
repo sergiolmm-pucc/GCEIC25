@@ -1,0 +1,145 @@
+name: Unit test
+
+on:
+  push:
+    branches: [main, stable, prod, dev, login, sobre, ajuda, splash]
+
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Environment
+        type: choice
+        required: true
+        default: dev
+        options:
+          - dev
+          - prod
+          - stage
+jobs:
+  info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code from repository
+        uses: actions/checkout@v3
+      - name: Instalar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22.x'
+      - name: Validate directory structure
+        run: |
+          echo "Repository structure:"
+          ls -la
+          echo "API directory content:"
+          ls -la api || echo "API directory not found"
+      - name: Exibir informações do projeto manualmente
+        run: |
+          echo "Informações do projeto"
+          node -v
+      - name: Gera saida do Github context sem execução direta
+        run: |
+          echo 'GitHub Context:' > github_context.txt
+          echo '${{ toJSON(github) }}' >> github_context.txt
+          cat github_context.txt
+      - name: Mostra mensagem
+        run: echo "Alo turma"
+
+  getCode:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code from repositori to evaluate
+        uses: actions/checkout@v3
+      - name: lista diretorio
+        run: ls -la
+
+  test:
+    needs: getCode
+    permissions: write-all
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api # Define o diretório base para todos os comandos
+    strategy:
+      matrix:
+        node-version: [22.x]
+    steps:
+      - name: Get Code from repository
+        uses: actions/checkout@v3
+      - name: lista diretorio
+        run: ls -la
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Instala Dependencias
+        run: npm ci
+      # - name: Run Lint
+      #   run:
+      #     npm run lint
+      # aqui uma entrada para cada teste
+      - name: Roda os testes
+        run: npm test
+
+      - name: lista
+        run: ls -la
+
+      - name: Gera o Relatório dos testes
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: JEST tests
+          path: api/reports/jest-junit.xml
+          reporter: jest-junit
+
+
+  Deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api # Define o diretório base para todos os comandos
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: lista
+        run: ls -la
+      - name: Limpa arquivos antes da sincronização
+        run: |
+          echo "Removendo arquivos e diretórios que causam problemas na sincronização"
+          # Remove o diretório de coverage
+          rm -rf coverage || true
+          # Remove outros arquivos grandes ou temporários se necessário
+          rm -rf node_modules/.cache || true
+          echo "Conteúdo do diretório após limpeza:"
+          ls -la     
+
+        
+      # - name: Install NodeJS
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: '22.x'
+      # - name: Validate API Directory
+      #   run: |
+      #     if [ ! -d "." ]; then
+      #       echo "Error: API directory does not exist or is not accessible.";
+      #       exit 1;
+      #     fi
+      #     echo "API directory content:"
+      #     ls -la
+      # - name: Instala Dependencias
+      #   run: npm ci
+      # - name: Validate API Directory
+      #   run: |
+      #     if [ ! -d "." ]; then
+      #       echo "Error: API directory does not exist or is not accessible.";
+      #       exit 1;
+      #     fi
+      #     echo "API directory content:"
+      #     ls -la     
+      # - name: Faz sincronismo com o Glitch
+      #   uses: kanadgupta/glitch-sync@v3.0.1
+      #   with:
+      #     auth-token: "$#{{ secrets.authToken }}"
+      #     project-id: "$#{{ secrets.projectId }}"
+      #     path: 'api'
+      # - name: lista
+      #   run: ls -la
