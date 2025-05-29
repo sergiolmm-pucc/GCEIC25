@@ -3,8 +3,14 @@ import 'package:gcseic25/equipes/APOS/screens/splash_screen.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
+import 'package:gcseic25/equipes/CI_CD_8/auth/login.dart' as CI_CD8Login;
+import 'package:gcseic25/equipes/CI_CD_8/splashscreen.dart' as CI_CD8Splash;
+import 'package:gcseic25/page/markup.dart';
+import 'package:gcseic25/page/login.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gcseic25/equipes/MKP1/screens/splash_screen.dart';
+import 'package:gcseic25/equipes/APOS/screens/splash_screen.dart';
+import 'package:gcseic25/equipes/base/equipe3/login_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
@@ -13,6 +19,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,14 +28,19 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.blue),
       home: HomePage(),
       routes: {
+
+        '/CI_CD_8': (context) => CI_CD8Splash.SplashScreen(nextPage: const CI_CD8Login.LoginPage()),
         '/splash1':
             (context) =>
                 SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
         '/splash2':
             (context) =>
                 SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
+        '/markup': (context) => MultiplierMarkupPage(),
+        '/login': (context) => LoginPage(),
         '/aposSplashScreen': (context) => APOSSplashScreen(),
         '/mkp1SplashScreen': (context) => const MKP1SplashScreen(),
+        '/mob3': (context) => SplashScreen(nextPage: LoginScreen()), 
       },
     );
   }
@@ -55,8 +68,18 @@ class HomePage extends StatelessWidget {
               },
               child: Text('Abrir Consulta 2'),
             ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () => Navigator.pushNamed(context, '/CI_CD_8'),
+              child: const Text('Grupo CI_CD_8'),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () => Navigator.pushNamed(context, '/login'),
+              child: const Text('MARKUP MULTIPLICADOR'),
+            ),
             Semantics(
-              identifier: 'Entrar',
+              // identifier: 'Entrar',
               label: 'Entrar',
               button: true,
               child: SizedBox(
@@ -97,6 +120,13 @@ class HomePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/mkp1SplashScreen');
               },
               child: Text('Calculadora de Markup'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/mob3');
+              },
+              child: Text('MOB3'),
             ),
           ],
         ),
