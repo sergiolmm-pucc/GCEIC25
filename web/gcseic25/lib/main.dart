@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gcseic25/equipes/CI_CD_6/login_screen.dart';
+import 'package:gcseic25/equipes/CI_CD_6/splash_creen.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
             SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
         '/splash2': (context) =>
             SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
-        '/CI_CD_6': (context) => LoginScreen()
+        '/CI_CD_6': (context) => SplashToLoginScreen()
       },
     );
   }
