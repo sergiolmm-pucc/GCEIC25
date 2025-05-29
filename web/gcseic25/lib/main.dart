@@ -10,6 +10,8 @@ import 'package:gcseic25/equipes/CI_CD_8/splashscreen.dart' as CI_CD8Splash;
 import 'package:gcseic25/page/markup.dart';
 import 'package:gcseic25/page/login.dart';
 import 'package:flutter/rendering.dart';
+import 'package:gcseic25/equipes/MKP1/screens/splash_screen.dart';
+import 'package:gcseic25/equipes/APOS/screens/splash_screen.dart';
 import 'package:gcseic25/equipes/base/equipe3/login_screen.dart';
 
 void main() {
@@ -42,6 +44,7 @@ class MyApp extends StatelessWidget {
         '/markup': (context) => MultiplierMarkupPage(),
         '/login': (context) => LoginPage(),
         '/aposSplashScreen': (context) => APOSSplashScreen(),
+        '/mkp1SplashScreen': (context) => const MKP1SplashScreen(),
         '/mob3': (context) => SplashScreen(nextPage: LoginScreen()), 
       },
     );
@@ -125,6 +128,14 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/mkp1SplashScreen');
+              },
+              child: Text('Calculadora de Markup'),
+            ),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/mob3');
