@@ -89,16 +89,17 @@ class _EletricMaterialPageState extends State<EletricMaterialPage> {
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'luminaria_qtd': int.parse(quantidadeLuzController.text),
-          'luminaria_preco': double.parse(pricelightController.text),
+          'luminaria_preco': double.parse(pricelightController.text.replaceAll(',', '.')),
           'fio_metros': int.parse(metrofioController.text),
-          'fio_preco': double.parse(pricefioController.text),
+          'fio_preco': double.parse(pricefioController.text.replaceAll(',', '.')),
           'comando_qtd': int.parse(qtdcomandoController.text),
-          'comando_preco': double.parse(priceComandoController.text),
+          'comando_preco': double.parse(priceComandoController.text.replaceAll(',', '.')),
           'disjuntor_qtd': int.parse(qtdDisjuntorController.text),
-          'disjuntor_preco': double.parse(priceDisjuntorController.text),
+          'disjuntor_preco': double.parse(priceDisjuntorController.text.replaceAll(',', '.')),
           'programador_qtd': int.parse(qtdDprogramadorController.text),
-          'programador_preco': double.parse(priceProgramadorController.text),
+          'programador_preco': double.parse(priceProgramadorController.text.replaceAll(',', '.')),
         }),
+
       );
 
       if (response.statusCode == 200) {

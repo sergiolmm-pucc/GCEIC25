@@ -83,61 +83,134 @@ function calcularVolume(req, res) {
 
 function calcularMaterialEletrico(req, res) {
 
+  try {
+    const {
+      luminaria_qtd,
+      luminaria_preco,
+      fio_metros,
+      fio_preco,
+      comando_qtd,
+      comando_preco,
+      disjuntor_qtd,
+      disjuntor_preco,
+      programador_qtd,
+      programador_preco
+    } = req.body;
+
+    // Verifica se todos os dados foram recebidos corretamente
+    if (
+      luminaria_qtd == null || luminaria_preco == null ||
+      fio_metros == null || fio_preco == null ||
+      comando_qtd == null || comando_preco == null ||
+      disjuntor_qtd == null || disjuntor_preco == null ||
+      programador_qtd == null || programador_preco == null
+    ) {
+      return res.status(400).json({ error: 'Todos os campos são obrigatórios.' });
+    }
+
+    // Cálculo do custo total
+    const total =
+      (luminaria_qtd * luminaria_preco) +
+      (fio_metros * fio_preco) +
+      (comando_qtd * comando_preco) +
+      (disjuntor_qtd * disjuntor_preco) +
+      (programador_qtd * programador_preco);
+
+    res.status(200).json({
+      custo_mensal: total.toFixed(2)
+    });
+
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao processar os dados.' });
+  }
+
 }
 
 function calcularMaterialHidraulico(req, res) {
- const {
-        comprimentoTubos,
-        custoPorMetro,
-        qtdValvulas,
-        custoValvula,
-        custoBomba,
-        custoFiltro,
-        tipoTubulacao
-    } = req.query;
+  try {
+    const {
+      luminaria_qtd,
+      luminaria_preco,
+      fio_metros,
+      fio_preco,
+      comando_qtd,
+      comando_preco,
+      disjuntor_qtd,
+      disjuntor_preco,
+      programador_qtd,
+      programador_preco
+    } = req.body;
+
 
     // Validação de preenchimento
     if (
-        comprimentoTubos === undefined || custoPorMetro === undefined ||
-        qtdValvulas === undefined || custoValvula === undefined ||
-        custoBomba === undefined || custoFiltro === undefined ||
-        !tipoTubulacao
+      luminaria_qtd == null || luminaria_preco == null ||
+      fio_metros == null || fio_preco == null ||
+      comando_qtd == null || comando_preco == null ||
+      disjuntor_qtd == null || disjuntor_preco == null ||
+      programador_qtd == null || programador_preco == null
     ) {
-        return res.status(400).json({ error: "Preencha todos os campos antes de prosseguir." });
+      return res.status(400).json({ error: 'Todos os campos são obrigatórios.' });
     }
 
-    // Conversão para números
-    const comprimento = parseFloat(comprimentoTubos);
-    const precoMetro = parseFloat(custoPorMetro);
-    const qtdConexoes = parseInt(qtdValvulas);
-    const precoValvula = parseFloat(custoValvula);
-    const precoBomba = parseFloat(custoBomba);
-    const precoFiltro = parseFloat(custoFiltro);
+    function tratarNumero(valor) {
+      if (typeof valor !== 'string') valor = valor.toString();
 
-    const camposNumericos = [comprimento, precoMetro, qtdConexoes, precoValvula, precoBomba, precoFiltro];
+      // Caso especial: número com vírgula como decimal e ponto como milhar
+      if (valor.includes(',') && valor.includes('.')) {
+        valor = valor.replace(/\./g, '').replace(',', '.');
+      }
+      // Caso comum no Brasil: número apenas com vírgula (decimal)
+      else if (valor.includes(',')) {
+        valor = valor.replace(',', '.');
+      }
+      // Caso com apenas ponto (milhar) — vamos remover o ponto nesse caso também
+      else if (/^\d{1,3}(\.\d{3})+$/.test(valor)) {
+        valor = valor.replace(/\./g, '');
+      }
+
+      return parseFloat(valor);
+    }
+
+
+    const luminariaQtd = tratarNumero(luminaria_qtd);
+    const luminariaPreco = tratarNumero(luminaria_preco);
+    const fioMetros = tratarNumero(fio_metros);
+    const fioPreco = tratarNumero(fio_preco);
+    const comandoQtd = tratarNumero(comando_qtd);
+    const comandoPreco = tratarNumero(comando_preco);
+    const disjuntorQtd = tratarNumero(disjuntor_qtd);
+    const disjuntorPreco = tratarNumero(disjuntor_preco);
+    const programadorQtd = tratarNumero(programador_qtd);
+    const programadorPreco = tratarNumero(programador_preco);
+
+    const camposNumericos = [
+      luminariaQtd, luminariaPreco,
+      fioMetros, fioPreco,
+      comandoQtd, comandoPreco,
+      disjuntorQtd, disjuntorPreco,
+      programadorQtd, programadorPreco
+    ];
+
     const algumInvalido = camposNumericos.some(num => isNaN(num) || num < 0);
-
     if (algumInvalido) {
-        return res.status(400).json({ error: "Todos os campos numéricos devem ser números válidos e não negativos." });
+      return res.status(400).json({ error: 'Todos os valores devem ser numéricos e positivos.' });
     }
 
-    // Cálculo
-    const custoTubos = comprimento * precoMetro;
-    const custoValvulasTotal = qtdConexoes * precoValvula;
-    const custoTotal = custoTubos + custoValvulasTotal + precoBomba + precoFiltro;
+    const total =
+      (luminariaQtd * luminariaPreco) +
+      (fioMetros * fioPreco) +
+      (comandoQtd * comandoPreco) +
+      (disjuntorQtd * disjuntorPreco) +
+      (programadorQtd * programadorPreco);
 
-    // Retorno das informações 
-    return res.status(200).json({
-        tipo_tubulacao: tipoTubulacao.toLowerCase(),
-        comprimentoTubos: comprimento,
-        custoPorMetro: precoMetro,
-        qtdValvulas: qtdConexoes,
-        custoValvula: precoValvula,
-        custoBomba: precoBomba,
-        custoFiltro: precoFiltro,
-        total: parseFloat(custoTotal.toFixed(2)),
-        mensagem: `O custo total estimado para os materiais hidráulicos é R$ ${custoTotal.toFixed(2)}.`
+    res.status(200).json({
+      custo_mensal: total.toFixed(2).replace('.', ',') // vírgula para formato pt-BR
     });
+    
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao processar os dados.' });
+  }
 }
 
 function calcularCustoDAgua(req, res) {
