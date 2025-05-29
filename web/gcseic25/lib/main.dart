@@ -4,7 +4,7 @@ import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
 import 'package:flutter/rendering.dart';
-import 'package:gcseic25/equipes/APOS/screens/splash_screen.dart';
+import 'package:gcseic25/equipes/MKP1/screens/splash_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
             (context) =>
                 SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
         '/aposSplashScreen': (context) => APOSSplashScreen(),
+        '/mkp1SplashScreen': (context) => const MKP1SplashScreen(),
       },
     );
   }
@@ -89,6 +90,13 @@ class HomePage extends StatelessWidget {
                   child: const Text('Entrar'),
                 ),
               ),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/mkp1SplashScreen');
+              },
+              child: Text('Calculadora de Markup'),
             ),
           ],
         ),
