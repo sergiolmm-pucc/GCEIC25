@@ -48,6 +48,9 @@ class ConsultaPage1 extends StatefulWidget {
 }
 
 class _ConsultaPageState1 extends State<ConsultaPage1> {
+
+  final TextEditingController _controller = TextEditingController();
+
   String _responseText = 'Resultado aparecerá aqui.';
 
   Future<void> _fetchData() async {
@@ -64,6 +67,14 @@ class _ConsultaPageState1 extends State<ConsultaPage1> {
   }
   }
 
+  String _outputText = '';
+
+  void _handleButtonClick() {
+    setState(() {
+      _outputText = '${_controller.text} OK - certo';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,9 +85,15 @@ class _ConsultaPageState1 extends State<ConsultaPage1> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            ElevatedButton(
-              onPressed: _fetchData,
-              child: Text('Consultar API turma 101'),
+            Semantics(
+                identifier: 'btn1',
+                label: 'Consultar API',
+                button: true,
+                child:
+                    ElevatedButton(
+                     onPressed: _fetchData,
+                      child: Text('Consultar API'),
+                ),
             ),
             SizedBox(height: 20),
             Container(
@@ -91,6 +108,39 @@ class _ConsultaPageState1 extends State<ConsultaPage1> {
                 style: TextStyle(fontSize: 16),
               ),
             ),
+        // teste funcional    um edit text e um botal e um label      
+             Semantics(
+                identifier: 'Enter a search term',
+                textField: true,
+                child:  
+                  TextField(
+                    controller: _controller,
+                    decoration: const InputDecoration(
+                      labelText: 'Digite',
+                      hintText: 'Enter a search term',),
+                  ),
+            ),
+            const SizedBox(height: 20),
+            
+            Semantics(
+                identifier: 'Concatenar',
+                label: 'Concatenar',
+                button: true,
+                child:
+                  ElevatedButton(
+                    onPressed: _handleButtonClick,
+                    child: const Text('Concatenar'),
+                    ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              _outputText,
+              style: const TextStyle(fontSize: 18),
+            ),   
+            
+
+
+
           ],
         ),
       ),
