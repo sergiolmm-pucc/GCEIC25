@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gcseic25/equipes/equipe4/screens/login.dart';
+import 'package:gcseic25/equipes/equipe4/screens/mob.dart';
 import 'package:gcseic25/equipes/equipe4/screens/water_volume.dart';
 import 'package:gcseic25/equipes/equipe4/screens/maintenance.dart';
 import 'package:gcseic25/equipes/equipe4/screens/water_cost.dart';
@@ -83,6 +84,17 @@ class HomeScreen4 extends StatelessWidget {
                 },
                 child: const Text('Sobre'),
               ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MOBPage(),
+                    ),
+                  );
+                },
+                child: const Text('MOB'),
+              )
             ],
           ),
         ),
