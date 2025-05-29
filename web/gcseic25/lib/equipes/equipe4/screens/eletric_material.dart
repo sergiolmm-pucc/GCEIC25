@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // <-- Import necessário para inputFormatters
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../utils/tab_bar.dart';
@@ -99,7 +100,6 @@ class _EletricMaterialPageState extends State<EletricMaterialPage> {
           'programador_qtd': int.parse(qtdDprogramadorController.text),
           'programador_preco': double.parse(priceProgramadorController.text.replaceAll(',', '.')),
         }),
-
       );
 
       if (response.statusCode == 200) {
@@ -156,14 +156,14 @@ class _EletricMaterialPageState extends State<EletricMaterialPage> {
                           children: [
                             Expanded(
                               child: _buildSection('Luminária subaquática', [
-                                _inputLabelField(label: 'Quantidade', controller: quantidadeLuzController),
+                                _inputLabelField(label: 'Quantidade', controller: quantidadeLuzController, isInteger: true),
                                 _inputLabelField(label: 'Preço unitário (R\$)', controller: pricelightController),
                               ]),
                             ),
                             const SizedBox(width: 16),
                             Expanded(
                               child: _buildSection('Cabo elétrico', [
-                                _inputLabelField(label: 'Metro do fio', controller: metrofioController),
+                                _inputLabelField(label: 'Metro do fio', controller: metrofioController, isInteger: true),
                                 _inputLabelField(label: 'Preço unitário (R\$)', controller: pricefioController),
                               ]),
                             ),
@@ -174,23 +174,22 @@ class _EletricMaterialPageState extends State<EletricMaterialPage> {
                           children: [
                             Expanded(
                               child: _buildSection('Quadro de comando', [
-                                _inputLabelField(label: 'Quantidade', controller: qtdcomandoController),
+                                _inputLabelField(label: 'Quantidade', controller: qtdcomandoController, isInteger: true),
                                 _inputLabelField(label: 'Preço unitário (R\$)', controller: priceComandoController),
                               ]),
                             ),
                             const SizedBox(width: 16),
                             Expanded(
                               child: _buildSection('Disjuntor', [
-                                _inputLabelField(label: 'Quantidade', controller: qtdDisjuntorController),
+                                _inputLabelField(label: 'Quantidade', controller: qtdDisjuntorController, isInteger: true),
                                 _inputLabelField(label: 'Preço unitário (R\$)', controller: priceDisjuntorController),
                               ]),
                             ),
                           ],
                         ),
                         const SizedBox(height: 16),
-                        // Programador sozinho na linha
                         _buildSection('Programador', [
-                          _inputLabelField(label: 'Quantidade', controller: qtdDprogramadorController),
+                          _inputLabelField(label: 'Quantidade', controller: qtdDprogramadorController, isInteger: true),
                           _inputLabelField(label: 'Preço unitário (R\$)', controller: priceProgramadorController),
                         ]),
                         const SizedBox(height: 20),
@@ -301,7 +300,11 @@ class _EletricMaterialPageState extends State<EletricMaterialPage> {
     );
   }
 
-  Widget _inputLabelField({required String label, required TextEditingController controller}) {
+  Widget _inputLabelField({
+    required String label,
+    required TextEditingController controller,
+    bool isInteger = false, // novo parâmetro
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -309,7 +312,8 @@ class _EletricMaterialPageState extends State<EletricMaterialPage> {
         const SizedBox(height: 4),
         TextField(
           controller: controller,
-          keyboardType: TextInputType.number,
+          keyboardType: TextInputType.numberWithOptions(decimal: !isInteger),
+          inputFormatters: isInteger ? [FilteringTextInputFormatter.digitsOnly] : [],
           decoration: InputDecoration(
             hintText: label,
             hintStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w200, fontFamily: 'Montserrat', color: Color(0xFF676767)),
@@ -318,7 +322,7 @@ class _EletricMaterialPageState extends State<EletricMaterialPage> {
             border: InputBorder.none,
             enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
             focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
           ),
         ),
       ],
