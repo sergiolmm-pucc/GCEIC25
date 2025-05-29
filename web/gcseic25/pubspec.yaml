@@ -95,10 +95,6 @@ flutter:
       - assets/equipe4/logo_equipe_4.png
       - assets/equipe4/user_team4.png
       - assets/equipe4/apis_background.png
-<<<<<<< HEAD
-     
-
-=======
       - assets/equipe4/circular.png
       - assets/equipe4/retangular.png
       - assets/equipe4/oval.png
@@ -110,17 +106,14 @@ flutter:
       - assets/equipe4/manu.png
       - assets/equipe4/bg1.png
       - assets/equipe4/bg2.png
+
   fonts:
     - family: Montserrat
       fonts:
-<<<<<<< HEAD
-        - asset: assets/fonts/Montserrat-VariableFont_wght.ttf
->>>>>>> origin/main
-=======
         - asset: assets/fonts/Montserrat-Regular.ttf
           weight: 200
         - asset: assets/fonts/Montserrat-Bold.ttf
           weight: 700
         - asset: assets/fonts/Montserrat-Medium.ttf
           weight: 400
->>>>>>> origin/maintenance
+
