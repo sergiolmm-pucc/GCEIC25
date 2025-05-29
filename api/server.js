@@ -21,7 +21,7 @@ app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/', baseRoutes);
 app.use('/users', userRoutes);
-app.use('/CCP', pool4Routes); // Grupo 04 - Cálculo Construção Piscina
+app.use('/CCP', pool4Routes); // Grupo 02 - Cálculo Construção Piscina
 
 app.use('/MKP2', markup2Routes);
 app.use('/markup', markupRoutes);// grupo 11 - markup

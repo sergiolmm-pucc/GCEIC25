@@ -10,7 +10,6 @@ import 'package:gcseic25/equipes/CI_CD_8/splashscreen.dart' as CI_CD8Splash;
 import 'package:gcseic25/page/markup.dart';
 import 'package:gcseic25/page/login.dart';
 import 'package:flutter/rendering.dart';
-import 'package:gcseic25/equipes/APOS/screens/splash_screen.dart';
 import 'package:gcseic25/equipes/base/equipe3/login_screen.dart';
 
 void main() {
@@ -31,7 +30,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/splash1': (context) => SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
         '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
-        '/splash_screen_equipe_4': (context) => SplashScreen4(nextPage: LoginPage4()),
+        '/splash_screen_equipe_2': (context) => SplashScreen4(nextPage: LoginPage4()),
 
         '/CI_CD_8': (context) => CI_CD8Splash.SplashScreen(nextPage: const CI_CD8Login.LoginPage()),
         '/splash1':
@@ -75,9 +74,9 @@ class HomePage extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/splash_screen_equipe_4');
+                Navigator.pushNamed(context, '/splash_screen_equipe_2');
               },
-              child: Text('Grupo 4 - Cálculo Piscina'),
+              child: Text('Grupo 2 - Cálculo Piscina'),
             ),
 
             SizedBox(height: 20),
