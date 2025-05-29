@@ -1,4 +1,4 @@
-export function calcularVolume(req, res) {
+function calcularVolume(req, res) {
     console.log('Recebido:', req.body);
     const {
     tipo_piscina,
@@ -81,11 +81,11 @@ export function calcularVolume(req, res) {
     return res.status(200).json(response);
 }
 
-export function calcularMaterialEletrico(req, res) {
+function calcularMaterialEletrico(req, res) {
 
 }
 
-export function calcularMaterialHidraulico(req, res) {
+function calcularMaterialHidraulico(req, res) {
  const {
         comprimentoTubos,
         custoPorMetro,
@@ -140,20 +140,124 @@ export function calcularMaterialHidraulico(req, res) {
     });
 }
 
+function calcularCustoDAgua(req, res) {
+  const { volume, tarifa } = req.body;
 
-export function calcularCustoDAgua(req, res) {
+  if (!volume || !tarifa) {
+    return res.status(400).json({ error: 'Volume e tarifa são obrigatórios.' });
+  }
 
+  function tratarNumero(valor) {
+    if (typeof valor !== 'string') valor = valor.toString();
+
+    // Caso especial: número com vírgula como decimal e ponto como milhar
+    if (valor.includes(',') && valor.includes('.')) {
+      valor = valor.replace(/\./g, '').replace(',', '.');
+    }
+    // Caso comum no Brasil: número apenas com vírgula (decimal)
+    else if (valor.includes(',')) {
+      valor = valor.replace(',', '.');
+    }
+    // Caso com apenas ponto (milhar) — vamos remover o ponto nesse caso também
+    else if (/^\d{1,3}(\.\d{3})+$/.test(valor)) {
+      valor = valor.replace(/\./g, '');
+    }
+
+    return parseFloat(valor);
+  }
+
+
+  const volumeFloat = tratarNumero(volume);
+  const tarifaFloat = tratarNumero(tarifa);
+
+  const custo = volumeFloat * tarifaFloat;
+
+  res.json({
+    custo_agua: custo.toFixed(2)
+  });
 }
 
-export function calcularManutencaoMensal(req, res) {
+function calcularManutencaoMensal(req, res) {
+  const {produtos_quimicos, energia_bomba, mao_obra } = req.body;
 
+  if (
+    produtos_quimicos == null ||
+    energia_bomba == null ||
+    mao_obra == null
+  ) {
+    return res.status(400).json({
+      error: 'Todos os campos (volume, produtos_quimicos, energia_bomba, mao_obra) são obrigatórios.'
+    });
+  }
+
+  function tratarNumero(valor) {
+  if (typeof valor !== 'string') valor = valor.toString();
+
+  // Caso especial: número com vírgula como decimal e ponto como milhar
+  if (valor.includes(',') && valor.includes('.')) {
+    valor = valor.replace(/\./g, '').replace(',', '.');
+  }
+  // Caso comum no Brasil: número apenas com vírgula (decimal)
+  else if (valor.includes(',')) {
+    valor = valor.replace(',', '.');
+  }
+  // Caso com apenas ponto (milhar) — vamos remover o ponto nesse caso também
+  else if (/^\d{1,3}(\.\d{3})+$/.test(valor)) {
+    valor = valor.replace(/\./g, '');
+  }
+
+  return parseFloat(valor);
 }
 
-export function calcularMob(req, res) {
+  const produtosQuimicosFloat = tratarNumero(produtos_quimicos);
+  const energiaBombaFloat = tratarNumero(energia_bomba);
+  const maoObraFloat = tratarNumero(mao_obra);
 
+const custoTotal = (produtosQuimicosFloat + energiaBombaFloat + maoObraFloat);
+
+
+  res.json({
+    custo_mensal: custoTotal.toFixed(2)
+  });
 }
 
-export function login(req, res) {
+function calcularMob(req, res) {
+    const { transporte, instalacao, maoDeObra, equipamentos } = req.body;
+
+    // Verificação se todos os campos foram preenchidos
+    if (
+      !transporte?.toString().trim() ||
+      !instalacao?.toString().trim() ||
+      !maoDeObra?.toString().trim() ||
+      !equipamentos?.toString().trim()
+    ) {
+      return res.status(400).json({ error: "Todos os campos são obrigatórios." });
+    }
+
+    // Conversão e validação dos valores numéricos
+    const t = parseFloat(transporte);
+    const i = parseFloat(instalacao);
+    const m = parseFloat(maoDeObra);
+    const e = parseFloat(equipamentos);
+
+    if ([t, i, m, e].some(val => isNaN(val) || val < 0)) {
+      return res.status(400).json({ error: "Todos os valores devem ser números válidos e positivos." });
+    }
+
+    // Cálculo total
+    const total = t + i + m + e;
+
+    return res.status(200).json({
+      transporte: t,
+      instalacao: i,
+      maoDeObra: m,
+      equipamentos: e,
+      total,
+      mensagem: `O custo total de MOB é R$ ${total.toFixed(2).replace('.', ',')}`
+    });
+}
+
+function login(req, res) {
     const { email, senha } = req.body;
 
     if (email === 'adm@adm.com' && senha === 'adm') {
@@ -163,3 +267,12 @@ export function login(req, res) {
     return res.status(401).json({ sucesso: false, mensagem: 'E-mail ou senha inválidos.' });
 }
 
+module.exports = {
+  calcularVolume,
+  calcularMaterialEletrico,
+  calcularMaterialHidraulico,
+  calcularCustoDAgua,
+  calcularManutencaoMensal,
+  calcularMob,
+  login
+};

@@ -103,6 +103,13 @@ flutter:
       - assets/equipe4/retangular.png
       - assets/equipe4/oval.png
       - assets/equipe4/irregular.png
+      - assets/equipe4/alex.png
+      - assets/equipe4/ana.png
+      - assets/equipe4/lais.png
+      - assets/equipe4/luiz.png
+      - assets/equipe4/manu.png
+      - assets/equipe4/bg1.png
+      - assets/equipe4/bg2.png
   fonts:
     - family: Montserrat
       fonts:

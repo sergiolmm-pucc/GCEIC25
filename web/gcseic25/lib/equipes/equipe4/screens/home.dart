@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gcseic25/equipes/equipe4/screens/login.dart';
+import 'package:gcseic25/equipes/equipe4/screens/mob.dart';
 import 'package:gcseic25/equipes/equipe4/screens/water_volume.dart';
-<<<<<<< HEAD
 import 'package:gcseic25/equipes/equipe4/screens/hydraulic_material.dart';
-
-=======
 import 'package:gcseic25/equipes/equipe4/screens/maintenance.dart';
->>>>>>> origin/main
+import 'package:gcseic25/equipes/equipe4/screens/water_cost.dart';
+import 'package:gcseic25/equipes/equipe4/screens/about.dart';
 import '../utils/tab_bar.dart';
 
 class HomeScreen4 extends StatelessWidget {
@@ -47,7 +46,7 @@ class HomeScreen4 extends StatelessWidget {
                               ),
                             );
                           },
-                          child: const Text('Cálculo do Material Hidraúlico'),
+                          child: const Text('Material Hidraúlico'),
                         ),
 
               const SizedBox(height: 12), // Espaço entre os botões
@@ -76,6 +75,39 @@ class HomeScreen4 extends StatelessWidget {
                 },
                 child: const Text('Manutenção'),
               ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const WaterCostPage(),
+                    ),
+                  );
+                },
+                child: const Text('Custo da água'),
+              ),
+                ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => About(),
+                    ),
+                  );
+                },
+                child: const Text('Sobre'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MOBPage(),
+                    ),
+                  );
+                },
+                child: const Text('MOB'),
+              )
             ],
           ),
         ),
