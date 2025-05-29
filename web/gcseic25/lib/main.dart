@@ -66,8 +66,9 @@ class HomePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/login');
               },
               child: Text('MARKUP MULTIPLICADOR'),
+            ),
             Semantics(
-              identifier: 'Entrar',
+              // identifier: 'Entrar',
               label: 'Entrar',
               button: true,
               child: SizedBox(
