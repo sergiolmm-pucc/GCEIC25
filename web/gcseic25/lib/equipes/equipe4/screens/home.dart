@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gcseic25/equipes/equipe4/screens/login.dart';
 import 'package:gcseic25/equipes/equipe4/screens/mob.dart';
 import 'package:gcseic25/equipes/equipe4/screens/water_volume.dart';
+import 'package:gcseic25/equipes/equipe4/screens/hydraulic_material.dart';
 import 'package:gcseic25/equipes/equipe4/screens/maintenance.dart';
 import 'package:gcseic25/equipes/equipe4/screens/water_cost.dart';
 import 'package:gcseic25/equipes/equipe4/screens/about.dart';
@@ -35,6 +36,18 @@ class HomeScreen4 extends StatelessWidget {
                 },
                 child: const Text('Cálculo do Volume'),
               ),
+
+                      ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const HydraulicCostPage(),
+                              ),
+                            );
+                          },
+                          child: const Text('Material Hidraúlico'),
+                        ),
 
               const SizedBox(height: 12), // Espaço entre os botões
 
