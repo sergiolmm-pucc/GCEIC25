@@ -24,7 +24,7 @@ app.use('/MKP2', markup2Routes);
 app.use('/markup', markupRoutes);// grupo 11 - markup
 app.use('/login', loginRoutes);
 app.use('/APOS', aposRoutes); // Grupo 09 - Cálculo de Aposentadoria
-app.use('/MOB3', piscinaRoutes); // GRupo 03
+app.use('/MOB3', piscinaRoutes); // Grupo 03
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
