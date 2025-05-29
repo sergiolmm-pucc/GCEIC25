@@ -31,6 +31,14 @@ exports.sobre = (req, res) => {
   });
 };
 
+
+exports.splashScreen = (req, res) => {
+  res.status(200).json({
+    sucesso: true,
+    mensagem: 'Splash screen carregada'
+  });
+};
+
 exports.ajuda = (req, res) => {
   res.status(200).json({
     titulo: 'Ajuda',

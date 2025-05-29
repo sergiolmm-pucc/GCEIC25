@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="5" failures="0" errors="0" time="1.258">
-  <testsuite name="Teste de cálculo de piscina" errors="0" failures="0" skipped="0" timestamp="2025-05-22T04:38:40" time="1.132" tests="5">
-    <testcase classname="Teste de cálculo de piscina Calcula corretamente os valores" name="Teste de cálculo de piscina Calcula corretamente os valores" time="0.007">
+<testsuites name="jest tests" tests="5" failures="0" errors="0" time="1.244">
+  <testsuite name="Teste de cálculo de piscina" errors="0" failures="0" skipped="0" timestamp="2025-05-22T01:45:32" time="1.144" tests="5">
+    <testcase classname="Teste de cálculo de piscina Calcula corretamente os valores" name="Teste de cálculo de piscina Calcula corretamente os valores" time="0.002">
     </testcase>
-    <testcase classname="Teste da rota POST /login Login com credenciais válidas retorna 200" name="Teste da rota POST /login Login com credenciais válidas retorna 200" time="0.086">
+    <testcase classname="Teste da rota POST /login Login com credenciais válidas retorna 200" name="Teste da rota POST /login Login com credenciais válidas retorna 200" time="0.048">
     </testcase>
-    <testcase classname="Teste da rota POST /login Login com credenciais inválidas retorna 401" name="Teste da rota POST /login Login com credenciais inválidas retorna 401" time="0.011">
+    <testcase classname="Teste da rota POST /login Login com credenciais inválidas retorna 401" name="Teste da rota POST /login Login com credenciais inválidas retorna 401" time="0.004">
     </testcase>
     <testcase classname="Teste da rota POST /sobre Retorna a URL da imagem corretamente" name="Teste da rota POST /sobre Retorna a URL da imagem corretamente" time="0.013">
     </testcase>
     <testcase classname="Teste da rota GET /ajuda Retorna o texto de ajuda corretamente" name="Teste da rota GET /ajuda Retorna o texto de ajuda corretamente" time="0.009">
+    </testcase>
+    <testcase classname="Teste da rota POST /MOB3/splash Retorna sucesso e mensagem da splash screen" name="Teste da rota POST /MOB3/splash Retorna sucesso e mensagem da splash screen" time="0.004">
     </testcase>
   </testsuite>
 </testsuites>

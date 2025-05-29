@@ -62,3 +62,12 @@ exports.sobre = (req, res) => {
     url: urlFoto
   });
 };
+
+exports.getSplashData = () => {
+  return {
+    mensagem: "Bem-vindo à PiscinaApp!",
+    versao: "1.0.0",
+    atualizacaoDisponivel: false,
+    timestamp: new Date().toISOString() // Formata a data em string ISO 8601
+  };
+};

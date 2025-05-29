@@ -68,6 +68,17 @@ describe('Teste da rota POST /sobre', () => {
   });
 });
 
+describe('Teste da rota POST /MOB3/splash', () => {
+  test('Retorna sucesso e mensagem da splash screen', async () => {
+    const response = await request(app)
+      .post('/MOB3/splash')
+      .expect(200);
+
+    expect(response.body).toHaveProperty('sucesso', true);
+    expect(response.body).toHaveProperty('mensagem', 'Splash screen carregada');
+  });
+});
+
 // Verifica o Get da tela ajuda
 describe('Teste da rota GET /ajuda', () => {
   test('Retorna o texto de ajuda corretamente', async () => {
