@@ -6,6 +6,7 @@ import 'package:gcseic25/equipes/equipe4/screens/hydraulic_material.dart';
 import 'package:gcseic25/equipes/equipe4/screens/maintenance.dart';
 import 'package:gcseic25/equipes/equipe4/screens/water_cost.dart';
 import 'package:gcseic25/equipes/equipe4/screens/about.dart';
+import 'package:gcseic25/equipes/equipe4/screens/eletric_material.dart';
 import '../utils/tab_bar.dart';
 
 class HomeScreen4 extends StatelessWidget {
@@ -107,7 +108,19 @@ class HomeScreen4 extends StatelessWidget {
                   );
                 },
                 child: const Text('MOB'),
-              )
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const EletricMaterialPage(),
+                    ),
+                  );
+                },
+                child: const Text('Custo do matérial elétrico'),
+              ),
+              
             ],
           ),
         ),
