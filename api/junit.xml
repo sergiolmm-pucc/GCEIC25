@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="28" failures="0" errors="0" time="2.068">
-  <testsuite name="Função calcularAposentadoria" errors="0" failures="0" skipped="0" timestamp="2025-05-29T12:21:47" time="1.548" tests="28">
+<testsuites name="jest tests" tests="17" failures="0" errors="0" time="0.208">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2025-05-29T12:43:51" time="0.167" tests="17">
+    <testcase classname=" Teste de multiplicação de markup" name=" Teste de multiplicação de markup" time="0.001">
+    </testcase>
+    <testcase classname=" Teste de multiplicação de markup com valores negativos" name=" Teste de multiplicação de markup com valores negativos" time="0.001">
+    </testcase>
+    <testcase classname=" Teste de multiplicação de markup com valores zero" name=" Teste de multiplicação de markup com valores zero" time="0">
+    </testcase>
+    <testcase classname=" Teste de multiplicação de markup com valores decimais" name=" Teste de multiplicação de markup com valores decimais" time="0">
+    </testcase>
+    <testcase classname=" Teste de divisão de markup" name=" Teste de divisão de markup" time="0">
+    </testcase>
+    <testcase classname=" Teste de divisão de markup com valores negativos" name=" Teste de divisão de markup com valores negativos" time="0">
+    </testcase>
+    <testcase classname=" Teste de divisão de markup com valores zero" name=" Teste de divisão de markup com valores zero" time="0">
+    </testcase>
+    <testcase classname=" Teste de divisão de markup com valores decimais" name=" Teste de divisão de markup com valores decimais" time="0">
+    </testcase>
+    <testcase classname=" Teste de multiplicação de markup com valores não numéricos" name=" Teste de multiplicação de markup com valores não numéricos" time="0">
+    </testcase>
+    <testcase classname=" Teste de multiplicação de markup com valores numeros e não numéricos" name=" Teste de multiplicação de markup com valores numeros e não numéricos" time="0">
+    </testcase>
+    <testcase classname=" Teste da função sobre não retornar as strings" name=" Teste da função sobre não retornar as strings" time="0">
+    </testcase>
+    <testcase classname=" Teste de autenticação" name=" Teste de autenticação" time="0">
+    </testcase>
+    <testcase classname=" Teste de autenticação" name=" Teste de autenticação" time="0">
+    </testcase>
+    <testcase classname=" Teste de autenticação" name=" Teste de autenticação" time="0">
+    </testcase>
+    <testcase classname=" Teste de autenticação" name=" Teste de autenticação" time="0">
+    </testcase>
+    <testcase classname=" Teste de autenticação" name=" Teste de autenticação" time="0">
+    </testcase>
+    <testcase classname=" Teste de autenticação" name=" Teste de autenticação" time="0">
     <testcase classname="Função calcularAposentadoria Mulher que já pode se aposentar" name="Função calcularAposentadoria Mulher que já pode se aposentar" time="0.007">
     </testcase>
     <testcase classname="Função calcularAposentadoria Homem que já pode se aposentar" name="Função calcularAposentadoria Homem que já pode se aposentar" time="0.001">
