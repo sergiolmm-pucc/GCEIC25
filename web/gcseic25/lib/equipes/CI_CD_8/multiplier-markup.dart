@@ -18,7 +18,7 @@ class _MultiplierMarkupPageState extends State<MultiplierMarkupPage> {
     if (_formKey.currentState!.validate()) {
       try {
         final response = await http.post(
-          Uri.parse('http://localhost:3000/MKP2/calcMultiplierMarkup'),
+          Uri.parse('https://animated-occipital-buckthorn.glitch.me/MKP2/calcMultiplierMarkup'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode({
             'despesasVariaveis': double.parse(_despesasVariaveisController.text),

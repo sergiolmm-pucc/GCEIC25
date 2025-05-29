@@ -17,7 +17,7 @@ class _DivisorMarkupPageState extends State<DivisorMarkupPage> {
     if (_formKey.currentState!.validate()) {
       try {
         final response = await http.post(
-          Uri.parse('http://localhost:3000/MKP2/calcDivisorMarkup'),
+          Uri.parse('https://animated-occipital-buckthorn.glitch.me/MKP2/calcDivisorMarkup'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode({
             'precoVenda': double.parse(_precoVendaController.text),

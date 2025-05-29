@@ -20,7 +20,7 @@ class _SobrePageState extends State<SobrePage> {
     await Future.delayed(Duration(seconds: 1)); 
 
     try {
-      final response = await http.get(Uri.parse('http://localhost:3000/MKP2/sobre'));
+      final response = await http.get(Uri.parse('https://animated-occipital-buckthorn.glitch.me/MKP2/sobre'));
 
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body) as Map<String, dynamic>;

@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> retornarHome() async {
     try {
-      final response = await http.get(Uri.parse('http://localhost:3000/MKP2/home'));
+      final response = await http.get(Uri.parse('https://animated-occipital-buckthorn.glitch.me/MKP2/home'));
 
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body) as Map<String, dynamic>;

@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
   void _login() async {
   if (!_formKey.currentState!.validate()) return;
 
-  final url = Uri.parse('http://localhost:3000/MKP2/auth'); // ou http://IP_DO_SERVIDOR:PORTA/auth
+  final url = Uri.parse('https://animated-occipital-buckthorn.glitch.me/MKP2/auth'); // ou http://IP_DO_SERVIDOR:PORTA/auth
   final body = jsonEncode({
     'email': _emailCtrl.text.trim(),
     'senha': _passCtrl.text.trim(),
