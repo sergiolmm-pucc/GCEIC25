@@ -63,6 +63,7 @@ flutter:
     - assets/APOS/logo.png
     - assets/APOS/logo_white.png
     - assets/APOS/background.png
+    - lib/equipes/CI_CD_8/assets/images/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -73,8 +74,6 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-  assets:
-    - lib/equipes/CI_CD_8/assets/images/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 
