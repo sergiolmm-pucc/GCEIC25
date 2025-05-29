@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="10" failures="0" errors="0" time="0.631">
-  <testsuite name="Testes da rota /calcular-volume" errors="0" failures="0" skipped="0" timestamp="2025-05-28T23:48:45" time="0.595" tests="10">
-    <testcase classname="Testes da rota /calcular-volume Deve calcular volume de piscina retangular corretamente" name="Testes da rota /calcular-volume Deve calcular volume de piscina retangular corretamente" time="0.046">
+<testsuites name="jest tests" tests="15" failures="0" errors="0" time="0.649">
+  <testsuite name="Testes da rota /calcular-volume" errors="0" failures="0" skipped="0" timestamp="2025-05-29T00:15:38" time="0.612" tests="15">
+    <testcase classname="Testes da rota /calcular-volume Deve calcular volume de piscina retangular corretamente" name="Testes da rota /calcular-volume Deve calcular volume de piscina retangular corretamente" time="0.051">
     </testcase>
     <testcase classname="Testes da rota /calcular-volume Deve retornar erro se faltar tipo de piscina" name="Testes da rota /calcular-volume Deve retornar erro se faltar tipo de piscina" time="0.006">
     </testcase>
@@ -15,11 +15,21 @@
     </testcase>
     <testcase classname="Testes da rota /agua Deve retornar erro se faltar parâmetros" name="Testes da rota /agua Deve retornar erro se faltar parâmetros" time="0.002">
     </testcase>
-    <testcase classname="Testes da rota /manutencao Deve calcular corretamente o custo de manutenção mensal" name="Testes da rota /manutencao Deve calcular corretamente o custo de manutenção mensal" time="0.003">
+    <testcase classname="Testes da função calcularManutencaoMensal Deve calcular corretamente o custo de manutenção mensal com números padrão" name="Testes da função calcularManutencaoMensal Deve calcular corretamente o custo de manutenção mensal com números padrão" time="0.002">
     </testcase>
-    <testcase classname="Testes da rota /manutencao Deve aceitar números no formato brasileiro (vírgula)" name="Testes da rota /manutencao Deve aceitar números no formato brasileiro (vírgula)" time="0.006">
+    <testcase classname="Testes da função calcularManutencaoMensal Deve aceitar números no formato brasileiro (vírgula como decimal)" name="Testes da função calcularManutencaoMensal Deve aceitar números no formato brasileiro (vírgula como decimal)" time="0.003">
     </testcase>
-    <testcase classname="Testes da rota /manutencao Deve retornar erro se faltar parâmetros" name="Testes da rota /manutencao Deve retornar erro se faltar parâmetros" time="0.002">
+    <testcase classname="Testes da função calcularManutencaoMensal Deve aceitar números com ponto como milhar e vírgula como decimal (ex.: &quot;1.000,50&quot;)" name="Testes da função calcularManutencaoMensal Deve aceitar números com ponto como milhar e vírgula como decimal (ex.: &quot;1.000,50&quot;)" time="0.003">
+    </testcase>
+    <testcase classname="Testes da função calcularManutencaoMensal Deve retornar erro se faltar qualquer campo obrigatório" name="Testes da função calcularManutencaoMensal Deve retornar erro se faltar qualquer campo obrigatório" time="0.002">
+    </testcase>
+    <testcase classname="Testes da função calcularMob Deve calcular corretamente o custo total de MOB com valores válidos" name="Testes da função calcularMob Deve calcular corretamente o custo total de MOB com valores válidos" time="0.002">
+    </testcase>
+    <testcase classname="Testes da função calcularMob Deve retornar erro se faltar algum campo obrigatório" name="Testes da função calcularMob Deve retornar erro se faltar algum campo obrigatório" time="0.002">
+    </testcase>
+    <testcase classname="Testes da função calcularMob Deve retornar erro se algum valor for inválido (não numérico)" name="Testes da função calcularMob Deve retornar erro se algum valor for inválido (não numérico)" time="0.002">
+    </testcase>
+    <testcase classname="Testes da função calcularMob Deve retornar erro se algum valor for negativo" name="Testes da função calcularMob Deve retornar erro se algum valor for negativo" time="0.001">
     </testcase>
   </testsuite>
 </testsuites>

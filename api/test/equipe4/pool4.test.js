@@ -101,47 +101,57 @@ describe('Testes da rota /agua', () => {
   });
 });
 
-describe('Testes da rota /manutencao', () => {
-  
-  it('Deve calcular corretamente o custo de manutenção mensal', async () => {
+describe('Testes da função calcularManutencaoMensal', () => {
+  it('Deve calcular corretamente o custo de manutenção mensal com números padrão', async () => {
     const response = await request(app)
       .post('/pool4/manutencao')
       .send({
-        volume: '100',
-        produtos_quimicos: '2.5',
+        produtos_quimicos: '100',
         energia_bomba: '150',
-        mao_obra: '300'
+        mao_obra: '200'
       });
 
     expect(response.statusCode).toBe(200);
-    expect(response.body).toHaveProperty('custo_mensal', '45250.00');
+    expect(response.body).toHaveProperty('custo_mensal', '450.00');
   });
 
-  it('Deve aceitar números no formato brasileiro (vírgula)', async () => {
+  it('Deve aceitar números no formato brasileiro (vírgula como decimal)', async () => {
     const response = await request(app)
       .post('/pool4/manutencao')
       .send({
-        volume: '200,5',         // 200.5
-        produtos_quimicos: '3,75', // 3.75
-        energia_bomba: '200,50',   // 200.5
-        mao_obra: '400,75'         // 400.75
+        produtos_quimicos: '100,5',
+        energia_bomba: '150,75',
+        mao_obra: '200,25'
       });
 
-    const resultadoEsperado = (200.5 * (3.75 + 200.5 + 400.75)).toFixed(2); 
-    // 200.5 * 605 = 121297.5
+    const custoEsperado = (100.5 + 150.75 + 200.25).toFixed(2); // 451.50
 
     expect(response.statusCode).toBe(200);
-    expect(response.body).toHaveProperty('custo_mensal', resultadoEsperado);
+    expect(response.body).toHaveProperty('custo_mensal', custoEsperado);
   });
 
-  it('Deve retornar erro se faltar parâmetros', async () => {
+  it('Deve aceitar números com ponto como milhar e vírgula como decimal (ex.: "1.000,50")', async () => {
     const response = await request(app)
       .post('/pool4/manutencao')
       .send({
-        volume: '100',
-        produtos_quimicos: '2.5',
+        produtos_quimicos: '1.000,50',
+        energia_bomba: '2.500,75',
+        mao_obra: '3.000,25'
+      });
+
+    const custoEsperado = (1000.5 + 2500.75 + 3000.25).toFixed(2); // 6501.50
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toHaveProperty('custo_mensal', custoEsperado);
+  });
+
+  it('Deve retornar erro se faltar qualquer campo obrigatório', async () => {
+    const response = await request(app)
+      .post('/pool4/manutencao')
+      .send({
+        produtos_quimicos: '100',
         energia_bomba: '150'
-        // faltando mao_obra
+        // falta mao_obra, poderia ser qualquer outro
       });
 
     expect(response.statusCode).toBe(400);
@@ -149,5 +159,70 @@ describe('Testes da rota /manutencao', () => {
       'error',
       'Todos os campos (volume, produtos_quimicos, energia_bomba, mao_obra) são obrigatórios.'
     );
+  });
+});
+
+describe('Testes da função calcularMob', () => {
+  it('Deve calcular corretamente o custo total de MOB com valores válidos', async () => {
+    const response = await request(app)
+      .post('/pool4/mob')
+      .send({
+        transporte: '100',
+        instalacao: '150',
+        maoDeObra: '200',
+        equipamentos: '50'
+      });
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toMatchObject({
+      transporte: 100,
+      instalacao: 150,
+      maoDeObra: 200,
+      equipamentos: 50,
+      total: 500
+    });
+    expect(response.body.mensagem).toBe('O custo total de MOB é R$ 500,00');
+  });
+
+  it('Deve retornar erro se faltar algum campo obrigatório', async () => {
+    const response = await request(app)
+      .post('/pool4/mob')
+      .send({
+        transporte: '100',
+        instalacao: '150',
+        maoDeObra: '200'
+        // falta equipamentos
+      });
+
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toHaveProperty('error', 'Todos os campos são obrigatórios.');
+  });
+
+  it('Deve retornar erro se algum valor for inválido (não numérico)', async () => {
+    const response = await request(app)
+      .post('/pool4/mob')
+      .send({
+        transporte: '100',
+        instalacao: 'abc',
+        maoDeObra: '200',
+        equipamentos: '50'
+      });
+
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toHaveProperty('error', 'Todos os valores devem ser números válidos e positivos.');
+  });
+
+  it('Deve retornar erro se algum valor for negativo', async () => {
+    const response = await request(app)
+      .post('/pool4/mob')
+      .send({
+        transporte: '-10',
+        instalacao: '150',
+        maoDeObra: '200',
+        equipamentos: '50'
+      });
+
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toHaveProperty('error', 'Todos os valores devem ser números válidos e positivos.');
   });
 });

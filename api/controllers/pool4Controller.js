@@ -1,4 +1,4 @@
-export function calcularVolume(req, res) {
+function calcularVolume(req, res) {
     console.log('Recebido:', req.body);
     const {
     tipo_piscina,
@@ -81,17 +81,17 @@ export function calcularVolume(req, res) {
     return res.status(200).json(response);
 }
 
-export function calcularMaterialEletrico(req, res) {
+function calcularMaterialEletrico(req, res) {
 
 }
 
-export function calcularMaterialHidraulico(req, res) {
+function calcularMaterialHidraulico(req, res) {
 
 }
 
 
 
-export function calcularCustoDAgua(req, res) {
+function calcularCustoDAgua(req, res) {
   const { volume, tarifa } = req.body;
 
   if (!volume || !tarifa) {
@@ -128,7 +128,7 @@ export function calcularCustoDAgua(req, res) {
   });
 }
 
-export function calcularManutencaoMensal(req, res) {
+function calcularManutencaoMensal(req, res) {
   const {produtos_quimicos, energia_bomba, mao_obra } = req.body;
 
   if (
@@ -172,9 +172,7 @@ const custoTotal = (produtosQuimicosFloat + energiaBombaFloat + maoObraFloat);
   });
 }
 
-
-
-export function calcularMob(req, res) {
+function calcularMob(req, res) {
     const { transporte, instalacao, maoDeObra, equipamentos } = req.body;
 
     // Verificação se todos os campos foram preenchidos
@@ -210,7 +208,7 @@ export function calcularMob(req, res) {
     });
 }
 
-export function login(req, res) {
+function login(req, res) {
     const { email, senha } = req.body;
 
     if (email === 'adm@adm.com' && senha === 'adm') {
@@ -220,3 +218,12 @@ export function login(req, res) {
     return res.status(401).json({ sucesso: false, mensagem: 'E-mail ou senha inválidos.' });
 }
 
+module.exports = {
+  calcularVolume,
+  calcularMaterialEletrico,
+  calcularMaterialHidraulico,
+  calcularCustoDAgua,
+  calcularManutencaoMensal,
+  calcularMob,
+  login
+};
