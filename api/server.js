@@ -9,6 +9,8 @@ const port = 3000;
 // importa as rotas
 const userRoutes = require('./routes/userRoutes')
 const baseRoutes = require('./routes/baseRoutes')
+const markupRoutes = require('./routes/markupRoutes');
+const loginRoutes = require('./routes/loginRoutes');
 const aposRoutes = require('./routes/aposRoutes')
 
 app.use(cors()); // Enable CORS for all routes
@@ -16,6 +18,8 @@ app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/', baseRoutes);
 app.use('/users', userRoutes);
+app.use('/markup', markupRoutes);// grupo 11 - markup
+app.use('/login', loginRoutes);
 app.use('/APOS', aposRoutes); // Grupo 09 - Cálculo de Aposentadoria
 
 

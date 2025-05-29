@@ -3,6 +3,8 @@ import 'package:gcseic25/equipes/APOS/screens/splash_screen.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
+import 'package:gcseic25/page/markup.dart';
+import 'package:gcseic25/page/login.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gcseic25/equipes/APOS/screens/splash_screen.dart';
 
@@ -13,6 +15,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,6 +30,8 @@ class MyApp extends StatelessWidget {
         '/splash2':
             (context) =>
                 SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
+        '/markup': (context) => MultiplierMarkupPage(),
+        '/login': (context) => LoginPage(),
         '/aposSplashScreen': (context) => APOSSplashScreen(),
       },
     );
@@ -54,8 +60,15 @@ class HomePage extends StatelessWidget {
               },
               child: Text('Abrir Consulta 2'),
             ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/login');
+              },
+              child: Text('MARKUP MULTIPLICADOR'),
+            ),
             Semantics(
-              identifier: 'Entrar',
+              // identifier: 'Entrar',
               label: 'Entrar',
               button: true,
               child: SizedBox(
