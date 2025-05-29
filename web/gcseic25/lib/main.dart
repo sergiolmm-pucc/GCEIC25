@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gcseic25/equipes/equipe4/screens/login.dart';
+import 'package:gcseic25/equipes/equipe4/screens/splash_screen.dart';
 import 'package:gcseic25/equipes/APOS/screens/splash_screen.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
@@ -28,6 +30,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.blue),
       home: HomePage(),
       routes: {
+        '/splash1': (context) => SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
+        '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
+        '/splash_screen_equipe_2': (context) => SplashScreen4(nextPage: LoginPage4()),
 
         '/CI_CD_8': (context) => CI_CD8Splash.SplashScreen(nextPage: const CI_CD8Login.LoginPage()),
         '/splash1':
@@ -68,6 +73,15 @@ class HomePage extends StatelessWidget {
               },
               child: Text('Abrir Consulta 2'),
             ),
+            
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/splash_screen_equipe_2');
+              },
+              child: Text('Grupo 2 - Cálculo Piscina'),
+            ),
+
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () => Navigator.pushNamed(context, '/CI_CD_8'),
