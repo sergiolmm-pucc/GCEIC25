@@ -84,11 +84,9 @@ class _SimulacaoScreenState extends State<SimulacaoScreen> {
     final String? sexo = _sexoSelecionado;
 
     try {
-      // IMPORTANTE: Este endpoint no backend precisa ser diferente do de 'cálculo' simples.
-      // Ele deve realizar a SIMULAÇÃO (ex: projetar anos até a pontuação/idade mínima)
+      // ** CORREÇÃO AQUI: Alterado o endpoint para corresponder ao aposRoute.js **
       final response = await http.post(
-        Uri.parse('$_backendUrl/APOS/simulacaoPontuacaoAposentadoria'), 
-        // Sugestão de novo endpoint para simulação de pontuação, ajuste se o seu for outro
+        Uri.parse('$_backendUrl/APOS/calculoPontuacao'), 
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'idade': idade,
@@ -100,9 +98,19 @@ class _SimulacaoScreenState extends State<SimulacaoScreen> {
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         setState(() {
-          _podeAposentarAgora = data['podeAposentarAgora'] ?? false;
-          _anosFaltantes = data['anosParaAposentar']; // CAPTURANDO OS ANOS FALTANTES!
+          // Os nomes das chaves no JSON de resposta devem corresponder ao que o backend envia.
+          // No seu aposController.js (função calcularPontuacao), ele retorna:
+          // 'anosRestantes' e 'mensagem' (e 'pontuacaoAtual', 'erro' se aplicável)
+          _podeAposentarAgora = (data['anosRestantes'] ?? 0) == 0; // Se anosRestantes for 0, pode aposentar agora
+          _anosFaltantes = data['anosRestantes']; // Captura os anos que faltam
           _resultadoMensagem = data['mensagem'] ?? 'Erro ao obter mensagem.';
+
+          // Se houver um campo 'erro' no JSON de resposta do backend, podemos tratar:
+          if (data['erro'] == true) {
+            _resultadoMensagem = data['mensagem'] ?? 'Ocorreu um erro no servidor.';
+            _podeAposentarAgora = false;
+            _anosFaltantes = null;
+          }
         });
       } else if (response.statusCode == 400) {
         final data = json.decode(response.body);
@@ -133,9 +141,11 @@ class _SimulacaoScreenState extends State<SimulacaoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // ALTERAÇÃO CRUCIAL AQUI: Define a cor primária para um tom de TEAL
+    // Definindo a cor principal e um tom mais claro para detalhes
     final primaryColor = Colors.teal.shade700;
-    final accentColor = Colors.teal.shade500; // Um tom mais claro para ícones/detalhes
+    // Precisamos de uma referência à MaterialColor completa (Colors.teal)
+    // para acessar outras tonalidades (shade400, shade600, shade800)
+    final MaterialColor baseTealColor = Colors.teal;
 
     return Scaffold(
       appBar: AppBar(
@@ -264,7 +274,7 @@ class _SimulacaoScreenState extends State<SimulacaoScreen> {
                   decoration: BoxDecoration(
                     color: _resultadoMensagem.isEmpty
                         ? Colors.grey[200]
-                        : (_podeAposentarAgora ? Colors.green[100] : Colors.teal[100]), // Cor de fundo baseada no resultado
+                        : (_podeAposentarAgora ? Colors.green[100] : baseTealColor[100]), // Usar baseTealColor
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: _resultadoMensagem.isEmpty
@@ -272,7 +282,7 @@ class _SimulacaoScreenState extends State<SimulacaoScreen> {
                           : (_podeAposentarAgora
                               ? Colors.green.shade600
                               : (_anosFaltantes != null && _anosFaltantes! > 0
-                                  ? primaryColor.shade400 // Teal para anos restantes
+                                  ? baseTealColor.shade400 // Usar baseTealColor.shade400
                                   : Colors.red.shade400)), // Vermelho para erro/validação
                       width: 1.5,
                     ),
@@ -299,7 +309,7 @@ class _SimulacaoScreenState extends State<SimulacaoScreen> {
                               : (_podeAposentarAgora
                                   ? Colors.green[800]
                                   : (_anosFaltantes != null && _anosFaltantes! > 0
-                                      ? primaryColor.shade800 // Teal para anos restantes
+                                      ? baseTealColor.shade800 // Usar baseTealColor.shade800
                                       : Colors.red[800])), // Vermelho para erro/validação
                         ),
                         textAlign: TextAlign.center,
@@ -311,7 +321,7 @@ class _SimulacaoScreenState extends State<SimulacaoScreen> {
                             'Você precisará de mais $_anosFaltantes ano(s) de contribuição.',
                             style: TextStyle(
                               fontSize: 16,
-                              color: primaryColor.shade600,
+                              color: baseTealColor.shade600, // Usar baseTealColor.shade600
                               fontStyle: FontStyle.italic,
                             ),
                             textAlign: TextAlign.center,
@@ -341,7 +351,7 @@ class _SimulacaoScreenState extends State<SimulacaoScreen> {
     );
   }
 
-  // --- Funções auxiliares para construção de widgets (com a cor TEAL) ---
+  // --- Funções auxiliares para construção de widgets ---
 
   Widget _buildTextField({
     required TextEditingController controller,
