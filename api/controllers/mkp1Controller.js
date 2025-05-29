@@ -10,4 +10,22 @@ exports.lucroObtido = (req, res) => {
     if (!custo || !precoVenda) return res.status(400).json({ error: 'Campos obrigatórios: custo e precoVenda' });
     const lucro = (precoVenda - custo) / custo;
     res.json({ lucro: (lucro * 100).toFixed(2) + '%' });
-};
+  
+exports.calculoDetalhado = (req, res) => {
+  const { custo, lucro, despesas, impostos } = req.body;
+  if ([custo, lucro, despesas, impostos].some(v => v === undefined))
+    return res.status(400).json({ error: 'Campos obrigatórios: custo, lucro, despesas, impostos' });
+
+  const precoVenda = custo * (1 + despesas + impostos + lucro);
+  res.json({ precoVenda: precoVenda.toFixed(2) });
+  
+exports.sugestaoPreco = (req, res) => {
+  const { custo, concorrentes } = req.body;
+  if (!custo || !Array.isArray(concorrentes) || concorrentes.length === 0)
+    return res.status(400).json({ error: 'Campos obrigatórios: custo e lista de concorrentes' });
+
+  const mediaConcorrentes = concorrentes.reduce((a, b) => a + b, 0) / concorrentes.length;
+  const precoSugerido = (custo + mediaConcorrentes) / 2;
+
+  res.json({ precoSugerido: precoSugerido.toFixed(2) });
+ };
