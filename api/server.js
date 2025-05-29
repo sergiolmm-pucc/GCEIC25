@@ -13,6 +13,7 @@ const markup2Routes = require('./routes/markup2Routes')
 const markupRoutes = require('./routes/markupRoutes');
 const loginRoutes = require('./routes/loginRoutes');
 const aposRoutes = require('./routes/aposRoutes')
+const mkp1Routes = require('./routes/mkp1Routes')
 const piscinaRoutes = require('./routes/piscina3Routes');
 const icmsRoutes = require('./routes/icmsRoutes5');
 const irpjRoutes = require('./routes/irpjRoutes5');
@@ -30,6 +31,7 @@ app.use('/MKP2', markup2Routes);
 app.use('/markup', markupRoutes);// grupo 11 - markup
 app.use('/login', loginRoutes);
 app.use('/APOS', aposRoutes); // Grupo 09 - Cálculo de Aposentadoria
+app.use('/mkp1', mkp1Routes); // Grupo MKP1 - Cálculo de Markup
 app.use('/MOB3', piscinaRoutes); // Grupo 03
 app.use('/impostos', ipiRoutes); // Grupo 05
 app.use('/impostos', icmsRoutes); 
