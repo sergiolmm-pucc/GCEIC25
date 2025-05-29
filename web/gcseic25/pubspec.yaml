@@ -64,6 +64,7 @@ flutter:
     - assets/APOS/logo_white.png
     - assets/APOS/background.png
     - lib/equipes/CI_CD_8/assets/images/
+    - assets/equipe5/sobre.jpeg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
