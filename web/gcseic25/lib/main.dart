@@ -9,6 +9,7 @@ import 'package:gcseic25/page/markup.dart';
 import 'package:gcseic25/page/login.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gcseic25/equipes/APOS/screens/splash_screen.dart';
+import 'package:gcseic25/equipes/base/equipe3/login_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
         '/markup': (context) => MultiplierMarkupPage(),
         '/login': (context) => LoginPage(),
         '/aposSplashScreen': (context) => APOSSplashScreen(),
+        '/mob3': (context) => SplashScreen(nextPage: LoginScreen()), 
       },
     );
   }
@@ -109,6 +111,12 @@ class HomePage extends StatelessWidget {
                   child: const Text('Entrar'),
                 ),
               ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/mob3');
+              },
+              child: Text('MOB3'),
             ),
           ],
         ),

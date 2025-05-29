@@ -1,4 +1,4 @@
-const request = require('supertest');
+const request = require('../controllers/piscina3Controller');
 const app = require('../app');
 
 // Teste da função calcularTodosCustos
