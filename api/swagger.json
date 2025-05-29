@@ -1,31 +1,30 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-      "title": "API Exemplo com Swagger",
-      "version": "1.0.0",
-      "description": "API para retornar data/hora e concatenar valores"
-    },
-    "servers": [
-      {
-        "url": "http://localhost:3000"
-      }
-    ],
-    "paths": {
-      "/datetime": {
-        "get": {
-          "summary": "Retorna data e hora do servidor",
-          "responses": {
-            "200": {
-              "description": "Data e hora atual",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "datetime": {
-                        "type": "string",
-                        "format": "date-time"
-                      }
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Exemplo com Swagger",
+    "version": "1.0.0",
+    "description": "API para retornar data/hora e concatenar valores"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/datetime": {
+      "get": {
+        "summary": "Retorna data e hora do servidor",
+        "responses": {
+          "200": {
+            "description": "Data e hora atual",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "datetime": {
+                      "type": "string",
+                      "format": "date-time"
                     }
                   }
                 }
@@ -33,253 +32,324 @@
             }
           }
         }
-      },
-      "/concat": {
-        "post": {
-          "summary": "Concatena valor com frase fixa",
-          "requestBody": {
-            "required": true,
+      }
+    },
+    "/concat": {
+      "post": {
+        "summary": "Concatena valor com frase fixa",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  }
+                },
+                "required": ["value"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado da concatenação",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "value": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "result": {
                       "type": "string"
                     }
-                  },
-                  "required": ["value"]
+                  }
                 }
               }
             }
           },
-          "responses": {
-            "200": {
-              "description": "Resultado da concatenação",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "success": {
-                        "type": "boolean"
-                      },
-                      "result": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Erro - valor não fornecido"
-            }
+          "400": {
+            "description": "Erro - valor não fornecido"
           }
         }
-      },
-      "/ETEC/calcularCustoMensal": {
-        "post": {
-          "tags":["ETEC"],
-          "summary": "Calcula o salário mensal",
-          "description": "Calcula o salário mensal bruto com base no salário líquido informado",
-          "requestBody": {
-            "required": true,
+      }
+    },
+    "/ETEC/calcularCustoMensal": {
+      "post": {
+        "tags": ["ETEC"],
+        "summary": "Calcula o salário mensal",
+        "description": "Calcula o salário mensal bruto com base no salário líquido informado",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "salario": {
+                    "type": "number"
+                  }
+                },
+                "required": ["value"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado do cálculo do salário mensal",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "salario": {
-                      "type": "number"
-                    }
-                  },
-                  "required": ["value"]
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Resultado do cálculo do salário mensal",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "success": {
-                        "type": "boolean"
-                      },
-                      "data": {
-                        "type": "object",
-                        "properties": {
-                          "salarioMensal": {
-                            "type": "number"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Erro - valor não fornecido"
-            }
-          }
-        }
-      },
-      "/ETEC/calcularFerias": {
-        "post": {
-          "tags":["ETEC"],
-          "summary": "Calcula férias mensal",
-          "description": "Calcula férias mensal com base no salário informado",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "salario": {
-                      "type": "number"
-                    }
-                  },
-                  "required": ["value"]
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Resultado do cálculo das férias",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "success": {
-                        "type": "boolean"
-                      },
-                      "data": {
-                        "type": "object",
-                        "properties": {
-                          "feriasMensal": {
-                            "type": "number"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Erro - valor não fornecido"
-            }
-          }
-        }
-      },
-      "/ETEC/calcularDecimoTerceiro": {
-        "post": {
-          "tags":["ETEC"],
-          "summary": "Calcula décimo terceiro",
-          "description": "Calcula o décimo terceiro com base no salário e na quantidade de meses trabalhados",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "salario": {
-                      "type": "number"
+                    "success": {
+                      "type": "boolean"
                     },
-                    "mesesTrabalhados": {
-                      "type": "number"
-                    }
-                  },
-                  "required": ["value"]
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Resultado do cálculo do décimo terceiro",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "success": {
-                        "type": "boolean"
-                      },
-                      "data": {
-                        "type": "object",
-                        "properties": {
-                          "bruto": {
-                            "type": "number"
-                          },
-                          "inss": {
-                            "type": "number"
-                          },
-                          "liquido": {
-                            "type": "number"
-                          }
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "salarioMensal": {
+                          "type": "number"
                         }
                       }
                     }
                   }
                 }
               }
-            },
-            "400": {
-              "description": "Erro - valor não fornecido"
             }
+          },
+          "400": {
+            "description": "Erro - valor não fornecido"
           }
         }
-      },
-      "/ETEC/calcularESocial": {
-        "post": {
-          "tags":["ETEC"],
-          "summary": "Calcula o eSocial",
-          "description": "Calcula o total do recolhimento do com base no salário informado e numero de dependentes",
-          "requestBody": {
-            "required": true,
+      }
+    },
+    "/ETEC/calcularFerias": {
+      "post": {
+        "tags": ["ETEC"],
+        "summary": "Calcula férias mensal",
+        "description": "Calcula férias mensal com base no salário informado",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "salario": {
+                    "type": "number"
+                  }
+                },
+                "required": ["value"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado do cálculo das férias",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "salario": {
-                      "type": "number"
+                    "success": {
+                      "type": "boolean"
                     },
-                    "dependentes": {
-                      "type": "number"
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "feriasMensal": {
+                          "type": "number"
+                        }
+                      }
                     }
-                  },
-                  "required": ["value"]
+                  }
                 }
               }
             }
           },
-          "responses": {
-            "200": {
-              "description": "Resultado do cálculo do recolhimento do eSocial",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "success": {
-                        "type": "boolean"
-                      },
-                      "data": {
-                        "type": "object",
-                        "properties": {
-                          "eSocial": {
-                            "type": "number"
+          "400": {
+            "description": "Erro - valor não fornecido"
+          }
+        }
+      }
+    },
+    "/ETEC/calcularDecimoTerceiro": {
+      "post": {
+        "tags": ["ETEC"],
+        "summary": "Calcula décimo terceiro",
+        "description": "Calcula o décimo terceiro com base no salário e na quantidade de meses trabalhados",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "salario": {
+                    "type": "number"
+                  },
+                  "mesesTrabalhados": {
+                    "type": "number"
+                  }
+                },
+                "required": ["value"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado do cálculo do décimo terceiro",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "bruto": {
+                          "type": "number"
+                        },
+                        "inss": {
+                          "type": "number"
+                        },
+                        "liquido": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro - valor não fornecido"
+          }
+        }
+      }
+    },
+    "/ETEC/calcularESocial": {
+      "post": {
+        "tags": ["ETEC"],
+        "summary": "Calcula o eSocial",
+        "description": "Calcula o total do recolhimento do com base no salário informado e numero de dependentes",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "salario": {
+                    "type": "number"
+                  },
+                  "dependentes": {
+                    "type": "number"
+                  }
+                },
+                "required": ["value"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado do cálculo do recolhimento do eSocial",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "eSocial": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro - valor inválido"
+          }
+        }
+      }
+    },
+    "/ETEC/calcularRescisao": {
+      "post": {
+        "tags": ["ETEC"],
+        "summary": "Calcula a rescisão",
+        "description": "Calcula o total da rescisão com base no salário informado e número de meses trabalhados",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "salario": {
+                    "type": "number"
+                  },
+                  "mesesTrabalhados": {
+                    "type": "number"
+                  },
+                  "saldoDias": {
+                    "type": "number"
+                  },
+                  "motivo": {
+                    "type": ["semJustaCausa", "JustaCausa", "PedidoDemissao"]
+                  },
+                  "feriasVencidas": {
+                    "type": "boolean"
+                  }
+                },
+                "required": ["value"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado do cálculo da rescisão",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "eSocial": {
+                          "recisao": {
+                            "recisao": "number",
+                            "avisoPrevio": "number",
+                            "saldoSalario": "number",
+                            "ferias": "number",
+                            "decimoTerceiro": "number",
+                            "fgts": "number",
+                            "multaFgts": "number"
                           }
                         }
                       }
@@ -287,13 +357,13 @@
                   }
                 }
               }
-            },
-            "400": {
-              "description": "Erro - valor inválido"
             }
+          },
+          "400": {
+            "description": "Erro - valor inválido"
           }
         }
       }
     }
   }
-  
+}
