@@ -18,17 +18,7 @@ on:
           - dev
           - prod
           - stage
-jobs:
-  info:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Gera siada do Github context
-        run: echo "${{ toJSON(github) }}"
-      - name : Mostra mensagem
-        run: echo "Alo turma"
-      - name :  Lista diretorio
-        run: ls -la          
-
+jobs:       
   getCode:
     runs-on: ubuntu-latest
     steps:
