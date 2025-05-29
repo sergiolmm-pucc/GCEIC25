@@ -5,7 +5,7 @@ exports.listUsers = (req, res) => {
     datetime: now.toISOString(),
     usuario: "sergio", 
     turma: "101",
-    aula: "presencial"
+    aula: "presencial",
   });
   };
   

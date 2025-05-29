@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testsuites name="jest tests" tests="13" failures="0" errors="0" time="1.772">
   <testsuite name="Testa rota de cálculo de ISS" errors="0" failures="0" skipped="0" timestamp="2025-05-27T19:25:09" time="1.187" tests="3">
     <testcase classname="Testa rota de cálculo de ISS deve calcular corretamente o ISS" name="Testa rota de cálculo de ISS deve calcular corretamente o ISS" time="0.054">
@@ -32,6 +33,98 @@
     <testcase classname="Testa rota de cálculo de IPI deve calcular corretamente o IPI incluindo frete e despesas acessórias" name="Testa rota de cálculo de IPI deve calcular corretamente o IPI incluindo frete e despesas acessórias" time="0.005">
     </testcase>
     <testcase classname="Testa rota de cálculo de IPI deve retornar erro se faltar campos obrigatórios" name="Testa rota de cálculo de IPI deve retornar erro se faltar campos obrigatórios" time="0.004">
+=======
+<testsuites name="jest tests" tests="17" failures="0" errors="0" time="0.208">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2025-05-29T12:43:51" time="0.167" tests="17">
+    <testcase classname=" Teste de multiplicação de markup" name=" Teste de multiplicação de markup" time="0.001">
+    </testcase>
+    <testcase classname=" Teste de multiplicação de markup com valores negativos" name=" Teste de multiplicação de markup com valores negativos" time="0.001">
+    </testcase>
+    <testcase classname=" Teste de multiplicação de markup com valores zero" name=" Teste de multiplicação de markup com valores zero" time="0">
+    </testcase>
+    <testcase classname=" Teste de multiplicação de markup com valores decimais" name=" Teste de multiplicação de markup com valores decimais" time="0">
+    </testcase>
+    <testcase classname=" Teste de divisão de markup" name=" Teste de divisão de markup" time="0">
+    </testcase>
+    <testcase classname=" Teste de divisão de markup com valores negativos" name=" Teste de divisão de markup com valores negativos" time="0">
+    </testcase>
+    <testcase classname=" Teste de divisão de markup com valores zero" name=" Teste de divisão de markup com valores zero" time="0">
+    </testcase>
+    <testcase classname=" Teste de divisão de markup com valores decimais" name=" Teste de divisão de markup com valores decimais" time="0">
+    </testcase>
+    <testcase classname=" Teste de multiplicação de markup com valores não numéricos" name=" Teste de multiplicação de markup com valores não numéricos" time="0">
+    </testcase>
+    <testcase classname=" Teste de multiplicação de markup com valores numeros e não numéricos" name=" Teste de multiplicação de markup com valores numeros e não numéricos" time="0">
+    </testcase>
+    <testcase classname=" Teste da função sobre não retornar as strings" name=" Teste da função sobre não retornar as strings" time="0">
+    </testcase>
+    <testcase classname=" Teste de autenticação" name=" Teste de autenticação" time="0">
+    </testcase>
+    <testcase classname=" Teste de autenticação" name=" Teste de autenticação" time="0">
+    </testcase>
+    <testcase classname=" Teste de autenticação" name=" Teste de autenticação" time="0">
+    </testcase>
+    <testcase classname=" Teste de autenticação" name=" Teste de autenticação" time="0">
+    </testcase>
+    <testcase classname=" Teste de autenticação" name=" Teste de autenticação" time="0">
+    </testcase>
+    <testcase classname=" Teste de autenticação" name=" Teste de autenticação" time="0">
+    <testcase classname="Função calcularAposentadoria Mulher que já pode se aposentar" name="Função calcularAposentadoria Mulher que já pode se aposentar" time="0.007">
+    </testcase>
+    <testcase classname="Função calcularAposentadoria Homem que já pode se aposentar" name="Função calcularAposentadoria Homem que já pode se aposentar" time="0.001">
+    </testcase>
+    <testcase classname="Função calcularAposentadoria Mulher que não pode se aposentar por idade" name="Função calcularAposentadoria Mulher que não pode se aposentar por idade" time="0.002">
+    </testcase>
+    <testcase classname="Função calcularAposentadoria Homem que não pode se aposentar por contribuição" name="Função calcularAposentadoria Homem que não pode se aposentar por contribuição" time="0.001">
+    </testcase>
+    <testcase classname="Função calcularAposentadoria Mulher que não pode se aposentar por idade e contribuição" name="Função calcularAposentadoria Mulher que não pode se aposentar por idade e contribuição" time="0.002">
+    </testcase>
+    <testcase classname="Função calcularAposentadoria Idade negativa" name="Função calcularAposentadoria Idade negativa" time="0.001">
+    </testcase>
+    <testcase classname="Função calcularAposentadoria Contribuição negativa" name="Função calcularAposentadoria Contribuição negativa" time="0.001">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Mulher que já pode se aposentar por pontuação" name="Função calcularPontuacao Mulher que já pode se aposentar por pontuação" time="0.002">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Homem que já pode se aposentar por pontuação" name="Função calcularPontuacao Homem que já pode se aposentar por pontuação" time="0.002">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Mulher que faltam anos para atingir a pontuação" name="Função calcularPontuacao Mulher que faltam anos para atingir a pontuação" time="0.002">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Homem que faltam anos para atingir a pontuação" name="Função calcularPontuacao Homem que faltam anos para atingir a pontuação" time="0.002">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Homem com idade baixa mas alta contribuição, faltando poucos anos" name="Função calcularPontuacao Homem com idade baixa mas alta contribuição, faltando poucos anos" time="0.003">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Idade negativa deve retornar erro" name="Função calcularPontuacao Idade negativa deve retornar erro" time="0.001">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Contribuição negativa deve retornar erro" name="Função calcularPontuacao Contribuição negativa deve retornar erro" time="0.001">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Sexo inválido deve retornar erro" name="Função calcularPontuacao Sexo inválido deve retornar erro" time="0.002">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Dados incompletos (idade faltando) deve retornar erro" name="Função calcularPontuacao Dados incompletos (idade faltando) deve retornar erro" time="0.001">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Dados incompletos (contribuicao faltando) deve retornar erro" name="Função calcularPontuacao Dados incompletos (contribuicao faltando) deve retornar erro" time="0.001">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Mulher com pontuação exata no limite (100)" name="Função calcularPontuacao Mulher com pontuação exata no limite (100)" time="0.002">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Homem com pontuação exata no limite (105)" name="Função calcularPontuacao Homem com pontuação exata no limite (105)" time="0.002">
+    </testcase>
+    <testcase classname="Rotas de Histórico Deve registrar uma operação no histórico" name="Rotas de Histórico Deve registrar uma operação no histórico" time="0.011">
+    </testcase>
+    <testcase classname="Rotas de Histórico Deve filtrar histórico por tipo" name="Rotas de Histórico Deve filtrar histórico por tipo" time="0.002">
+    </testcase>
+    <testcase classname="Rotas de Histórico Deve limitar o histórico a 100 operações" name="Rotas de Histórico Deve limitar o histórico a 100 operações" time="0.014">
+    </testcase>
+    <testcase classname="Rotas de Histórico Deve ordenar histórico do mais recente para o mais antigo" name="Rotas de Histórico Deve ordenar histórico do mais recente para o mais antigo" time="0.104">
+    </testcase>
+    <testcase classname="Rotas de Histórico Deve registrar diferentes tipos de operações" name="Rotas de Histórico Deve registrar diferentes tipos de operações" time="0.021">
+    </testcase>
+    <testcase classname="Função calcularTempoAposentadoria Pessoa que já pode se aposentar" name="Função calcularTempoAposentadoria Pessoa que já pode se aposentar" time="0.003">
+    </testcase>
+    <testcase classname="Função calcularTempoAposentadoria Pessoa que falta tempo para idade mínima" name="Função calcularTempoAposentadoria Pessoa que falta tempo para idade mínima" time="0.01">
+    </testcase>
+    <testcase classname="Função calcularTempoAposentadoria Pessoa que falta tempo de contribuição" name="Função calcularTempoAposentadoria Pessoa que falta tempo de contribuição" time="0.005">
+    </testcase>
+    <testcase classname="Função calcularTempoAposentadoria Dados incompletos" name="Função calcularTempoAposentadoria Dados incompletos" time="0.004">
+>>>>>>> upstream/main
     </testcase>
   </testsuite>
 </testsuites>

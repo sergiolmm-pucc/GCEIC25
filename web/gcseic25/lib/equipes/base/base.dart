@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 
-
-
 class SplashScreen1 extends StatefulWidget {
   final Widget nextPage;
 
@@ -48,35 +46,52 @@ class ConsultaPage1 extends StatefulWidget {
 }
 
 class _ConsultaPageState1 extends State<ConsultaPage1> {
+
+  final TextEditingController _controller = TextEditingController();
+
   String _responseText = 'Resultado aparecerá aqui.';
 
   Future<void> _fetchData() async {
     //
-   final response = await http.get(Uri.parse('https://animated-occipital-buckthorn.glitch.me/users'));
-  if (response.statusCode == 200) {
-    setState(() {
-      _responseText = response.body;
-    });
-  } else {
-    setState(() {
-      _responseText = 'Erro ao consultar API.';
-    });
+    final response = await http.get(
+      Uri.parse('https://animated-occipital-buckthorn.glitch.me/users'),
+    );
+    if (response.statusCode == 200) {
+      setState(() {
+        _responseText = response.body;
+      });
+    } else {
+      setState(() {
+        _responseText = 'Erro ao consultar API.';
+      });
+    }
   }
+
+  String _outputText = '';
+
+  void _handleButtonClick() {
+    setState(() {
+      _outputText = '${_controller.text} OK - certo';
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: AppBar(title: Text(widget.title)),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            ElevatedButton(
-              onPressed: _fetchData,
-              child: Text('Consultar API turma 101'),
+            Semantics(
+                identifier: 'btn1',
+                label: 'Consultar API',
+                button: true,
+                child:
+                    ElevatedButton(
+                     onPressed: _fetchData,
+                      child: Text('Consultar API'),
+                ),
             ),
             SizedBox(height: 20),
             Container(
@@ -86,11 +101,41 @@ class _ConsultaPageState1 extends State<ConsultaPage1> {
                 border: Border.all(color: Colors.blueAccent),
                 borderRadius: BorderRadius.circular(8.0),
               ),
-              child: Text(
-                _responseText,
-                style: TextStyle(fontSize: 16),
-              ),
+              child: Text(_responseText, style: TextStyle(fontSize: 16)),
             ),
+        // teste funcional    um edit text e um botal e um label      
+             Semantics(
+                identifier: 'Enter a search term',
+                textField: true,
+                child:  
+                  TextField(
+                    controller: _controller,
+                    decoration: const InputDecoration(
+                      labelText: 'Digite',
+                      hintText: 'Enter a search term',),
+                  ),
+            ),
+            const SizedBox(height: 20),
+            
+            Semantics(
+                identifier: 'Concatenar',
+                label: 'Concatenar',
+                button: true,
+                child:
+                  ElevatedButton(
+                    onPressed: _handleButtonClick,
+                    child: const Text('Concatenar'),
+                    ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              _outputText,
+              style: const TextStyle(fontSize: 18),
+            ),   
+            
+
+
+
           ],
         ),
       ),

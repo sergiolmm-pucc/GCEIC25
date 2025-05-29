@@ -77,7 +77,421 @@
             }
           }
         }
+      },
+      "/MKP2/calcMultiplierMarkup": {
+        "post": {
+          "tags": ["Markup"],
+          "summary": "Calcula o multiplicador do markup",
+          "description": "Calcula o multiplicador do markup com base nas despesas variáveis, fixas e margem de lucro",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "despesasVariaveis": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100,
+                      "description": "Percentual de despesas variáveis"
+                    },
+                    "despesasFixas": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100,
+                      "description": "Percentual de despesas fixas"
+                    },
+                    "margemLucro": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100,
+                      "description": "Percentual da margem de lucro"
+                    }
+                  },
+                  "required": ["despesasVariaveis", "despesasFixas", "margemLucro"]
+                },
+                "example": {
+                  "despesasVariaveis": 20,
+                  "despesasFixas": 30,
+                  "margemLucro": 10
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Multiplicador do markup calculado com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "string",
+                    "description": "Valor do multiplicador do markup",
+                    "example": "2.50"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Erro nos parâmetros fornecidos",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Todos os valores devem estar entre 0 e 100"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/MKP2/calcDivisorMarkup": {
+        "post": {
+          "tags": ["Markup"],
+          "summary": "Calcula o divisor do markup",
+          "description": "Calcula o divisor do markup com base no preço de venda e custo total de vendas",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "precoVenda": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Preço de venda do produto"
+                    },
+                    "custoTotalVendas": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Custo total de vendas do produto"
+                    }
+                  },
+                  "required": ["precoVenda", "custoTotalVendas"]
+                },
+                "example": {
+                  "precoVenda": 150.00,
+                  "custoTotalVendas": 100.00
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Divisor do markup calculado com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "string",
+                    "description": "Valor do divisor do markup",
+                    "example": "0.50"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Erro nos parâmetros fornecidos",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Os valores devem ser maiores que zero"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/auth": {
+        "post": {
+          "tags": ["Autenticação"],
+          "summary": "Autentica o usuário com email e senha",
+          "description": "Valida as credenciais fornecidas e retorna se o acesso está liberado ou negado.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "format": "email",
+                      "example": "admin@email.com"
+                    },
+                    "senha": {
+                      "type": "string",
+                      "example": "123456"
+                    }
+                  },
+                  "required": ["email", "senha"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Credenciais válidas",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "acesso": {
+                        "type": "string",
+                        "example": "liberado"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Credenciais inválidas",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "acesso": {
+                        "type": "string",
+                        "example": "negado"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+    },
+    "/MKP2/sobre": {
+      "get": {
+        "tags": ["Informações"],
+        "summary": "Retorna informações dos autores",
+        "description": "Retorna um objeto contendo os nomes e os RAs dos autores do projeto",
+        "responses": {
+          "200": {
+            "description": "Informações dos autores retornadas com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "CAIO ACOSTA GONÇALVES": {
+                      "type": "string",
+                      "example": "23008203"
+                    },
+                    "ENZO CINTO QUATROCHI": {
+                      "type": "string",
+                      "example": "23015904"
+                    },
+                    "JOÃO GABRIEL BIAZON FERREIRA": {
+                      "type": "string",
+                      "example": "23004430"
+                    },
+                    "VINICIUS MENDES DA CUNHA": {
+                      "type": "string",
+                      "example": "23015801"
+                    },
+                    "TIAGO PEREIRA DA SILVA": {
+                      "type": "string",
+                      "example": "23012171"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MOB3/calcular": {
+      "post": {
+        "summary": "Calcular custos de construção e manutenção da piscina",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "largura": { "type": "number" },
+                  "comprimento": { "type": "number" },
+                  "profundidade": { "type": "number" },
+                  "precoAgua": { "type": "number" },
+                  "custoEletrico": { "type": "number" },
+                  "custoHidraulico": { "type": "number" },
+                  "custoManutencaoMensal": { "type": "number" }
+                },
+                "required": ["largura", "comprimento", "profundidade", "precoAgua", "custoEletrico", "custoHidraulico", "custoManutencaoMensal"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado dos cálculos",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MOB3/login": {
+      "post": {
+        "summary": "Realiza login do usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string", "example": "usuario@email.com" },
+                  "senha": { "type": "string", "example": "123456" }
+                },
+                "required": ["email", "senha"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login realizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sucesso": { "type": "boolean" },
+                    "mensagem": { "type": "string" },
+                    "usuario": {
+                      "type": "object",
+                      "properties": {
+                        "email": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Falha de autenticação",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "erro": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno no servidor"
+          }
+        }
+      }
+    },
+    "/MOB3/sobre": {
+      "post": {
+        "summary": "Retorna a splash screen com foto do time",
+        "responses": {
+          "200": {
+            "description": "Foto do time retornada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sucesso": { "type": "boolean" },
+                    "mensagem": { "type": "string" },
+                    "url": { "type": "string", "format": "uri" }
+                  },
+                  "example": {
+                    "sucesso": true,
+                    "mensagem": "Foto do time",
+                    "url": "https://sep-bucket-prod.s3.amazonaws.com/wp-content/uploads/2022/11/51981800313_fb744fd72d_o.jpg"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MOB3/ajuda": {
+      "get": {
+        "summary": "Retorna informações da tela de ajuda",
+        "responses": {
+          "200": {
+            "description": "Texto de ajuda retornado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "titulo": {
+                      "type": "string",
+                      "example": "Ajuda"
+                    },
+                    "texto": {
+                      "type": "string",
+                      "example": "Preencha os dados da piscina e toque em 'Calcular' para ver o custo estimado.\n\nCaso tenha dúvidas, entre em contato com a equipe MOB3."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MOB3/splash": {
+      "post": {
+        "summary": "Retorna splash screen da aplicação",
+        "responses": {
+          "200": {
+            "description": "Splash screen carregada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sucesso": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "mensagem": {
+                      "type": "string",
+                      "example": "Splash screen carregada"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
-  
+}
