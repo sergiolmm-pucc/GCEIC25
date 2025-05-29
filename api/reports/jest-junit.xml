@@ -1,43 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<testsuites name="jest tests" tests="13" failures="0" errors="0" time="1.431">
-  <testsuite name="Testa rota de cálculo de ICMS" errors="0" failures="0" skipped="0" timestamp="2025-05-27T19:29:47" time="0.836" tests="2">
-    <testcase classname="Testa rota de cálculo de ICMS deve calcular corretamente o ICMS" name="Testa rota de cálculo de ICMS deve calcular corretamente o ICMS" time="0.042">
-    </testcase>
-    <testcase classname="Testa rota de cálculo de ICMS deve retornar erro se faltar campos" name="Testa rota de cálculo de ICMS deve retornar erro se faltar campos" time="0.005">
-    </testcase>
-  </testsuite>
-  <testsuite name="Testa rota de cálculo de ISS" errors="0" failures="0" skipped="0" timestamp="2025-05-27T19:29:47" time="0.862" tests="3">
-    <testcase classname="Testa rota de cálculo de ISS deve calcular corretamente o ISS" name="Testa rota de cálculo de ISS deve calcular corretamente o ISS" time="0.042">
-    </testcase>
-    <testcase classname="Testa rota de cálculo de ISS deve retornar erro se faltar campos" name="Testa rota de cálculo de ISS deve retornar erro se faltar campos" time="0.007">
-    </testcase>
-    <testcase classname="Testa rota de cálculo de ISS deve retornar erro se os valores não forem numéricos" name="Testa rota de cálculo de ISS deve retornar erro se os valores não forem numéricos" time="0.004">
-    </testcase>
-  </testsuite>
-  <testsuite name="Testa rota de cálculo de IPI" errors="0" failures="0" skipped="0" timestamp="2025-05-27T19:29:47" time="1.139" tests="3">
-    <testcase classname="Testa rota de cálculo de IPI deve calcular corretamente o IPI com valorProduto e aliquotaIPI" name="Testa rota de cálculo de IPI deve calcular corretamente o IPI com valorProduto e aliquotaIPI" time="0.038">
-    </testcase>
-    <testcase classname="Testa rota de cálculo de IPI deve calcular corretamente o IPI incluindo frete e despesas acessórias" name="Testa rota de cálculo de IPI deve calcular corretamente o IPI incluindo frete e despesas acessórias" time="0.005">
-    </testcase>
-    <testcase classname="Testa rota de cálculo de IPI deve retornar erro se faltar campos obrigatórios" name="Testa rota de cálculo de IPI deve retornar erro se faltar campos obrigatórios" time="0.004">
-    </testcase>
-  </testsuite>
-  <testsuite name="Testa rota de cálculo de IRPJ" errors="0" failures="0" skipped="0" timestamp="2025-05-27T19:29:47" time="1.163" tests="5">
-    <testcase classname="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Real (abaixo do limite)" name="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Real (abaixo do limite)" time="0.037">
-    </testcase>
-    <testcase classname="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Real (acima do limite)" name="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Real (acima do limite)" time="0.005">
-    </testcase>
-    <testcase classname="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Presumido" name="Testa rota de cálculo de IRPJ deve calcular corretamente o IRPJ no regime de Lucro Presumido" time="0.005">
-    </testcase>
-    <testcase classname="Testa rota de cálculo de IRPJ deve retornar erro se faltar campo obrigatório" name="Testa rota de cálculo de IRPJ deve retornar erro se faltar campo obrigatório" time="0.006">
-    </testcase>
-    <testcase classname="Testa rota de cálculo de IRPJ deve retornar erro se valor não for numérico" name="Testa rota de cálculo de IRPJ deve retornar erro se valor não for numérico" time="0.005">
-=======
 <testsuites name="jest tests" tests="1" failures="0" errors="0" time="0.436">
   <testsuite name="Teste de cálculo de piscina" errors="0" failures="0" skipped="0" timestamp="2025-05-20T23:36:24" time="0.345" tests="1">
     <testcase classname="Teste de cálculo de piscina Calcula corretamente os valores" name="Teste de cálculo de piscina Calcula corretamente os valores" time="0.003">
->>>>>>> upstream/main
     </testcase>
   </testsuite>
 </testsuites>
