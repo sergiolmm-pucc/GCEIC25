@@ -1,0 +1,49 @@
+name: Funcional test
+
+on:
+  push:
+    branches: [stable, prod]
+
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Environment
+        type: choice
+        required: true
+        default: dev
+        options:
+          - dev
+          - prod
+          - stage
+jobs:
+  test:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api # Define o diretório base para todos os comandos
+    strategy:
+      matrix:
+        node-version: [22.x]
+    steps:
+      - name: Get Code from repository
+        uses: actions/checkout@v3
+      - name: lista diretorio
+        run: ls -la
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Instala Dependencias
+        run: npm ci
+      - name: instala bridge
+        run: npm i @rentready/flutter-selenium-bridge
+      - name: Roda os testes
+        run: npm run funcional2
+      - name: fotos da tela
+        uses: actions/upload-artifact@v4
+        with:
+          name: Fotos dos testes
+          # Path to the release files
+          # Gravar as fotos na raiz do projeto no docker
+          path: /home/runner/work//GCEIC25/GCEIC25/api/fotos/**/*.png
