@@ -57,7 +57,7 @@ describe("Testes para o cálculo do ETEC", () => {
     };
 
     const resultado = etecService.calcularRecisao(dados);
-    expect(resultado).toBe({
+    expect(resultado).toStrictEqual({
       recisao: 9167.56,
       avisoPrevio: 2000,
       saldoSalario: 1200,
