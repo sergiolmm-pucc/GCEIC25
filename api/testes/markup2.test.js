@@ -36,27 +36,27 @@ test('Teste de divisão de markup com valores decimais', () => {
 // NOVOS TESTES USANDO TDD - Tiago
 // Teste para a rota POST /MKP2/calcMultiplierMarkup
 // API tem que estar rodando para testar
-test("POST to /MKP2/calcMultiplierMarkup should return 201", async () => {
-    const response = await fetch('http://localhost:3000/MKP2/calcMultiplierMarkup', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            despesasVariaveis: 10,
-            despesasFixas: 20,
-            margemLucro: 30
-        })
-    });
+// test("POST to /MKP2/calcMultiplierMarkup should return 201", async () => {
+//     const response = await fetch('http://localhost:3000/MKP2/calcMultiplierMarkup', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             despesasVariaveis: 10,
+//             despesasFixas: 20,
+//             margemLucro: 30
+//         })
+//     });
 
-    /* Aqui podemos testar se o calculo do markup está correto
-    const responsebody = await response.text();
-    console.log(responsebody);
-    expect(responsebody).toBe("2.5");
-    */
+//     /* Aqui podemos testar se o calculo do markup está correto
+//     const responsebody = await response.text();
+//     console.log(responsebody);
+//     expect(responsebody).toBe("2.5");
+//     */
 
-    expect(response.status).toBe(200);
-});
+//     expect(response.status).toBe(200);
+// });
 
 test('Teste de multiplicação de markup com valores não numéricos', () => {
     expect(markup2.calcularMarkup('a', 'b', 'c')).toBe("Erro");
