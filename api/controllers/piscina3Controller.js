@@ -44,6 +44,6 @@ exports.ajuda = (req, res) => {
     titulo: 'Ajuda',
     texto:
       'Preencha os dados da piscina e toque em "Calcular" para ver o custo estimado.\n\n' +
-      'Caso tenha dúvidas, entre em contato com a equipe MOB3.',
+      'Caso tenha dúvidas, entre em contato com a equipe MOB3..',
   });
 };
