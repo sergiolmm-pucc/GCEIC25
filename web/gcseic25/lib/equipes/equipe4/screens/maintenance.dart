@@ -11,7 +11,7 @@ class MaintenancePage extends StatefulWidget {
 }
 
 class _MaintenancePageState extends State<MaintenancePage> {
-  final TextEditingController volumeController = TextEditingController();
+
   final TextEditingController produtosController = TextEditingController();
   final TextEditingController energiaController = TextEditingController();
   final TextEditingController maoDeObraController = TextEditingController();
@@ -20,7 +20,7 @@ class _MaintenancePageState extends State<MaintenancePage> {
   bool isLoading = false;
 
   bool get _todosCamposPreenchidos {
-    return volumeController.text.isNotEmpty &&
+    return 
         produtosController.text.isNotEmpty &&
         energiaController.text.isNotEmpty &&
         maoDeObraController.text.isNotEmpty;
@@ -30,7 +30,7 @@ class _MaintenancePageState extends State<MaintenancePage> {
   void initState() {
     super.initState();
 
-    volumeController.addListener(_onInputChanged);
+   
     produtosController.addListener(_onInputChanged);
     energiaController.addListener(_onInputChanged);
     maoDeObraController.addListener(_onInputChanged);
@@ -44,12 +44,12 @@ class _MaintenancePageState extends State<MaintenancePage> {
 
   @override
   void dispose() {
-    volumeController.removeListener(_onInputChanged);
+   
     produtosController.removeListener(_onInputChanged);
     energiaController.removeListener(_onInputChanged);
     maoDeObraController.removeListener(_onInputChanged);
 
-    volumeController.dispose();
+   
     produtosController.dispose();
     energiaController.dispose();
     maoDeObraController.dispose();
@@ -58,7 +58,7 @@ class _MaintenancePageState extends State<MaintenancePage> {
   }
 
   Future<void> calcularCusto() async {
-    final volume = volumeController.text;
+  
     final produtos = produtosController.text;
     final energia = energiaController.text;
     final maoDeObra = maoDeObraController.text;
@@ -75,7 +75,6 @@ class _MaintenancePageState extends State<MaintenancePage> {
         url,
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
-          'volume': volume,
           'produtos_quimicos': produtos,
           'energia_bomba': energia,
           'mao_obra': maoDeObra,
@@ -141,11 +140,6 @@ class _MaintenancePageState extends State<MaintenancePage> {
                         const SizedBox(height: 34),
                         Row(
                           children: [
-                            Expanded(
-                                child: _inputLabelField(
-                                    label: 'Volume (m³)',
-                                    controller: volumeController)),
-                            const SizedBox(width: 12),
                             Expanded(
                                 child: _inputLabelField(
                                     label: 'Produtos químicos (R\$)',

@@ -129,10 +129,9 @@ export function calcularCustoDAgua(req, res) {
 }
 
 export function calcularManutencaoMensal(req, res) {
-  const { volume, produtos_quimicos, energia_bomba, mao_obra } = req.body;
+  const {produtos_quimicos, energia_bomba, mao_obra } = req.body;
 
   if (
-    volume == null ||
     produtos_quimicos == null ||
     energia_bomba == null ||
     mao_obra == null
@@ -143,30 +142,29 @@ export function calcularManutencaoMensal(req, res) {
   }
 
   function tratarNumero(valor) {
-    if (typeof valor !== 'string') valor = valor.toString();
+  if (typeof valor !== 'string') valor = valor.toString();
 
-    // Caso especial: número com vírgula como decimal e ponto como milhar
-    if (valor.includes(',') && valor.includes('.')) {
-      valor = valor.replace(/\./g, '').replace(',', '.');
-    }
-    // Caso comum no Brasil: número apenas com vírgula (decimal)
-    else if (valor.includes(',')) {
-      valor = valor.replace(',', '.');
-    }
-    // Caso com apenas ponto (milhar) — vamos remover o ponto nesse caso também
-    else if (/^\d{1,3}(\.\d{3})+$/.test(valor)) {
-      valor = valor.replace(/\./g, '');
-    }
-
-    return parseFloat(valor);
+  // Caso especial: número com vírgula como decimal e ponto como milhar
+  if (valor.includes(',') && valor.includes('.')) {
+    valor = valor.replace(/\./g, '').replace(',', '.');
+  }
+  // Caso comum no Brasil: número apenas com vírgula (decimal)
+  else if (valor.includes(',')) {
+    valor = valor.replace(',', '.');
+  }
+  // Caso com apenas ponto (milhar) — vamos remover o ponto nesse caso também
+  else if (/^\d{1,3}(\.\d{3})+$/.test(valor)) {
+    valor = valor.replace(/\./g, '');
   }
 
-  const volumeFloat = tratarNumero(volume);
+  return parseFloat(valor);
+}
+
   const produtosQuimicosFloat = tratarNumero(produtos_quimicos);
   const energiaBombaFloat = tratarNumero(energia_bomba);
   const maoObraFloat = tratarNumero(mao_obra);
 
-const custoTotal = volumeFloat * (produtosQuimicosFloat + energiaBombaFloat + maoObraFloat);
+const custoTotal = (produtosQuimicosFloat + energiaBombaFloat + maoObraFloat);
 
 
   res.json({
