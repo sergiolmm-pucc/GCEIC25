@@ -84,7 +84,7 @@ exports.calcularIRPJ = ({ lucroTributavel, isLucroReal = true }) => {
     imposto: valorIRPJ.toFixed(2),
     regime: isLucroReal ? 'Lucro Real' : 'Lucro Presumido',
     observacao: isLucroReal
-      ? '15% + 10% sobre excedente de R$ 60k/trimestre'
+      ? '15% sobre o lucro tributável. Adicional de 10% sobre o valor que exceder R$ 60.000/trimestre (se aplicável)'
       : '15% sobre base presumida'
   };
 };

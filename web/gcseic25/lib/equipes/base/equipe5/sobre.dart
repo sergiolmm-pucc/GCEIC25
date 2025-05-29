@@ -18,7 +18,7 @@ class SobrePage extends StatelessWidget {
 
                 // Image placeholder centralizado
                 Image.asset(
-                  'assets/sobre.jpeg',
+                  'assets/equipe5/sobre.jpeg',
                   width: 200,
                   height: 200,
                   fit: BoxFit.cover,
