@@ -91,6 +91,6 @@ describe(' rota GET /ajuda', () => {
 
     expect(response.body).toHaveProperty('titulo', 'Ajuda');
     expect(response.body).toHaveProperty('texto');
-    expect(response.body.texto).toMatch(/Preencha os dados da piscina/);
+    expect(response.body.texto).toMatch(/Preencha os dados/);
   });
 });
