@@ -90,5 +90,15 @@
     </testcase>
     <testcase classname="Função calcularTempoAposentadoria Dados incompletos" name="Função calcularTempoAposentadoria Dados incompletos" time="0.004">
     </testcase>
+    <testcase classname="Testes para o cálculo do ETEC Calcular o custo mensal da empregada" name="Testes para o cálculo do ETEC Calcular o custo mensal da empregada" time="0.002">
+    </testcase>
+    <testcase classname="Testes para o cálculo do ETEC Calcular férias mensal" name="Testes para o cálculo do ETEC Calcular férias mensal" time="0">
+    </testcase>
+    <testcase classname="Testes para o cálculo do ETEC Calcular décimo terceiro proporcional" name="Testes para o cálculo do ETEC Calcular décimo terceiro proporcional" time="0">
+    </testcase>
+    <testcase classname="Testes para o cálculo do ETEC Calcular do eSocial" name="Testes para o cálculo do ETEC Calcular do eSocial" time="0">
+    </testcase>
+    <testcase classname="Testes para o cálculo do ETEC Calcular valor de rescisão" name="Testes para o cálculo do ETEC Calcular valor de rescisão" time="0">
+    </testcase>
   </testsuite>
 </testsuites>

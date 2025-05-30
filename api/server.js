@@ -16,14 +16,15 @@ const loginRoutes = require('./routes/loginRoutes');
 const aposRoutes = require('./routes/aposRoutes')
 const mkp1Routes = require('./routes/mkp1Routes')
 const piscinaRoutes = require('./routes/piscina3Routes');
+const etecRoutes = require('./routes/etecRoutes');
 
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/', baseRoutes);
 app.use('/users', userRoutes);
+app.use('/ETEC', etecRoutes);
 app.use('/CCP', pool4Routes); // Grupo 02 - Cálculo Construção Piscina
-
 app.use('/MKP2', markup2Routes);
 app.use('/markup', markupRoutes);// grupo 11 - markup
 app.use('/login', loginRoutes);
