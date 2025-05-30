@@ -102,4 +102,18 @@
     <testcase classname="Testes para o cálculo do ETEC Calcular valor de rescisão" name="Testes para o cálculo do ETEC Calcular valor de rescisão" time="0">
     </testcase>
   </testsuite>
+  <testsuite name="Teste de cálculo de piscina" errors="0" failures="0" skipped="0" timestamp="2025-05-30T14:02:16" time="1.809" tests="6">
+    <testcase classname="Teste de cálculo de piscina Calcula corretamente os valores" name="Teste de cálculo de piscina Calcula corretamente os valores" time="0.006">
+    </testcase>
+    <testcase classname="Teste da rota POST /login Login com credenciais válidas retorna 200" name="Teste da rota POST /login Login com credenciais válidas retorna 200" time="0.052">
+    </testcase>
+    <testcase classname="Teste da rota POST /login Login com credenciais inválidas retorna 401" name="Teste da rota POST /login Login com credenciais inválidas retorna 401" time="0.008">
+    </testcase>
+    <testcase classname="Teste da rota POST /sobre Retorna a URL da imagem corretamente" name="Teste da rota POST /sobre Retorna a URL da imagem corretamente" time="0.004">
+    </testcase>
+    <testcase classname="Teste da rota POST /MOB3/splash Retorna sucesso e mensagem da splash screen" name="Teste da rota POST /MOB3/splash Retorna sucesso e mensagem da splash screen" time="0.007">
+    </testcase>
+    <testcase classname="Teste da rota GET /ajuda Retorna o texto de ajuda corretamente" name="Teste da rota GET /ajuda Retorna o texto de ajuda corretamente" time="0.006">
+    </testcase>
+  </testsuite>
 </testsuites>
