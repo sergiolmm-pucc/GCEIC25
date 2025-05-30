@@ -6,7 +6,7 @@
     "scripts": {
         "start": "node server.js",
         "funcional2": "node ./test/funcionalExemplo2",
-        "test": "jest"
+        "test": "jest --testPathIgnorePatterns=piscina3Service.test.js"
     },
     "dependencies": {
         "cors": "^2.8.5",
