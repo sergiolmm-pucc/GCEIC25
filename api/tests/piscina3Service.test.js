@@ -4,8 +4,8 @@ const request = supertest;
 
 const piscinaService = require('../services/piscina3Service');
 
-//a
-describe('Teste de cálculo de piscina', () => {
+// Teste de cálculo
+describe('cálculo de piscina', () => {
   test('Calcula corretamente os valores', () => {
     const dados = {
       largura: 4,
@@ -26,8 +26,8 @@ describe('Teste de cálculo de piscina', () => {
   });
 });
 
-// Teste da rota POST /login
-describe('Teste da rota POST /login', () => {
+// Rota POST /login
+describe(' rota POST /login', () => {
   test('Login com credenciais válidas retorna 200', async () => {
     const dadosLogin = {
       email: 'usuario1@email.com',
@@ -58,7 +58,8 @@ describe('Teste da rota POST /login', () => {
   });
 });
 
-describe('Teste da rota POST /sobre', () => {
+// Rota POST /sobre
+describe(' rota POST /sobre', () => {
   test('Retorna a URL da imagem corretamente', async () => {
     const response = await request(app)
       .post('/MOB3/sobre')
@@ -69,7 +70,8 @@ describe('Teste da rota POST /sobre', () => {
   });
 });
 
-describe('Teste da rota POST /MOB3/splash', () => {
+// Rota POST /splash
+describe(' rota POST /MOB3/splash', () => {
   test('Retorna sucesso e mensagem da splash screen', async () => {
     const response = await request(app)
       .post('/MOB3/splash')
@@ -80,8 +82,8 @@ describe('Teste da rota POST /MOB3/splash', () => {
   });
 });
 
-// Verifica o Get da tela ajuda
-describe('Teste da rota GET /ajuda', () => {
+// Rota GET /ajuda
+describe(' rota GET /ajuda', () => {
   test('Retorna o texto de ajuda corretamente', async () => {
     const response = await request(app)
       .get('/MOB3/ajuda')
