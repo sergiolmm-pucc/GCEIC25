@@ -1,8 +1,9 @@
-const request = require('../controllers/piscina3Controller');
+const supertest = require('supertest');
 const app = require('../app');
+const request = supertest;
 
-// Teste da função calcularTodosCustos
 const piscinaService = require('../services/piscina3Service');
+
 
 describe('Teste de cálculo de piscina', () => {
   test('Calcula corretamente os valores', () => {

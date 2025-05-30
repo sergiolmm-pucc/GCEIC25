@@ -4,6 +4,7 @@ on:
   push:
     branches: 
       - 'main'
+      - 'agoravai'
     paths:
       - 'api/**'  
   
