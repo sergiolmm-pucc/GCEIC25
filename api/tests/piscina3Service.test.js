@@ -1,8 +1,11 @@
-const supertest = require('supertest');
-const app = require('../app');
-const request = supertest;
-
+const express = require('express');
+const request = require('supertest');
+const piscinaRoutes = require('../routes/piscina3Routes'); []
 const piscinaService = require('../services/piscina3Service');
+
+const app = express();
+app.use(express.json());
+app.use('/MOB3', piscinaRoutes);
 
 // Teste de cálculo
 describe('cálculo de piscina', () => {

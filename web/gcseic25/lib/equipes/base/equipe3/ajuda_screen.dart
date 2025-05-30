@@ -46,15 +46,74 @@ class _AjudaScreenState extends State<AjudaScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Ajuda')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: isLoading
-            ? Center(child: CircularProgressIndicator())
-            : Text(
-                textoAjuda,
-                style: TextStyle(fontSize: 16),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF2196F3), Color(0xFFBBDEFB)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: 400),
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(24),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 10,
+                          offset: Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            IconButton(
+                              icon: Icon(Icons.arrow_back, color: Colors.blue[700]),
+                              onPressed: () => Navigator.pop(context),
+                            ),
+                            SizedBox(width: 8),
+                            Text(
+                              'Ajuda',
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue[800],
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 16),
+                        isLoading
+                            ? Center(child: CircularProgressIndicator(color: Colors.blue[700]))
+                            : Text(
+                                textoAjuda,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.blue[900],
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
+            ),
+          ),
+        ),
       ),
     );
   }

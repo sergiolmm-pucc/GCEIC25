@@ -13,6 +13,7 @@ import 'package:gcseic25/page/login.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gcseic25/equipes/MKP1/screens/splash_screen.dart';
 import 'package:gcseic25/equipes/base/equipe3/login_screen.dart';
+import 'package:gcseic25/equipes/base/equipe3/splash_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginPage(),
         '/aposSplashScreen': (context) => APOSSplashScreen(),
         '/mkp1SplashScreen': (context) => const MKP1SplashScreen(),
-        '/mob3': (context) => SplashScreen(nextPage: LoginScreen()), 
+        '/mob3': (context) => SplashScreen3(nextPage: LoginScreen()), 
       },
     );
   }
@@ -93,6 +94,13 @@ class HomePage extends StatelessWidget {
               onPressed: () => Navigator.pushNamed(context, '/CI_CD_8'),
               child: const Text('Grupo CI_CD_8'),
             ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/mob3');
+              },
+              child: Text('MOB3'),
+            ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () => Navigator.pushNamed(context, '/login'),
@@ -140,13 +148,6 @@ class HomePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/mkp1SplashScreen');
               },
               child: Text('Calculadora de Markup'),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/mob3');
-              },
-              child: Text('MOB3'),
             ),
           ],
         ),
