@@ -34,6 +34,7 @@
     <testcase classname=" Teste de autenticação" name=" Teste de autenticação" time="0">
     </testcase>
     <testcase classname=" Teste de autenticação" name=" Teste de autenticação" time="0">
+    </testcase>
     <testcase classname="Função calcularAposentadoria Mulher que já pode se aposentar" name="Função calcularAposentadoria Mulher que já pode se aposentar" time="0.007">
     </testcase>
     <testcase classname="Função calcularAposentadoria Homem que já pode se aposentar" name="Função calcularAposentadoria Homem que já pode se aposentar" time="0.001">
