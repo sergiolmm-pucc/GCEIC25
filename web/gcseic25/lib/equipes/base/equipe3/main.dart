@@ -5,6 +5,6 @@ import 'login_screen.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: SplashScreen(nextPage: LoginScreen()),
+    home: SplashScreen3(nextPage: LoginScreen()),
   ));
 }
