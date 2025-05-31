@@ -1,6 +1,6 @@
 const express = require('express');
 const request = require('supertest');
-const piscinaRoutes = require('../routes/piscina3Routes'); []
+const piscinaRoutes = require('../routes/piscina3Routes');
 const piscinaService = require('../services/piscina3Service');
 
 const app = express();
