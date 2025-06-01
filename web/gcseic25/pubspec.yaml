@@ -79,6 +79,7 @@ flutter:
     - assets/equipe4/bg1.png
     - assets/equipe4/bg2.png
     - lib/equipes/CI_CD_6/assets/
+    - lib/equipes/equipe5/assets/sobre.jpeg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

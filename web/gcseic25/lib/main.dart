@@ -14,6 +14,7 @@ import 'package:flutter/rendering.dart';
 import 'package:gcseic25/equipes/MKP1/screens/splash_screen.dart';
 import 'package:gcseic25/equipes/base/equipe3/login_screen.dart';
 import 'package:gcseic25/equipes/base/equipe3/splash_screen.dart';
+import 'package:gcseic25/equipes/equipe5/screens/login.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
         '/aposSplashScreen': (context) => APOSSplashScreen(),
         '/mkp1SplashScreen': (context) => const MKP1SplashScreen(),
         '/mob3': (context) => SplashScreen3(nextPage: LoginScreen()), 
+        '/equipe5': (context) => TelaLogin(),
       },
     );
   }
@@ -148,6 +150,13 @@ class HomePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/mkp1SplashScreen');
               },
               child: Text('Calculadora de Markup'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/equipe5');
+              },
+              child: Text('Calculadora de Impostos 5'),
             ),
           ],
         ),
