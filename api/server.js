@@ -17,6 +17,10 @@ const aposRoutes = require('./routes/aposRoutes')
 const mkp1Routes = require('./routes/mkp1Routes')
 const piscinaRoutes = require('./routes/piscina3Routes');
 const etecRoutes = require('./routes/etecRoutes');
+const icmsRoutes = require('./routes/icmsRoutes5');
+const irpjRoutes = require('./routes/irpjRoutes5');
+const issRoutes = require('./routes/issRoutes5');
+const ipiRoutes = require('./routes/ipiRoutes5');
 
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json());
@@ -31,6 +35,11 @@ app.use('/login', loginRoutes);
 app.use('/APOS', aposRoutes); // Grupo 09 - Cálculo de Aposentadoria
 app.use('/mkp1', mkp1Routes); // Grupo MKP1 - Cálculo de Markup
 app.use('/MOB3', piscinaRoutes); // Grupo 03 --piscina
+app.use('/impostos', ipiRoutes); // Grupo 05
+app.use('/impostos', icmsRoutes); 
+app.use('/impostos', irpjRoutes);
+app.use('/impostos', issRoutes);
+
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
