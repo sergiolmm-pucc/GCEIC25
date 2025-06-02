@@ -23,7 +23,9 @@ class _CalculoIcmsPageState extends State<CalculoIcmsPage> {
       return;
     }
 
-    final url = Uri.parse('http://localhost:3000/impostos/icms');
+    final url = Uri.parse(kReleaseMode 
+    ? 'https://sergio.dev.br/impostos/icms' 
+    : 'http://localhost:3000/impostos/icms');
 
     final response = await http.post(
       url,
