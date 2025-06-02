@@ -34,9 +34,8 @@ const { Options } = require('selenium-webdriver/chrome');
   //await driver.get('https://sergio.dev.br/'); // Replace with your Flutter Web app URL
   await driver.get('http://localhost:49794/'); // Replace with your Flutter Web app URL
   //await bridge.enableAccessibility();
-  // Wait for 5 secs to let the dynamic content to load
-  await driver.sleep(10000);
 
+  await driver.sleep(10000);
   await driver.takeScreenshot().then((image, err) => {
     require('fs').writeFile('../fotos/APOS/tela_inicio.png', image, 'base64', function (err) {
       if (err == null) {
@@ -47,11 +46,10 @@ const { Options } = require('selenium-webdriver/chrome');
     });
   });
 
-await driver.wait(until.elementLocated(By.xpath("//flt-semantics[text()='Calculadora de Aposentadoria']")), 10000);
+await driver.wait(until.elementLocated(By.xpath("//flt-semantics[text()='Calculadora de Aposentadoria']")), 15000);
 const calcButton = await driver.findElement(By.xpath("//flt-semantics[text()='Calculadora de Aposentadoria']"));
 await calcButton.click();
 await driver.sleep(5000);
-
 await driver.takeScreenshot().then((image, err) => {
   require('fs').writeFile('../fotos/APOS/splash_screen.png', image, 'base64', function (err) {
     if (err == null) {
@@ -62,7 +60,7 @@ await driver.takeScreenshot().then((image, err) => {
   });
 });
 
-await driver.sleep(8000);
+await driver.sleep(10000);
 await driver.takeScreenshot().then((image, err) => {
     require('fs').writeFile('../fotos/APOS/login_screen.png', image, 'base64', function (err) {
       if (err == null){
@@ -74,15 +72,13 @@ await driver.takeScreenshot().then((image, err) => {
     });
   });
 
-
-await driver.wait(until.elementLocated(By.xpath("//*[@aria-label='Usuário']")), 10000);
+await driver.wait(until.elementLocated(By.xpath("//*[@aria-label='Usuário']")), 15000);
 await driver.findElement(By.xpath("//*[@aria-label='Usuário']")).sendKeys('admin');
-await driver.wait(until.elementLocated(By.xpath("//*[@aria-label='Senha']")), 10000);
+await driver.wait(until.elementLocated(By.xpath("//*[@aria-label='Senha']")), 15000);
 await driver.findElement(By.xpath("//*[@aria-label='Senha']")).sendKeys('1234');
-await driver.wait(until.elementLocated(By.xpath("//flt-semantics[text()='Entrar']")), 10000);
+await driver.wait(until.elementLocated(By.xpath("//flt-semantics[text()='Entrar']")), 15000);
 const loginButton = await driver.findElement(By.xpath("//flt-semantics[text()='Entrar']"));
 await loginButton.click();
-
 await driver.sleep(5000);
 await driver.takeScreenshot().then((image, err) => {
     require('fs').writeFile('../fotos/APOS/home_screen.png', image, 'base64', function (err) {
@@ -94,6 +90,51 @@ await driver.takeScreenshot().then((image, err) => {
     });
   });
 
-   await driver.sleep(5000);
+  const aboutButton = await driver.wait(
+    until.elementLocated(By.xpath("//flt-semantics[@role='button' and contains(text(), 'Sobre')]")),
+    15000
+  );
+  await aboutButton.click();
+  await driver.sleep(5000);
+  await driver.takeScreenshot().then((image, err) => {
+      require('fs').writeFile('../fotos/APOS/about_screen.png', image, 'base64', function (err) {
+        if (err == null){
+            console.log('Gravou Foto da Tela Sobre');
+        }else{
+            console.log('Erro ->' + err);
+        }
+      });
+    });
+
+    const backButton = await driver.wait(
+      until.elementLocated(By.xpath("//flt-semantics[@role='button' and contains(text(), 'Back')]")),
+      15000
+    );
+    await backButton.click();
+
+    const helpButton = await driver.wait(
+      until.elementLocated(By.xpath("//flt-semantics[@role='button' and contains(text(), 'Ajuda')]")),
+      15000
+    );
+    await helpButton.click();
+    await driver.sleep(5000);
+      await driver.takeScreenshot().then((image, err) => {
+          require('fs').writeFile('../fotos/APOS/help_screen.png', image, 'base64', function (err) {
+            if (err == null){
+                console.log('Gravou Foto da Tela de Ajuda');
+            }else{
+                console.log('Erro ->' + err);
+            }
+          });
+        });
+
+    const backButton2 = await driver.wait(
+      until.elementLocated(By.xpath("//flt-semantics[@role='button' and contains(text(), 'Back')]")),
+      15000
+    );
+    await backButton2.click();
+
+
+  await driver.sleep(15000);
   driver.quit();
 })();
