@@ -322,12 +322,12 @@ const custoTotal = (produtosQuimicosFloat + energiaBombaFloat + maoObraFloat);
 function calcularMob(req, res) {
     const { transporte, instalacao, maoDeObra, equipamentos } = req.body;
 
-    // Verificação se todos os campos foram preenchidos
+    // Verificação se todos os campos foram preenchidos // ajuste by SLMM 02/06/25
     if (
-      !transporte?.toString().trim() ||
-      !instalacao?.toString().trim() ||
-      !maoDeObra?.toString().trim() ||
-      !equipamentos?.toString().trim()
+      !transporte.toString().trim() ||
+      !instalacao.toString().trim() ||
+      !maoDeObra.toString().trim() ||
+      !equipamentos.toString().trim()
     ) {
       return res.status(400).json({ error: "Todos os campos são obrigatórios." });
     }
