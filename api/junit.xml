@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="28" failures="0" errors="0" time="2.068">
-  <testsuite name="Função calcularAposentadoria" errors="0" failures="0" skipped="0" timestamp="2025-05-29T12:21:47" time="1.548" tests="28">
+<testsuites name="jest tests" tests="28" failures="0" errors="0" time="1.259">
+  <testsuite name="Função calcularAposentadoria" errors="0" failures="0" skipped="0" timestamp="2025-06-02T19:50:20" time="0.909" tests="28">
     <testcase classname="Função calcularAposentadoria Mulher que já pode se aposentar" name="Função calcularAposentadoria Mulher que já pode se aposentar" time="0.007">
     </testcase>
-    <testcase classname="Função calcularAposentadoria Homem que já pode se aposentar" name="Função calcularAposentadoria Homem que já pode se aposentar" time="0.001">
+    <testcase classname="Função calcularAposentadoria Homem que já pode se aposentar" name="Função calcularAposentadoria Homem que já pode se aposentar" time="0">
     </testcase>
-    <testcase classname="Função calcularAposentadoria Mulher que não pode se aposentar por idade" name="Função calcularAposentadoria Mulher que não pode se aposentar por idade" time="0.002">
+    <testcase classname="Função calcularAposentadoria Mulher que não pode se aposentar por idade" name="Função calcularAposentadoria Mulher que não pode se aposentar por idade" time="0.001">
     </testcase>
-    <testcase classname="Função calcularAposentadoria Homem que não pode se aposentar por contribuição" name="Função calcularAposentadoria Homem que não pode se aposentar por contribuição" time="0.001">
+    <testcase classname="Função calcularAposentadoria Homem que não pode se aposentar por contribuição" name="Função calcularAposentadoria Homem que não pode se aposentar por contribuição" time="0">
     </testcase>
-    <testcase classname="Função calcularAposentadoria Mulher que não pode se aposentar por idade e contribuição" name="Função calcularAposentadoria Mulher que não pode se aposentar por idade e contribuição" time="0.002">
+    <testcase classname="Função calcularAposentadoria Mulher que não pode se aposentar por idade e contribuição" name="Função calcularAposentadoria Mulher que não pode se aposentar por idade e contribuição" time="0.001">
     </testcase>
     <testcase classname="Função calcularAposentadoria Idade negativa" name="Função calcularAposentadoria Idade negativa" time="0.001">
     </testcase>
@@ -17,45 +17,45 @@
     </testcase>
     <testcase classname="Função calcularPontuacao Mulher que já pode se aposentar por pontuação" name="Função calcularPontuacao Mulher que já pode se aposentar por pontuação" time="0.002">
     </testcase>
-    <testcase classname="Função calcularPontuacao Homem que já pode se aposentar por pontuação" name="Função calcularPontuacao Homem que já pode se aposentar por pontuação" time="0.002">
+    <testcase classname="Função calcularPontuacao Homem que já pode se aposentar por pontuação" name="Função calcularPontuacao Homem que já pode se aposentar por pontuação" time="0.001">
     </testcase>
-    <testcase classname="Função calcularPontuacao Mulher que faltam anos para atingir a pontuação" name="Função calcularPontuacao Mulher que faltam anos para atingir a pontuação" time="0.002">
+    <testcase classname="Função calcularPontuacao Mulher que faltam anos para atingir a pontuação" name="Função calcularPontuacao Mulher que faltam anos para atingir a pontuação" time="0.001">
     </testcase>
-    <testcase classname="Função calcularPontuacao Homem que faltam anos para atingir a pontuação" name="Função calcularPontuacao Homem que faltam anos para atingir a pontuação" time="0.002">
+    <testcase classname="Função calcularPontuacao Homem que faltam anos para atingir a pontuação" name="Função calcularPontuacao Homem que faltam anos para atingir a pontuação" time="0.001">
     </testcase>
-    <testcase classname="Função calcularPontuacao Homem com idade baixa mas alta contribuição, faltando poucos anos" name="Função calcularPontuacao Homem com idade baixa mas alta contribuição, faltando poucos anos" time="0.003">
+    <testcase classname="Função calcularPontuacao Homem com idade baixa mas alta contribuição, faltando poucos anos" name="Função calcularPontuacao Homem com idade baixa mas alta contribuição, faltando poucos anos" time="0.001">
     </testcase>
     <testcase classname="Função calcularPontuacao Idade negativa deve retornar erro" name="Função calcularPontuacao Idade negativa deve retornar erro" time="0.001">
     </testcase>
     <testcase classname="Função calcularPontuacao Contribuição negativa deve retornar erro" name="Função calcularPontuacao Contribuição negativa deve retornar erro" time="0.001">
     </testcase>
-    <testcase classname="Função calcularPontuacao Sexo inválido deve retornar erro" name="Função calcularPontuacao Sexo inválido deve retornar erro" time="0.002">
+    <testcase classname="Função calcularPontuacao Sexo inválido deve retornar erro" name="Função calcularPontuacao Sexo inválido deve retornar erro" time="0.001">
     </testcase>
     <testcase classname="Função calcularPontuacao Dados incompletos (idade faltando) deve retornar erro" name="Função calcularPontuacao Dados incompletos (idade faltando) deve retornar erro" time="0.001">
     </testcase>
     <testcase classname="Função calcularPontuacao Dados incompletos (contribuicao faltando) deve retornar erro" name="Função calcularPontuacao Dados incompletos (contribuicao faltando) deve retornar erro" time="0.001">
     </testcase>
-    <testcase classname="Função calcularPontuacao Mulher com pontuação exata no limite (100)" name="Função calcularPontuacao Mulher com pontuação exata no limite (100)" time="0.002">
+    <testcase classname="Função calcularPontuacao Mulher com pontuação exata no limite (100)" name="Função calcularPontuacao Mulher com pontuação exata no limite (100)" time="0.001">
     </testcase>
-    <testcase classname="Função calcularPontuacao Homem com pontuação exata no limite (105)" name="Função calcularPontuacao Homem com pontuação exata no limite (105)" time="0.002">
+    <testcase classname="Função calcularPontuacao Homem com pontuação exata no limite (105)" name="Função calcularPontuacao Homem com pontuação exata no limite (105)" time="0.001">
     </testcase>
-    <testcase classname="Rotas de Histórico Deve registrar uma operação no histórico" name="Rotas de Histórico Deve registrar uma operação no histórico" time="0.011">
+    <testcase classname="Rotas de Histórico Deve registrar uma operação no histórico" name="Rotas de Histórico Deve registrar uma operação no histórico" time="0.003">
     </testcase>
     <testcase classname="Rotas de Histórico Deve filtrar histórico por tipo" name="Rotas de Histórico Deve filtrar histórico por tipo" time="0.002">
     </testcase>
-    <testcase classname="Rotas de Histórico Deve limitar o histórico a 100 operações" name="Rotas de Histórico Deve limitar o histórico a 100 operações" time="0.014">
+    <testcase classname="Rotas de Histórico Deve limitar o histórico a 100 operações" name="Rotas de Histórico Deve limitar o histórico a 100 operações" time="0.008">
     </testcase>
-    <testcase classname="Rotas de Histórico Deve ordenar histórico do mais recente para o mais antigo" name="Rotas de Histórico Deve ordenar histórico do mais recente para o mais antigo" time="0.104">
+    <testcase classname="Rotas de Histórico Deve ordenar histórico do mais recente para o mais antigo" name="Rotas de Histórico Deve ordenar histórico do mais recente para o mais antigo" time="0.113">
     </testcase>
-    <testcase classname="Rotas de Histórico Deve registrar diferentes tipos de operações" name="Rotas de Histórico Deve registrar diferentes tipos de operações" time="0.021">
+    <testcase classname="Rotas de Histórico Deve registrar diferentes tipos de operações" name="Rotas de Histórico Deve registrar diferentes tipos de operações" time="0.003">
     </testcase>
-    <testcase classname="Função calcularTempoAposentadoria Pessoa que já pode se aposentar" name="Função calcularTempoAposentadoria Pessoa que já pode se aposentar" time="0.003">
+    <testcase classname="Função calcularTempoAposentadoria Pessoa que já pode se aposentar" name="Função calcularTempoAposentadoria Pessoa que já pode se aposentar" time="0">
     </testcase>
-    <testcase classname="Função calcularTempoAposentadoria Pessoa que falta tempo para idade mínima" name="Função calcularTempoAposentadoria Pessoa que falta tempo para idade mínima" time="0.01">
+    <testcase classname="Função calcularTempoAposentadoria Pessoa que falta tempo para idade mínima" name="Função calcularTempoAposentadoria Pessoa que falta tempo para idade mínima" time="0.001">
     </testcase>
-    <testcase classname="Função calcularTempoAposentadoria Pessoa que falta tempo de contribuição" name="Função calcularTempoAposentadoria Pessoa que falta tempo de contribuição" time="0.005">
+    <testcase classname="Função calcularTempoAposentadoria Pessoa que falta tempo de contribuição" name="Função calcularTempoAposentadoria Pessoa que falta tempo de contribuição" time="0">
     </testcase>
-    <testcase classname="Função calcularTempoAposentadoria Dados incompletos" name="Função calcularTempoAposentadoria Dados incompletos" time="0.004">
+    <testcase classname="Função calcularTempoAposentadoria Dados incompletos" name="Função calcularTempoAposentadoria Dados incompletos" time="0.001">
     </testcase>
   </testsuite>
 </testsuites>
