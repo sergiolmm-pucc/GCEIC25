@@ -3,6 +3,7 @@ import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
 import 'package:gcseic25/equipes/CI_CD_10/login.dart';
+import 'package:gcseic25/equipes/CI_CD_10/splashscreen.dart' as CI_CD10Splash;
 
 void main() {
   runApp(MyApp());
@@ -22,7 +23,9 @@ class MyApp extends StatelessWidget {
         '/splash2':
             (context) =>
                 SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
-        '/CI_CD_10': (context) => LoginPage(),
+        '/CI_CD_10_splash': 
+            (context) =>
+                CI_CD10Splash.SplashScreen(nextPage: LoginPage(),),
       },
     );
   }
@@ -53,7 +56,7 @@ class HomePage extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/CI_CD_10');
+                Navigator.pushNamed(context, '/CI_CD_10_splash');
               },
               child: Text('Grupo CI_CD_10'),
             ),
