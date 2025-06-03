@@ -2,39 +2,41 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class ConsultaScreen extends StatefulWidget {
+class ConsultaHidraulicaScreen extends StatefulWidget {
   @override
-  _ConsultaScreenState createState() => _ConsultaScreenState();
+  _ConsultaHidraulicaScreenState createState() => _ConsultaHidraulicaScreenState();
 }
 
-class _ConsultaScreenState extends State<ConsultaScreen> {
-  String _resposta = '';
-  final _largura = TextEditingController();
-  final _comprimento = TextEditingController();
-  final _profundidade = TextEditingController();
+class _ConsultaHidraulicaScreenState extends State<ConsultaHidraulicaScreen> {
+  final _tubulacaoController = TextEditingController();
+  final _conexoesController = TextEditingController();
+  final _precoTubulacaoController = TextEditingController();
+  final _precoConexaoController = TextEditingController();
+  final _maoDeObraController = TextEditingController();
 
-  Future<void> _consultarAPI() async {
-    final url = Uri.parse('http://animated-occipital-buckthorn.glitch.me/MOB3/calcular');
+  String _resultado = '';
+
+  Future<void> _calcularParteHidraulica() async {
+    final url = Uri.parse('http://animated-occipital-buckthorn.glitch.me/MOB3/calcularHidraulica');
+
     final response = await http.post(
       url,
-      headers: {"Content-Type": "application/json"},
+      headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
-        "largura": double.tryParse(_largura.text) ?? 0,
-        "comprimento": double.tryParse(_comprimento.text) ?? 0,
-        "profundidade": double.tryParse(_profundidade.text) ?? 0,
-        "precoAgua": 4.5,
-        "custoEletrico": 1200,
-        "custoHidraulico": 900,
-        "custoManutencaoMensal": 250
+        "quantidadeTubulacao": double.tryParse(_tubulacaoController.text) ?? 0,
+        "quantidadeConexoes": int.tryParse(_conexoesController.text) ?? 0,
+        "precoPorMetroTubulacao": double.tryParse(_precoTubulacaoController.text) ?? 0,
+        "precoPorConexao": double.tryParse(_precoConexaoController.text) ?? 0,
+        "custoMaoDeObra": double.tryParse(_maoDeObraController.text) ?? 0,
       }),
     );
 
     setState(() {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        _resposta = 'Custo total da piscina: R\$ ${data["custoTotalPiscina"]}';
+        _resultado = 'Custo total hidráulico estimado: R\$ ${data["custoTotalHidraulico"]}';
       } else {
-        _resposta = 'Erro na requisição';
+        _resultado = 'Erro ao calcular.';
       }
     });
   }
@@ -71,7 +73,6 @@ class _ConsultaScreenState extends State<ConsultaScreen> {
                       ],
                     ),
                     child: Column(
-                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
@@ -82,7 +83,7 @@ class _ConsultaScreenState extends State<ConsultaScreen> {
                             ),
                             SizedBox(width: 8),
                             Text(
-                              'Consulta de Piscina',
+                              'Cálculo Hidráulico',
                               style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,
@@ -92,44 +93,15 @@ class _ConsultaScreenState extends State<ConsultaScreen> {
                           ],
                         ),
                         SizedBox(height: 24),
-                        TextField(
-                          controller: _largura,
-                          decoration: InputDecoration(
-                            labelText: 'Largura',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            filled: true,
-                            fillColor: Colors.blue[50],
-                          ),
-                          keyboardType: TextInputType.numberWithOptions(decimal: true),
-                        ),
+                        _buildInputField(_tubulacaoController, 'Qtd. Tubulação (m)'),
                         SizedBox(height: 16),
-                        TextField(
-                          controller: _comprimento,
-                          decoration: InputDecoration(
-                            labelText: 'Comprimento',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            filled: true,
-                            fillColor: Colors.blue[50],
-                          ),
-                          keyboardType: TextInputType.numberWithOptions(decimal: true),
-                        ),
+                        _buildInputField(_conexoesController, 'Qtd. Conexões'),
                         SizedBox(height: 16),
-                        TextField(
-                          controller: _profundidade,
-                          decoration: InputDecoration(
-                            labelText: 'Profundidade',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            filled: true,
-                            fillColor: Colors.blue[50],
-                          ),
-                          keyboardType: TextInputType.numberWithOptions(decimal: true),
-                        ),
+                        _buildInputField(_precoTubulacaoController, 'Preço/m Tubulação (R\$)'),
+                        SizedBox(height: 16),
+                        _buildInputField(_precoConexaoController, 'Preço/unid Conexão (R\$)'),
+                        SizedBox(height: 16),
+                        _buildInputField(_maoDeObraController, 'Custo Mão de Obra (R\$)'),
                         SizedBox(height: 20),
                         SizedBox(
                           width: double.infinity,
@@ -140,7 +112,7 @@ class _ConsultaScreenState extends State<ConsultaScreen> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10)),
                             ),
-                            onPressed: _consultarAPI,
+                            onPressed: _calcularParteHidraulica,
                             child: Text(
                               'Calcular',
                               style: TextStyle(fontSize: 18, color: Colors.white),
@@ -149,7 +121,7 @@ class _ConsultaScreenState extends State<ConsultaScreen> {
                         ),
                         SizedBox(height: 24),
                         Text(
-                          _resposta,
+                          _resultado,
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.blue[900],
@@ -165,6 +137,19 @@ class _ConsultaScreenState extends State<ConsultaScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildInputField(TextEditingController controller, String label) {
+    return TextField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: label,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        filled: true,
+        fillColor: Colors.blue[50],
+      ),
+      keyboardType: TextInputType.numberWithOptions(decimal: true),
     );
   }
 }

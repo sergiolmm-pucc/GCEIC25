@@ -2,39 +2,45 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class ConsultaScreen extends StatefulWidget {
+class ConsultaEletricaScreen extends StatefulWidget {
   @override
-  _ConsultaScreenState createState() => _ConsultaScreenState();
+  _ConsultaEletricaScreenState createState() => _ConsultaEletricaScreenState();
 }
 
-class _ConsultaScreenState extends State<ConsultaScreen> {
-  String _resposta = '';
-  final _largura = TextEditingController();
-  final _comprimento = TextEditingController();
-  final _profundidade = TextEditingController();
+class _ConsultaEletricaScreenState extends State<ConsultaEletricaScreen> {
+  final _comprimentoFiosController = TextEditingController();
+  final _precoPorMetroFioController = TextEditingController();
+  final _quantidadeDisjuntoresController = TextEditingController();
+  final _precoPorDisjuntorController = TextEditingController();
+  final _custoMaoDeObraController = TextEditingController();
 
-  Future<void> _consultarAPI() async {
-    final url = Uri.parse('http://animated-occipital-buckthorn.glitch.me/MOB3/calcular');
+  String _resultado = '';
+
+  Future<void> _calcularParteEletrica() async {
+    final url = Uri.parse('http://animated-occipital-buckthorn.glitch.me/MOB3/calcularEletrica');
+
     final response = await http.post(
       url,
-      headers: {"Content-Type": "application/json"},
+      headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
-        "largura": double.tryParse(_largura.text) ?? 0,
-        "comprimento": double.tryParse(_comprimento.text) ?? 0,
-        "profundidade": double.tryParse(_profundidade.text) ?? 0,
-        "precoAgua": 4.5,
-        "custoEletrico": 1200,
-        "custoHidraulico": 900,
-        "custoManutencaoMensal": 250
+        "comprimentoFios": double.tryParse(_comprimentoFiosController.text) ?? 0,
+        "precoPorMetroFio": double.tryParse(_precoPorMetroFioController.text) ?? 0,
+        "quantidadeDisjuntores": int.tryParse(_quantidadeDisjuntoresController.text) ?? 0,
+        "precoPorDisjuntor": double.tryParse(_precoPorDisjuntorController.text) ?? 0,
+        "custoMaoDeObra": double.tryParse(_custoMaoDeObraController.text) ?? 0,
       }),
     );
 
+    print('Status code: ${response.statusCode}');
+    print('Response body: ${response.body}');
+
+    if (!mounted) return;
+
     setState(() {
       if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        _resposta = 'Custo total da piscina: R\$ ${data["custoTotalPiscina"]}';
+        _resultado = 'Custo elétrico estimado: R\$ ${response.body}';
       } else {
-        _resposta = 'Erro na requisição';
+        _resultado = 'Erro ao calcular.';
       }
     });
   }
@@ -71,7 +77,6 @@ class _ConsultaScreenState extends State<ConsultaScreen> {
                       ],
                     ),
                     child: Column(
-                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
@@ -82,7 +87,7 @@ class _ConsultaScreenState extends State<ConsultaScreen> {
                             ),
                             SizedBox(width: 8),
                             Text(
-                              'Consulta de Piscina',
+                              'Cálculo Elétrico',
                               style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,
@@ -92,44 +97,15 @@ class _ConsultaScreenState extends State<ConsultaScreen> {
                           ],
                         ),
                         SizedBox(height: 24),
-                        TextField(
-                          controller: _largura,
-                          decoration: InputDecoration(
-                            labelText: 'Largura',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            filled: true,
-                            fillColor: Colors.blue[50],
-                          ),
-                          keyboardType: TextInputType.numberWithOptions(decimal: true),
-                        ),
+                        _buildInputField(_comprimentoFiosController, 'Comprimento dos Fios (metros)'),
                         SizedBox(height: 16),
-                        TextField(
-                          controller: _comprimento,
-                          decoration: InputDecoration(
-                            labelText: 'Comprimento',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            filled: true,
-                            fillColor: Colors.blue[50],
-                          ),
-                          keyboardType: TextInputType.numberWithOptions(decimal: true),
-                        ),
+                        _buildInputField(_precoPorMetroFioController, 'Preço por metro do fio (R\$)'),
                         SizedBox(height: 16),
-                        TextField(
-                          controller: _profundidade,
-                          decoration: InputDecoration(
-                            labelText: 'Profundidade',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            filled: true,
-                            fillColor: Colors.blue[50],
-                          ),
-                          keyboardType: TextInputType.numberWithOptions(decimal: true),
-                        ),
+                        _buildInputField(_quantidadeDisjuntoresController, 'Quantidade de disjuntores'),
+                        SizedBox(height: 16),
+                        _buildInputField(_precoPorDisjuntorController, 'Preço por disjuntor (R\$)'),
+                        SizedBox(height: 16),
+                        _buildInputField(_custoMaoDeObraController, 'Custo da mão de obra (R\$)'),
                         SizedBox(height: 20),
                         SizedBox(
                           width: double.infinity,
@@ -140,7 +116,7 @@ class _ConsultaScreenState extends State<ConsultaScreen> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10)),
                             ),
-                            onPressed: _consultarAPI,
+                            onPressed: _calcularParteEletrica,
                             child: Text(
                               'Calcular',
                               style: TextStyle(fontSize: 18, color: Colors.white),
@@ -149,7 +125,7 @@ class _ConsultaScreenState extends State<ConsultaScreen> {
                         ),
                         SizedBox(height: 24),
                         Text(
-                          _resposta,
+                          _resultado,
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.blue[900],
@@ -165,6 +141,19 @@ class _ConsultaScreenState extends State<ConsultaScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildInputField(TextEditingController controller, String label) {
+    return TextField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: label,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        filled: true,
+        fillColor: Colors.blue[50],
+      ),
+      keyboardType: TextInputType.numberWithOptions(decimal: true),
     );
   }
 }
