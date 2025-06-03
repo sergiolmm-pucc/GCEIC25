@@ -124,24 +124,17 @@ class HomePage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/aposSplashScreen');
-              },
-              child: Text('Calculadora de Aposentadoria'),
-            ),
-            SizedBox(height: 20),
             Semantics(
-              identifier: 'Entrar',
-              label: 'Entrar',
+              identifier: 'Calculadora de Aposentadoria',
+              label: 'Calculadora de Aposentadoria',
               button: true,
               child: SizedBox(
-                width: 220,
+                width: 320,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/aposSplashScreen');
                   },
-                  child: const Text('Entrar'),
+                  child: const Text('Calculadora de Aposentadoria'),
                 ),
               ),
             ),
