@@ -124,6 +124,7 @@ class _CalculoScreenState extends State<CalculoScreen> {
     final primaryColor = Colors.teal.shade700;
 
     return Scaffold(
+      appBar: AppBar(title: const Text('')),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
