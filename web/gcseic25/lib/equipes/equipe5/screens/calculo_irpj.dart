@@ -52,7 +52,10 @@ class _CalculoIrpjPageState extends State<CalculoIrpjPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Cálculo de IRPJ')),
+      appBar: AppBar(
+        title: const Text('Cálculo de IRPJ'),
+        backgroundColor: Color(0xFF0D47A1),
+      ),
       body: Container(
         width: double.infinity,
         decoration: const BoxDecoration(

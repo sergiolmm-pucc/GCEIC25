@@ -6,7 +6,10 @@ class SobrePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Sobre')),
+      appBar: AppBar(
+        title: const Text('Sobre'),
+        backgroundColor: Color(0xFF0D47A1),
+      ),
       body: Container(
         width: double.infinity,
         decoration: const BoxDecoration(

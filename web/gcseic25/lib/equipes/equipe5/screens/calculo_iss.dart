@@ -46,7 +46,10 @@ class _CalculoIssPageState extends State<CalculoIssPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Cálculo de ISS')),
+      appBar: AppBar(
+        title: const Text('Cálculo de ISS'),
+        backgroundColor: Color(0xFF0D47A1),
+      ),
       body: Container(
         width: double.infinity,
         decoration: const BoxDecoration(

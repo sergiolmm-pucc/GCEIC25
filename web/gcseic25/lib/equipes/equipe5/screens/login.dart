@@ -51,79 +51,97 @@ class _TelaLoginState extends State<TelaLogin> {
           ),
         ),
         child: Center(
-          child: Container(
-            width: 350,
-            padding: const EdgeInsets.all(24.0),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 10,
-                  offset: const Offset(0, 5),
-                ),
-              ],
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text(
-                  'Login',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 24),
-
-                // Campo de Email com Semantics
-                Semantics(
-                  label: 'Campo de email',
-                  hint: 'Digite seu email',
-                  textField: true,
-                  child: TextField(
-                    controller: _emailController,
-                    decoration: const InputDecoration(labelText: 'Email'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(bottom: 32.0),
+                child: Text(
+                  'Bem-vindo à Calculadora de Impostos',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
                   ),
+                  textAlign: TextAlign.center,
                 ),
-
-                const SizedBox(height: 16),
-
-                // Campo de Senha com Semantics
-                Semantics(
-                  label: 'Campo de senha',
-                  hint: 'Digite sua senha',
-                  textField: true,
-                  child: TextField(
-                    controller: _senhaController,
-                    decoration: const InputDecoration(labelText: 'Senha'),
-                    obscureText: true,
-                  ),
+              ),
+              Container(
+                width: 350,
+                padding: const EdgeInsets.all(24.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 10,
+                      offset: const Offset(0, 5),
+                    ),
+                  ],
                 ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      'Login',
+                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 24),
 
-                const SizedBox(height: 24),
+                    // Campo de Email
+                    Semantics(
+                      label: 'Campo de email',
+                      hint: 'Digite seu email',
+                      textField: true,
+                      child: TextField(
+                        controller: _emailController,
+                        decoration: const InputDecoration(labelText: 'Email'),
+                      ),
+                    ),
 
-                // Botão de login com Semantics
-                Semantics(
-                  label: 'Botão Entrar',
-                  button: true,
-                  hint: 'Pressione para fazer login',
-                  child: ElevatedButton(
-                    onPressed: fazerLogin,
-                    child: const Text('Entrar'),
-                  ),
+                    const SizedBox(height: 16),
+
+                    // Campo de Senha
+                    Semantics(
+                      label: 'Campo de senha',
+                      hint: 'Digite sua senha',
+                      textField: true,
+                      child: TextField(
+                        controller: _senhaController,
+                        decoration: const InputDecoration(labelText: 'Senha'),
+                        obscureText: true,
+                      ),
+                    ),
+
+                    const SizedBox(height: 24),
+
+                    // Botão Entrar
+                    Semantics(
+                      label: 'Botão Entrar',
+                      button: true,
+                      hint: 'Pressione para fazer login',
+                      child: ElevatedButton(
+                        onPressed: fazerLogin,
+                        child: const Text('Entrar'),
+                      ),
+                    ),
+
+                    if (erro != null) ...[
+                      const SizedBox(height: 16),
+                      Text(
+                        erro!,
+                        style: const TextStyle(color: Colors.red),
+                      ),
+                    ],
+                  ],
                 ),
-
-                if (erro != null) ...[
-                  const SizedBox(height: 16),
-                  Text(
-                    erro!,
-                    style: const TextStyle(color: Colors.red),
-                  ),
-                ],
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
+
 }

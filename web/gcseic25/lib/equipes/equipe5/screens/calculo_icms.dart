@@ -47,7 +47,10 @@ class _CalculoIcmsPageState extends State<CalculoIcmsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Cálculo de ICMS')),
+      appBar: AppBar(
+        title: const Text('Cálculo de ICMS'),
+        backgroundColor: Color(0xFF0D47A1),
+      ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(

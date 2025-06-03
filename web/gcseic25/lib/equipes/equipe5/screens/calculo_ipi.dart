@@ -57,7 +57,10 @@ class _CalculoIpiPageState extends State<CalculoIpiPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Cálculo de IPI')),
+      appBar: AppBar(
+        title: const Text('Cálculo de IPI'),
+        backgroundColor: Color(0xFF0D47A1),
+      ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
