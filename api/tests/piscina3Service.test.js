@@ -94,6 +94,6 @@ describe('cálculo hidráulico', () => {
 
     // cálculo esperado: (50*10) + (5*20) + 150 = 500 + 100 + 150 = 750.00
     const resultadoHidraulico = piscinaService.calcularHidraulica(dadosHidraulicos);
-    expect(resultadoHidraulico).toBe('750.00');
+    expect(resultadoHidraulico.custoTotalHidraulico).toBe('750.00');
   });
 });
