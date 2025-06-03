@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'consulta_screen.dart';
+import 'consulta_eletrica_screen.dart';
+import 'consulta_hidraulica_screen.dart';  
 import 'sobre_screen.dart';
 import 'ajuda_screen.dart';
 
@@ -46,7 +48,11 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 30),
-                      _buildMenuButton(context, 'Consulta Piscina', Icons.pool, ConsultaScreen()),
+                      _buildMenuButton(context, 'Consulta Piscina', Icons.pool, ConsultaEletricaScreen()),
+                      SizedBox(height: 16),
+                      _buildMenuButton(context, 'Consulta Elétrica', Icons.electrical_services, ConsultaEletricaScreen()),  
+                      SizedBox(height: 16),
+                      _buildMenuButton(context, 'Consulta Hidráulica', Icons.plumbing, ConsultaHidraulicaScreen()),  
                       SizedBox(height: 16),
                       _buildMenuButton(context, 'Sobre', Icons.info_outline, SobreScreen()),
                       SizedBox(height: 16),

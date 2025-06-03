@@ -14,36 +14,6 @@ exports.calcularTodosCustos = ({ largura, comprimento, profundidade, precoAgua, 
   };
 };
 
-exports.loginUser = ({ email, senha }) => {
-  const usuariosFake = [
-    { email: 'usuario1@email.com', senha: '123456' },
-    { email: 'usuario2@email.com', senha: 'abcdef' }
-  ];
-
-  const usuarioEncontrado = usuariosFake.find(
-    user =>
-      user.email.toLowerCase() === email.trim().toLowerCase() &&
-      user.senha === senha.trim()
-  );
-
-  if (!usuarioEncontrado) {
-    return {
-      sucesso: false,
-      mensagem: 'Usuário ou senha inválidos'
-    };
-  }
-
-  return {
-    sucesso: true,
-    mensagem: 'Login realizado com sucesso',
-    usuario: {
-      email: usuarioEncontrado.email
-    },
-    token: 'token-fake-para-desenvolvimento'
-  };
-};
-
-
 exports.sobre = (req, res) => {
   const urlFoto = 'https://sep-bucket-prod.s3.amazonaws.com/wp-content/uploads/2022/11/51981800313_fb744fd72d_o.jpg';
 
@@ -61,4 +31,32 @@ exports.getSplashData = () => {
     atualizacaoDisponivel: false,
     timestamp: new Date().toISOString() // Formata a data em string ISO 8601
   };
+};
+
+exports.calcularEletrica = ({
+  comprimentoFios = 0,
+  precoPorMetroFio = 0,
+  quantidadeDisjuntores = 0,
+  precoPorDisjuntor = 0,
+  custoMaoDeObra = 0
+}) => {
+  const custoFios = comprimentoFios * precoPorMetroFio;
+  const custoDisjuntores = quantidadeDisjuntores * precoPorDisjuntor;
+  const custoTotalEletrica = custoFios + custoDisjuntores + custoMaoDeObra;
+
+  return custoTotalEletrica.toFixed(2);
+};
+
+exports.calcularHidraulica = ({
+  quantidadeTubulacao = 0,
+  precoPorMetroTubulacao = 0,
+  quantidadeConexoes = 0,
+  precoPorConexao = 0,
+  custoMaoDeObra = 0
+}) => {
+  const custoTubulacao = quantidadeTubulacao * precoPorMetroTubulacao;
+  const custoConexoes = quantidadeConexoes * precoPorConexao;
+  const custoTotalHidraulica = custoTubulacao + custoConexoes + custoMaoDeObra;
+
+  return custoTotalHidraulica.toFixed(2);
 };

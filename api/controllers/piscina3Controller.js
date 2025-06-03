@@ -10,30 +10,6 @@ exports.calcularCustos = (req, res) => {
   }
 };
 
-exports.realizarLogin = (req, res) => {
-  try {
-    console.log('Login recebido:', req.body);
-    const dados = req.body;
-    const resultado = piscinaService.loginUser(dados);
-
-    if (!resultado.sucesso) {
-      return res.status(401).json({ erro: resultado.mensagem });
-    }
-
-    res.status(200).json(resultado);
-  } catch (error) {
-    console.error("Erro inesperado no login:", error);
-      const mensagemErro = (error && typeof error === 'object' && error.message)
-        ? error.message
-        : String(error);
-
-      res.status(500).json({
-        erro: 'Erro aoaaaa realizar login',
-        detalhes: mensagemErro
-      });  
-    }
-};
-
 exports.sobre = (req, res) => {
   res.status(200).json({
     foto: "https://sep-bucket-prod.s3.amazonaws.com/wp-content/uploads/2022/11/51981800313_fb744fd72d_o.jpg"
@@ -55,4 +31,26 @@ exports.ajuda = (req, res) => {
       'Preencha os dados da piscina e toque em "Calcular" para ver o custo estimado.\n\n' +
       'Caso tenha dúvidas, entre em contato com a equipe MOB3..',
   });
+};
+
+// Controller para cálculo da parte elétrica
+exports.calcularEletrica = (req, res) => {
+  try {
+    const dados = req.body;
+    const resultado = piscinaService.calcularEletrica(dados);
+    res.status(200).json(resultado);
+  } catch (error) {
+    res.status(500).json({ erro: 'Erro ao calcular custos elétricos', detalhes: error.message });
+  }
+};
+
+// Controller para cálculo da parte hidráulica
+exports.calcularHidraulica = (req, res) => {
+  try {
+    const dados = req.body;
+    const resultado = piscinaService.calcularHidraulica(dados);
+    res.status(200).json(resultado);
+  } catch (error) {
+    res.status(500).json({ erro: 'Erro ao calcular custos hidráulicos', detalhes: error.message });
+  }
 };
