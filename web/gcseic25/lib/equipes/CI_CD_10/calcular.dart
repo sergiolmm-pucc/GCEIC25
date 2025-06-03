@@ -53,7 +53,7 @@ void _calcular() async {
 
   final salario = double.tryParse(_salarioCtrl.text) ?? 0;
   final meses = int.tryParse(_mesesCtrl.text) ?? 0;
-  const baseUrl = 'http://localhost:3000/etec'; 
+  const baseUrl = 'http://localhost:3000/etec2'; 
 
   try {
     final headers = {'Content-Type': 'application/json'};

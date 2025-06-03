@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Importa o controller
-const userController = require('../controllers/etecController');
+const userController = require('../controllers/etec2Controller');
 
 router.post('/salario-liquido', userController.salarioLiquido);
 router.post('/inss', userController.inss);
