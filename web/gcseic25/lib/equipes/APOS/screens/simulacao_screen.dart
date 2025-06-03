@@ -139,6 +139,7 @@ class _SimulacaoScreenState extends State<SimulacaoScreen> {
     final MaterialColor baseTealColor = Colors.teal;
 
     return Scaffold(
+      appBar: AppBar(title: const Text('')),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -229,7 +230,7 @@ class _SimulacaoScreenState extends State<SimulacaoScreen> {
                     label: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 18),
                       child: Text(
-                        _isLoading ? 'CALCULANDO...' : 'SIMULAR PROJEÇÃO',
+                        _isLoading ? 'Calculando...' : 'Simular Projeção',
                         // Texto mais claro
                         style: const TextStyle(
                           fontSize: 20,

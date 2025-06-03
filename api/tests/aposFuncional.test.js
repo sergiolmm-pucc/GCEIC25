@@ -96,16 +96,34 @@ async function preencherCampo(driver, xpath, texto, timeout = 15000) {
         // Preenchendo campos
         await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Sexo')]");
         await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Feminino')]");
-        const inputIdade = await driver.wait(until.elementLocated(By.css("input[aria-label='Idade atual']")), 10000);
-        await inputIdade.sendKeys('62');
-        const inputContribuicao = await driver.wait(until.elementLocated(By.css("input[aria-label='Anos de contribuição']")), 10000);
-        await inputContribuicao.sendKeys('35');
+        await preencherCampo(driver, "//*[@aria-label='Idade atual']", "62");
+        await preencherCampo(driver, "//*[@aria-label='Anos de contribuição']", "35");
         await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Calcular')]");
 
         // Calcular Aposentadoria Screen Preenchida
         await driver.sleep(15000);
         await takeScreenshot(driver, '../fotos/APOS/calculo_aposentadoria_result.png', 'Gravou Foto da Tela de Calculo de Aposentadoria Resultado');
         await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
+
+        // Simulação da Aposentadoria Screen
+        await clickAndSearchElement(driver, "//flt-semantics[text()='Simular tempo restante']");
+        await takeScreenshot(driver, '../fotos/APOS/simulacao_aposentadoria.png', 'Gravou Foto da Tela de Simulação de Aposentadoria');
+
+        // Preenchendo os campos
+        await preencherCampo(driver, "//*[@aria-label='Sua Idade Atual']", "62");
+        await preencherCampo(driver, "//*[@aria-label='Anos de Contribuição Atuais']", "35");
+        await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Sexo')]");
+        await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Feminino')]");
+        await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Simular Projeção')]");
+
+        // Simulação de Aposentadoria Screen Resultado
+        await driver.sleep(15000);
+        await takeScreenshot(driver, '../fotos/APOS/simulacao_aposentadoria_result.png', 'Gravou Foto da Tela de Simulação de Aposentadoria Resultado');
+        await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
+
+
+
+
 
 
         // Saindo
