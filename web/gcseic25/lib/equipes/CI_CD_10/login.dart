@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gcseic25/equipes/CI_CD_10/home.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class CI_CD10LoginPage extends StatefulWidget {
+  const CI_CD10LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<CI_CD10LoginPage> createState() => _CI_CD10LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _CI_CD10LoginPageState extends State<CI_CD10LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailCtrl = TextEditingController();
   final _passCtrl = TextEditingController();

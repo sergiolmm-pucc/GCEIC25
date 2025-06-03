@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
         '/mob3': (context) => SplashScreen3(nextPage:  LoginScreen()), 
         '/equipe5': (context) => TelaLogin(),
 
-        '/CI_CD_10': (context) => LoginPage(),
+        '/CI_CD_10': (context) => CI_CD10LoginPage(),
 
       },
     );
@@ -167,7 +167,10 @@ class HomePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/equipe5');
               },
               child: Text('Calculadora de Impostos 5'),
-
+            ),
+                        SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
                 Navigator.pushNamed(context, '/CI_CD_10');
               },
               child: Text('Grupo CI_CD_10'),
