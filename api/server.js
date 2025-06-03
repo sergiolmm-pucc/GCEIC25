@@ -5,7 +5,7 @@ const cors = require('cors');
 
 
 const app = express();
-const port = 3000;
+const port = 5000;
 
 // importa as rotas
 const userRoutes = require('./routes/userRoutes')

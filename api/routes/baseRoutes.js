@@ -7,6 +7,7 @@ const userController = require('../controllers/baseController');
 // Define rotas usando as funções do controller
 router.get('/datetime', userController.datetime);
 router.get('/data', userController.data);
+router.post('/calcular', userController.calcular);9
 router.post('/concat', userController.concat);
 
 module.exports = router;
