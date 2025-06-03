@@ -69,7 +69,7 @@ class SobreScreen extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: Image.asset(
-                            'web/gcseic25/equipes/base/equipe3/imagem/foto.jpg',
+                            'lib/equipes/base/equipe3/assets/equipe3.jpg',
                             width: 250,
                             height: 250,
                             fit: BoxFit.cover,
