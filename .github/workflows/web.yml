@@ -24,6 +24,8 @@ on:
 jobs:
   set-environment:
     runs-on: ubuntu-latest
+    outputs:
+      env_is_valid: ${{ steps.checar_env.outputs.valid }}
     steps:
       - uses: actions/checkout@v2
       - name: Set environment from branch or input
@@ -31,17 +33,19 @@ jobs:
         run: |
           if [ -n "${{ github.event.inputs.environment }}" ]; then
             if  [ "${{ github.event.inputs.environment }}" = "macOs" ]; then
-              echo "env_name=${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT              
+              echo "env_name=${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT   
+              echo "Variável MY_SECRET está definida"
+              echo "valid=true" >> $GITHUB_OUTPUT   
             else
               echo "Error: Invalid target"
-              exit 1
+              echo "Variável MY_SECRET não está definida"
+              echo "valid=false" >> $GITHUB_OUTPUT
             fi  
           else
             echo "Error: Invalid target"
-            exit 1
+            echo "Variável MY_SECRET não está definida"
+            echo "valid=false" >> $GITHUB_OUTPUT
           fi
-    outputs:
-      env_name: ${{ steps.branch_check.outputs.env_name }}
 
   build_and_deploy:
     runs-on: ubuntu-latest
@@ -87,6 +91,7 @@ jobs:
 
   macOSdeploy:
     needs: [set-environment]
+    if: needs.verificar_env.outputs.env_is_valid == 'true'
     runs-on: macos-latest
     defaults:
       run:
