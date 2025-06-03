@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginPage(),
         '/aposSplashScreen': (context) => APOSSplashScreen(),
         '/mkp1SplashScreen': (context) => const MKP1SplashScreen(),
-        '/mob3': (context) => LoginScreen(), 
+        '/mob3': (context) => SplashScreen3(nextPage:  LoginScreen()), 
         '/equipe5': (context) => TelaLogin(),
       },
     );

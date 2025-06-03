@@ -18,7 +18,7 @@ class _AjudaScreenState extends State<AjudaScreen> {
   }
 
   Future<void> carregarAjuda() async {
-    final url = Uri.parse('http://localhost:3000/MOB3/ajuda');
+    final url = Uri.parse('http://animated-occipital-buckthorn.glitch.me/MOB3/ajuda');
 
     try {
       final response = await http.get(url);

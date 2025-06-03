@@ -17,7 +17,7 @@ class _ConsultaEletricaScreenState extends State<ConsultaEletricaScreen> {
   String _resultado = '';
 
   Future<void> _calcularParteEletrica() async {
-    final url = Uri.parse('http://localhost:3000/MOB3/calcularEletrica');
+    final url = Uri.parse('http://animated-occipital-buckthorn.glitch.me/MOB3/calcularEletrica');
 
     final response = await http.post(
       url,

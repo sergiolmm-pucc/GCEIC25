@@ -48,7 +48,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 30),
-                      _buildMenuButton(context, 'Consulta Piscina', Icons.pool, ConsultaEletricaScreen()),
+                      _buildMenuButton(context, 'Consulta Piscina', Icons.pool, ConsultaScreen()),
                       SizedBox(height: 16),
                       _buildMenuButton(context, 'Consulta Elétrica', Icons.electrical_services, ConsultaEletricaScreen()),  
                       SizedBox(height: 16),
