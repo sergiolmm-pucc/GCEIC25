@@ -58,5 +58,8 @@ exports.calcularHidraulica = ({
   const custoConexoes = quantidadeConexoes * precoPorConexao;
   const custoTotalHidraulica = custoTubulacao + custoConexoes + custoMaoDeObra;
 
-  return custoTotalHidraulica.toFixed(2);
+  return {
+    custoTotalHidraulico: custoTotalHidraulica.toFixed(2)
+  };
 };
+

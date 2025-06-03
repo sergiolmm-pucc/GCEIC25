@@ -17,7 +17,7 @@ class _ConsultaHidraulicaScreenState extends State<ConsultaHidraulicaScreen> {
   String _resultado = '';
 
   Future<void> _calcularParteHidraulica() async {
-    final url = Uri.parse('https://animated-occipital-buckthorn.glitch.me/MOB3/calcularHidraulica');
+    final url = Uri.parse('http://localhost:3000/MOB3/calcularHidraulica');
 
     final response = await http.post(
       url,

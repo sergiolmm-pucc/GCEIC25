@@ -8,24 +8,26 @@ class ConsultaEletricaScreen extends StatefulWidget {
 }
 
 class _ConsultaEletricaScreenState extends State<ConsultaEletricaScreen> {
-  final _refletoresController = TextEditingController();
-  final _potenciaBombaController = TextEditingController();
-  final _horasUsoController = TextEditingController();
-  final _tarifaEnergiaController = TextEditingController();
+  final _comprimentoFiosController = TextEditingController();
+  final _precoPorMetroFioController = TextEditingController();
+  final _quantidadeDisjuntoresController = TextEditingController();
+  final _precoPorDisjuntorController = TextEditingController();
+  final _custoMaoDeObraController = TextEditingController();
 
   String _resultado = '';
 
   Future<void> _calcularParteEletrica() async {
-    final url = Uri.parse('https://animated-occipital-buckthorn.glitch.me/MOB3/calcularEletrica');
+    final url = Uri.parse('http://localhost:3000/MOB3/calcularEletrica');
 
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
-        "quantidadeRefletores": int.tryParse(_refletoresController.text) ?? 0,
-        "potenciaBombaHP": double.tryParse(_potenciaBombaController.text) ?? 0,
-        "horasUsoDiario": double.tryParse(_horasUsoController.text) ?? 0,
-        "tarifaEnergia": double.tryParse(_tarifaEnergiaController.text) ?? 0,
+        "comprimentoFios": double.tryParse(_comprimentoFiosController.text) ?? 0,
+        "precoPorMetroFio": double.tryParse(_precoPorMetroFioController.text) ?? 0,
+        "quantidadeDisjuntores": int.tryParse(_quantidadeDisjuntoresController.text) ?? 0,
+        "precoPorDisjuntor": double.tryParse(_precoPorDisjuntorController.text) ?? 0,
+        "custoMaoDeObra": double.tryParse(_custoMaoDeObraController.text) ?? 0,
       }),
     );
 
@@ -35,17 +37,12 @@ class _ConsultaEletricaScreenState extends State<ConsultaEletricaScreen> {
     if (!mounted) return;
 
     setState(() {
-    if (response.statusCode == 200) {
-      try {
-        final data = jsonDecode(response.body);
-        _resultado = 'Custo elétrico mensal estimado: R\$ ${data["custoEletricoMensal"]}';
-      } catch (e) {
-        _resultado = 'Erro ao interpretar resposta da API.';
+      if (response.statusCode == 200) {
+        _resultado = 'Custo elétrico estimado: R\$ ${response.body}';
+      } else {
+        _resultado = 'Erro ao calcular.';
       }
-    } else {
-      _resultado = 'Erro ao calcular: ${response.statusCode}';
-    }
-  });
+    });
   }
 
   @override
@@ -100,13 +97,15 @@ class _ConsultaEletricaScreenState extends State<ConsultaEletricaScreen> {
                           ],
                         ),
                         SizedBox(height: 24),
-                        _buildInputField(_refletoresController, 'Qtd. Refletores'),
+                        _buildInputField(_comprimentoFiosController, 'Comprimento dos Fios (metros)'),
                         SizedBox(height: 16),
-                        _buildInputField(_potenciaBombaController, 'Potência da Bomba (HP)'),
+                        _buildInputField(_precoPorMetroFioController, 'Preço por metro do fio (R\$)'),
                         SizedBox(height: 16),
-                        _buildInputField(_horasUsoController, 'Horas de Uso Diário'),
+                        _buildInputField(_quantidadeDisjuntoresController, 'Quantidade de disjuntores'),
                         SizedBox(height: 16),
-                        _buildInputField(_tarifaEnergiaController, 'Tarifa de Energia (R\$/kWh)'),
+                        _buildInputField(_precoPorDisjuntorController, 'Preço por disjuntor (R\$)'),
+                        SizedBox(height: 16),
+                        _buildInputField(_custoMaoDeObraController, 'Custo da mão de obra (R\$)'),
                         SizedBox(height: 20),
                         SizedBox(
                           width: double.infinity,
