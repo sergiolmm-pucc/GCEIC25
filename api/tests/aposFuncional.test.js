@@ -22,12 +22,14 @@ async function takeScreenshot(driver, path, message) {
 async function clickAndSearchElement(driver, xpath, timeout = 15000) {
     const element = await driver.wait(until.elementLocated(By.xpath(xpath)), timeout);
     await element.click();
+    await driver.sleep(2000);
     return element;
 }
 
 async function preencherCampo(driver, xpath, texto, timeout = 15000) {
     const campo = await driver.wait(until.elementLocated(By.xpath(xpath)), timeout);
     await campo.sendKeys(texto);
+    await driver.sleep(2000);
     return campo;
 }
 
@@ -101,7 +103,7 @@ async function preencherCampo(driver, xpath, texto, timeout = 15000) {
         await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Calcular')]");
 
         // Calcular Aposentadoria Screen Preenchida
-        await driver.sleep(15000);
+        await driver.sleep(8000);
         await takeScreenshot(driver, '../fotos/APOS/calculo_aposentadoria_result.png', 'Gravou Foto da Tela de Calculo de Aposentadoria Resultado');
         await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
 
@@ -117,7 +119,7 @@ async function preencherCampo(driver, xpath, texto, timeout = 15000) {
         await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Simular Projeção')]");
 
         // Simulação de Aposentadoria Screen Resultado
-        await driver.sleep(15000);
+        await driver.sleep(8000);
         await takeScreenshot(driver, '../fotos/APOS/simulacao_screen_result.png', 'Gravou Foto da Tela de Simulação de Aposentadoria Resultado');
         await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
 
@@ -135,7 +137,7 @@ async function preencherCampo(driver, xpath, texto, timeout = 15000) {
         await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Ver Regras Aplicáveis')]");
 
         // Regras Atuais Screen Resultado
-        await driver.sleep(15000);
+        await driver.sleep(8000);
         await takeScreenshot(driver, '../fotos/APOS/regras_screen_result.png', 'Gravou Foto da Tela de Regras de Aposentadoria Resultado');
         await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
 
@@ -149,13 +151,41 @@ async function preencherCampo(driver, xpath, texto, timeout = 15000) {
         await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Calcular')]");
 
         // Quando Aposentar Screen Resultado
-        await driver.sleep(15000);
+        await driver.sleep(8000);
         await takeScreenshot(driver, '../fotos/APOS/quando_screen_result.png', 'Gravou Foto da Tela de Quando Aposentar Resultado');
         await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
 
+        // Histórico de Simulações Screen
+        await driver.sleep(1500);
+        await clickAndSearchElement(driver, "//flt-semantics[text()='Histórico de simulações']");
+        await takeScreenshot(driver, '../fotos/APOS/historico_screen.png', 'Gravou Foto da Tela de Histórico de Simulações');
+
+        // Usando Filtros
+        await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Escolha um tipo')]");
+        await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), '/calculoAposentadoria')]");
+        await driver.sleep(5000);
+        await takeScreenshot(driver, '../fotos/APOS/historico_filtro1.png', 'Gravou Foto da Tela de Histórico - Filtro 1');
+
+        await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), '/calculoAposentadoria')]");
+        await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), '/calculoRegra')]");
+        await driver.sleep(5000);
+        await takeScreenshot(driver, '../fotos/APOS/historico_filtro2.png', 'Gravou Foto da Tela de Histórico - Filtro 2');
+
+        await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), '/calculoRegra')]");
+        await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), '/calculoPontuacao')]");
+        await driver.sleep(5000);
+        await takeScreenshot(driver, '../fotos/APOS/historico_filtro3.png', 'Gravou Foto da Tela de Histórico - Filtro 3');
+
+        await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), '/calculoPontuacao')]");
+        await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), '/calculoTempoAposentadoria')]");
+        await driver.sleep(5000);
+        await takeScreenshot(driver, '../fotos/APOS/historico_filtro4.png', 'Gravou Foto da Tela de Histórico - Filtro 4');
+
+        // Voltando
+        await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
 
         // Saindo
-        await driver.sleep(15000);
+        await driver.sleep(8000);
         await driver.quit();
     } catch (err) {
         console.error('[ERRO CRÍTICO]', err);
