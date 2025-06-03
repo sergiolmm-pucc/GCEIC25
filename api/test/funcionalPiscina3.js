@@ -53,8 +53,7 @@ const screenshotsDir = path.join(__dirname, '..', 'fotos', 'mob3');
     await emailInput.sendKeys('usuario1@email.com');
     await senhaInput.sendKeys('123456');
 
-
-    await driver.sleep(10000);
+    await driver.sleep(15000);
 
     console.log('7) Clicando no botão Entrar...');
     const entrarButton = await driver.findElement(By.xpath("//flt-semantics[contains(text(), 'Entrar')]"));

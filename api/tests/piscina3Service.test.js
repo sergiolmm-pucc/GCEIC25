@@ -29,18 +29,6 @@ describe('cálculo de piscina', () => {
   });
 });
 
-// Rota POST /sobre
-describe(' rota POST /sobre', () => {
-  test('Retorna a URL da imagem corretamente', async () => {
-    const response = await request(app)
-      .post('/MOB3/sobre')
-      .expect(200);
-
-    expect(response.body).toHaveProperty('foto');
-    expect(response.body.foto).toBe('https://sep-bucket-prod.s3.amazonaws.com/wp-content/uploads/2022/11/51981800313_fb744fd72d_o.jpg');
-  });
-});
-
 // Rota POST /splash
 describe(' rota POST /MOB3/splash', () => {
   test('Retorna sucesso e mensagem da splash screen', async () => {

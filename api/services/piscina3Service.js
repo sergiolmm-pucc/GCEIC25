@@ -14,16 +14,6 @@ exports.calcularTodosCustos = ({ largura, comprimento, profundidade, precoAgua, 
   };
 };
 
-exports.sobre = (req, res) => {
-  const urlFoto = 'https://sep-bucket-prod.s3.amazonaws.com/wp-content/uploads/2022/11/51981800313_fb744fd72d_o.jpg';
-
-  res.json({
-    sucesso: true,
-    mensagem: 'Foto do time',
-    url: urlFoto
-  });
-};
-
 exports.getSplashData = () => {
   return {
     mensagem: "Bem-vindo à PiscinaApp!",
