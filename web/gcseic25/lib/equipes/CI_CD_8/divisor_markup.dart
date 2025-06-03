@@ -2,38 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class MultiplierMarkupPage extends StatefulWidget {
+class DivisorMarkupPage extends StatefulWidget {
   @override
-  _MultiplierMarkupPageState createState() => _MultiplierMarkupPageState();
+  _DivisorMarkupPageState createState() => _DivisorMarkupPageState();
 }
 
-class _MultiplierMarkupPageState extends State<MultiplierMarkupPage> {
+class _DivisorMarkupPageState extends State<DivisorMarkupPage> {
   final _formKey = GlobalKey<FormState>();
-  final _despesasVariaveisController = TextEditingController();
-  final _despesasFixasController = TextEditingController();
-  final _margemLucroController = TextEditingController();
+  final _precoVendaController = TextEditingController();
+  final _custoTotalVendasController = TextEditingController();
   String _resultado = '';
 
   Future<void> _calcularMarkup() async {
     if (_formKey.currentState!.validate()) {
       try {
         final response = await http.post(
-          Uri.parse('http://localhost:3000/MKP2/calcMultiplierMarkup'),
+          Uri.parse('https://animated-occipital-buckthorn.glitch.me/MKP2/calcDivisorMarkup'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode({
-            'despesasVariaveis': double.parse(_despesasVariaveisController.text),
-            'despesasFixas': double.parse(_despesasFixasController.text),
-            'margemLucro': double.parse(_margemLucroController.text),
+            'precoVenda': double.parse(_precoVendaController.text),
+            'custoTotalVendas': double.parse(_custoTotalVendasController.text),
           }),
         );
 
         if (response.statusCode == 200) {
           setState(() {
-            _resultado = 'Multiplicador do Markup: ${response.body}';
+            _resultado = 'Divisor do Markup: ${response.body}';
           });
         } else {
           setState(() {
-            _resultado = 'Erro ao calcular o markup';
+            _resultado = 'Erro ao calcular o divisor do markup';
           });
         }
       } catch (e) {
@@ -49,8 +47,8 @@ class _MultiplierMarkupPageState extends State<MultiplierMarkupPage> {
       return 'Campo obrigatório';
     }
     double numero = double.tryParse(value) ?? -1;
-    if (numero < 0 || numero > 100) {
-      return 'O valor deve estar entre 0 e 100';
+    if (numero <= 0) {
+      return 'O valor deve ser maior que zero';
     }
     return null;
   }
@@ -69,9 +67,9 @@ class _MultiplierMarkupPageState extends State<MultiplierMarkupPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextFormField(
-                controller: _despesasVariaveisController,
+                controller: _precoVendaController,
                 decoration: InputDecoration(
-                  labelText: 'Despesas Variáveis (%)',
+                  labelText: 'Preço de Venda',
                   border: OutlineInputBorder(),
                 ),
                 keyboardType: TextInputType.number,
@@ -79,24 +77,15 @@ class _MultiplierMarkupPageState extends State<MultiplierMarkupPage> {
               ),
               SizedBox(height: 16),
               TextFormField(
-                controller: _despesasFixasController,
+                controller: _custoTotalVendasController,
                 decoration: InputDecoration(
-                  labelText: 'Despesas Fixas (%)',
+                  labelText: 'Custo Total de Vendas',
                   border: OutlineInputBorder(),
                 ),
                 keyboardType: TextInputType.number,
                 validator: _validarCampo,
               ),
               SizedBox(height: 16),
-              TextFormField(
-                controller: _margemLucroController,
-                decoration: InputDecoration(
-                  labelText: 'Margem de Lucro (%)',
-                  border: OutlineInputBorder(),
-                ),
-                keyboardType: TextInputType.number,
-                validator: _validarCampo,
-              ),
               SizedBox(height: 24),
               ElevatedButton(
                 onPressed: _calcularMarkup,
@@ -132,9 +121,8 @@ class _MultiplierMarkupPageState extends State<MultiplierMarkupPage> {
 
   @override
   void dispose() {
-    _despesasVariaveisController.dispose();
-    _despesasFixasController.dispose();
-    _margemLucroController.dispose();
+    _precoVendaController.dispose();
+    _custoTotalVendasController.dispose();
     super.dispose();
   }
 }

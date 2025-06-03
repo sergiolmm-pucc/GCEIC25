@@ -1,15 +1,14 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 // Importa o controller
-const userController = require('../controllers/etecController');
+const etecController = require("../controllers/etecController");
 
-router.post('/salario-liquido', userController.salarioLiquido);
-router.post('/inss', userController.inss);
-router.post('/fgts', userController.fgts);
-router.post('/decimo', userController.decimo);
-router.post('/ferias', userController.ferias);
-router.post('/total-mensal', userController.totalMensal);
-
+// Define rotas usando as funções do controller
+router.post("/calcularCustoMensal", etecController.calcularCustoMensal);
+router.post("/calcularFerias", etecController.calcularFerias);
+router.post("/calcularDecimoTerceiro", etecController.calcularDecimoTerceiro);
+router.post("/calcularESocial", etecController.calcularESocial);
+router.post("/calcularRescisao", etecController.calcularRecisao);
 
 module.exports = router;

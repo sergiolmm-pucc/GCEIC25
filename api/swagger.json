@@ -1,30 +1,433 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-      "title": "API Exemplo com Swagger",
-      "version": "1.0.0",
-      "description": "API para retornar data/hora e concatenar valores"
-    },
-    "servers": [
-      {
-        "url": "http://localhost:3000"
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Exemplo com Swagger",
+    "version": "1.0.0",
+    "description": "API para retornar data/hora e concatenar valores"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/datetime": {
+      "get": {
+        "summary": "Retorna data e hora do servidor",
+        "responses": {
+          "200": {
+            "description": "Data e hora atual",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "datetime": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
-    ],
-    "paths": {
-      "/datetime": {
-        "get": {
-          "summary": "Retorna data e hora do servidor",
+    },
+    "/concat": {
+      "post": {
+        "summary": "Concatena valor com frase fixa",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  }
+                },
+                "required": ["value"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado da concatenação",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "result": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro - valor não fornecido"
+          }
+        }
+      }
+    },
+    "/ETEC/calcularCustoMensal": {
+      "post": {
+        "tags": ["ETEC"],
+        "summary": "Calcula o salário mensal",
+        "description": "Calcula o salário mensal bruto com base no salário líquido informado",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "salario": {
+                    "type": "number"
+                  }
+                },
+                "required": ["value"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado do cálculo do salário mensal",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "salarioMensal": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro - valor não fornecido"
+          }
+        }
+      }
+    },
+    "/ETEC/calcularFerias": {
+      "post": {
+        "tags": ["ETEC"],
+        "summary": "Calcula férias mensal",
+        "description": "Calcula férias mensal com base no salário informado",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "salario": {
+                    "type": "number"
+                  }
+                },
+                "required": ["value"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado do cálculo das férias",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "feriasMensal": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro - valor não fornecido"
+          }
+        }
+      }
+    },
+    "/ETEC/calcularDecimoTerceiro": {
+      "post": {
+        "tags": ["ETEC"],
+        "summary": "Calcula décimo terceiro",
+        "description": "Calcula o décimo terceiro com base no salário e na quantidade de meses trabalhados",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "salario": {
+                    "type": "number"
+                  },
+                  "mesesTrabalhados": {
+                    "type": "number"
+                  }
+                },
+                "required": ["value"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado do cálculo do décimo terceiro",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "bruto": {
+                          "type": "number"
+                        },
+                        "inss": {
+                          "type": "number"
+                        },
+                        "liquido": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro - valor não fornecido"
+          }
+        }
+      }
+    },
+    "/ETEC/calcularESocial": {
+      "post": {
+        "tags": ["ETEC"],
+        "summary": "Calcula o eSocial",
+        "description": "Calcula o total do recolhimento do com base no salário informado e numero de dependentes",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "salario": {
+                    "type": "number"
+                  },
+                  "dependentes": {
+                    "type": "number"
+                  }
+                },
+                "required": ["value"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado do cálculo do recolhimento do eSocial",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "eSocial": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro - valor inválido"
+          }
+        }
+      }
+    },
+    "/ETEC/calcularRescisao": {
+      "post": {
+        "tags": ["ETEC"],
+        "summary": "Calcula a rescisão",
+        "description": "Calcula o total da rescisão com base no salário informado e número de meses trabalhados",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "salarioBase": {
+                    "type": "number"
+                  },
+                  "mesesTrabalhados": {
+                    "type": "number"
+                  },
+                  "diasTrabalhados": {
+                    "type": "number"
+                  },
+                  "motivo": {
+                    "type": ["semJustaCausa", "JustaCausa", "PedidoDemissao"]
+                  },
+                  "feriasVencidas": {
+                    "type": "boolean"
+                  }
+                },
+                "required": ["value"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado do cálculo da rescisão",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "eSocial": {
+                          "recisao": {
+                            "recisao": "number",
+                            "avisoPrevio": "number",
+                            "saldoSalario": "number",
+                            "ferias": "number",
+                            "decimoTerceiro": "number",
+                            "fgts": "number",
+                            "multaFgts": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro - valor inválido"
+          }
+        }
+      },
+      "/MKP2/calcMultiplierMarkup": {
+        "post": {
+          "tags": ["Markup"],
+          "summary": "Calcula o multiplicador do markup",
+          "description": "Calcula o multiplicador do markup com base nas despesas variáveis, fixas e margem de lucro",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "despesasVariaveis": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100,
+                      "description": "Percentual de despesas variáveis"
+                    },
+                    "despesasFixas": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100,
+                      "description": "Percentual de despesas fixas"
+                    },
+                    "margemLucro": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100,
+                      "description": "Percentual da margem de lucro"
+                    }
+                  },
+                  "required": ["despesasVariaveis", "despesasFixas", "margemLucro"]
+                },
+                "example": {
+                  "despesasVariaveis": 20,
+                  "despesasFixas": 30,
+                  "margemLucro": 10
+                }
+              }
+            }
+          },
           "responses": {
             "200": {
-              "description": "Data e hora atual",
+              "description": "Multiplicador do markup calculado com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "string",
+                    "description": "Valor do multiplicador do markup",
+                    "example": "2.50"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Erro nos parâmetros fornecidos",
               "content": {
                 "application/json": {
                   "schema": {
                     "type": "object",
                     "properties": {
-                      "datetime": {
+                      "error": {
                         "type": "string",
-                        "format": "date-time"
+                        "example": "Todos os valores devem estar entre 0 e 100"
                       }
                     }
                   }
@@ -34,9 +437,11 @@
           }
         }
       },
-      "/concat": {
+      "/MKP2/calcDivisorMarkup": {
         "post": {
-          "summary": "Concatena valor com frase fixa",
+          "tags": ["Markup"],
+          "summary": "Calcula o divisor do markup",
+          "description": "Calcula o divisor do markup com base no preço de venda e custo total de vendas",
           "requestBody": {
             "required": true,
             "content": {
@@ -44,40 +449,357 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "value": {
-                      "type": "string"
+                    "precoVenda": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Preço de venda do produto"
+                    },
+                    "custoTotalVendas": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Custo total de vendas do produto"
                     }
                   },
-                  "required": ["value"]
+                  "required": ["precoVenda", "custoTotalVendas"]
+                },
+                "example": {
+                  "precoVenda": 150.00,
+                  "custoTotalVendas": 100.00
                 }
               }
             }
           },
           "responses": {
             "200": {
-              "description": "Resultado da concatenação",
+              "description": "Divisor do markup calculado com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "string",
+                    "description": "Valor do divisor do markup",
+                    "example": "0.50"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Erro nos parâmetros fornecidos",
               "content": {
                 "application/json": {
                   "schema": {
                     "type": "object",
                     "properties": {
-                      "success": {
-                        "type": "boolean"
-                      },
-                      "result": {
-                        "type": "string"
+                      "error": {
+                        "type": "string",
+                        "example": "Os valores devem ser maiores que zero"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/auth": {
+        "post": {
+          "tags": ["Autenticação"],
+          "summary": "Autentica o usuário com email e senha",
+          "description": "Valida as credenciais fornecidas e retorna se o acesso está liberado ou negado.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "format": "email",
+                      "example": "admin@email.com"
+                    },
+                    "senha": {
+                      "type": "string",
+                      "example": "123456"
+                    }
+                  },
+                  "required": ["email", "senha"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Credenciais válidas",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "acesso": {
+                        "type": "string",
+                        "example": "liberado"
                       }
                     }
                   }
                 }
               }
             },
-            "400": {
-              "description": "Erro - valor não fornecido"
+            "401": {
+              "description": "Credenciais inválidas",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "acesso": {
+                        "type": "string",
+                        "example": "negado"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+    },
+    "/MKP2/sobre": {
+      "get": {
+        "tags": ["Informações"],
+        "summary": "Retorna informações dos autores",
+        "description": "Retorna um objeto contendo os nomes e os RAs dos autores do projeto",
+        "responses": {
+          "200": {
+            "description": "Informações dos autores retornadas com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "CAIO ACOSTA GONÇALVES": {
+                      "type": "string",
+                      "example": "23008203"
+                    },
+                    "ENZO CINTO QUATROCHI": {
+                      "type": "string",
+                      "example": "23015904"
+                    },
+                    "JOÃO GABRIEL BIAZON FERREIRA": {
+                      "type": "string",
+                      "example": "23004430"
+                    },
+                    "VINICIUS MENDES DA CUNHA": {
+                      "type": "string",
+                      "example": "23015801"
+                    },
+                    "TIAGO PEREIRA DA SILVA": {
+                      "type": "string",
+                      "example": "23012171"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MOB3/calcular": {
+      "post": {
+        "summary": "Calcular custos de construção e manutenção da piscina",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "largura": { "type": "number" },
+                  "comprimento": { "type": "number" },
+                  "profundidade": { "type": "number" },
+                  "precoAgua": { "type": "number" },
+                  "custoEletrico": { "type": "number" },
+                  "custoHidraulico": { "type": "number" },
+                  "custoManutencaoMensal": { "type": "number" }
+                },
+                "required": ["largura", "comprimento", "profundidade", "precoAgua", "custoEletrico", "custoHidraulico", "custoManutencaoMensal"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado dos cálculos",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MOB3/sobre": {
+      "post": {
+        "summary": "Retorna a splash screen com foto do time",
+        "responses": {
+          "200": {
+            "description": "Foto do time retornada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sucesso": { "type": "boolean" },
+                    "mensagem": { "type": "string" },
+                    "url": { "type": "string", "format": "uri" }
+                  },
+                  "example": {
+                    "sucesso": true,
+                    "mensagem": "Foto do time",
+                    "url": "https://sep-bucket-prod.s3.amazonaws.com/wp-content/uploads/2022/11/51981800313_fb744fd72d_o.jpg"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MOB3/ajuda": {
+      "get": {
+        "summary": "Retorna informações da tela de ajuda",
+        "responses": {
+          "200": {
+            "description": "Texto de ajuda retornado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "titulo": {
+                      "type": "string",
+                      "example": "Ajuda"
+                    },
+                    "texto": {
+                      "type": "string",
+                      "example": "Preencha os dados da piscina e toque em 'Calcular' para ver o custo estimado.\n\nCaso tenha dúvidas, entre em contato com a equipe MOB3."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MOB3/calculoEletrico": {
+    "post": {
+      "summary": "Calcula o custo elétrico estimado da piscina",
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "potenciaBomba": { "type": "number", "description": "Potência da bomba em kW" },
+                "horasUsoDiario": { "type": "number", "description": "Horas de uso da bomba por dia" },
+                "precoKwh": { "type": "number", "description": "Preço do kWh em reais" }
+              },
+              "required": ["potenciaBomba", "horasUsoDiario", "precoKwh"]
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Custo elétrico calculado com sucesso",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "custoEletricoMensal": {
+                    "type": "number",
+                    "description": "Custo estimado mensal em reais",
+                    "example": 120.50
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+   "/MOB3/calculoHidraulico": {
+    "post": {
+      "summary": "Calcula o custo hidráulico estimado da piscina",
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "consumoAguaDiario": { "type": "number", "description": "Consumo diário de água em metros cúbicos" },
+                "precoAgua": { "type": "number", "description": "Preço da água por metro cúbico" }
+              },
+              "required": ["consumoAguaDiario", "precoAgua"]
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Custo hidráulico calculado com sucesso",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "custoHidraulicoMensal": {
+                    "type": "number",
+                    "description": "Custo estimado mensal em reais",
+                    "example": 85.75
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+    "/MOB3/splash": {
+      "post": {
+        "summary": "Retorna splash screen da aplicação",
+        "responses": {
+          "200": {
+            "description": "Splash screen carregada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sucesso": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "mensagem": {
+                      "type": "string",
+                      "example": "Splash screen carregada"
+                    }
+                  }
+                }
+              }
             }
           }
         }
       }
     }
   }
-  
+  }
+}

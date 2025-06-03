@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="79" failures="0" errors="0" time="1.082">
+  <testsuite name="Cálculo de IRPJ - Service" errors="0" failures="0" skipped="0" timestamp="2025-06-03T13:41:01" time="0.336" tests="8">
+    <testcase classname="Cálculo de IRPJ - Service Lucro Real abaixo do limite (60 mil)" name="Cálculo de IRPJ - Service Lucro Real abaixo do limite (60 mil)" time="0.002">
+    </testcase>
+    <testcase classname="Cálculo de IRPJ - Service Lucro Real acima do limite" name="Cálculo de IRPJ - Service Lucro Real acima do limite" time="0.001">
+    </testcase>
+    <testcase classname="Cálculo de IRPJ - Service Lucro Presumido" name="Cálculo de IRPJ - Service Lucro Presumido" time="0.001">
+    </testcase>
+    <testcase classname="Rota POST /impostos/irpj Retorna IRPJ corretamente - Lucro Real abaixo do limite" name="Rota POST /impostos/irpj Retorna IRPJ corretamente - Lucro Real abaixo do limite" time="0.024">
+    </testcase>
+    <testcase classname="Rota POST /impostos/irpj Retorna IRPJ corretamente - Lucro Real acima do limite" name="Rota POST /impostos/irpj Retorna IRPJ corretamente - Lucro Real acima do limite" time="0.003">
+    </testcase>
+    <testcase classname="Rota POST /impostos/irpj Retorna IRPJ corretamente - Lucro Presumido" name="Rota POST /impostos/irpj Retorna IRPJ corretamente - Lucro Presumido" time="0.002">
+    </testcase>
+    <testcase classname="Rota POST /impostos/irpj Retorna erro se campo obrigatório faltar" name="Rota POST /impostos/irpj Retorna erro se campo obrigatório faltar" time="0.002">
+    </testcase>
+    <testcase classname="Rota POST /impostos/irpj Retorna erro se valor não for numérico" name="Rota POST /impostos/irpj Retorna erro se valor não for numérico" time="0.003">
+    </testcase>
+  </testsuite>
+  <testsuite name="Testes ETEC2" errors="0" failures="0" skipped="0" timestamp="2025-06-03T13:41:01" time="0.083" tests="6">
+    <testcase classname="Testes ETEC2 POST /salario-liquido" name="Testes ETEC2 POST /salario-liquido" time="0.004">
+    </testcase>
+    <testcase classname="Testes ETEC2 POST /inss" name="Testes ETEC2 POST /inss" time="0.002">
+    </testcase>
+    <testcase classname="Testes ETEC2 POST /fgts" name="Testes ETEC2 POST /fgts" time="0.002">
+    </testcase>
+    <testcase classname="Testes ETEC2 POST /decimo" name="Testes ETEC2 POST /decimo" time="0.003">
+    </testcase>
+    <testcase classname="Testes ETEC2 POST /ferias" name="Testes ETEC2 POST /ferias" time="0.001">
+    </testcase>
+    <testcase classname="Testes ETEC2 POST /total-mensal" name="Testes ETEC2 POST /total-mensal" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="Função calcularAposentadoria" errors="0" failures="0" skipped="0" timestamp="2025-06-03T13:41:01" time="0.157" tests="28">
+    <testcase classname="Função calcularAposentadoria Mulher que já pode se aposentar" name="Função calcularAposentadoria Mulher que já pode se aposentar" time="0.001">
+    </testcase>
+    <testcase classname="Função calcularAposentadoria Homem que já pode se aposentar" name="Função calcularAposentadoria Homem que já pode se aposentar" time="0">
+    </testcase>
+    <testcase classname="Função calcularAposentadoria Mulher que não pode se aposentar por idade" name="Função calcularAposentadoria Mulher que não pode se aposentar por idade" time="0">
+    </testcase>
+    <testcase classname="Função calcularAposentadoria Homem que não pode se aposentar por contribuição" name="Função calcularAposentadoria Homem que não pode se aposentar por contribuição" time="0">
+    </testcase>
+    <testcase classname="Função calcularAposentadoria Mulher que não pode se aposentar por idade e contribuição" name="Função calcularAposentadoria Mulher que não pode se aposentar por idade e contribuição" time="0.001">
+    </testcase>
+    <testcase classname="Função calcularAposentadoria Idade negativa" name="Função calcularAposentadoria Idade negativa" time="0">
+    </testcase>
+    <testcase classname="Função calcularAposentadoria Contribuição negativa" name="Função calcularAposentadoria Contribuição negativa" time="0.001">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Mulher que já pode se aposentar por pontuação" name="Função calcularPontuacao Mulher que já pode se aposentar por pontuação" time="0">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Homem que já pode se aposentar por pontuação" name="Função calcularPontuacao Homem que já pode se aposentar por pontuação" time="0.001">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Mulher que faltam anos para atingir a pontuação" name="Função calcularPontuacao Mulher que faltam anos para atingir a pontuação" time="0">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Homem que faltam anos para atingir a pontuação" name="Função calcularPontuacao Homem que faltam anos para atingir a pontuação" time="0.001">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Homem com idade baixa mas alta contribuição, faltando poucos anos" name="Função calcularPontuacao Homem com idade baixa mas alta contribuição, faltando poucos anos" time="0">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Idade negativa deve retornar erro" name="Função calcularPontuacao Idade negativa deve retornar erro" time="0.001">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Contribuição negativa deve retornar erro" name="Função calcularPontuacao Contribuição negativa deve retornar erro" time="0">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Sexo inválido deve retornar erro" name="Função calcularPontuacao Sexo inválido deve retornar erro" time="0">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Dados incompletos (idade faltando) deve retornar erro" name="Função calcularPontuacao Dados incompletos (idade faltando) deve retornar erro" time="0">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Dados incompletos (contribuicao faltando) deve retornar erro" name="Função calcularPontuacao Dados incompletos (contribuicao faltando) deve retornar erro" time="0">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Mulher com pontuação exata no limite (100)" name="Função calcularPontuacao Mulher com pontuação exata no limite (100)" time="0.001">
+    </testcase>
+    <testcase classname="Função calcularPontuacao Homem com pontuação exata no limite (105)" name="Função calcularPontuacao Homem com pontuação exata no limite (105)" time="0">
+    </testcase>
+    <testcase classname="Rotas de Histórico Deve registrar uma operação no histórico" name="Rotas de Histórico Deve registrar uma operação no histórico" time="0.001">
+    </testcase>
+    <testcase classname="Rotas de Histórico Deve filtrar histórico por tipo" name="Rotas de Histórico Deve filtrar histórico por tipo" time="0">
+    </testcase>
+    <testcase classname="Rotas de Histórico Deve limitar o histórico a 100 operações" name="Rotas de Histórico Deve limitar o histórico a 100 operações" time="0.001">
+    </testcase>
+    <testcase classname="Rotas de Histórico Deve ordenar histórico do mais recente para o mais antigo" name="Rotas de Histórico Deve ordenar histórico do mais recente para o mais antigo" time="0.109">
+    </testcase>
+    <testcase classname="Rotas de Histórico Deve registrar diferentes tipos de operações" name="Rotas de Histórico Deve registrar diferentes tipos de operações" time="0">
+    </testcase>
+    <testcase classname="Função calcularTempoAposentadoria Pessoa que já pode se aposentar" name="Função calcularTempoAposentadoria Pessoa que já pode se aposentar" time="0.001">
+    </testcase>
+    <testcase classname="Função calcularTempoAposentadoria Pessoa que falta tempo para idade mínima" name="Função calcularTempoAposentadoria Pessoa que falta tempo para idade mínima" time="0">
+    </testcase>
+    <testcase classname="Função calcularTempoAposentadoria Pessoa que falta tempo de contribuição" name="Função calcularTempoAposentadoria Pessoa que falta tempo de contribuição" time="0">
+    </testcase>
+    <testcase classname="Função calcularTempoAposentadoria Dados incompletos" name="Função calcularTempoAposentadoria Dados incompletos" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="MKP1 API Tests" errors="0" failures="0" skipped="0" timestamp="2025-06-03T13:41:01" time="0.08" tests="8">
+    <testcase classname="MKP1 API Tests POST /mkp1/markup-simples deve calcular markup simples corretamente" name="MKP1 API Tests POST /mkp1/markup-simples deve calcular markup simples corretamente" time="0.005">
+    </testcase>
+    <testcase classname="MKP1 API Tests POST /mkp1/markup-simples deve retornar erro quando faltar parâmetros" name="MKP1 API Tests POST /mkp1/markup-simples deve retornar erro quando faltar parâmetros" time="0.002">
+    </testcase>
+    <testcase classname="MKP1 API Tests POST /mkp1/markup-detalhado deve calcular markup detalhado corretamente" name="MKP1 API Tests POST /mkp1/markup-detalhado deve calcular markup detalhado corretamente" time="0.001">
+    </testcase>
+    <testcase classname="MKP1 API Tests POST /mkp1/markup-detalhado deve retornar erro quando faltar parâmetros" name="MKP1 API Tests POST /mkp1/markup-detalhado deve retornar erro quando faltar parâmetros" time="0.002">
+    </testcase>
+    <testcase classname="MKP1 API Tests POST /mkp1/sugestao-preco deve calcular sugestão de preço corretamente" name="MKP1 API Tests POST /mkp1/sugestao-preco deve calcular sugestão de preço corretamente" time="0.001">
+    </testcase>
+    <testcase classname="MKP1 API Tests POST /mkp1/sugestao-preco deve retornar erro quando faltar parâmetros" name="MKP1 API Tests POST /mkp1/sugestao-preco deve retornar erro quando faltar parâmetros" time="0.001">
+    </testcase>
+    <testcase classname="MKP1 API Tests POST /mkp1/lucro-obtido deve calcular lucro obtido corretamente" name="MKP1 API Tests POST /mkp1/lucro-obtido deve calcular lucro obtido corretamente" time="0.002">
+    </testcase>
+    <testcase classname="MKP1 API Tests POST /mkp1/lucro-obtido deve retornar erro quando faltar parâmetros" name="MKP1 API Tests POST /mkp1/lucro-obtido deve retornar erro quando faltar parâmetros" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="Cálculo de ISS - Service" errors="0" failures="0" skipped="0" timestamp="2025-06-03T13:41:02" time="0.075" tests="6">
+    <testcase classname="Cálculo de ISS - Service Calcula corretamente o ISS" name="Cálculo de ISS - Service Calcula corretamente o ISS" time="0">
+    </testcase>
+    <testcase classname="Cálculo de ISS - Service Lança erro se valorServico ou aliquotaISS não forem fornecidos" name="Cálculo de ISS - Service Lança erro se valorServico ou aliquotaISS não forem fornecidos" time="0.004">
+    </testcase>
+    <testcase classname="Cálculo de ISS - Service Lança erro se os valores não forem numéricos" name="Cálculo de ISS - Service Lança erro se os valores não forem numéricos" time="0">
+    </testcase>
+    <testcase classname="Rota POST /api/iss Retorna corretamente o valor do ISS" name="Rota POST /api/iss Retorna corretamente o valor do ISS" time="0.005">
+    </testcase>
+    <testcase classname="Rota POST /api/iss Retorna erro se faltar campos obrigatórios" name="Rota POST /api/iss Retorna erro se faltar campos obrigatórios" time="0.002">
+    </testcase>
+    <testcase classname="Rota POST /api/iss Retorna erro se os valores não forem numéricos" name="Rota POST /api/iss Retorna erro se os valores não forem numéricos" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="cálculo de piscina" errors="0" failures="0" skipped="0" timestamp="2025-06-03T13:41:02" time="0.075" tests="6">
+    <testcase classname="cálculo de piscina Calcula corretamente os valores" name="cálculo de piscina Calcula corretamente os valores" time="0">
+    </testcase>
+    <testcase classname=" rota POST /sobre Retorna a URL da imagem corretamente" name=" rota POST /sobre Retorna a URL da imagem corretamente" time="0.006">
+    </testcase>
+    <testcase classname=" rota POST /MOB3/splash Retorna sucesso e mensagem da splash screen" name=" rota POST /MOB3/splash Retorna sucesso e mensagem da splash screen" time="0.002">
+    </testcase>
+    <testcase classname=" rota GET /ajuda Retorna o texto de ajuda corretamente" name=" rota GET /ajuda Retorna o texto de ajuda corretamente" time="0.002">
+    </testcase>
+    <testcase classname="cálculo elétrico Calcula corretamente o custo elétrico" name="cálculo elétrico Calcula corretamente o custo elétrico" time="0">
+    </testcase>
+    <testcase classname="cálculo hidráulico Calcula corretamente o custo hidráulico" name="cálculo hidráulico Calcula corretamente o custo hidráulico" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Cálculo de IPI - Service" errors="0" failures="0" skipped="0" timestamp="2025-06-03T13:41:02" time="0.071" tests="5">
+    <testcase classname="Cálculo de IPI - Service Calcula corretamente o IPI com valorProduto e aliquotaIPI" name="Cálculo de IPI - Service Calcula corretamente o IPI com valorProduto e aliquotaIPI" time="0">
+    </testcase>
+    <testcase classname="Cálculo de IPI - Service Calcula corretamente o IPI com frete e despesas acessórias" name="Cálculo de IPI - Service Calcula corretamente o IPI com frete e despesas acessórias" time="0">
+    </testcase>
+    <testcase classname="Rota POST /impostos/ipi Retorna o valor do IPI corretamente" name="Rota POST /impostos/ipi Retorna o valor do IPI corretamente" time="0.006">
+    </testcase>
+    <testcase classname="Rota POST /impostos/ipi Calcula o IPI com frete e despesas acessórias corretamente" name="Rota POST /impostos/ipi Calcula o IPI com frete e despesas acessórias corretamente" time="0.002">
+    </testcase>
+    <testcase classname="Rota POST /impostos/ipi Retorna erro se faltar campos obrigatórios" name="Rota POST /impostos/ipi Retorna erro se faltar campos obrigatórios" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="Cálculo de ICMS - Service" errors="0" failures="0" skipped="0" timestamp="2025-06-03T13:41:02" time="0.067" tests="3">
+    <testcase classname="Cálculo de ICMS - Service Calcula corretamente o valor do ICMS" name="Cálculo de ICMS - Service Calcula corretamente o valor do ICMS" time="0">
+    </testcase>
+    <testcase classname="Rota POST /api/icms Retorna o valor do ICMS corretamente" name="Rota POST /api/icms Retorna o valor do ICMS corretamente" time="0.006">
+    </testcase>
+    <testcase classname="Rota POST /api/icms Retorna erro se os campos não forem enviados" name="Rota POST /api/icms Retorna erro se os campos não forem enviados" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="Testes para o cálculo do ETEC" errors="0" failures="0" skipped="0" timestamp="2025-06-03T13:41:02" time="0.029" tests="5">
+    <testcase classname="Testes para o cálculo do ETEC Calcular o custo mensal da empregada" name="Testes para o cálculo do ETEC Calcular o custo mensal da empregada" time="0">
+    </testcase>
+    <testcase classname="Testes para o cálculo do ETEC Calcular férias mensal" name="Testes para o cálculo do ETEC Calcular férias mensal" time="0">
+    </testcase>
+    <testcase classname="Testes para o cálculo do ETEC Calcular décimo terceiro proporcional" name="Testes para o cálculo do ETEC Calcular décimo terceiro proporcional" time="0">
+    </testcase>
+    <testcase classname="Testes para o cálculo do ETEC Calcular do eSocial" name="Testes para o cálculo do ETEC Calcular do eSocial" time="0">
+    </testcase>
+    <testcase classname="Testes para o cálculo do ETEC Calcular valor de rescisão" name="Testes para o cálculo do ETEC Calcular valor de rescisão" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="markupMultiplicador" errors="0" failures="0" skipped="0" timestamp="2025-06-03T13:41:02" time="0.03" tests="4">
+    <testcase classname="markupMultiplicador deve retornar erro 400 se faltar campo obrigatório" name="markupMultiplicador deve retornar erro 400 se faltar campo obrigatório" time="0.001">
+    </testcase>
+    <testcase classname="markupMultiplicador deve retornar erro 400 se soma de percentuais ≥ 100%" name="markupMultiplicador deve retornar erro 400 se soma de percentuais ≥ 100%" time="0">
+    </testcase>
+    <testcase classname="markupMultiplicador calcula corretamente markup e preço de venda" name="markupMultiplicador calcula corretamente markup e preço de venda" time="0">
+    </testcase>
+    <testcase classname="markupMultiplicador markup = 1 e precoVenda = custo quando percentuais = 0" name="markupMultiplicador markup = 1 e precoVenda = custo quando percentuais = 0" time="0">
+    </testcase>
+  </testsuite>
+</testsuites>
