@@ -1,8 +1,3 @@
-const jwt = require('jsonwebtoken');
-
-const SECRET_KEY = 'seusegredoaqui';
-
-
 exports.calcularTodosCustos = ({ largura, comprimento, profundidade, precoAgua, custoEletrico, custoHidraulico, custoManutencaoMensal, mesesManutencao = 12 }) => {
   const volume = largura * comprimento * profundidade;
   const custoAgua = volume * precoAgua;
@@ -16,41 +11,6 @@ exports.calcularTodosCustos = ({ largura, comprimento, profundidade, precoAgua, 
     custoConstrucao: custoConstrucao.toFixed(2),
     manutencaoMensal: custoManutencaoMensal.toFixed(2),
     custoTotalPiscina: custoTotalPiscina.toFixed(2)
-  };
-};
-
-
-
-exports.loginUser = ({ email, senha }) => {
-  const usuariosFake = [
-    { email: 'usuario1@email.com', senha: '123456' },
-    { email: 'usuario2@email.com', senha: 'abcdef' }
-  ];
-
-  const usuarioEncontrado = usuariosFake.find(
-    user => user.email === email && user.senha === senha
-  );
-
-  if (!usuarioEncontrado) {
-    return {
-      sucesso: false,
-      mensagem: 'Usuário ou senha inválidos'
-    };
-  }
-
-  const token = jwt.sign(
-    { email: usuarioEncontrado.email },
-    SECRET_KEY,
-    { expiresIn: '1h' }  
-  );
-
-  return {
-    sucesso: true,
-    mensagem: 'Login realizado com sucesso',
-    usuario: {
-      email: usuarioEncontrado.email
-    },
-    token 
   };
 };
 
@@ -72,3 +32,34 @@ exports.getSplashData = () => {
     timestamp: new Date().toISOString() // Formata a data em string ISO 8601
   };
 };
+
+exports.calcularEletrica = ({
+  comprimentoFios = 0,
+  precoPorMetroFio = 0,
+  quantidadeDisjuntores = 0,
+  precoPorDisjuntor = 0,
+  custoMaoDeObra = 0
+}) => {
+  const custoFios = comprimentoFios * precoPorMetroFio;
+  const custoDisjuntores = quantidadeDisjuntores * precoPorDisjuntor;
+  const custoTotalEletrica = custoFios + custoDisjuntores + custoMaoDeObra;
+
+  return custoTotalEletrica.toFixed(2);
+};
+
+exports.calcularHidraulica = ({
+  quantidadeTubulacao = 0,
+  precoPorMetroTubulacao = 0,
+  quantidadeConexoes = 0,
+  precoPorConexao = 0,
+  custoMaoDeObra = 0
+}) => {
+  const custoTubulacao = quantidadeTubulacao * precoPorMetroTubulacao;
+  const custoConexoes = quantidadeConexoes * precoPorConexao;
+  const custoTotalHidraulica = custoTubulacao + custoConexoes + custoMaoDeObra;
+
+  return {
+    custoTotalHidraulico: custoTotalHidraulica.toFixed(2)
+  };
+};
+

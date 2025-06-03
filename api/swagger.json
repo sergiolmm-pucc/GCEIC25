@@ -640,64 +640,6 @@
         }
       }
     },
-    "/MOB3/login": {
-      "post": {
-        "summary": "Realiza login do usuário",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "email": { "type": "string", "example": "usuario@email.com" },
-                  "senha": { "type": "string", "example": "123456" }
-                },
-                "required": ["email", "senha"]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Login realizado com sucesso",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "sucesso": { "type": "boolean" },
-                    "mensagem": { "type": "string" },
-                    "usuario": {
-                      "type": "object",
-                      "properties": {
-                        "email": { "type": "string" }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Falha de autenticação",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "erro": { "type": "string" }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Erro interno no servidor"
-          }
-        }
-      }
-    },
     "/MOB3/sobre": {
       "post": {
         "summary": "Retorna a splash screen com foto do time",
@@ -752,6 +694,85 @@
         }
       }
     },
+    "/MOB3/calculoEletrico": {
+    "post": {
+      "summary": "Calcula o custo elétrico estimado da piscina",
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "potenciaBomba": { "type": "number", "description": "Potência da bomba em kW" },
+                "horasUsoDiario": { "type": "number", "description": "Horas de uso da bomba por dia" },
+                "precoKwh": { "type": "number", "description": "Preço do kWh em reais" }
+              },
+              "required": ["potenciaBomba", "horasUsoDiario", "precoKwh"]
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Custo elétrico calculado com sucesso",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "custoEletricoMensal": {
+                    "type": "number",
+                    "description": "Custo estimado mensal em reais",
+                    "example": 120.50
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+   "/MOB3/calculoHidraulico": {
+    "post": {
+      "summary": "Calcula o custo hidráulico estimado da piscina",
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "consumoAguaDiario": { "type": "number", "description": "Consumo diário de água em metros cúbicos" },
+                "precoAgua": { "type": "number", "description": "Preço da água por metro cúbico" }
+              },
+              "required": ["consumoAguaDiario", "precoAgua"]
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Custo hidráulico calculado com sucesso",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "custoHidraulicoMensal": {
+                    "type": "number",
+                    "description": "Custo estimado mensal em reais",
+                    "example": 85.75
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
     "/MOB3/splash": {
       "post": {
         "summary": "Retorna splash screen da aplicação",
