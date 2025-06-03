@@ -22,11 +22,13 @@ class _CalculoIcmsPageState extends State<CalculoIcmsPage> {
       setState(() => resultado = 'Preencha os valores corretamente.');
       return;
     }
+   final url = Uri.parse('https://sergio.dev.br/impostos/icms' ); // by slmm para ajudar
 
-    final url = Uri.parse(kReleaseMode 
+/*
+    final url = Uri.parse(ReleaseMode 
     ? 'https://sergio.dev.br/impostos/icms' 
     : 'http://localhost:3000/impostos/icms');
-
+*/
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
