@@ -1617,11 +1617,6 @@ fs.realpath@^1.0.0:
   resolved "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   integrity sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==
 
-fsevents@^2.3.2:
-  version "2.3.3"
-  resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.3.tgz"
-  integrity sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==
-
 function-bind@^1.1.2:
   version "1.1.2"
   resolved "https://registry.npmjs.org/function-bind/-/function-bind-1.1.2.tgz"
@@ -2930,10 +2925,10 @@ safe-buffer@~5.1.1:
   resolved "https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
-selenium-webdriver@^4.18.1:
-  version "4.32.0"
-  resolved "https://registry.npmjs.org/selenium-webdriver/-/selenium-webdriver-4.32.0.tgz"
-  integrity sha512-dG48JJnB96Aea1iVaZOKGmd6yT6aemeI1heWI/i8DtfD3pDX7uIlwpDBoGauNhtXAaFaamP+U4hIab8zZkg3Ag==
+selenium-webdriver@^4.18.1, selenium-webdriver@^4.33.0:
+  version "4.33.0"
+  resolved "https://registry.npmjs.org/selenium-webdriver/-/selenium-webdriver-4.33.0.tgz"
+  integrity sha512-5vRhk4iI0B9nYbEitfnCjPDXBfG6o9DNhj5DG2355eQo8idETknhj1tigqqlkHsGephSZwLZqEm/d+3e1stGUA==
   dependencies:
     "@bazel/runfiles" "^6.3.1"
     jszip "^3.10.1"

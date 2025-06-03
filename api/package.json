@@ -16,6 +16,7 @@
     "jest": "^29.7.0",
     "jest-unit": "^0.0.2",
     "jsonwebtoken": "^9.0.2",
+    "selenium-webdriver": "^4.33.0",
     "swagger-ui-express": "^4.6.3"
   },
   "engines": {
