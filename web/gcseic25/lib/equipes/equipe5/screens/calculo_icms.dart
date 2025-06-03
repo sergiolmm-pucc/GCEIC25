@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
-// import 'package:flutter/foundation.dart'; // Se for usar `kReleaseMode`
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class CalculoIcmsPage extends StatefulWidget {
   const CalculoIcmsPage({super.key});
@@ -11,11 +10,10 @@ class CalculoIcmsPage extends StatefulWidget {
 }
 
 class _CalculoIcmsPageState extends State<CalculoIcmsPage> {
-  // final TextEditingController valorProdutoController = TextEditingController();
-  // final TextEditingController aliquotaController = TextEditingController();
-  // String? resultado;
+  final TextEditingController valorProdutoController = TextEditingController();
+  final TextEditingController aliquotaController = TextEditingController();
+  String? resultado;
 
-  /*
   Future<void> calcularICMS() async {
     final double? valor = double.tryParse(valorProdutoController.text);
     final double? aliquota = double.tryParse(aliquotaController.text);
@@ -24,11 +22,13 @@ class _CalculoIcmsPageState extends State<CalculoIcmsPage> {
       setState(() => resultado = 'Preencha os valores corretamente.');
       return;
     }
+   final url = Uri.parse('https://sergio.dev.br/impostos/icms' ); // by slmm para ajudar
 
-    final url = Uri.parse(kReleaseMode 
-      ? 'https://sergio.dev.br/impostos/icms' 
-      : 'http://localhost:3000/impostos/icms');
-
+/*
+    final url = Uri.parse(ReleaseMode 
+    ? 'https://sergio.dev.br/impostos/icms' 
+    : 'http://localhost:3000/impostos/icms');
+*/
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
@@ -46,7 +46,6 @@ class _CalculoIcmsPageState extends State<CalculoIcmsPage> {
       });
     }
   }
-  */
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +75,7 @@ class _CalculoIcmsPageState extends State<CalculoIcmsPage> {
                           label: 'Valor do produto',
                           textField: true,
                           child: TextField(
-                            // controller: valorProdutoController,
+                            controller: valorProdutoController,
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(labelText: 'Valor do produto'),
                           ),
@@ -86,7 +85,7 @@ class _CalculoIcmsPageState extends State<CalculoIcmsPage> {
                           label: 'Alíquota',
                           textField: true,
                           child: TextField(
-                            // controller: aliquotaController,
+                            controller: aliquotaController,
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(labelText: 'Alíquota (%)'),
                           ),
@@ -96,12 +95,7 @@ class _CalculoIcmsPageState extends State<CalculoIcmsPage> {
                           label: 'Calcular ICMS',
                           button: true,
                           child: ElevatedButton(
-                            // onPressed: calcularICMS,
-                            onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Função desativada temporariamente')),
-                              );
-                            },
+                            onPressed: calcularICMS,
                             child: const Text('Calcular ICMS'),
                           ),
                         ),
@@ -109,14 +103,12 @@ class _CalculoIcmsPageState extends State<CalculoIcmsPage> {
                     ),
                   ),
                   const SizedBox(height: 32),
-                  /*
                   if (resultado != null)
                     Text(
                       resultado!,
                       style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
-                  */
                 ],
               ),
             ),
