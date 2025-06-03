@@ -107,7 +107,7 @@ async function preencherCampo(driver, xpath, texto, timeout = 15000) {
 
         // Simulação da Aposentadoria Screen
         await clickAndSearchElement(driver, "//flt-semantics[text()='Simular tempo restante']");
-        await takeScreenshot(driver, '../fotos/APOS/simulacao_aposentadoria.png', 'Gravou Foto da Tela de Simulação de Aposentadoria');
+        await takeScreenshot(driver, '../fotos/APOS/simulacao_screen.png', 'Gravou Foto da Tela de Simulação de Aposentadoria');
 
         // Preenchendo os campos
         await preencherCampo(driver, "//*[@aria-label='Sua Idade Atual']", "62");
@@ -118,7 +118,25 @@ async function preencherCampo(driver, xpath, texto, timeout = 15000) {
 
         // Simulação de Aposentadoria Screen Resultado
         await driver.sleep(15000);
-        await takeScreenshot(driver, '../fotos/APOS/simulacao_aposentadoria_result.png', 'Gravou Foto da Tela de Simulação de Aposentadoria Resultado');
+        await takeScreenshot(driver, '../fotos/APOS/simulacao_screen_result.png', 'Gravou Foto da Tela de Simulação de Aposentadoria Resultado');
+        await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
+
+        // Regras Atuais Screen
+        await clickAndSearchElement(driver, "//flt-semantics[text()='Ver regras atuais']");
+        await takeScreenshot(driver, '../fotos/APOS/regras_screen.png', 'Gravou Foto da Tela de Regras Atuais');
+
+        // Preenchendo campos
+        await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Sexo')]");
+        await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Masculino')]");
+        await preencherCampo(driver, "//*[@aria-label='Idade']", "55");
+        await preencherCampo(driver, "//*[@aria-label='Tempo de Contribuição']", "25");
+        await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Categoria')]");
+        await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Incapacidade')]");
+        await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Ver Regras Aplicáveis')]");
+
+        // Regras Atuais Screen Resultado
+        await driver.sleep(15000);
+        await takeScreenshot(driver, '../fotos/APOS/regras_screen_result.png', 'Gravou Foto da Tela de Regras de Aposentadoria Resultado');
         await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
 
 
