@@ -47,7 +47,7 @@ async function preencherCampo(driver, xpath, texto, timeout = 15000) {
 
         const bridge = new FlutterSeleniumBridge(driver);
         await driver.manage().window().setRect(screen);
-        await driver.get('http://localhost:59686/');
+        await driver.get('http://localhost:64787/');
 
         console.log('Esperando 10s para o app carregar...');
         await driver.sleep(10000);
@@ -139,9 +139,19 @@ async function preencherCampo(driver, xpath, texto, timeout = 15000) {
         await takeScreenshot(driver, '../fotos/APOS/regras_screen_result.png', 'Gravou Foto da Tela de Regras de Aposentadoria Resultado');
         await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
 
+        // Quando Aposentar Screen
+        await clickAndSearchElement(driver, "//flt-semantics[text()='Quando posso me aposentar?']");
+        await takeScreenshot(driver, '../fotos/APOS/quando_screen.png', 'Gravou Foto da Tela de Quando Aposenar');
 
+        // Preenchendo campos
+        await preencherCampo(driver, "//*[@aria-label='Idade']", "45");
+        await preencherCampo(driver, "//*[@aria-label='Tempo de Contribuição (anos)']", "11");
+        await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Calcular')]");
 
-
+        // Quando Aposentar Screen Resultado
+        await driver.sleep(15000);
+        await takeScreenshot(driver, '../fotos/APOS/quando_screen_result.png', 'Gravou Foto da Tela de Quando Aposentar Resultado');
+        await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
 
 
         // Saindo
