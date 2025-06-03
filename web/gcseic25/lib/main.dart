@@ -15,6 +15,7 @@ import 'package:gcseic25/equipes/MKP1/screens/splash_screen.dart';
 import 'package:gcseic25/equipes/base/equipe3/login_screen.dart';
 import 'package:gcseic25/equipes/base/equipe3/splash_screen.dart';
 import 'package:gcseic25/equipes/equipe5/screens/login.dart';
+import 'package:gcseic25/equipes/equipe5/screens/transition_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
         '/aposSplashScreen': (context) => APOSSplashScreen(),
         '/mkp1SplashScreen': (context) => const MKP1SplashScreen(),
         '/mob3': (context) => SplashScreen3(nextPage:  LoginScreen()), 
-        '/equipe5': (context) => TelaLogin(),
+        '/equipe5': (context) => TransitionScreen(nextPage: TelaLogin()),
       },
     );
   }
