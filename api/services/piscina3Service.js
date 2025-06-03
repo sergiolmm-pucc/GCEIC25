@@ -1,8 +1,3 @@
-const jwt = require('jsonwebtoken');
-
-const SECRET_KEY = 'seusegredoaqui';
-
-
 exports.calcularTodosCustos = ({ largura, comprimento, profundidade, precoAgua, custoEletrico, custoHidraulico, custoManutencaoMensal, mesesManutencao = 12 }) => {
   const volume = largura * comprimento * profundidade;
   const custoAgua = volume * precoAgua;
@@ -19,8 +14,6 @@ exports.calcularTodosCustos = ({ largura, comprimento, profundidade, precoAgua, 
   };
 };
 
-
-
 exports.loginUser = ({ email, senha }) => {
   const usuariosFake = [
     { email: 'usuario1@email.com', senha: '123456' },
@@ -28,7 +21,9 @@ exports.loginUser = ({ email, senha }) => {
   ];
 
   const usuarioEncontrado = usuariosFake.find(
-    user => user.email === email && user.senha === senha
+    user =>
+      user.email.toLowerCase() === email.trim().toLowerCase() &&
+      user.senha === senha.trim()
   );
 
   if (!usuarioEncontrado) {
@@ -38,21 +33,16 @@ exports.loginUser = ({ email, senha }) => {
     };
   }
 
-  const token = jwt.sign(
-    { email: usuarioEncontrado.email },
-    SECRET_KEY,
-    { expiresIn: '1h' }  
-  );
-
   return {
     sucesso: true,
     mensagem: 'Login realizado com sucesso',
     usuario: {
       email: usuarioEncontrado.email
     },
-    token 
+    token: 'token-fake-para-desenvolvimento'
   };
 };
+
 
 exports.sobre = (req, res) => {
   const urlFoto = 'https://sep-bucket-prod.s3.amazonaws.com/wp-content/uploads/2022/11/51981800313_fb744fd72d_o.jpg';

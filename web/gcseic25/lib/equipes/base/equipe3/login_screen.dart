@@ -13,25 +13,17 @@ class _LoginScreenState extends State<LoginScreen> {
   final _senha = TextEditingController();
   String? erro;
 
-  Future<void> _login() async {
-    final url = Uri.parse('https://animated-occipital-buckthorn.glitch.me/MOB3/login');
-
-    try {
-      final response = await http.post(
-        url,
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'email': _usuario.text, 'senha': _senha.text}),
+  
+  void _login() {
+    if (_usuario.text == 'usuario1@email.com' && _senha.text == '123456') {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => HomeScreen()),
       );
-
-      if (response.statusCode == 200) {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomeScreen()));
-      } else if (response.statusCode == 401) {
-        setState(() => erro = 'Usuário ou senha inválidos.');
-      } else {
-        setState(() => erro = 'Erro ao conectar ao servidor.');
-      }
-    } catch (e) {
-      setState(() => erro = 'Erro inesperado: $e');
+    } else {
+      setState(() {
+        erro = 'Usuário ou senha inválidos';
+      });
     }
   }
 

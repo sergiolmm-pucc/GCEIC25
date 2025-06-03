@@ -12,6 +12,7 @@ exports.calcularCustos = (req, res) => {
 
 exports.realizarLogin = (req, res) => {
   try {
+    console.log('Login recebido:', req.body);
     const dados = req.body;
     const resultado = piscinaService.loginUser(dados);
 
@@ -21,8 +22,16 @@ exports.realizarLogin = (req, res) => {
 
     res.status(200).json(resultado);
   } catch (error) {
-    res.status(500).json({ erro: 'Erro ao realizar login', detalhes: error.message });
-  }
+    console.error("Erro inesperado no login:", error);
+      const mensagemErro = (error && typeof error === 'object' && error.message)
+        ? error.message
+        : String(error);
+
+      res.status(500).json({
+        erro: 'Erro aoaaaa realizar login',
+        detalhes: mensagemErro
+      });  
+    }
 };
 
 exports.sobre = (req, res) => {
