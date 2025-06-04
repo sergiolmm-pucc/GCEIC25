@@ -37,93 +37,139 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: Colors.blue[900],
       body: Center(
-        child: Card(
-          margin: const EdgeInsets.all(20),
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(Icons.local_bar, size: 80, color: Colors.blue),
-                  const SizedBox(height: 20),
-                  Semantics(
-                    label: 'Campo Usuário',
-                    textField: true,
-                    child: TextFormField(
-                      controller: _usernameController,
-                      decoration: const InputDecoration(
-                        labelText: 'Usuário',
-                        border: OutlineInputBorder(),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Por favor, insira o usuário';
-                        }
-                        return null;
-                      },
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 400),
+          child: Card(
+            margin: const EdgeInsets.all(20),
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Semantics(
+                      label: 'Ícone da Calculadora de Markup',
+                      child: const Icon(Icons.local_bar, size: 80, color: Colors.blue),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  Semantics(
-                    label: 'Campo Senha',
-                    textField: true,
-                    child: TextFormField(
-                      controller: _passwordController,
-                      decoration: const InputDecoration(
-                        labelText: 'Senha',
-                        border: OutlineInputBorder(),
-                      ),
-                      obscureText: true,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Por favor, insira a senha';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Semantics(
-                        label: 'Botão Sobre',
-                        button: true,
-                        child: IconButton(
-                          icon: const Icon(Icons.info_outline),
-                          tooltip: 'Sobre',
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/sobre');
-                          },
+                    const SizedBox(height: 20),
+                    Semantics(
+                      identifier: 'Campo Usuário',
+                      label: 'Campo de usuário',
+                      hint: 'Digite seu usuário',
+                      textField: true,
+                      child: TextFormField(
+                        controller: _usernameController,
+                        decoration: const InputDecoration(
+                          labelText: 'Usuário',
+                          border: OutlineInputBorder(),
+                          hintText: 'Digite seu usuário',
                         ),
-                      ),
-                      Semantics(
-                        label: 'Botão Ajuda',
-                        button: true,
-                        child: IconButton(
-                          icon: const Icon(Icons.help_outline),
-                          tooltip: 'Ajuda',
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/ajuda');
-                          },
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.next,
+                        autofocus: true,
+                        enabled: true,
+                        readOnly: false,
+                        focusNode: FocusNode(),
+                        style: const TextStyle(
+                          fontSize: 16,
                         ),
+                        onTap: () {
+                          _usernameController.selection = TextSelection.fromPosition(
+                            TextPosition(offset: _usernameController.text.length),
+                          );
+                        },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Por favor, insira o usuário';
+                          }
+                          return null;
+                        },
                       ),
-                    ],
-                  ),
-                  Semantics(
-                    label: 'Botão Entrar',
-                    button: true,
-                    child: ElevatedButton(
-                      onPressed: _login,
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size.fromHeight(50),
-                      ),
-                      child: const Text('Entrar'),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 20),
+                    Semantics(
+                      identifier: 'Campo Senha',
+                      label: 'Campo de senha',
+                      hint: 'Digite sua senha',
+                      textField: true,
+                      child: TextFormField(
+                        controller: _passwordController,
+                        decoration: const InputDecoration(
+                          labelText: 'Senha',
+                          border: OutlineInputBorder(),
+                          hintText: 'Digite sua senha',
+                        ),
+                        keyboardType: TextInputType.visiblePassword,
+                        textInputAction: TextInputAction.done,
+                        obscureText: true,
+                        enabled: true,
+                        readOnly: false,
+                        focusNode: FocusNode(),
+                        style: const TextStyle(
+                          fontSize: 16,
+                        ),
+                        onTap: () {
+                          _passwordController.selection = TextSelection.fromPosition(
+                            TextPosition(offset: _passwordController.text.length),
+                          );
+                        },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Por favor, insira a senha';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Semantics(
+                          identifier: 'Botão Sobre',
+                          label: 'Botão Sobre',
+                          button: true,
+                          hint: 'Clique para ver informações sobre o aplicativo',
+                          child: ElevatedButton.icon(
+                            icon: const Icon(Icons.info_outline),
+                            label: const Text('Sobre'),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/sobre');
+                            },
+                          ),
+                        ),
+                        Semantics(
+                          identifier: 'Botão Ajuda',
+                          label: 'Botão Ajuda',
+                          button: true,
+                          hint: 'Clique para ver a ajuda do aplicativo',
+                          child: ElevatedButton.icon(
+                            icon: const Icon(Icons.help_outline),
+                            label: const Text('Ajuda'),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/ajuda');
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    Semantics(
+                      identifier: 'Botão Entrar',
+                      label: 'Botão Entrar',
+                      button: true,
+                      hint: 'Clique para fazer login',
+                      child: ElevatedButton(
+                        onPressed: _login,
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size.fromHeight(50),
+                        ),
+                        child: const Text('Entrar'),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
