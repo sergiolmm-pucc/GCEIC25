@@ -1,37 +1,37 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-class ConsultaScreen extends StatefulWidget {
+class ConsultaTotalScreen extends StatefulWidget {
   @override
-  _ConsultaScreenState createState() => _ConsultaScreenState();
+  _ConsultaTotalScreenState createState() => _ConsultaTotalScreenState();
 }
 
-class _ConsultaScreenState extends State<ConsultaScreen> {
+class _ConsultaTotalScreenState extends State<ConsultaTotalScreen> {
   String _resposta = '';
-  final _custoProdutosLimpeza = TextEditingController();
-  final _custoMaoDeObra = TextEditingController();
-  final _custoTrocaFiltro = TextEditingController();
 
+  final _precoEletrica = TextEditingController();
+  final _precoHidraulica = TextEditingController();
+  final _precoManutencao = TextEditingController();
 
   Future<void> _consultarAPI() async {
-    final url = Uri.parse('https://animated-occipital-buckthorn.glitch.me/MOB3/calcular');
+    final url = Uri.parse('https://animated-occipital-buckthorn.glitch.me/MOB3/calcularCustoTotal');
     final response = await http.post(
       url,
       headers: {"Content-Type": "application/json"},
       body: jsonEncode({
-        "custoProdutosLimpeza": double.tryParse(_custoProdutosLimpeza.text) ?? 0,
-        "custoMaoDeObra": double.tryParse(_custoMaoDeObra.text) ?? 0,
-        "custoTrocaFiltro": double.tryParse(_custoTrocaFiltro.text) ?? 0,
+        "custoEletrica": double.tryParse(_precoEletrica.text) ?? 0,
+        "custoHidraulica": double.tryParse(_precoHidraulica.text) ?? 0,
+        "custoManutencao": double.tryParse(_precoManutencao.text) ?? 0,
       }),
     );
 
     setState(() {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        _resposta = 'Custo total da manutenção da piscina: R\$ ${data["custoTotalPiscina"]}';
+        _resposta = 'Custo total calculado: R\$ ${data["custoTotalGeral"]}';
       } else {
-        _resposta = 'Erro na requisição';
+        _resposta = 'Erro na requisição: código ${response.statusCode}';
       }
     });
   }
@@ -39,22 +39,22 @@ class _ConsultaScreenState extends State<ConsultaScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF2196F3), Color(0xFFBBDEFB)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+      body: RepaintBoundary( 
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF2196F3), Color(0xFFBBDEFB)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
           ),
-        ),
-        child: SafeArea(
-          child: Center(
-            child: SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 400),
-                child: Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: RepaintBoundary(
+          child: SafeArea(
+            child: Center(
+              child: SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: 400),
+                  child: Padding(
+                    padding: const EdgeInsets.all(24.0),
                     child: Container(
                       padding: const EdgeInsets.all(24),
                       decoration: BoxDecoration(
@@ -80,7 +80,7 @@ class _ConsultaScreenState extends State<ConsultaScreen> {
                               ),
                               SizedBox(width: 8),
                               Text(
-                                'Custos da Manutenção',
+                                'Consulta Custo Total',
                                 style: TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,
@@ -90,11 +90,11 @@ class _ConsultaScreenState extends State<ConsultaScreen> {
                             ],
                           ),
                           SizedBox(height: 24),
-                          _buildInputField('Custo Produtos Limpeza', _custoProdutosLimpeza),
+                          _buildInputField('Preço da parte elétrica', _precoEletrica),
                           SizedBox(height: 16),
-                          _buildInputField('Custo Mão de Obra', _custoMaoDeObra),
+                          _buildInputField('Preço da parte hidráulica', _precoHidraulica),
                           SizedBox(height: 16),
-                          _buildInputField('Custo Troca de Filtro', _custoTrocaFiltro),
+                          _buildInputField('Preço da manutenção', _precoManutencao),
                           SizedBox(height: 20),
                           SizedBox(
                             width: double.infinity,
