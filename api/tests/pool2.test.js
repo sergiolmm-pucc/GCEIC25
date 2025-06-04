@@ -1,6 +1,6 @@
 const request = require('supertest');
 const express = require('express');
-const pool4Router = require('../../routes/pool4Routes');
+const pool4Router = require('../routes/pool4Routes');
 
 const app = express();
 app.use(express.json());

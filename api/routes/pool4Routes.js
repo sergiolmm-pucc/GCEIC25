@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Importa o controller
-const pool4 = require('../controllers/pool4Controller');
+const pool4 = require('../controllers/pool2Controller');
 
 // Define rotas usando as funções do controller
 router.post('/calcular-volume', pool4.calcularVolume);
