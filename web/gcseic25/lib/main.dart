@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gcseic25/equipes/CI_CD_6/splash_creen.dart';
-import 'package:gcseic25/equipes/equipe4/screens/login.dart';
-import 'package:gcseic25/equipes/equipe4/screens/splash_screen.dart';
+import 'package:gcseic25/equipes/equipe2/screens/login.dart';
+import 'package:gcseic25/equipes/equipe2/screens/splash_screen.dart';
 import 'package:gcseic25/equipes/APOS/screens/splash_screen.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
@@ -17,6 +17,8 @@ import 'package:gcseic25/equipes/base/equipe3/splash_screen.dart';
 import 'package:gcseic25/equipes/equipe5/screens/login.dart';
 import 'package:gcseic25/equipes/MKP1/screens/sobre_screen.dart';
 import 'package:gcseic25/equipes/MKP1/screens/ajuda_screen.dart';
+import 'package:gcseic25/equipes/equipe5/screens/transition_screen.dart';
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
@@ -36,7 +38,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/splash_screen_equipe_2':
             (context) => SplashScreen4(nextPage: LoginPage4()),
-
+        '/splash_screen_equipe_2': 
+            (context) => SplashScreen4(nextPage: LoginPage2()),
         '/CI_CD_8':
             (context) => CI_CD8Splash.SplashScreen(
               nextPage: const CI_CD8Login.LoginPage(),
@@ -56,6 +59,8 @@ class MyApp extends StatelessWidget {
         '/equipe5': (context) => TelaLogin(),
         '/sobre': (context) => const SobreScreen(),
         '/ajuda': (context) => const AjudaScreen(),
+        '/mob3': (context) => SplashScreen3(nextPage:  LoginScreen()), 
+        '/equipe5': (context) => TransitionScreen(nextPage: TelaLogin()),
       },
     );
   }
@@ -131,24 +136,17 @@ class HomePage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/aposSplashScreen');
-              },
-              child: Text('Calculadora de Aposentadoria'),
-            ),
-            SizedBox(height: 20),
             Semantics(
-              identifier: 'Entrar',
-              label: 'Entrar',
+              identifier: 'Calculadora de Aposentadoria',
+              label: 'Calculadora de Aposentadoria',
               button: true,
               child: SizedBox(
-                width: 220,
+                width: 320,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/aposSplashScreen');
                   },
-                  child: const Text('Entrar'),
+                  child: const Text('Calculadora de Aposentadoria'),
                 ),
               ),
             ),

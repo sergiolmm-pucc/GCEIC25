@@ -1,27 +1,16 @@
-exports.calcularTodosCustos = ({ largura, comprimento, profundidade, precoAgua, custoEletrico, custoHidraulico, custoManutencaoMensal, mesesManutencao = 12 }) => {
-  const volume = largura * comprimento * profundidade;
-  const custoAgua = volume * precoAgua;
-  const custoConstrucao = custoAgua + custoEletrico + custoHidraulico;
-  const custoManutencaoTotal = custoManutencaoMensal * mesesManutencao;
-  const custoTotalPiscina = custoConstrucao + custoManutencaoTotal;
+exports.calcularTodosCustos = ({
+  custoProdutosLimpeza = 0,
+  custoMaoDeObra = 0,
+  custoTrocaFiltro = 0
+}) => {
+  const custoTotalPiscina = custoProdutosLimpeza + custoMaoDeObra + custoTrocaFiltro;
 
   return {
-    volume: volume.toFixed(2) + ' m³',
-    custoAgua: custoAgua.toFixed(2),
-    custoConstrucao: custoConstrucao.toFixed(2),
-    manutencaoMensal: custoManutencaoMensal.toFixed(2),
+    custoProdutosLimpeza: custoProdutosLimpeza.toFixed(2),
+    custoMaoDeObra: custoMaoDeObra.toFixed(2),
+    custoTrocaFiltro: custoTrocaFiltro.toFixed(2),
     custoTotalPiscina: custoTotalPiscina.toFixed(2)
   };
-};
-
-exports.sobre = (req, res) => {
-  const urlFoto = 'https://sep-bucket-prod.s3.amazonaws.com/wp-content/uploads/2022/11/51981800313_fb744fd72d_o.jpg';
-
-  res.json({
-    sucesso: true,
-    mensagem: 'Foto do time',
-    url: urlFoto
-  });
 };
 
 exports.getSplashData = () => {
@@ -44,7 +33,8 @@ exports.calcularEletrica = ({
   const custoDisjuntores = quantidadeDisjuntores * precoPorDisjuntor;
   const custoTotalEletrica = custoFios + custoDisjuntores + custoMaoDeObra;
 
-  return custoTotalEletrica.toFixed(2);
+  return {
+    custoTotalEletrico: custoTotalEletrica.toFixed(2)}
 };
 
 exports.calcularHidraulica = ({
@@ -63,3 +53,17 @@ exports.calcularHidraulica = ({
   };
 };
 
+exports.calcularCustoTotalGeral = ({
+  custoManutencao = 0,
+  custoEletrica = 0,
+  custoHidraulica = 0
+}) => {
+  const custoTotal = custoManutencao + custoEletrica + custoHidraulica;
+
+  return {
+    custoManutencao: custoManutencao.toFixed(2),
+    custoEletrica: custoEletrica.toFixed(2),
+    custoHidraulica: custoHidraulica.toFixed(2),
+    custoTotalGeral: custoTotal.toFixed(2)
+  };
+};
