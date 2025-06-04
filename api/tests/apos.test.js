@@ -136,7 +136,7 @@ describe("Função calcularAposentadoria", () => {
 describe("Função calcularRegra", () => {
 
   test("Deve retornar 400 se faltar algum campo", () => {
-    const req = { body: { sexo: "feminino", idade: 60 } }; // faltam 2 campos
+    const req = { body: { sexo: "feminino", idade: 60 } };
     const res = mockResponse();
 
     calcularRegra(req, res);
@@ -225,7 +225,6 @@ describe("Função calcularRegra", () => {
     });
   });
 });
-
 
 // Emilly Ferro
 describe("Função calcularPontuacao", () => {
