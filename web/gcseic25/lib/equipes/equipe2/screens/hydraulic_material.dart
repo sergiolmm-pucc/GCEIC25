@@ -15,8 +15,17 @@ class _HydraulicCostPageState extends State<HydraulicCostPage> {
   final TextEditingController filtroController = TextEditingController();
   final TextEditingController tubosController = TextEditingController();
   final TextEditingController precoMetroController = TextEditingController();
-  final TextEditingController tipoTubulacaoController = TextEditingController();
   final TextEditingController conexoesController = TextEditingController();
+
+  String? tipoTubulacaoSelecionado;
+
+  // Mapeia os preços médios por metro para cada tipo de tubulação
+  final Map<String, double> precosMedios = {
+    'PVC': 10.0,
+    'CPVC': 12.5,
+    'Cobre': 25.0,
+    'PEX': 20.0,
+  };
 
   double total = 0.0;
 
@@ -29,6 +38,18 @@ class _HydraulicCostPageState extends State<HydraulicCostPage> {
 
     setState(() {
       total = bomba + filtro + (tubos * precoMetro) + conexoes;
+    });
+  }
+
+  // Quando o usuário escolhe o tipo da tubulação, atualiza preço por metro automaticamente
+  void onTipoTubulacaoChanged(String? value) {
+    setState(() {
+      tipoTubulacaoSelecionado = value;
+      if (value != null && precosMedios.containsKey(value)) {
+        precoMetroController.text = precosMedios[value]!.toStringAsFixed(2);
+      } else {
+        precoMetroController.clear();
+      }
     });
   }
 
@@ -71,9 +92,9 @@ class _HydraulicCostPageState extends State<HydraulicCostPage> {
                         children: [
                           Row(
                             children: [
-                              Expanded(child: buildStyledTextField(bombaController, 'Bomba')),
+                              Expanded(child: buildStyledTextField(bombaController, 'Bomba (R\$)')),
                               const SizedBox(width: 10),
-                              Expanded(child: buildStyledTextField(filtroController, 'Filtro')),
+                              Expanded(child: buildStyledTextField(filtroController, 'Filtro (R\$)')),
                             ],
                           ),
                           const SizedBox(height: 10),
@@ -81,15 +102,15 @@ class _HydraulicCostPageState extends State<HydraulicCostPage> {
                             children: [
                               Expanded(child: buildStyledTextField(tubosController, 'Tubulações (m)')),
                               const SizedBox(width: 10),
-                              Expanded(child: buildStyledTextField(tipoTubulacaoController, 'Tipo da tubulação')),
+                              Expanded(child: buildDropdownTipoTubulacao()),
                             ],
                           ),
                           const SizedBox(height: 10),
                           Row(
                             children: [
-                              Expanded(child: buildStyledTextField(precoMetroController, 'Preço por metro')),
+                              Expanded(child: buildStyledTextField(precoMetroController, 'Preço por metro (R\$)')),
                               const SizedBox(width: 10),
-                              Expanded(child: buildStyledTextField(conexoesController, 'Conexões')),
+                              Expanded(child: buildStyledTextField(conexoesController, 'Conexões (un)')),
                             ],
                           ),
                           const SizedBox(height: 20),
@@ -117,7 +138,7 @@ class _HydraulicCostPageState extends State<HydraulicCostPage> {
                     padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                     width: 300,
                     decoration: BoxDecoration(
-                      color: Color(0xFFF2F2F2),
+                      color: const Color(0xFFF2F2F2),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Row(
@@ -164,13 +185,45 @@ class _HydraulicCostPageState extends State<HydraulicCostPage> {
         const SizedBox(height: 4),
         TextFormField(
           controller: controller,
-          keyboardType: TextInputType.number,
+          keyboardType: TextInputType.numberWithOptions(decimal: true),
           style: const TextStyle(color: Color(0xFF3C3C3C)),
           decoration: InputDecoration(
             filled: true,
-            fillColor: Color(0xFFEBEBEB),
+            fillColor: const Color(0xFFEBEBEB),
             hintText: label,
             hintStyle: const TextStyle(color: Color(0xFFADADAD)),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none,
+            ),
+            contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildDropdownTipoTubulacao() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Tipo da tubulação',
+          style: TextStyle(color: Color(0xFF3C3C3C), fontSize: 14),
+        ),
+        const SizedBox(height: 4),
+        DropdownButtonFormField<String>(
+          value: tipoTubulacaoSelecionado,
+          items: const [
+            DropdownMenuItem(value: 'PVC', child: Text('PVC')),
+            DropdownMenuItem(value: 'CPVC', child: Text('CPVC')),
+            DropdownMenuItem(value: 'Cobre', child: Text('Cobre')),
+            DropdownMenuItem(value: 'PEX', child: Text('PEX')),
+          ],
+          onChanged: onTipoTubulacaoChanged,
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: const Color(0xFFEBEBEB),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide.none,

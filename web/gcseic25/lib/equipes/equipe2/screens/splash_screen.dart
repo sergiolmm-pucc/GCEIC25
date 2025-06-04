@@ -1,20 +1,20 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-class SplashScreen4 extends StatefulWidget {
+class SplashScreen2 extends StatefulWidget {
   final Widget nextPage;
 
-  const SplashScreen4({super.key, required this.nextPage});
+  const SplashScreen2({super.key, required this.nextPage});
 
   @override
-  State<SplashScreen4> createState() => _SplashScreenState();
+  State<SplashScreen2> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen4> {
+class _SplashScreenState extends State<SplashScreen2> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 6), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => widget.nextPage),

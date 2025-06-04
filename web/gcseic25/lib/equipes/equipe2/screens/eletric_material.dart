@@ -163,8 +163,8 @@ class _EletricMaterialPageState extends State<EletricMaterialPage> {
                             const SizedBox(width: 16),
                             Expanded(
                               child: _buildSection('Cabo elétrico', [
-                                _inputLabelField(label: 'Metro do fio', controller: metrofioController, isInteger: true),
-                                _inputLabelField(label: 'Preço unitário (R\$)', controller: pricefioController),
+                                _inputLabelField(label: 'Metros de fio', controller: metrofioController, isInteger: true),
+                                _inputLabelField(label: 'Preço por metro (R\$)', controller: pricefioController),
                               ]),
                             ),
                           ],

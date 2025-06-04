@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.blue),
       home: HomePage(),
       routes: {
-        '/splash_screen_equipe_2': (context) => SplashScreen4(nextPage: LoginPage2()),
+        '/splash_screen_equipe_2': (context) => SplashScreen2(nextPage: LoginPage2()),
 
         '/CI_CD_8': (context) => CI_CD8Splash.SplashScreen(nextPage: const CI_CD8Login.LoginPage()),
         '/CI_CD_6': (context) => SplashToLoginScreen(),

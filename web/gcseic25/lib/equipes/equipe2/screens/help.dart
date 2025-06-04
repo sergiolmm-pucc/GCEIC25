@@ -5,7 +5,6 @@ class HelpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const borderColor = Color(0xFF347CA5);
 
     return Scaffold(
       backgroundColor: const Color(0xFFF4F4F4),

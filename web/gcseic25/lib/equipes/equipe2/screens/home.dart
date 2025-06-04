@@ -382,7 +382,7 @@ Widget buildButtonCard({
                   gradient: LinearGradient(
                     colors: [
                       Colors.white.withOpacity(0.8),
-                      Colors.white.withOpacity(0.4),
+                      Colors.white.withOpacity(0.6),
                     ],
                     begin: Alignment.bottomCenter,
                     end: Alignment.topCenter,
@@ -404,7 +404,7 @@ Widget buildButtonCard({
                     Text(
                       subtitle,
                       style: const TextStyle(
-                        color: Colors.white70,
+                        color: Colors.grey,
                         fontSize: 13,
                         fontWeight: FontWeight.w600
                       ),
