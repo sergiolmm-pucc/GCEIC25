@@ -36,8 +36,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.blue),
       home: HomePage(),
       routes: {
-        '/splash_screen_equipe_2':
-            (context) => SplashScreen4(nextPage: LoginPage4()),
         '/splash_screen_equipe_2': 
             (context) => SplashScreen4(nextPage: LoginPage2()),
         '/CI_CD_8':
