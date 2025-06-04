@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class MKP1Service {
-  //static const String baseUrl = 'https://animated-occipital-buckthorn.glitch.me/mkp1';
-  static const String baseUrl = 'http://localhost:3000/mkp1';
+  static const String baseUrl = 'https://animated-occipital-buckthorn.glitch.me/mkp1';
+  //static const String baseUrl = 'http://localhost:3000/mkp1';
 
   // Cálculo simples de markup
   Future<Map<String, dynamic>> calculoSimples(

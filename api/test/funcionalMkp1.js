@@ -25,8 +25,10 @@ const { Options } = require('selenium-webdriver/chrome');
   let driver = await builder.build();
 
   try {
-    console.log('http://localhost:8000/');
-    await driver.get('http://localhost:8000/');
+    //console.log('http://localhost:8000/');
+    //await driver.get('http://localhost:8000/');
+    console.log('https://sergio.dev.br/');
+    await driver.get('https://sergio.dev.br/'); 
     await driver.sleep(10000);
 
     // Screenshot 1: Tela inicial
