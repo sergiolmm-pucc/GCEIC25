@@ -50,15 +50,15 @@ class About extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 64),
                     child: PersonCard(
-                      imagePath: 'assets/equipe4/alex.png',
+                      imagePath: 'assets/equipe2/alex.png',
                       name: 'Alex Chaves Insel',
                       ra: '21008278',
-                      bgPath: 'assets/equipe4/bg1.png',
+                      bgPath: 'assets/equipe2/bg1.png',
                       nameStyle: nameStyle,
                     ),
                   ),
                  PersonCard(
-                      imagePath: 'assets/equipe4/ana.png',
+                      imagePath: 'assets/equipe2/ana.png',
                       name: 'Ana Carolina Morelli Chaves',
                       ra: '23017617',
                       bgPath: '',
@@ -67,24 +67,24 @@ class About extends StatelessWidget {
               
               
                    PersonCard(
-                      imagePath: 'assets/equipe4/lais.png',
+                      imagePath: 'assets/equipe2/lais.png',
                       name: 'Lais de Paula Lemos',
                       ra: '23016041',
-                      bgPath: 'assets/equipe4/bg2.png',
+                      bgPath: 'assets/equipe2/bg2.png',
                       nameStyle: nameStyle,
                     ),
 
                   const SizedBox(width: double.infinity,height: 1), // força quebra de linha
 
                   PersonCard(
-                    imagePath: 'assets/equipe4/luiz.png',
+                    imagePath: 'assets/equipe2/luiz.png',
                     name: 'Luiz Gustavo Pinto da Silva',
                     ra: '23013028',
-                    bgPath: 'assets/equipe4/bg1.png',
+                    bgPath: 'assets/equipe2/bg1.png',
                     nameStyle: nameStyle,
                   ),
                   PersonCard(
-                    imagePath: 'assets/equipe4/manu.png',
+                    imagePath: 'assets/equipe2/manu.png',
                     name: 'Manoela Fernanda Pereira',
                     ra: '23007000',
                     bgPath: '',

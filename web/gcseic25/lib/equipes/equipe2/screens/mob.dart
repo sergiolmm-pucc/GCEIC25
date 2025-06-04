@@ -86,7 +86,7 @@ class _MOBPageState extends State<MOBPage> {
                 width: 520,
                 padding: const EdgeInsets.all(28),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.85),
+                  color: const Color(0xFFF2F2F2),
                   borderRadius: BorderRadius.circular(32),
                 ),
                 child: Column(
@@ -158,8 +158,13 @@ class _MOBPageState extends State<MOBPage> {
         controller: controller,
         decoration: InputDecoration(
           labelText: label,
+          labelStyle: const TextStyle( 
+            fontSize: 14,              
+            color: Color(0xFFADADAD),
+          ),
+          prefixText: 'R\$ ',
           filled: true,
-          fillColor: Colors.grey[300],
+          fillColor: const Color(0xFFEBEBEB),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide.none,

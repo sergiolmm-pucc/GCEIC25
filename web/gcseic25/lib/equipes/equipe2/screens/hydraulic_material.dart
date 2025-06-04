@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../utils/tab_bar.dart';
 
 class HydraulicCostPage extends StatefulWidget {
   const HydraulicCostPage({super.key});
@@ -33,75 +34,12 @@ class _HydraulicCostPageState extends State<HydraulicCostPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF3E7CA0),
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: const Text(
-          'SplashMath',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
-        ),
-        actions: [
-          const SizedBox(width: 8),
-          TextButton(
-            onPressed: () {
-              // Navegar para Help
-            },
-            child: const Text(
-              'Ajuda',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-          const SizedBox(width: 8),
-          TextButton(
-            onPressed: () {
-              // Navegar para Sobre
-            },
-            child: const Text(
-              'Sobre',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-          const SizedBox(width: 8),
-          TextButton(
-            onPressed: () {
-              // Navegar para Perfil/User
-            },
-            style: TextButton.styleFrom(
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-            ),
-            child: Row(
-              children: [
-                Image.asset(
-                  'assets/equipe4/user_team4.png',
-                  width: 24,
-                  height: 24,
-                ),
-                const SizedBox(width: 6),
-                const Text('User'),
-              ],
-            ),
-          ),
-          const SizedBox(width: 12),
-        ],
-      ),
-      extendBodyBehindAppBar: true,
-      body: Stack(
+    return MainLayout(
+      child: Stack(
         children: [
           SizedBox.expand(
             child: Image.asset(
-              'assets/equipe4/apis_background.png',
+              'assets/equipe2/apis_background.png',
               fit: BoxFit.cover,
             ),
           ),
@@ -124,9 +62,9 @@ class _HydraulicCostPageState extends State<HydraulicCostPage> {
                     key: _formKey,
                     child: Container(
                       padding: const EdgeInsets.all(20),
-                      width: 360,
+                      width: 460,
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
+                        color: const Color(0xFFF2F2F2),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Column(
@@ -179,7 +117,7 @@ class _HydraulicCostPageState extends State<HydraulicCostPage> {
                     padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                     width: 300,
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.3),
+                      color: Color(0xFFF2F2F2),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Row(
@@ -190,8 +128,8 @@ class _HydraulicCostPageState extends State<HydraulicCostPage> {
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF3C3C3C),
                           ),
                         ),
                         Text(
@@ -199,8 +137,8 @@ class _HydraulicCostPageState extends State<HydraulicCostPage> {
                           style: const TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF1274F1),
                           ),
                         ),
                       ],
@@ -221,18 +159,18 @@ class _HydraulicCostPageState extends State<HydraulicCostPage> {
       children: [
         Text(
           label,
-          style: const TextStyle(color: Colors.white, fontSize: 14),
+          style: const TextStyle(color: Color(0xFF3C3C3C), fontSize: 14),
         ),
         const SizedBox(height: 4),
         TextFormField(
           controller: controller,
           keyboardType: TextInputType.number,
-          style: const TextStyle(color: Colors.white),
+          style: const TextStyle(color: Color(0xFF3C3C3C)),
           decoration: InputDecoration(
             filled: true,
-            fillColor: Colors.white.withOpacity(0.3),
+            fillColor: Color(0xFFEBEBEB),
             hintText: label,
-            hintStyle: const TextStyle(color: Colors.white70),
+            hintStyle: const TextStyle(color: Color(0xFFADADAD)),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide.none,

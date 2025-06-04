@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gcseic25/equipes/CI_CD_6/splash_creen.dart';
-import 'package:gcseic25/equipes/equipe4/screens/login.dart';
-import 'package:gcseic25/equipes/equipe4/screens/splash_screen.dart';
+import 'package:gcseic25/equipes/equipe2/screens/login.dart';
+import 'package:gcseic25/equipes/equipe2/screens/splash_screen.dart';
 import 'package:gcseic25/equipes/APOS/screens/splash_screen.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.blue),
       home: HomePage(),
       routes: {
-        '/splash_screen_equipe_2': (context) => SplashScreen4(nextPage: LoginPage4()),
+        '/splash_screen_equipe_2': (context) => SplashScreen4(nextPage: LoginPage2()),
 
         '/CI_CD_8': (context) => CI_CD8Splash.SplashScreen(nextPage: const CI_CD8Login.LoginPage()),
         '/CI_CD_6': (context) => SplashToLoginScreen(),
