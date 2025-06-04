@@ -5,7 +5,6 @@ import 'calculo_iss.dart';
 import 'calculo_irpj.dart';
 import 'sobre.dart';
 import 'help.dart';
-import 'transition_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -45,7 +44,7 @@ class SplashScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => TransitionScreen(nextPage: const CalculoIpiPage()),
+                          builder: (context) => CalculoIpiPage(),
                         ),
                       );
                     },
@@ -57,7 +56,7 @@ class SplashScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => TransitionScreen(nextPage: const CalculoIcmsPage()),
+                          builder: (context) => CalculoIcmsPage(),
                         ),
                       );
                     },
@@ -69,7 +68,7 @@ class SplashScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => TransitionScreen(nextPage: const CalculoIrpjPage()),
+                          builder: (context) => CalculoIrpjPage(),
                         ),
                       );
                     },
@@ -81,7 +80,7 @@ class SplashScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => TransitionScreen(nextPage: const CalculoIssPage()),
+                          builder: (context) => CalculoIssPage(),
                         ),
                       );
                     },
@@ -93,7 +92,7 @@ class SplashScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => TransitionScreen(nextPage: const SobrePage()),
+                          builder: (context) => SobrePage(),
                         ),
                       );
                     },
@@ -105,7 +104,7 @@ class SplashScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => TransitionScreen(nextPage: const HelpPage()),
+                          builder: (context) => HelpPage(),
                         ),
                       );
                     },
