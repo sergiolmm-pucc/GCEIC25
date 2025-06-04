@@ -15,6 +15,7 @@ class _MaintenancePageState extends State<MaintenancePage> {
   final TextEditingController produtosController = TextEditingController();
   final TextEditingController energiaController = TextEditingController();
   final TextEditingController maoDeObraController = TextEditingController();
+  final TextEditingController horaBombaController = TextEditingController();
 
   String resultado = '';
   bool isLoading = false;
@@ -23,7 +24,8 @@ class _MaintenancePageState extends State<MaintenancePage> {
     return 
         produtosController.text.isNotEmpty &&
         energiaController.text.isNotEmpty &&
-        maoDeObraController.text.isNotEmpty;
+        maoDeObraController.text.isNotEmpty&&
+        horaBombaController.text.isNotEmpty;
   }
 
   @override
@@ -34,6 +36,7 @@ class _MaintenancePageState extends State<MaintenancePage> {
     produtosController.addListener(_onInputChanged);
     energiaController.addListener(_onInputChanged);
     maoDeObraController.addListener(_onInputChanged);
+    horaBombaController.addListener(_onInputChanged);
   }
 
   void _onInputChanged() {
@@ -48,11 +51,13 @@ class _MaintenancePageState extends State<MaintenancePage> {
     produtosController.removeListener(_onInputChanged);
     energiaController.removeListener(_onInputChanged);
     maoDeObraController.removeListener(_onInputChanged);
+    horaBombaController.removeListener(_onInputChanged);
 
    
     produtosController.dispose();
     energiaController.dispose();
     maoDeObraController.dispose();
+    horaBombaController.dispose();
 
     super.dispose();
   }
@@ -62,6 +67,7 @@ class _MaintenancePageState extends State<MaintenancePage> {
     final produtos = produtosController.text;
     final energia = energiaController.text;
     final maoDeObra = maoDeObraController.text;
+    final horaBomba = horaBombaController.text;
 
     setState(() {
       isLoading = true;
@@ -78,6 +84,7 @@ class _MaintenancePageState extends State<MaintenancePage> {
           'produtos_quimicos': produtos,
           'energia_bomba': energia,
           'mao_obra': maoDeObra,
+          'hora_bomba': horaBomba,
         }),
       );
 
@@ -139,31 +146,45 @@ class _MaintenancePageState extends State<MaintenancePage> {
                       children: [
                         const SizedBox(height: 34),
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Expanded(
-                                child: _inputLabelField(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  _inputLabelField(
                                     label: 'Produtos químicos (R\$)',
-                                    controller: produtosController)),
+                                    controller: produtosController,
+                                  ),
+                                  const SizedBox(height: 4),
+                                  const Text(
+                                    "Obs. cloro, algicida, pH+ ou pH-, clarificante.",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontFamily: 'Montserrat',
+                                      fontWeight: FontWeight.w200,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: _inputLabelField(
+                                label: 'Uso mensal da bomba (horas)',
+                                controller: horaBombaController,
+                              ),
+                            ),
                           ],
                         ),
-                        const SizedBox(height: 4),
-                        const Align(
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            "Obs. cloro, algicida, pH+ ou pH-, clarificante.",
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.w200,
-                                color: Colors.grey),
-                          ),
-                        ),
+
                         const SizedBox(height: 20),
                         Row(
                           children: [
                             Expanded(
                                 child: _inputLabelField(
-                                    label: 'Energia da bomba (R\$)',
+                                    label: 'Preço/hora da bomba ligada (R\$)',
                                     controller: energiaController)),
                             const SizedBox(width: 12),
                             Expanded(
@@ -171,18 +192,6 @@ class _MaintenancePageState extends State<MaintenancePage> {
                                     label: 'Mão de obra (R\$)',
                                     controller: maoDeObraController)),
                           ],
-                        ),
-                        const SizedBox(height: 4),
-                        const Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Obs: horas por dia",
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.w200,
-                                color: Colors.grey),
-                          ),
                         ),
                         const SizedBox(height: 20),
                         Row(
