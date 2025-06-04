@@ -276,48 +276,47 @@ function calcularCustoDAgua(req, res) {
 }
 
 function calcularManutencaoMensal(req, res) {
-  const {produtos_quimicos, energia_bomba, mao_obra } = req.body;
+  const { produtos_quimicos, energia_bomba, mao_obra, hora_bomba } = req.body;
 
   if (
     produtos_quimicos == null ||
     energia_bomba == null ||
-    mao_obra == null
+    mao_obra == null ||
+    hora_bomba == null
   ) {
     return res.status(400).json({
-      error: 'Todos os campos (volume, produtos_quimicos, energia_bomba, mao_obra) são obrigatórios.'
+      error: 'Todos os campos (produtos_quimicos, energia_bomba, mao_obra, horas_bomba) são obrigatórios.'
     });
   }
 
   function tratarNumero(valor) {
-  if (typeof valor !== 'string') valor = valor.toString();
+    if (typeof valor !== 'string') valor = valor.toString();
 
-  // Caso especial: número com vírgula como decimal e ponto como milhar
-  if (valor.includes(',') && valor.includes('.')) {
-    valor = valor.replace(/\./g, '').replace(',', '.');
-  }
-  // Caso comum no Brasil: número apenas com vírgula (decimal)
-  else if (valor.includes(',')) {
-    valor = valor.replace(',', '.');
-  }
-  // Caso com apenas ponto (milhar) — vamos remover o ponto nesse caso também
-  else if (/^\d{1,3}(\.\d{3})+$/.test(valor)) {
-    valor = valor.replace(/\./g, '');
-  }
+    if (valor.includes(',') && valor.includes('.')) {
+      valor = valor.replace(/\./g, '').replace(',', '.');
+    } else if (valor.includes(',')) {
+      valor = valor.replace(',', '.');
+    } else if (/^\d{1,3}(\.\d{3})+$/.test(valor)) {
+      valor = valor.replace(/\./g, '');
+    }
 
-  return parseFloat(valor);
-}
+    return parseFloat(valor);
+  }
 
   const produtosQuimicosFloat = tratarNumero(produtos_quimicos);
   const energiaBombaFloat = tratarNumero(energia_bomba);
   const maoObraFloat = tratarNumero(mao_obra);
+  const horasBombaFloat = tratarNumero(hora_bomba);
 
-const custoTotal = (produtosQuimicosFloat + energiaBombaFloat + maoObraFloat);
+  const energiaMensal = energiaBombaFloat * horasBombaFloat;
 
+  const custoTotal = produtosQuimicosFloat + energiaMensal + maoObraFloat;
 
   res.json({
     custo_mensal: custoTotal.toFixed(2)
   });
 }
+
 
 function calcularMob(req, res) {
     const { transporte, instalacao, maoDeObra, equipamentos } = req.body;
