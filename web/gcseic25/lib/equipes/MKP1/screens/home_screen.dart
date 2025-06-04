@@ -127,40 +127,48 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildCalculoSimples() {
     return Column(
       children: [
-        TextFormField(
-          controller: _custoController,
-          decoration: const InputDecoration(
-            labelText: 'Custo do Produto (R\$)',
-            border: OutlineInputBorder(),
+        Semantics(
+          label: 'Campo Custo do Produto',
+          textField: true,
+          child: TextFormField(
+            controller: _custoController,
+            decoration: const InputDecoration(
+              labelText: 'Custo do Produto (R\$)',
+              border: OutlineInputBorder(),
+            ),
+            keyboardType: TextInputType.number,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Por favor, insira o custo';
+              }
+              if (double.tryParse(value) == null) {
+                return 'Por favor, insira um número válido';
+              }
+              return null;
+            },
           ),
-          keyboardType: TextInputType.number,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Por favor, insira o custo';
-            }
-            if (double.tryParse(value) == null) {
-              return 'Por favor, insira um número válido';
-            }
-            return null;
-          },
         ),
         const SizedBox(height: 20),
-        TextFormField(
-          controller: _lucroController,
-          decoration: const InputDecoration(
-            labelText: 'Lucro Desejado (%)',
-            border: OutlineInputBorder(),
+        Semantics(
+          label: 'Campo Lucro Desejado',
+          textField: true,
+          child: TextFormField(
+            controller: _lucroController,
+            decoration: const InputDecoration(
+              labelText: 'Lucro Desejado (%)',
+              border: OutlineInputBorder(),
+            ),
+            keyboardType: TextInputType.number,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Por favor, insira o lucro';
+              }
+              if (double.tryParse(value) == null) {
+                return 'Por favor, insira um número válido';
+              }
+              return null;
+            },
           ),
-          keyboardType: TextInputType.number,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Por favor, insira o lucro';
-            }
-            if (double.tryParse(value) == null) {
-              return 'Por favor, insira um número válido';
-            }
-            return null;
-          },
         ),
       ],
     );
@@ -169,76 +177,92 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildCalculoDetalhado() {
     return Column(
       children: [
-        TextFormField(
-          controller: _custoController,
-          decoration: const InputDecoration(
-            labelText: 'Custo do Produto (R\$)',
-            border: OutlineInputBorder(),
+        Semantics(
+          label: 'Campo Custo do Produto',
+          textField: true,
+          child: TextFormField(
+            controller: _custoController,
+            decoration: const InputDecoration(
+              labelText: 'Custo do Produto (R\$)',
+              border: OutlineInputBorder(),
+            ),
+            keyboardType: TextInputType.number,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Por favor, insira o custo';
+              }
+              if (double.tryParse(value) == null) {
+                return 'Por favor, insira um número válido';
+              }
+              return null;
+            },
           ),
-          keyboardType: TextInputType.number,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Por favor, insira o custo';
-            }
-            if (double.tryParse(value) == null) {
-              return 'Por favor, insira um número válido';
-            }
-            return null;
-          },
         ),
         const SizedBox(height: 20),
-        TextFormField(
-          controller: _lucroController,
-          decoration: const InputDecoration(
-            labelText: 'Lucro Desejado (%)',
-            border: OutlineInputBorder(),
+        Semantics(
+          label: 'Campo Lucro Desejado',
+          textField: true,
+          child: TextFormField(
+            controller: _lucroController,
+            decoration: const InputDecoration(
+              labelText: 'Lucro Desejado (%)',
+              border: OutlineInputBorder(),
+            ),
+            keyboardType: TextInputType.number,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Por favor, insira o lucro';
+              }
+              if (double.tryParse(value) == null) {
+                return 'Por favor, insira um número válido';
+              }
+              return null;
+            },
           ),
-          keyboardType: TextInputType.number,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Por favor, insira o lucro';
-            }
-            if (double.tryParse(value) == null) {
-              return 'Por favor, insira um número válido';
-            }
-            return null;
-          },
         ),
         const SizedBox(height: 20),
-        TextFormField(
-          controller: _despesasController,
-          decoration: const InputDecoration(
-            labelText: 'Despesas (%)',
-            border: OutlineInputBorder(),
+        Semantics(
+          label: 'Campo Despesas',
+          textField: true,
+          child: TextFormField(
+            controller: _despesasController,
+            decoration: const InputDecoration(
+              labelText: 'Despesas (%)',
+              border: OutlineInputBorder(),
+            ),
+            keyboardType: TextInputType.number,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Por favor, insira as despesas';
+              }
+              if (double.tryParse(value) == null) {
+                return 'Por favor, insira um número válido';
+              }
+              return null;
+            },
           ),
-          keyboardType: TextInputType.number,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Por favor, insira as despesas';
-            }
-            if (double.tryParse(value) == null) {
-              return 'Por favor, insira um número válido';
-            }
-            return null;
-          },
         ),
         const SizedBox(height: 20),
-        TextFormField(
-          controller: _impostosController,
-          decoration: const InputDecoration(
-            labelText: 'Impostos (%)',
-            border: OutlineInputBorder(),
+        Semantics(
+          label: 'Campo Impostos',
+          textField: true,
+          child: TextFormField(
+            controller: _impostosController,
+            decoration: const InputDecoration(
+              labelText: 'Impostos (%)',
+              border: OutlineInputBorder(),
+            ),
+            keyboardType: TextInputType.number,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Por favor, insira os impostos';
+              }
+              if (double.tryParse(value) == null) {
+                return 'Por favor, insira um número válido';
+              }
+              return null;
+            },
           ),
-          keyboardType: TextInputType.number,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Por favor, insira os impostos';
-            }
-            if (double.tryParse(value) == null) {
-              return 'Por favor, insira um número válido';
-            }
-            return null;
-          },
         ),
       ],
     );
@@ -247,41 +271,49 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildSugestaoPreco() {
     return Column(
       children: [
-        TextFormField(
-          controller: _custoController,
-          decoration: const InputDecoration(
-            labelText: 'Custo do Produto (R\$)',
-            border: OutlineInputBorder(),
+        Semantics(
+          label: 'Campo Custo do Produto',
+          textField: true,
+          child: TextFormField(
+            controller: _custoController,
+            decoration: const InputDecoration(
+              labelText: 'Custo do Produto (R\$)',
+              border: OutlineInputBorder(),
+            ),
+            keyboardType: TextInputType.number,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Por favor, insira o custo';
+              }
+              if (double.tryParse(value) == null) {
+                return 'Por favor, insira um número válido';
+              }
+              return null;
+            },
           ),
-          keyboardType: TextInputType.number,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Por favor, insira o custo';
-            }
-            if (double.tryParse(value) == null) {
-              return 'Por favor, insira um número válido';
-            }
-            return null;
-          },
         ),
         const SizedBox(height: 20),
-        TextFormField(
-          controller: _concorrentesController,
-          decoration: const InputDecoration(
-            labelText: 'Preços dos Concorrentes (separados por vírgula)',
-            border: OutlineInputBorder(),
+        Semantics(
+          label: 'Campo Preços dos Concorrentes',
+          textField: true,
+          child: TextFormField(
+            controller: _concorrentesController,
+            decoration: const InputDecoration(
+              labelText: 'Preços dos Concorrentes (separados por vírgula)',
+              border: OutlineInputBorder(),
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Por favor, insira os preços dos concorrentes';
+              }
+              try {
+                value.split(',').forEach((e) => double.parse(e.trim()));
+                return null;
+              } catch (e) {
+                return 'Por favor, insira números válidos separados por vírgula';
+              }
+            },
           ),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Por favor, insira os preços dos concorrentes';
-            }
-            try {
-              value.split(',').forEach((e) => double.parse(e.trim()));
-              return null;
-            } catch (e) {
-              return 'Por favor, insira números válidos separados por vírgula';
-            }
-          },
         ),
       ],
     );
@@ -330,30 +362,34 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: const TextStyle(color: Colors.red),
                   ),
                 ),
-              ElevatedButton(
-                onPressed:
-                    _isLoading
-                        ? null
-                        : () {
-                          switch (_tipoCalculo) {
-                            case 'simples':
-                              _calcularSimples();
-                              break;
-                            case 'detalhado':
-                              _calcularDetalhado();
-                              break;
-                            case 'sugestao':
-                              _calcularSugestao();
-                              break;
-                          }
-                        },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(50),
+              Semantics(
+                label: 'Botão Calcular',
+                button: true,
+                child: ElevatedButton(
+                  onPressed:
+                      _isLoading
+                          ? null
+                          : () {
+                            switch (_tipoCalculo) {
+                              case 'simples':
+                                _calcularSimples();
+                                break;
+                              case 'detalhado':
+                                _calcularDetalhado();
+                                break;
+                              case 'sugestao':
+                                _calcularSugestao();
+                                break;
+                            }
+                          },
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(50),
+                  ),
+                  child:
+                      _isLoading
+                          ? const CircularProgressIndicator()
+                          : const Text('Calcular'),
                 ),
-                child:
-                    _isLoading
-                        ? const CircularProgressIndicator()
-                        : const Text('Calcular'),
               ),
               const SizedBox(height: 30),
               if (_resultado != null) ...[

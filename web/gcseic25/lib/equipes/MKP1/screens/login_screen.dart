@@ -48,41 +48,80 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   const Icon(Icons.local_bar, size: 80, color: Colors.blue),
                   const SizedBox(height: 20),
-                  TextFormField(
-                    controller: _usernameController,
-                    decoration: const InputDecoration(
-                      labelText: 'Usuário',
-                      border: OutlineInputBorder(),
+                  Semantics(
+                    label: 'Campo Usuário',
+                    textField: true,
+                    child: TextFormField(
+                      controller: _usernameController,
+                      decoration: const InputDecoration(
+                        labelText: 'Usuário',
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Por favor, insira o usuário';
+                        }
+                        return null;
+                      },
                     ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor, insira o usuário';
-                      }
-                      return null;
-                    },
                   ),
                   const SizedBox(height: 20),
-                  TextFormField(
-                    controller: _passwordController,
-                    decoration: const InputDecoration(
-                      labelText: 'Senha',
-                      border: OutlineInputBorder(),
+                  Semantics(
+                    label: 'Campo Senha',
+                    textField: true,
+                    child: TextFormField(
+                      controller: _passwordController,
+                      decoration: const InputDecoration(
+                        labelText: 'Senha',
+                        border: OutlineInputBorder(),
+                      ),
+                      obscureText: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Por favor, insira a senha';
+                        }
+                        return null;
+                      },
                     ),
-                    obscureText: true,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor, insira a senha';
-                      }
-                      return null;
-                    },
                   ),
                   const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: _login,
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size.fromHeight(50),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Semantics(
+                        label: 'Botão Sobre',
+                        button: true,
+                        child: IconButton(
+                          icon: const Icon(Icons.info_outline),
+                          tooltip: 'Sobre',
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/sobre');
+                          },
+                        ),
+                      ),
+                      Semantics(
+                        label: 'Botão Ajuda',
+                        button: true,
+                        child: IconButton(
+                          icon: const Icon(Icons.help_outline),
+                          tooltip: 'Ajuda',
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/ajuda');
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  Semantics(
+                    label: 'Botão Entrar',
+                    button: true,
+                    child: ElevatedButton(
+                      onPressed: _login,
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size.fromHeight(50),
+                      ),
+                      child: const Text('Entrar'),
                     ),
-                    child: const Text('Entrar'),
                   ),
                 ],
               ),
