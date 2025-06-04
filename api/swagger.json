@@ -607,7 +607,7 @@
     },
     "/MOB3/calcular": {
       "post": {
-        "summary": "Calcular custos de construção e manutenção da piscina",
+        "summary": "Calcular custo total da piscina (limpeza, mão de obra e troca de filtro)",
         "requestBody": {
           "required": true,
           "content": {
@@ -615,15 +615,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "largura": { "type": "number" },
-                  "comprimento": { "type": "number" },
-                  "profundidade": { "type": "number" },
-                  "precoAgua": { "type": "number" },
-                  "custoEletrico": { "type": "number" },
-                  "custoHidraulico": { "type": "number" },
-                  "custoManutencaoMensal": { "type": "number" }
+                  "custoProdutosLimpeza": { "type": "number" },
+                  "custoMaoDeObra": { "type": "number" },
+                  "custoTrocaFiltro": { "type": "number" }
                 },
-                "required": ["largura", "comprimento", "profundidade", "precoAgua", "custoEletrico", "custoHidraulico", "custoManutencaoMensal"]
+                "required": ["custoProdutosLimpeza", "custoMaoDeObra", "custoTrocaFiltro"]
               }
             }
           }
@@ -633,7 +629,15 @@
             "description": "Resultado dos cálculos",
             "content": {
               "application/json": {
-                "schema": { "type": "object" }
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "custoProdutosLimpeza": { "type": "string" },
+                    "custoMaoDeObra": { "type": "string" },
+                    "custoTrocaFiltro": { "type": "string" },
+                    "custoTotalPiscina": { "type": "string" }
+                  }
+                }
               }
             }
           }
@@ -659,6 +663,45 @@
                       "type": "string",
                       "example": "Preencha os dados da piscina e toque em 'Calcular' para ver o custo estimado.\n\nCaso tenha dúvidas, entre em contato com a equipe MOB3."
                     }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MOB3/calcularCustoTotalGeral": {
+      "post": {
+        "summary": "Calcular custo total geral (manutenção, elétrica e hidráulica)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "custoManutencao": { "type": "number" },
+                  "custoEletrica": { "type": "number" },
+                  "custoHidraulica": { "type": "number" }
+                },
+                "required": ["custoManutencao", "custoEletrica", "custoHidraulica"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado do cálculo do custo total geral",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "custoManutencao": { "type": "string" },
+                    "custoEletrica": { "type": "string" },
+                    "custoHidraulica": { "type": "string" },
+                    "custoTotalGeral": { "type": "string" }
                   }
                 }
               }
@@ -745,34 +788,7 @@
         }
       }
     }
-  },
-    "/MOB3/splash": {
-      "post": {
-        "summary": "Retorna splash screen da aplicação",
-        "responses": {
-          "200": {
-            "description": "Splash screen carregada com sucesso",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "sucesso": {
-                      "type": "boolean",
-                      "example": true
-                    },
-                    "mensagem": {
-                      "type": "string",
-                      "example": "Splash screen carregada"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+  }
   }
   }
 }

@@ -50,10 +50,30 @@ const screenshotsDir = path.join(__dirname, '..', 'fotos', 'mob3');
     const emailInput = await driver.findElement(By.css('input[aria-label="Email"]'));
     const senhaInput = await driver.findElement(By.css('input[aria-label="Senha"]'));
 
+    await emailInput.clear();
     await emailInput.sendKeys('usuario1@email.com');
-    await senhaInput.sendKeys('123456');
 
-    await driver.sleep(15000);
+    await driver.sleep(1000);
+
+    await senhaInput.clear();
+    let attempts = 0;
+    while (attempts < 3) {
+      await senhaInput.sendKeys('123456');
+      await driver.sleep(500);
+
+      const value = await senhaInput.getAttribute('value');
+      if (value === '123456') break;
+
+      console.warn(`Tentativa ${attempts + 1}: senha não preenchida corretamente. Retentando...`);
+      await senhaInput.clear();
+      attempts++;
+    }
+
+    if (attempts === 3) {
+      throw new Error('Campo de senha não foi preenchido corretamente após 3 tentativas.');
+    }
+
+    await driver.sleep(5000);
 
     console.log('7) Clicando no botão Entrar...');
     const entrarButton = await driver.findElement(By.xpath("//flt-semantics[contains(text(), 'Entrar')]"));
@@ -87,15 +107,14 @@ const screenshotsDir = path.join(__dirname, '..', 'fotos', 'mob3');
     await driver.sleep(5000);  
     await takeScreenshot(driver, 'tela_sobre.png');
 
-
     console.log('12) Voltando ao menu...');
     await clickBackArrow(driver);
     await ensureOnMenu(driver);
 
-    console.log('13) Navegando para tela Consulta Piscina...');
+    console.log('13) Navegando para tela Consulta de manutenção...');
 
     const consultarBtn = await driver.wait(
-      until.elementLocated(By.xpath("//flt-semantics[contains(text(),'Consulta Piscina')]")),
+      until.elementLocated(By.xpath("//flt-semantics[contains(text(),'Consulta de Manutenção')]")),
       10000
     );
     await driver.wait(until.elementIsVisible(consultarBtn), 5000);
@@ -140,6 +159,21 @@ const screenshotsDir = path.join(__dirname, '..', 'fotos', 'mob3');
     await clickBackArrow(driver);
     await ensureOnMenu(driver);
 
+    console.log('19) Navegando para tela Consulta Total...');
+    const consultaTotalBtn = await driver.wait(
+      until.elementLocated(By.xpath("//flt-semantics[contains(text(),'Consulta do Preço Total')]")),
+      10000
+    );
+    await driver.wait(until.elementIsVisible(consultaTotalBtn), 5000);
+    await driver.sleep(1000);
+    await driver.executeScript("arguments[0].click();", consultaTotalBtn);
+    await driver.sleep(3000);
+    await takeScreenshot(driver, 'tela_consulta_total.png');
+
+    console.log('20) Voltando ao menu...');
+    await clickBackArrow(driver);
+    await ensureOnMenu(driver);
+
     console.log('Testes finalizados com sucesso.');
 
   } catch (err) {
@@ -147,7 +181,6 @@ const screenshotsDir = path.join(__dirname, '..', 'fotos', 'mob3');
   } finally {
     await driver.quit();
   }
-
 
   async function takeScreenshot(driver, fileName) {
     const image = await driver.takeScreenshot();
