@@ -15,12 +15,12 @@ describe('MKP1 API Tests', () => {
         .post('/mkp1/markup-simples')
         .send({
           custo: 100,
-          lucro: 0.5
+          lucro: 50 // 50%
         });
 
       expect(response.status).toBe(200);
-      expect(response.body).toHaveProperty('precoVenda');
-      expect(parseFloat(response.body.precoVenda)).toBe(150.00);
+      expect(response.body).toHaveProperty('Preço de Venda');
+      expect(parseFloat(response.body['Preço de Venda'])).toBe(150.00);
     });
 
     it('deve retornar erro quando faltar parâmetros', async () => {
@@ -42,14 +42,14 @@ describe('MKP1 API Tests', () => {
         .post('/mkp1/markup-detalhado')
         .send({
           custo: 100,
-          lucro: 0.3,
-          despesas: 0.2,
-          impostos: 0.1
+          lucro: 30,      // 30%
+          despesas: 20,   // 20%
+          impostos: 10    // 10%
         });
 
       expect(response.status).toBe(200);
-      expect(response.body).toHaveProperty('precoVenda');
-      expect(parseFloat(response.body.precoVenda)).toBe(160.00);
+      expect(response.body).toHaveProperty('Preço de Venda');
+      expect(parseFloat(response.body['Preço de Venda'])).toBe(160.00);
     });
 
     it('deve retornar erro quando faltar parâmetros', async () => {
@@ -57,7 +57,7 @@ describe('MKP1 API Tests', () => {
         .post('/mkp1/markup-detalhado')
         .send({
           custo: 100,
-          lucro: 0.3
+          lucro: 30
         });
 
       expect(response.status).toBe(400);
@@ -76,8 +76,8 @@ describe('MKP1 API Tests', () => {
         });
 
       expect(response.status).toBe(200);
-      expect(response.body).toHaveProperty('precoSugerido');
-      expect(parseFloat(response.body.precoSugerido)).toBe(112.5);
+      expect(response.body).toHaveProperty('Preço Sugerido');
+      expect(parseFloat(response.body['Preço Sugerido'])).toBe(112.5);
     });
 
     it('deve retornar erro quando faltar parâmetros', async () => {
@@ -103,8 +103,8 @@ describe('MKP1 API Tests', () => {
         });
 
       expect(response.status).toBe(200);
-      expect(response.body).toHaveProperty('lucro');
-      expect(response.body.lucro).toBe('50.00%');
+      expect(response.body).toHaveProperty('Lucro Obtido');
+      expect(response.body['Lucro Obtido']).toBe('50.00');
     });
 
     it('deve retornar erro quando faltar parâmetros', async () => {
