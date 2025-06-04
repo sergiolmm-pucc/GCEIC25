@@ -195,22 +195,22 @@ class _WaterVolumePageState extends State<WaterVolumePage> {
       case 'Retangular':
         labels = ['Comprimento (m)', 'Largura (m)', 'Profundidade (m)'];
         description = 'Volume da piscina retangular';
-        imagePath = 'assets/equipe4/retangular.png';
+        imagePath = 'assets/equipe2/retangular.png';
         break;
       case 'Circular':
         labels = ['Diâmetro (m)', 'Profundidade (m)'];
         description = 'Volume da piscina circular';
-        imagePath = 'assets/equipe4/circular.png';
+        imagePath = 'assets/equipe2/circular.png';
         break;
       case 'Oval':
         labels = ['Comprimento (m)', 'Largura (m)', 'Profundidade (m)'];
         description = 'Volume da piscina oval';
-        imagePath = 'assets/equipe4/oval.png';
+        imagePath = 'assets/equipe2/oval.png';
         break;
       case 'Irregular':
         labels = ['Comprimento (m)', 'Largura (m)', 'Profundidade (m)'];
         description = 'Volume da piscina irregular';
-        imagePath = 'assets/equipe4/irregular.png';
+        imagePath = 'assets/equipe2/irregular.png';
         break;
       default:
         return const SizedBox();

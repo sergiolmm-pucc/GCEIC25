@@ -84,7 +84,7 @@ class _HydraulicCostPageState extends State<HydraulicCostPage> {
             child: Row(
               children: [
                 Image.asset(
-                  'assets/equipe4/user_team4.png',
+                  'assets/equipe2/user_team2.png',
                   width: 24,
                   height: 24,
                 ),
@@ -101,7 +101,7 @@ class _HydraulicCostPageState extends State<HydraulicCostPage> {
         children: [
           SizedBox.expand(
             child: Image.asset(
-              'assets/equipe4/apis_background.png',
+              'assets/equipe2/apis_background.png',
               fit: BoxFit.cover,
             ),
           ),
