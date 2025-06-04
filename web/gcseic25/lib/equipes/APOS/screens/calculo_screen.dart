@@ -84,7 +84,7 @@ class _CalculoScreenState extends State<CalculoScreen> {
         body: jsonEncode({
           'idade': int.tryParse(idadeController.text) ?? 0,
           'contribuicao': int.tryParse(contribuicaoController.text) ?? 0,
-          'sexo': _sexo, // envia o sexo para o backend
+          'sexo': _sexo,
         }),
       );
 
@@ -124,6 +124,7 @@ class _CalculoScreenState extends State<CalculoScreen> {
     final primaryColor = Colors.teal.shade700;
 
     return Scaffold(
+      appBar: AppBar(title: const Text('')),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -154,7 +155,6 @@ class _CalculoScreenState extends State<CalculoScreen> {
                   style: TextStyle(fontSize: 16, color: Colors.black87),
                 ),
                 const SizedBox(height: 30),
-                // Campo para selecionar o sexo
                 DropdownButtonFormField<String>(
                   value: _sexo,
                   decoration: InputDecoration(
