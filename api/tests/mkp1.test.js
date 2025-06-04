@@ -15,7 +15,7 @@ describe('MKP1 API Tests', () => {
         .post('/mkp1/markup-simples')
         .send({
           custo: 100,
-          lucro: 0.5
+          lucro: 50 // 50%
         });
 
       expect(response.status).toBe(200);
@@ -42,9 +42,9 @@ describe('MKP1 API Tests', () => {
         .post('/mkp1/markup-detalhado')
         .send({
           custo: 100,
-          lucro: 0.3,
-          despesas: 0.2,
-          impostos: 0.1
+          lucro: 30,      // 30%
+          despesas: 20,   // 20%
+          impostos: 10    // 10%
         });
 
       expect(response.status).toBe(200);
@@ -57,7 +57,7 @@ describe('MKP1 API Tests', () => {
         .post('/mkp1/markup-detalhado')
         .send({
           custo: 100,
-          lucro: 0.3
+          lucro: 30
         });
 
       expect(response.status).toBe(400);
