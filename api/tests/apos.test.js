@@ -133,6 +133,99 @@ describe("Função calcularAposentadoria", () => {
 });
 
 // Izabelle Oliveira
+describe("Função calcularRegra", () => {
+
+  test("Deve retornar 400 se faltar algum campo", () => {
+    const req = { body: { sexo: "feminino", idade: 60 } }; // faltam 2 campos
+    const res = mockResponse();
+
+    calcularRegra(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({ erro: "Dados incompletos" });
+  });
+
+  test("Mulher que já pode se aposentar por idade mínima (62 anos)", () => {
+    const req = {
+      body: { sexo: "feminino", idade: 62, tempoContribuicao: 15, categoria: "incapacidade" },
+    };
+    const res = mockResponse();
+
+    calcularRegra(req, res);
+
+    expect(res.json).toHaveBeenCalledWith({
+      regras: expect.arrayContaining([
+        "Idade mínima para aposentadoria",
+        "Aposentadoria por Incapacidade: tempo mínimo reduzido",
+        "Aposentadoria por Incapacidade: sem idade mínima",
+      ]),
+    });
+  });
+
+  test("Homem que atinge pontuação progressiva + tempo mínimo de contribuição", () => {
+    const req = {
+      body: { sexo: "masculino", idade: 65, tempoContribuicao: 40, categoria: "programada" },
+    };
+    const res = mockResponse();
+
+    calcularRegra(req, res);
+
+    expect(res.json).toHaveBeenCalledWith({
+      regras: [
+        "Pontuação Progressiva",
+        "Tempo mínimo de contribuição",
+        "Idade mínima para aposentadoria",
+        "Aposentadoria Programada: idade mínima de 65 anos",
+      ],
+    });
+  });
+
+  test("Regra especial para professor (sem outras condições atendidas)", () => {
+    const req = {
+      body: { sexo: "feminino", idade: 50, tempoContribuicao: 25, categoria: "professor" },
+    };
+    const res = mockResponse();
+
+    calcularRegra(req, res);
+
+    expect(res.json).toHaveBeenCalledWith({
+      regras: ["Regra Especial para Professores"],
+    });
+  });
+
+  test("Aposentadoria rural com idade e tempo reduzidos (mulher)", () => {
+    const req = {
+      body: { sexo: "feminino", idade: 55, tempoContribuicao: 15, categoria: "rural" },
+    };
+    const res = mockResponse();
+
+    calcularRegra(req, res);
+
+    expect(res.json).toHaveBeenCalledWith({
+      regras: [
+        "Aposentadoria Rural: tempo mínimo de contribuição reduzido",
+        "Aposentadoria Rural: idade mínima reduzida",
+      ],
+    });
+  });
+
+  test("Incapacidade: tempo ≥ 12 meses, sem idade mínima", () => {
+    const req = {
+      body: { sexo: "masculino", idade: 30, tempoContribuicao: 12, categoria: "incapacidade" },
+    };
+    const res = mockResponse();
+
+    calcularRegra(req, res);
+
+    expect(res.json).toHaveBeenCalledWith({
+      regras: [
+        "Aposentadoria por Incapacidade: tempo mínimo reduzido",
+        "Aposentadoria por Incapacidade: sem idade mínima",
+      ],
+    });
+  });
+});
+
 
 // Emilly Ferro
 describe("Função calcularPontuacao", () => {
