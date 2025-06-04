@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:gcseic25/equipes/equipe4/screens/home.dart'; // Certifique-se de ter essa tela
+import 'package:gcseic25/equipes/equipe2/screens/home.dart'; // Certifique-se de ter essa tela
 
-class LoginPage4 extends StatefulWidget {
-  const LoginPage4({super.key});
+class LoginPage2 extends StatefulWidget {
+  const LoginPage2({super.key});
 
   @override
-  State<LoginPage4> createState() => _LoginPageState();
+  State<LoginPage2> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage4> {
+class _LoginPageState extends State<LoginPage2> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController senhaController = TextEditingController();
 
@@ -40,7 +40,7 @@ class _LoginPageState extends State<LoginPage4> {
       if (response.statusCode == 200 && data['sucesso'] == true) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const HomeScreen4()),
+          MaterialPageRoute(builder: (context) => const HomeScreen2()),
         );
       } else {
         setState(() {
@@ -65,16 +65,22 @@ class _LoginPageState extends State<LoginPage4> {
         children: [
           SizedBox.expand(
             child: Image.asset(
-              'assets/equipe4/apis_background.png',
+              'assets/equipe2/background_login_equipe2.png',
               fit: BoxFit.cover,
             ),
           ),
           Center(
             child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 80),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/equipe4/logo_equipe_4.png', height: 100),
+                  Image.asset(
+                    'assets/equipe2/splash_icon.png', 
+                    height: 160,
+                  ),
+                  Image.asset('assets/equipe2/logo_equipe_2.png', height: 100),
                   const SizedBox(height: 20),
                   Container(
                     width: 350,
@@ -106,12 +112,12 @@ class _LoginPageState extends State<LoginPage4> {
                         const SizedBox(height: 4),
                         TextField(
                           controller: emailController,
-                          style: const TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Color.fromARGB(255, 105, 105, 105)),
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.white.withOpacity(0.3),
+                            fillColor: Colors.white.withOpacity(0.9),
                             hintText: 'E-mail',
-                            hintStyle: const TextStyle(color: Colors.white),
+                            hintStyle: const TextStyle(color: Color(0xFFADADAD)),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide.none,
@@ -125,12 +131,12 @@ class _LoginPageState extends State<LoginPage4> {
                         TextField(
                           controller: senhaController,
                           obscureText: true,
-                          style: const TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Color.fromARGB(255, 105, 105, 105)),
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.white.withOpacity(0.3),
+                            fillColor: Colors.white.withOpacity(0.9),
                             hintText: 'Senha',
-                            hintStyle: const TextStyle(color: Colors.white),
+                            hintStyle: const TextStyle(color: Color(0xFFADADAD)),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide.none,
@@ -169,6 +175,7 @@ class _LoginPageState extends State<LoginPage4> {
                 ],
               ),
             ),
+          ),
           ),
         ],
       ),
