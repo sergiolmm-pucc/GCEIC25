@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'splash_screen.dart'; // ajuste conforme seu projeto
-import 'transition_screen.dart'; // nova tela intermediária
+
 
 class TelaLogin extends StatefulWidget {
   const TelaLogin({super.key});
@@ -24,9 +24,7 @@ class _TelaLoginState extends State<TelaLogin> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => TransitionScreen(
-            nextPage: const SplashScreen(),
-          ),
+          builder: (context) => SplashScreen(),
         ),
       );
     } else {

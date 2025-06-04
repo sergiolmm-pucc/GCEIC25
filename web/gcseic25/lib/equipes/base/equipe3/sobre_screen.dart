@@ -89,19 +89,22 @@ class SobreScreen extends StatelessWidget {
 
                         SizedBox(height: 10),
 
-                        Text(
-                          '''
-                          - Leonardo Ferraro Gianfagna
-                          - Mateus Colferai Mistro
-                          - Rafael Gonçalves Michielin
-                          - Renan Negri Cecolin
-                          - Samuel Arantes Dos Santos Prado
-                          ''',
+                        DefaultTextStyle(
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.blue[900],
                           ),
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.left,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text('- Leonardo Ferraro Gianfagna'),
+                              Text('- Mateus Colferai Mistro'),
+                              Text('- Rafael Gonçalves Michielin'),
+                              Text('- Renan Negri Cecolin'),
+                              Text('- Samuel Arantes Dos Santos Prado'),
+                            ],
+                          ),
                         ),
                       ],
                     ),
