@@ -85,6 +85,7 @@ flutter:
     - assets/equipe2/hidraulica.png
     - assets/equipe2/mob.png
     - assets/equipe2/eletrica.png
+    - assets/equipe2/splash_icon.png
     - assets/equipe2/volume.png
     - lib/equipes/CI_CD_6/assets/
     - lib/equipes/equipe5/assets/sobre.jpeg

@@ -71,9 +71,15 @@ class _LoginPageState extends State<LoginPage2> {
           ),
           Center(
             child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 80),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Image.asset(
+                    'assets/equipe2/splash_icon.png', 
+                    height: 160,
+                  ),
                   Image.asset('assets/equipe2/logo_equipe_2.png', height: 100),
                   const SizedBox(height: 20),
                   Container(
@@ -169,6 +175,7 @@ class _LoginPageState extends State<LoginPage2> {
                 ],
               ),
             ),
+          ),
           ),
         ],
       ),
