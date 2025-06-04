@@ -33,7 +33,7 @@ class SobrePage extends StatelessWidget {
 
                   // Imagem da equipe
                   Image.asset(
-                    'assets/sobre.jpeg',
+                    'lib/equipes/equipe5/assets/sobre.jpeg',
                     width: 200,
                     height: 200,
                     fit: BoxFit.cover,
