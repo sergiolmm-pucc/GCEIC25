@@ -3,6 +3,7 @@ import 'package:gcseic25/equipes/CI_CD_6/splash_creen.dart';
 import 'package:gcseic25/equipes/equipe2/screens/login.dart';
 import 'package:gcseic25/equipes/equipe2/screens/splash_screen.dart';
 import 'package:gcseic25/equipes/APOS/screens/splash_screen.dart';
+import 'package:gcseic25/page/markup_splash_screen.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
@@ -18,7 +19,6 @@ import 'package:gcseic25/equipes/equipe5/screens/login.dart';
 import 'package:gcseic25/equipes/MKP1/screens/sobre_screen.dart';
 import 'package:gcseic25/equipes/MKP1/screens/ajuda_screen.dart';
 import 'package:gcseic25/equipes/equipe5/screens/transition_screen.dart';
-
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.blue),
       home: HomePage(),
       routes: {
-        '/splash_screen_equipe_2': 
+        '/splash_screen_equipe_2':
             (context) => SplashScreen4(nextPage: LoginPage2()),
         '/CI_CD_8':
             (context) => CI_CD8Splash.SplashScreen(
@@ -50,6 +50,7 @@ class MyApp extends StatelessWidget {
             (context) =>
                 SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
         '/markup': (context) => MultiplierMarkupPage(),
+        '/markupSplashScreen': (context) => const MarkupSplashScreen(),
         '/login': (context) => LoginPage(),
         '/aposSplashScreen': (context) => APOSSplashScreen(),
         '/mkp1SplashScreen': (context) => const MKP1SplashScreen(),
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
         '/equipe5': (context) => TelaLogin(),
         '/sobre': (context) => const SobreScreen(),
         '/ajuda': (context) => const AjudaScreen(),
-        '/mob3': (context) => SplashScreen3(nextPage:  LoginScreen()), 
+        '/mob3': (context) => SplashScreen3(nextPage: LoginScreen()),
         '/equipe5': (context) => TransitionScreen(nextPage: TelaLogin()),
       },
     );
@@ -116,9 +117,11 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, '/login'),
+              onPressed:
+                  () => Navigator.pushNamed(context, '/markupSplashScreen'),
               child: const Text('MARKUP MULTIPLICADOR'),
             ),
+            SizedBox(height: 20),
             Semantics(
               // identifier: 'Entrar',
               label: 'Entrar',

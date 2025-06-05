@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'sobre_page.dart';
+import 'help.dart';
 
 class MultiplierMarkupPage extends StatefulWidget {
   @override
@@ -72,39 +74,70 @@ class _MultiplierMarkupPageState extends State<MultiplierMarkupPage> {
     super.dispose();
   }
 
+  Widget _buildInputField({
+    required TextEditingController controller,
+    required String label,
+    required IconData icon,
+  }) {
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: label,
+        prefixIcon: Icon(icon),
+        filled: true,
+        fillColor: Colors.white,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+      ),
+      keyboardType: TextInputType.number,
+      validator: _validarCampo,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        title: const Text('Calculadora de Markup Multiplicador'),
+        title: const Text('Calculadora de Markup'),
         centerTitle: true,
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
       body: Center(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.all(32.0),
           child: Form(
             key: _formKey,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _buildInputField(controller: _custoController, label: 'Custo'),
+                Icon(
+                  Icons.calculate_outlined,
+                  size: 80,
+                  color: Colors.blue[700],
+                ),
+                const SizedBox(height: 24),
+                _buildInputField(
+                  controller: _custoController,
+                  label: 'Custo',
+                  icon: Icons.attach_money,
+                ),
                 const SizedBox(height: 16),
                 _buildInputField(
                   controller: _despesasVariaveisController,
                   label: 'Despesas Variáveis (%)',
+                  icon: Icons.percent,
                 ),
                 const SizedBox(height: 16),
                 _buildInputField(
                   controller: _despesasFixasController,
                   label: 'Despesas Fixas (%)',
+                  icon: Icons.percent,
                 ),
                 const SizedBox(height: 16),
                 _buildInputField(
                   controller: _margemLucroController,
                   label: 'Margem de Lucro (%)',
+                  icon: Icons.show_chart,
                 ),
                 const SizedBox(height: 24),
                 SizedBox(
@@ -117,9 +150,8 @@ class _MultiplierMarkupPageState extends State<MultiplierMarkupPage> {
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
-                        side: const BorderSide(color: Colors.blue),
                       ),
-                      elevation: 3,
+                      elevation: 4,
                     ),
                     child: const Text(
                       'Calcular',
@@ -133,8 +165,8 @@ class _MultiplierMarkupPageState extends State<MultiplierMarkupPage> {
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       color: Colors.green.shade50,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: Colors.green),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.grey),
                     ),
                     child: Text(
                       _resultado,
@@ -142,28 +174,38 @@ class _MultiplierMarkupPageState extends State<MultiplierMarkupPage> {
                       textAlign: TextAlign.center,
                     ),
                   ),
+                const SizedBox(height: 32),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => SobrePage()),
+                        );
+                      },
+                      icon: const Icon(Icons.info_outline),
+                      label: const Text('Sobre o App'),
+                    ),
+                    const SizedBox(width: 16),
+                    TextButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => HelpPage()),
+                        );
+                      },
+                      icon: const Icon(Icons.help_outline),
+                      label: const Text('Help'),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildInputField({
-    required TextEditingController controller,
-    required String label,
-  }) {
-    return TextFormField(
-      controller: controller,
-      decoration: InputDecoration(
-        labelText: label,
-        filled: true,
-        fillColor: Colors.white,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
-      ),
-      keyboardType: TextInputType.number,
-      validator: _validarCampo,
     );
   }
 }
