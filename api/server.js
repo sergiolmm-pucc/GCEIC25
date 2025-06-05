@@ -9,6 +9,7 @@ const port = process.env.PORT || 3000;
 // importa as rotas
 const userRoutes = require('./routes/userRoutes')
 const baseRoutes = require('./routes/baseRoutes')
+const etec2Routes = require('./routes/etec2Routes')
 const pool4Routes = require('./routes/pool4Routes')
 const markup2Routes = require('./routes/markup2Routes')
 const markupRoutes = require('./routes/markupRoutes');
@@ -39,6 +40,8 @@ app.use('/impostos', ipiRoutes); // Grupo 05
 app.use('/impostos', icmsRoutes); 
 app.use('/impostos', irpjRoutes);
 app.use('/impostos', issRoutes);
+app.use('/etec2', etec2Routes); //Grupo 10 - ETEC
+
 
 
 app.listen(port, () => {
