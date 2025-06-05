@@ -22,7 +22,7 @@ class _MultiplierMarkupPageState extends State<MultiplierMarkupPage> {
     if (_formKey.currentState!.validate()) {
       try {
         final response = await http.post(
-          Uri.parse('https://sergio.dev.br/markup'),
+          Uri.parse('https://animated-occipital-buckthorn.glitch.me/markup'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode({
             'custo': double.parse(_custoController.text),
