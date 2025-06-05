@@ -14,6 +14,10 @@ class SolarLoginApp extends StatelessWidget {
     routes: [
       GoRoute(
         path: '/',
+        builder: (context, state) => SplashScreen(),
+      ),
+      GoRoute(
+        path: '/login',
         builder: (context, state) => LoginScreen(),
       ),
       GoRoute(
@@ -42,6 +46,107 @@ class SolarLoginApp extends StatelessWidget {
       routerConfig: _router,
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(),
+      ),
+    );
+  }
+}
+
+class _LoginRouteWrapper extends StatelessWidget {
+  const _LoginRouteWrapper();
+
+  @override
+  Widget build(BuildContext context) {
+    // Usa o `Future.microtask` para garantir a chamada após o build
+    Future.microtask(() {
+      Navigator.of(context).pushReplacementNamed('/login');
+    });
+    return const Scaffold(
+      backgroundColor: Colors.transparent,
+      body: SizedBox(),
+    );
+  }
+}
+
+
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Controlador de animação
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 800),
+    );
+
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.0).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+
+    // Timer para iniciar animação e navegar
+    Future.delayed(const Duration(seconds: 2), () async {
+      await _controller.forward(); // animação de "sugar"
+      if (mounted) {
+        // Use o go_router para navegar
+        if (context.mounted) {
+          context.go('/login');
+        }
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 255, 226, 9),
+      body: Center(
+        child: ScaleTransition(
+          scale: _scaleAnimation,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 120,
+                height: 120,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color(0xFFFFF4C1),
+                ),
+                padding: const EdgeInsets.all(20),
+                child: Image.asset(
+                  'assets/82097-200.png',
+                  fit: BoxFit.contain,
+                ),
+              ),
+              const SizedBox(height: 24),
+              const Text(
+                'Energia Sustentável',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF446B29),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -536,7 +641,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
           TextButton(
             onPressed: () {
               Navigator.of(context).pop(); // Fecha o popup
-              if (sucesso) context.go('/'); // Redireciona para login se sucesso
+              if (sucesso) context.go('/login'); // Redireciona para login se sucesso
             },
             child: Text('Entendido'),
           ),
