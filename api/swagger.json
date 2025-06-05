@@ -13,7 +13,7 @@
   "paths": {
 
 
-    "/etec2/salarioLiquido": {
+    "/etec2/salario-liquido": {
   "post": {
     "tags": ["ETEC2"],
     "summary": "Calcula o salário líquido",
@@ -50,7 +50,7 @@
     }
   }
 },
-"/etec2/totalMensal": {
+"/etec2/total-mensal": {
   "post": {
     "tags": ["ETEC2"],
     "summary": "Calcula o custo total mensal",
