@@ -173,6 +173,13 @@ class HomePage extends StatelessWidget {
               },
               child: Text('Calculadora de Impostos 5'),
             ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/CI_CD_10_splash');
+              },
+              child: Text('Cálculo do ETEC[CI_CD_10]'),
+            ),
           ],
         ),
       ),
