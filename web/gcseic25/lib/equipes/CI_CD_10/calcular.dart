@@ -49,7 +49,7 @@ class _CalcularPageState extends State<CalcularPage> {
         'mesesTrabalhados': meses,
       });
 
-
+      /*
       final responses = await Future.wait([
         http.post(Uri.parse('$urlLocalhost/salario-liquido'),headers: headers,body: body,),
         http.post(Uri.parse('$urlLocalhost/inss'), headers: headers, body: body),
@@ -58,8 +58,8 @@ class _CalcularPageState extends State<CalcularPage> {
         http.post(Uri.parse('$urlLocalhost/ferias'), headers: headers, body: body),
         http.post(Uri.parse('$urlLocalhost/total-mensal'),headers: headers,body: body,),
       ]);
-
-       /*
+        */
+       
       final responses = await Future.wait([
         http.post(Uri.parse('$baseUrl/salario-liquido'),headers: headers,body: body,),
         http.post(Uri.parse('$baseUrl/inss'), headers: headers, body: body),
@@ -68,7 +68,7 @@ class _CalcularPageState extends State<CalcularPage> {
         http.post(Uri.parse('$baseUrl/ferias'), headers: headers, body: body),
         http.post(Uri.parse('$baseUrl/total-mensal'),headers: headers,body: body,),
       ]);
-       */
+       
       setState(() {
         salarioLiquido = double.parse(
           jsonDecode(responses[0].body)['salarioLiquido'],
