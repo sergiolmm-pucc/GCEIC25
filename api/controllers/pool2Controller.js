@@ -148,13 +148,15 @@ function calcularMaterialEletrico(req, res) {
 
 function calcularMaterialHidraulico(req, res) {
   const {
-    comprimentoTubos, custoPorMetro,
-    custoValvula, custoBomba,
-    custoFiltro, tipoTubulacao
+    comprimentoTubos,
+    custoPorMetro,
+    custoValvula,
+    custoBomba,
+    custoFiltro,
+    tipoTubulacao
   } = req.body;
 
-  const qtdConexoes = parseFloat(req.body.custoValvula) || 0; // Se conexões = custo total
-
+  // Validação: verificar se todos os campos foram preenchidos
   if (
     comprimentoTubos === undefined || custoPorMetro === undefined ||
     custoValvula === undefined || custoBomba === undefined ||
@@ -163,15 +165,37 @@ function calcularMaterialHidraulico(req, res) {
     return res.status(400).json({ error: "Preencha todos os campos antes de prosseguir." });
   }
 
+  // Conversão
   const comprimento = parseFloat(comprimentoTubos);
   const precoMetro = parseFloat(custoPorMetro);
   const precoValvula = parseFloat(custoValvula);
   const precoBomba = parseFloat(custoBomba);
   const precoFiltro = parseFloat(custoFiltro);
 
+  // Validação de números
+  if (
+    isNaN(comprimento) || isNaN(precoMetro) || isNaN(precoValvula) ||
+    isNaN(precoBomba) || isNaN(precoFiltro)
+  ) {
+    return res.status(400).json({ error: "Todos os valores numéricos devem ser números válidos." });
+  }
+
+  // Validação de números negativos
+  if (
+    comprimento < 0 || precoMetro < 0 || precoValvula < 0 ||
+    precoBomba < 0 || precoFiltro < 0
+  ) {
+    return res.status(400).json({ error: "Os valores não podem ser negativos." });
+  }
+
+  // Cálculo
   const total = comprimento * precoMetro + precoValvula + precoBomba + precoFiltro;
-  valorHidraulico = total ; 
-  res.status(200).json({ total });
+
+  // Retorno
+  res.status(200).json({
+    total,
+    tipo_tubulacao: tipoTubulacao.toLowerCase()
+  });
 }
 
 function calcularCustoDAgua(req, res) {
@@ -232,6 +256,16 @@ function calcularManutencaoMensal(req, res) {
 
 function calcularMob(req, res) {
   const { transporte, instalacao, maoDeObra, equipamentos } = req.body;
+
+    if (
+      transporte === undefined ||
+      instalacao === undefined ||
+      maoDeObra === undefined ||
+      equipamentos === undefined
+    ) {
+      return res.status(400).json({ error: "Todos os campos são obrigatórios." });
+    }
+
   if (
     !transporte.toString().trim() ||
     !instalacao.toString().trim() ||
