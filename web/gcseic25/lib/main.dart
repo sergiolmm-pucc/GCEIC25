@@ -20,6 +20,10 @@ import 'package:gcseic25/equipes/MKP1/screens/sobre_screen.dart';
 import 'package:gcseic25/equipes/MKP1/screens/ajuda_screen.dart';
 import 'package:gcseic25/equipes/equipe5/screens/transition_screen.dart';
 
+
+import 'package:gcseic25/equipes/CI_CD_10/login.dart';
+import 'package:gcseic25/equipes/CI_CD_10/splashscreen.dart' as CI_CD10Splash;
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
   SemanticsBinding.instance.ensureSemantics();
@@ -49,6 +53,7 @@ class MyApp extends StatelessWidget {
         '/splash2':
             (context) =>
                 SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
+        '/CI_CD_10_splash': (context) => CI_CD10Splash.SplashScreen(nextPage: CI_CD10LoginPage(),),
         '/markup': (context) => MultiplierMarkupPage(),
         '/login': (context) => LoginPage(),
         '/markupSplash': (context) => const MarkupSplashScreen(),
