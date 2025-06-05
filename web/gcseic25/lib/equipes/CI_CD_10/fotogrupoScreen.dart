@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class FotoGrupoScreen extends StatelessWidget {
   const FotoGrupoScreen({super.key});
 
@@ -40,20 +41,20 @@ class FotoGrupoScreen extends StatelessWidget {
                   crossAxisCount: 2,
                   children: const [
                     MemberPhoto(
-                      imagePath: 'assets/membro1.jpg',
-                      name: 'Membro 1',
+                      imagePath: 'assets/CI_CD_10/lucas.jpg',
+                      name: 'Lucas',
                     ),
                     MemberPhoto(
-                      imagePath: 'assets/membro2.jpg',
-                      name: 'Membro 2',
+                      imagePath: 'assets/CI_CD_10/luan.jpg',
+                      name: 'Luan',
                     ),
                     MemberPhoto(
-                      imagePath: 'assets/membro3.jpg',
-                      name: 'Membro 3',
+                      imagePath: 'assets/CI_CD_10/bruno.png',
+                      name: 'Bruno',
                     ),
                     MemberPhoto(
-                      imagePath: 'assets/membro4.jpg',
-                      name: 'Membro 4',
+                      imagePath: 'assets/CI_CD_10/vitor.jpg',
+                      name: 'Vitor',
                     ),
                   ],
                 ),

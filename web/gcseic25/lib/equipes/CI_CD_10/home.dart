@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gcseic25/equipes/CI_CD_10/calcular.dart';
+import 'package:gcseic25/equipes/CI_CD_10/fotogrupoScreen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -28,6 +29,16 @@ class HomeScreen extends StatelessWidget {
                   );
                 },
                 child: const Text('Ir para cálculo'),
+              ),
+                            const SizedBox(height: 30),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const FotoGrupoScreen()),
+                  );
+                },
+                child: const Text('Sobre'),
               ),
             ],
           ),
