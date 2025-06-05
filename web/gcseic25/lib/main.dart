@@ -20,6 +20,10 @@ import 'package:gcseic25/equipes/MKP1/screens/ajuda_screen.dart';
 import 'package:gcseic25/equipes/equipe5/screens/transition_screen.dart';
 
 
+import 'package:gcseic25/equipes/CI_CD_10/login.dart';
+import 'package:gcseic25/equipes/CI_CD_10/splashscreen.dart' as CI_CD10Splash;
+
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
   SemanticsBinding.instance.ensureSemantics();
@@ -36,29 +40,47 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.blue),
       home: HomePage(),
       routes: {
+
         '/splash_screen_equipe_2': 
             (context) => SplashScreen4(nextPage: LoginPage2()),
         '/CI_CD_8':
             (context) => CI_CD8Splash.SplashScreen(
               nextPage: const CI_CD8Login.LoginPage(),
             ),
+
+
+        '/splash_screen_equipe_2': (context) => SplashScreen4(nextPage: LoginPage4()),
+
+        '/CI_CD_8': (context) => CI_CD8Splash.SplashScreen(nextPage: const CI_CD8Login.LoginPage()),
+
         '/CI_CD_6': (context) => SplashToLoginScreen(),
+
         '/splash1':
             (context) =>
                 SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
         '/splash2':
             (context) =>
                 SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
+
+        '/CI_CD_10_splash': 
+            (context) =>
+                CI_CD10Splash.SplashScreen(nextPage: CI_CD10LoginPage(),),
+
         '/markup': (context) => MultiplierMarkupPage(),
         '/login': (context) => LoginPage(),
         '/aposSplashScreen': (context) => APOSSplashScreen(),
         '/mkp1SplashScreen': (context) => const MKP1SplashScreen(),
         '/mob3': (context) => SplashScreen3(nextPage: LoginScreen()),
         '/equipe5': (context) => TelaLogin(),
+
         '/sobre': (context) => const SobreScreen(),
         '/ajuda': (context) => const AjudaScreen(),
         '/mob3': (context) => SplashScreen3(nextPage:  LoginScreen()), 
         '/equipe5': (context) => TransitionScreen(nextPage: TelaLogin()),
+
+
+
+
       },
     );
   }
@@ -91,6 +113,8 @@ class HomePage extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
+
+
                 Navigator.pushNamed(context, '/CI_CD_6');
               },
               child: Text('Cálculo do ETEC[CI/CD 6]'),
@@ -165,6 +189,15 @@ class HomePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/equipe5');
               },
               child: Text('Calculadora de Impostos 5'),
+            ),
+                SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+
+                Navigator.pushNamed(context, '/CI_CD_10_splash');
+
+              },
+              child: Text('Cálculo do ETEC[CI_CD_10]'),
             ),
           ],
         ),
