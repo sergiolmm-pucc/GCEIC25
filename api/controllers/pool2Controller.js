@@ -190,6 +190,7 @@ function calcularMaterialHidraulico(req, res) {
 
   // Cálculo
   const total = comprimento * precoMetro + precoValvula + precoBomba + precoFiltro;
+  valorHidraulico = total;
 
   // Retorno
   res.status(200).json({
