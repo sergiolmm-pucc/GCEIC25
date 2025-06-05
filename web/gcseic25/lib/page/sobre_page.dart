@@ -31,7 +31,7 @@ class SobrePage extends StatelessWidget {
                   final membro = equipe[index];
                   return ListTile(
                     leading: CircleAvatar(
-                      backgroundImage: NetworkImage(membro['foto']!),
+                      backgroundImage: AssetImage(membro['foto']!),
                       radius: 25,
                     ),
                     title: Text(
