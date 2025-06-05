@@ -37,7 +37,6 @@ class _CI_CD10LoginPageState extends State<CI_CD10LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Fundo com o mesmo gradiente do splash
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -54,7 +53,6 @@ class _CI_CD10LoginPageState extends State<CI_CD10LoginPage> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Ícone central parecido com splash
                   Container(
                     padding: const EdgeInsets.all(24),
                     decoration: BoxDecoration(
@@ -75,7 +73,6 @@ class _CI_CD10LoginPageState extends State<CI_CD10LoginPage> {
                     ),
                   ),
                   const SizedBox(height: 36),
-                  // Título
                   const Text(
                     'Simulador de Encargos',
                     style: TextStyle(
@@ -86,7 +83,6 @@ class _CI_CD10LoginPageState extends State<CI_CD10LoginPage> {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  // Subtítulo
                   const Text(
                     'Faça login para continuar',
                     style: TextStyle(
@@ -96,7 +92,6 @@ class _CI_CD10LoginPageState extends State<CI_CD10LoginPage> {
                     ),
                   ),
                   const SizedBox(height: 32),
-                  // Email
                   TextFormField(
                     controller: _emailCtrl,
                     keyboardType: TextInputType.emailAddress,
@@ -116,7 +111,6 @@ class _CI_CD10LoginPageState extends State<CI_CD10LoginPage> {
                         (v == null || !v.contains('@')) ? 'Digite um email válido' : null,
                   ),
                   const SizedBox(height: 20),
-                  // Senha
                   TextFormField(
                     controller: _passCtrl,
                     obscureText: true,
@@ -135,14 +129,12 @@ class _CI_CD10LoginPageState extends State<CI_CD10LoginPage> {
                     validator: (v) => (v == null || v.isEmpty) ? 'Digite uma senha' : null,
                   ),
                   const SizedBox(height: 16),
-                  // Mensagem de erro
                   if (_error != null)
                     Text(
                       _error!,
                       style: const TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold),
                     ),
                   if (_error != null) const SizedBox(height: 16),
-                  // Botão
                   SizedBox(
                     width: double.infinity,
                     height: 50,
