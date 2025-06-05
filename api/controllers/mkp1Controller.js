@@ -4,19 +4,35 @@ const calculoSimples = (req, res) => {
     return res
       .status(400)
       .json({ error: "Campos obrigatórios: custo e lucro" });
-  const precoVenda = custo * (1 + lucro);
-  res.json({ precoVenda: precoVenda.toFixed(2) });
+  const precoVenda = custo * (1 + lucro / 100);
+  res.json({ "Preço de Venda": precoVenda.toFixed(2) });
 };
 
-const lucroObtido = (req, res) => {
-  const { custo, precoVenda } = req.body;
-  if (!custo || !precoVenda)
-    return res
-      .status(400)
-      .json({ error: "Campos obrigatórios: custo e precoVenda" });
-  const lucro = (precoVenda - custo) / custo;
-  // eslint-disable-next-line no-irregular-whitespace
-  res.json({ lucro: (lucro * 100).toFixed(2) + "%" });
+const lucroObtido = async (req, res) => {
+  try {
+    const { custo, precoVenda } = req.body;
+
+    if (!custo || !precoVenda) {
+      return res.status(400).json({
+        error: 'Custo e preço de venda são obrigatórios'
+      });
+    }
+
+    const lucro = precoVenda - custo;
+    const margemLucro = (lucro / custo) * 100;
+
+    return res.json({
+      "Lucro Obtido": lucro.toFixed(2),
+      "Margem de Lucro": `${margemLucro.toFixed(2)}%`,
+      "Custo": custo.toFixed(2),
+      "Preço de Venda": precoVenda.toFixed(2)
+    });
+  } catch (error) {
+    console.error('Erro ao calcular lucro obtido:', error);
+    return res.status(500).json({
+      error: 'Erro ao calcular lucro obtido'
+    });
+  }
 };
 
 const calculoDetalhado = (req, res) => {
@@ -26,8 +42,8 @@ const calculoDetalhado = (req, res) => {
       .status(400)
       .json({ error: "Campos obrigatórios: custo, lucro, despesas, impostos" });
 
-  const precoVenda = custo * (1 + despesas + impostos + lucro);
-  res.json({ precoVenda: precoVenda.toFixed(2) });
+  const precoVenda = custo * (1 + despesas/100 + impostos/100 + lucro/100);
+  res.json({ "Preço de Venda": precoVenda.toFixed(2) });
 };
 
 const sugestaoPreco = (req, res) => {
@@ -41,7 +57,7 @@ const sugestaoPreco = (req, res) => {
     concorrentes.reduce((a, b) => a + b, 0) / concorrentes.length;
   const precoSugerido = (custo + mediaConcorrentes) / 2;
 
-  res.json({ precoSugerido: precoSugerido.toFixed(2) });
+  res.json({ "Preço Sugerido": precoSugerido.toFixed(2) });
 };
 
 const simulacao = (req, res) => {
@@ -52,11 +68,11 @@ const simulacao = (req, res) => {
       .json({ error: "Campos obrigatórios: custo, despesas, impostos" });
 
   const resultados = [];
-  for (let lucro = 0.1; lucro <= 1; lucro += 0.1) {
-    const precoVenda = custo * (1 + despesas + impostos + lucro);
+  for (let lucro = 10; lucro <= 100; lucro += 10) {
+    const precoVenda = custo * (1 + despesas/100 + impostos/100 + lucro/100);
     resultados.push({
-      lucro: (lucro * 100).toFixed(0) + "%",
-      precoVenda: precoVenda.toFixed(2),
+      "Margem de Lucro": lucro + "%",
+      "Preço de Venda": precoVenda.toFixed(2),
     });
   }
   res.json({ simulacoes: resultados });

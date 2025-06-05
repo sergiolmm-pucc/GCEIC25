@@ -4,6 +4,7 @@ import 'consulta_eletrica_screen.dart';
 import 'consulta_hidraulica_screen.dart';  
 import 'sobre_screen.dart';
 import 'ajuda_screen.dart';
+import 'consulta_total.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -47,12 +48,6 @@ class HomeScreen extends StatelessWidget {
                           color: Colors.blue[800],
                         ),
                       ),
-                      SizedBox(height: 30),
-                      Semantics(
-                        label: 'Consulta Piscina',
-                        button: true,
-                        child: _buildMenuButton(context, 'Consulta Piscina', Icons.pool, ConsultaScreen()),
-                      ),
                       SizedBox(height: 16),
                       Semantics(
                         label: 'Consulta Elétrica',
@@ -64,6 +59,18 @@ class HomeScreen extends StatelessWidget {
                         label: 'Consulta Hidráulica',
                         button: true,
                         child: _buildMenuButton(context, 'Consulta Hidráulica', Icons.plumbing, ConsultaHidraulicaScreen()),
+                      ),
+                      SizedBox(height: 16),
+                      Semantics(
+                        label: 'Consulta de Manutenção',
+                        button: true,
+                        child: _buildMenuButton(context, 'Consulta de Manutenção', Icons.build, ConsultaScreen()),
+                      ),
+                      SizedBox(height: 16),
+                      Semantics(
+                        label: 'Consulta do Preço Total',
+                        button: true,
+                        child: _buildMenuButton(context, 'Consulta do Preço Total', Icons.pool, ConsultaTotalScreen()),
                       ),
                       SizedBox(height: 16),
                       Semantics(

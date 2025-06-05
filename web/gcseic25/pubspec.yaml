@@ -64,23 +64,33 @@ flutter:
     - assets/APOS/logo_white.png
     - assets/APOS/background.png
     - lib/equipes/CI_CD_8/assets/images/
-    - assets/equipe4/logo_equipe_4.png
-    - assets/equipe4/user_team4.png
-    - assets/equipe4/apis_background.png
-    - assets/equipe4/circular.png
-    - assets/equipe4/retangular.png
-    - assets/equipe4/oval.png
-    - assets/equipe4/irregular.png
-    - assets/equipe4/alex.png
-    - assets/equipe4/ana.png
-    - assets/equipe4/lais.png
-    - assets/equipe4/luiz.png
-    - assets/equipe4/manu.png
-    - assets/equipe4/bg1.png
-    - assets/equipe4/bg2.png
+    - assets/equipe2/logo_equipe_2.png
+    - assets/equipe2/user_team2.png
+    - assets/equipe2/apis_background.png
+    - assets/equipe2/circular.png
+    - assets/equipe2/retangular.png
+    - assets/equipe2/oval.png
+    - assets/equipe2/irregular.png
+    - assets/equipe2/alex.png
+    - assets/equipe2/ana.png
+    - assets/equipe2/lais.png
+    - assets/equipe2/luiz.png
+    - assets/equipe2/manu.png
+    - assets/equipe2/bg1.png
+    - assets/equipe2/bg2.png
+    - assets/equipe2/background_login_equipe2.png
+    - assets/equipe2/background_home_equipe2.png
+    - assets/equipe2/manutencao.png
+    - assets/equipe2/custo_agua.png
+    - assets/equipe2/hidraulica.png
+    - assets/equipe2/mob.png
+    - assets/equipe2/eletrica.png
+    - assets/equipe2/splash_icon.png
+    - assets/equipe2/volume.png
     - lib/equipes/CI_CD_6/assets/
     - lib/equipes/equipe5/assets/sobre.jpeg
     - lib/equipes/base/equipe3/assets/equipe3.jpg
+    - lib/equipes/MKP1/images/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
