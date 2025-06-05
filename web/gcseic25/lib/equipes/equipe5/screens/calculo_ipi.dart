@@ -28,7 +28,7 @@ class _CalculoIpiPageState extends State<CalculoIpiPage> {
       return;
     }
 
-    final url = Uri.parse('http://localhost:3000/impostos/ipi');
+    final url = Uri.parse('https://animated-occipital-buckthorn.glitch.me/impostos/ipi');
 
     final response = await http.post(
       url,
@@ -57,88 +57,103 @@ class _CalculoIpiPageState extends State<CalculoIpiPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Cálculo de IPI')),
-      body: SingleChildScrollView(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height - kToolbarHeight,
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 350,
-                    padding: const EdgeInsets.all(24),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(color: Colors.black26, blurRadius: 10),
-                      ],
+      appBar: AppBar(
+        title: const Text('Cálculo de IPI'),
+        backgroundColor: Color(0xFF0D47A1),
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFF0D47A1), // Azul escuro
+              Colors.white,
+            ],
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height - kToolbarHeight,
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 350,
+                      padding: const EdgeInsets.all(24),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(color: Colors.black26, blurRadius: 10),
+                        ],
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Semantics(
+                            label: 'Valor do produto',
+                            textField: true,
+                            child: TextField(
+                              controller: valorProdutoController,
+                              keyboardType: TextInputType.number,
+                              decoration: const InputDecoration(labelText: 'Valor do produto'),
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          Semantics(
+                            label: 'Alíquota',
+                            textField: true,
+                            child: TextField(
+                              controller: aliquotaController,
+                              keyboardType: TextInputType.number,
+                              decoration: const InputDecoration(labelText: 'Alíquota (%)'),
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          Semantics(
+                            label: 'Frete',
+                            textField: true,
+                            child: TextField(
+                              controller: freteController,
+                              keyboardType: TextInputType.number,
+                              decoration: const InputDecoration(labelText: 'Frete'),
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          Semantics(
+                            label: 'Despesas acessórias',
+                            textField: true,
+                            child: TextField(
+                              controller: despesasController,
+                              keyboardType: TextInputType.number,
+                              decoration: const InputDecoration(labelText: 'Despesas acessórias'),
+                            ),
+                          ),
+                          const SizedBox(height: 24),
+                          Semantics(
+                            label: 'Calcular IPI',
+                            button: true,
+                            child: ElevatedButton(
+                              onPressed: calcularIPI,
+                              child: const Text('Calcular IPI'),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Semantics(
-                          label: 'Valor do produto',
-                          textField: true,
-                          child: TextField(
-                            controller: valorProdutoController,
-                            keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(labelText: 'Valor do produto'),
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        Semantics(
-                          label: 'Alíquota',
-                          textField: true,
-                          child: TextField(
-                            controller: aliquotaController,
-                            keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(labelText: 'Alíquota (%)'),
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        Semantics(
-                          label: 'Frete',
-                          textField: true,
-                          child: TextField(
-                            controller: freteController,
-                            keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(labelText: 'Frete'),
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        Semantics(
-                          label: 'Despesas acessórias',
-                          textField: true,
-                          child: TextField(
-                            controller: despesasController,
-                            keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(labelText: 'Despesas acessórias'),
-                          ),
-                        ),
-                        const SizedBox(height: 24),
-                        Semantics(
-                          label: 'Calcular IPI',
-                          button: true,
-                          child: ElevatedButton(
-                            onPressed: calcularIPI,
-                            child: const Text('Calcular IPI'),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 32),
-                  if (resultado != null)
-                    Text(
-                      resultado!,
-                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
-                ],
+                    const SizedBox(height: 32),
+                    if (resultado != null)
+                      Text(
+                        resultado!,
+                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                      ),
+                  ],
+                ),
               ),
             ),
           ),

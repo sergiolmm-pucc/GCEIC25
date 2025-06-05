@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 
 class MKP1Service {
   static const String baseUrl = 'https://animated-occipital-buckthorn.glitch.me/mkp1';
+  //static const String baseUrl = 'http://localhost:3000/mkp1';
 
   // Cálculo simples de markup
   Future<Map<String, dynamic>> calculoSimples(
@@ -93,6 +94,33 @@ class MKP1Service {
         return jsonDecode(response.body);
       } else {
         throw Exception('Falha ao obter sugestão de preço');
+      }
+    } catch (e) {
+      throw Exception('Erro ao conectar com o servidor: $e');
+    }
+  }
+
+  // Simulação de preços com diferentes margens de lucro
+  Future<Map<String, dynamic>> simulacao({
+    required double custo,
+    required double despesas,
+    required double impostos,
+  }) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/simulacao'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'custo': custo,
+          'despesas': despesas,
+          'impostos': impostos,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+        throw Exception('Falha ao realizar simulação');
       }
     } catch (e) {
       throw Exception('Erro ao conectar com o servidor: $e');

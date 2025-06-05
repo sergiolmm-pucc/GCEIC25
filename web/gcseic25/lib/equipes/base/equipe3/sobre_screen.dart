@@ -1,49 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
-class SobreScreen extends StatefulWidget {
-  @override
-  _SobreScreenState createState() => _SobreScreenState();
-}
-
-class _SobreScreenState extends State<SobreScreen> {
-  String? imageUrl;
-  bool isLoading = true;
-  String _resposta = '';
-
-  @override
-  void initState() {
-    super.initState();
-    _consultarSobreAPI();
-  }
-
-  Future<void> _consultarSobreAPI() async {
-    final url = Uri.parse('https://animated-occipital-buckthorn.glitch.me/MOB3/sobre');
-
-    final response = await http.post(
-      url,
-      headers: {"Content-Type": "application/json"},
-    );
-
-    setState(() {
-      _resposta = response.statusCode == 200 ? response.body : 'Erro na requisição';
-    });
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      setState(() {
-        imageUrl = data['url'];
-        isLoading = false;
-      });
-    } else {
-      setState(() {
-        isLoading = false;
-      });
-      print('Erro: ${response.statusCode}');
-    }
-  }
-
+class SobreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,49 +54,58 @@ class _SobreScreenState extends State<SobreScreen> {
                           ],
                         ),
                         SizedBox(height: 24),
-                        if (isLoading)
-                          Center(child: CircularProgressIndicator())
-                        else ...[
-                          CircleAvatar(
-                            radius: 60,
-                            backgroundImage: imageUrl != null
-                                ? NetworkImage(imageUrl!)
-                                : AssetImage('image/Imagem teste.jpg') as ImageProvider,
+
+                        Text(
+                          'Foto da equipe',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.blue[900],
                           ),
-                          SizedBox(height: 16),
-                          Text(
-                            "Equipe MOB 3",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.blue[900],
-                            ),
+                        ),
+
+                        SizedBox(height: 16),
+
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.asset(
+                            'lib/equipes/base/equipe3/assets/equipe3.jpg',
+                            width: 250,
+                            height: 250,
+                            fit: BoxFit.cover,
                           ),
-                          Text(
-                            "Aplicativo de Cálculo de Piscinas",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.blue[700],
-                            ),
+                        ),
+
+                        SizedBox(height: 20),
+
+                        Text(
+                          'Integrantes:',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue[800],
                           ),
-                          SizedBox(height: 20),
-                          Text(
-                            'Resposta da API:',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: Colors.blue[800],
-                            ),
+                        ),
+
+                        SizedBox(height: 10),
+
+                        DefaultTextStyle(
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.blue[900],
                           ),
-                          SizedBox(height: 8),
-                          Text(
-                            _resposta,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.blue[900],
-                            ),
+                          textAlign: TextAlign.left,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text('- Leonardo Ferraro Gianfagna'),
+                              Text('- Mateus Colferai Mistro'),
+                              Text('- Rafael Gonçalves Michielin'),
+                              Text('- Renan Negri Cecolin'),
+                              Text('- Samuel Arantes Dos Santos Prado'),
+                            ],
                           ),
-                        ],
+                        ),
                       ],
                     ),
                   ),

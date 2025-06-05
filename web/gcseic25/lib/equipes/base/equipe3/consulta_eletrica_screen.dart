@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -17,6 +18,17 @@ class _ConsultaEletricaScreenState extends State<ConsultaEletricaScreen> {
   String _resultado = '';
 
   Future<void> _calcularParteEletrica() async {
+    if (_comprimentoFiosController.text.isEmpty ||
+        _precoPorMetroFioController.text.isEmpty ||
+        _quantidadeDisjuntoresController.text.isEmpty ||
+        _precoPorDisjuntorController.text.isEmpty ||
+        _custoMaoDeObraController.text.isEmpty) {
+      setState(() {
+        _resultado = 'Por favor, preencha todos os campos com valores válidos.';
+      });
+      return;
+    }
+
     final url = Uri.parse('https://animated-occipital-buckthorn.glitch.me/MOB3/calcularEletrica');
 
     final response = await http.post(
@@ -31,16 +43,14 @@ class _ConsultaEletricaScreenState extends State<ConsultaEletricaScreen> {
       }),
     );
 
-    print('Status code: ${response.statusCode}');
-    print('Response body: ${response.body}');
-
     if (!mounted) return;
 
     setState(() {
       if (response.statusCode == 200) {
-        _resultado = 'Custo elétrico estimado: R\$ ${response.body}';
+        final data = jsonDecode(response.body);
+        _resultado = 'Custo elétrico estimado: R\$ ${data["custoTotalEletrico"]}';
       } else {
-        _resultado = 'Erro ao calcular.';
+        _resultado = 'Erro ao calcular. Verifique os dados e tente novamente.';
       }
     });
   }
@@ -97,15 +107,15 @@ class _ConsultaEletricaScreenState extends State<ConsultaEletricaScreen> {
                           ],
                         ),
                         SizedBox(height: 24),
-                        _buildInputField(_comprimentoFiosController, 'Comprimento dos Fios (metros)'),
+                        _buildInputField(_comprimentoFiosController, 'Comprimento dos Fios (metros)', isInteger: false),
                         SizedBox(height: 16),
-                        _buildInputField(_precoPorMetroFioController, 'Preço por metro do fio (R\$)'),
+                        _buildInputField(_precoPorMetroFioController, 'Preço por metro do fio (R\$)', isInteger: false),
                         SizedBox(height: 16),
-                        _buildInputField(_quantidadeDisjuntoresController, 'Quantidade de disjuntores'),
+                        _buildInputField(_quantidadeDisjuntoresController, 'Quantidade de disjuntores', isInteger: true),
                         SizedBox(height: 16),
-                        _buildInputField(_precoPorDisjuntorController, 'Preço por disjuntor (R\$)'),
+                        _buildInputField(_precoPorDisjuntorController, 'Preço por disjuntor (R\$)', isInteger: false),
                         SizedBox(height: 16),
-                        _buildInputField(_custoMaoDeObraController, 'Custo da mão de obra (R\$)'),
+                        _buildInputField(_custoMaoDeObraController, 'Custo da mão de obra (R\$)', isInteger: false),
                         SizedBox(height: 20),
                         SizedBox(
                           width: double.infinity,
@@ -144,7 +154,7 @@ class _ConsultaEletricaScreenState extends State<ConsultaEletricaScreen> {
     );
   }
 
-  Widget _buildInputField(TextEditingController controller, String label) {
+  Widget _buildInputField(TextEditingController controller, String label, {bool isInteger = false}) {
     return TextField(
       controller: controller,
       decoration: InputDecoration(
@@ -153,7 +163,14 @@ class _ConsultaEletricaScreenState extends State<ConsultaEletricaScreen> {
         filled: true,
         fillColor: Colors.blue[50],
       ),
-      keyboardType: TextInputType.numberWithOptions(decimal: true),
+      keyboardType: TextInputType.numberWithOptions(decimal: !isInteger),
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(
+          isInteger
+              ? RegExp(r'^\d+$') 
+              : RegExp(r'^\d*\.?\d{0,2}$'), 
+        ),
+      ],
     );
   }
 }

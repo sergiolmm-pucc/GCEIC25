@@ -23,7 +23,7 @@ class _CalculoIssPageState extends State<CalculoIssPage> {
       return;
     }
 
-    final url = Uri.parse('http://localhost:3000/impostos/iss');
+    final url = Uri.parse('https://animated-occipital-buckthorn.glitch.me/impostos/iss');
 
     final response = await http.post(
       url,
@@ -46,72 +46,88 @@ class _CalculoIssPageState extends State<CalculoIssPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Cálculo de ISS')),
-      body: SingleChildScrollView(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height - kToolbarHeight,
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 350,
-                    padding: const EdgeInsets.all(24),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(color: Colors.black26, blurRadius: 10),
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Semantics(
-                          label: 'Campo para inserir o valor do serviço',
-                          textField: true,
-                          child: TextField(
-                            controller: valorServicoController,
-                            keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(labelText: 'Valor do serviço'),
+      appBar: AppBar(
+        title: const Text('Cálculo de ISS'),
+        backgroundColor: Color(0xFF0D47A1),
+      ),
+      body: Container(
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFF0D47A1), // Azul escuro
+              Colors.white,
+            ],
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height - kToolbarHeight,
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 350,
+                      padding: const EdgeInsets.all(24),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(color: Colors.black26, blurRadius: 10),
+                        ],
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Semantics(
+                            label: 'Campo para inserir o valor do serviço',
+                            textField: true,
+                            child: TextField(
+                              controller: valorServicoController,
+                              keyboardType: TextInputType.number,
+                              decoration: const InputDecoration(labelText: 'Valor do serviço'),
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 16),
-                        Semantics(
-                          label: 'Campo para inserir a alíquota do ISS em porcentagem',
-                          textField: true,
-                          child: TextField(
-                            controller: aliquotaController,
-                            keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(labelText: 'Alíquota (%)'),
+                          const SizedBox(height: 16),
+                          Semantics(
+                            label: 'Campo para inserir a alíquota do ISS em porcentagem',
+                            textField: true,
+                            child: TextField(
+                              controller: aliquotaController,
+                              keyboardType: TextInputType.number,
+                              decoration: const InputDecoration(labelText: 'Alíquota (%)'),
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 24),
-                        Semantics(
-                          label: 'Botão para calcular o ISS',
-                          button: true,
-                          child: ElevatedButton(
-                            onPressed: calcularISS,
-                            child: const Text('Calcular ISS'),
+                          const SizedBox(height: 24),
+                          Semantics(
+                            label: 'Botão para calcular o ISS',
+                            button: true,
+                            child: ElevatedButton(
+                              onPressed: calcularISS,
+                              child: const Text('Calcular ISS'),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 32),
-                  if (resultado != null)
-                    Semantics(
-                      label: 'Resultado do cálculo do ISS',
-                      readOnly: true,
-                      child: Text(
-                        resultado!,
-                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
+                        ],
                       ),
                     ),
-                ],
+                    const SizedBox(height: 32),
+                    if (resultado != null)
+                      Semantics(
+                        label: 'Resultado do cálculo do ISS',
+                        readOnly: true,
+                        child: Text(
+                          resultado!,
+                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
           ),

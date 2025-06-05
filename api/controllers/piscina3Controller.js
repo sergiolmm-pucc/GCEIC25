@@ -1,5 +1,6 @@
 const piscinaService = require('../services/piscina3Service');
 
+// Controller para cálculo da manutenção
 exports.calcularCustos = (req, res) => {
   try {
     const dados = req.body;
@@ -10,20 +11,7 @@ exports.calcularCustos = (req, res) => {
   }
 };
 
-exports.sobre = (req, res) => {
-  res.status(200).json({
-    foto: "https://sep-bucket-prod.s3.amazonaws.com/wp-content/uploads/2022/11/51981800313_fb744fd72d_o.jpg"
-  });
-};
-
-
-exports.splashScreen = (req, res) => {
-  res.status(200).json({
-    sucesso: true,
-    mensagem: 'Splash screen carregada'
-  });
-};
-
+// Controller para o texto de ajuda
 exports.ajuda = (req, res) => {
   res.status(200).json({
     titulo: 'Ajuda',
@@ -55,5 +43,16 @@ exports.calcularHidraulica = (req, res) => {
     res.status(200).json(resultado);
   } catch (error) {
     res.status(500).json({ erro: 'Erro ao calcular custos hidráulicos', detalhes: error.message });
+  }
+};
+
+// Controller para cálculo do custo total geral (manutenção + elétrica + hidráulica)
+exports.calcularCustoTotalGeral = (req, res) => {
+  try {
+    const dados = req.body;
+    const resultado = piscinaService.calcularCustoTotalGeral(dados);
+    res.status(200).json(resultado);
+  } catch (error) {
+    res.status(500).json({ erro: 'Erro ao calcular custo total geral', detalhes: error.message });
   }
 };

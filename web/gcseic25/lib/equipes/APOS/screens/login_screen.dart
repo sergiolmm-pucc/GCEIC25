@@ -190,21 +190,29 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         FractionallySizedBox(
                           widthFactor: 0.6,
-                          child: ElevatedButton.icon(
-                            onPressed: _login,
-                            icon: const Icon(Icons.login, size: 18),
-                            label: const Text(
-                              'Entrar',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.teal,
-                              foregroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
+                          child: Semantics(
+                            identifier: 'Entrar',
+                            label: 'Entrar',
+                            button: true,
+                            child: FractionallySizedBox(
+                              widthFactor: 0.6,
+                              child: ElevatedButton.icon(
+                                onPressed: _login,
+                                icon: const Icon(Icons.login, size: 18),
+                                label: const Text(
+                                  'Entrar',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.teal,
+                                  foregroundColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
+                          )
                         ),
 
                         if (_error != null) ...[

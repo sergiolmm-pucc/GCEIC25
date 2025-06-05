@@ -21,7 +21,8 @@ class _CalculoIrpjPageState extends State<CalculoIrpjPage> {
       return;
     }
 
-    final url = Uri.parse('http://localhost:3000/impostos/irpj');
+    final url = Uri.parse('https://animated-occipital-buckthorn.glitch.me/impostos/irpj');
+
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
@@ -51,79 +52,97 @@ class _CalculoIrpjPageState extends State<CalculoIrpjPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Cálculo de IRPJ')),
-      body: Center(
-        child: Container(
-          width: 350,
-          padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-            boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 10)],
+      appBar: AppBar(
+        title: const Text('Cálculo de IRPJ'),
+        backgroundColor: Color(0xFF0D47A1),
+      ),
+      body: Container(
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFF0D47A1), // Azul escuro
+              Colors.white,
+            ],
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Semantics(
-                label: 'Campo de lucro tributável',
-                textField: true,
-                child: TextField(
-                  controller: lucroController,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(labelText: 'Lucro Tributável'),
-                ),
+        ),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Container(
+              width: 350,
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 10)],
               ),
-              const SizedBox(height: 16),
-              Semantics(
-                label: 'Selecione o regime tributário',
-                child: Row(
-                  children: [
-                    const Text('Regime:'),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: DropdownButton<bool>(
-                        value: isLucroReal,
-                        onChanged: (value) {
-                          setState(() {
-                            isLucroReal = value!;
-                          });
-                        },
-                        items: const [
-                          DropdownMenuItem(
-                            value: true,
-                            child: Text('Lucro Real'),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Semantics(
+                    label: 'Campo de lucro tributável',
+                    textField: true,
+                    child: TextField(
+                      controller: lucroController,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(labelText: 'Lucro Tributável'),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Semantics(
+                    label: 'Selecione o regime tributário',
+                    child: Row(
+                      children: [
+                        const Text('Regime:'),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: DropdownButton<bool>(
+                            value: isLucroReal,
+                            onChanged: (value) {
+                              setState(() {
+                                isLucroReal = value!;
+                              });
+                            },
+                            items: const [
+                              DropdownMenuItem(
+                                value: true,
+                                child: Text('Lucro Real'),
+                              ),
+                              DropdownMenuItem(
+                                value: false,
+                                child: Text('Lucro Presumido'),
+                              ),
+                            ],
                           ),
-                          DropdownMenuItem(
-                            value: false,
-                            child: Text('Lucro Presumido'),
-                          ),
-                        ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Semantics(
+                    label: 'Botão para calcular IRPJ',
+                    button: true,
+                    child: ElevatedButton(
+                      onPressed: calcularIRPJ,
+                      child: const Text('Calcular IRPJ'),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  if (resultado != null)
+                    Semantics(
+                      label: 'Resultado do cálculo do IRPJ',
+                      readOnly: true,
+                      child: Text(
+                        resultado!,
+                        style: const TextStyle(fontSize: 14),
+                        textAlign: TextAlign.center,
                       ),
                     ),
-                  ],
-                ),
+                ],
               ),
-              const SizedBox(height: 24),
-              Semantics(
-                label: 'Botão para calcular IRPJ',
-                button: true,
-                child: ElevatedButton(
-                  onPressed: calcularIRPJ,
-                  child: const Text('Calcular IRPJ'),
-                ),
-              ),
-              const SizedBox(height: 16),
-              if (resultado != null)
-                Semantics(
-                  label: 'Resultado do cálculo do IRPJ',
-                  readOnly: true,
-                  child: Text(
-                    resultado!,
-                    style: const TextStyle(fontSize: 14),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-            ],
+            ),
           ),
         ),
       ),

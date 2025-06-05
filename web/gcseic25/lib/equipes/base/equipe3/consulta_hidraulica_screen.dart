@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/services.dart';
 import 'dart:convert';
 
 class ConsultaHidraulicaScreen extends StatefulWidget {
@@ -17,6 +18,17 @@ class _ConsultaHidraulicaScreenState extends State<ConsultaHidraulicaScreen> {
   String _resultado = '';
 
   Future<void> _calcularParteHidraulica() async {
+    if (_tubulacaoController.text.isEmpty ||
+        _conexoesController.text.isEmpty ||
+        _precoTubulacaoController.text.isEmpty ||
+        _precoConexaoController.text.isEmpty ||
+        _maoDeObraController.text.isEmpty) {
+      setState(() {
+        _resultado = 'Por favor, preencha todos os campos com valores válidos.';
+      });
+      return;
+    }
+
     final url = Uri.parse('https://animated-occipital-buckthorn.glitch.me/MOB3/calcularHidraulica');
 
     final response = await http.post(
@@ -31,12 +43,14 @@ class _ConsultaHidraulicaScreenState extends State<ConsultaHidraulicaScreen> {
       }),
     );
 
+    if (!mounted) return;
+
     setState(() {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        _resultado = 'Custo total hidráulico estimado: R\$ ${data["custoTotalHidraulico"]}';
+        _resultado = 'Custo hidráulico estimado: R\$ ${data["custoTotalHidraulico"]}';
       } else {
-        _resultado = 'Erro ao calcular.';
+        _resultado = 'Erro ao calcular. Verifique os dados e tente novamente.';
       }
     });
   }
@@ -93,15 +107,15 @@ class _ConsultaHidraulicaScreenState extends State<ConsultaHidraulicaScreen> {
                           ],
                         ),
                         SizedBox(height: 24),
-                        _buildInputField(_tubulacaoController, 'Qtd. Tubulação (m)'),
+                        _buildInputField(_tubulacaoController, 'Qtd. Tubulação (m)', isInteger: false),
                         SizedBox(height: 16),
-                        _buildInputField(_conexoesController, 'Qtd. Conexões'),
+                        _buildInputField(_conexoesController, 'Qtd. Conexões', isInteger: true),
                         SizedBox(height: 16),
-                        _buildInputField(_precoTubulacaoController, 'Preço/m Tubulação (R\$)'),
+                        _buildInputField(_precoTubulacaoController, 'Preço/m Tubulação (R\$)', isInteger: false),
                         SizedBox(height: 16),
-                        _buildInputField(_precoConexaoController, 'Preço/unid Conexão (R\$)'),
+                        _buildInputField(_precoConexaoController, 'Preço/unid Conexão (R\$)', isInteger: false),
                         SizedBox(height: 16),
-                        _buildInputField(_maoDeObraController, 'Custo Mão de Obra (R\$)'),
+                        _buildInputField(_maoDeObraController, 'Custo Mão de Obra (R\$)', isInteger: false),
                         SizedBox(height: 20),
                         SizedBox(
                           width: double.infinity,
@@ -110,7 +124,8 @@ class _ConsultaHidraulicaScreenState extends State<ConsultaHidraulicaScreen> {
                               backgroundColor: Colors.blue[700],
                               padding: const EdgeInsets.symmetric(vertical: 14),
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
                             ),
                             onPressed: _calcularParteHidraulica,
                             child: Text(
@@ -140,7 +155,7 @@ class _ConsultaHidraulicaScreenState extends State<ConsultaHidraulicaScreen> {
     );
   }
 
-  Widget _buildInputField(TextEditingController controller, String label) {
+  Widget _buildInputField(TextEditingController controller, String label, {bool isInteger = false}) {
     return TextField(
       controller: controller,
       decoration: InputDecoration(
@@ -149,7 +164,14 @@ class _ConsultaHidraulicaScreenState extends State<ConsultaHidraulicaScreen> {
         filled: true,
         fillColor: Colors.blue[50],
       ),
-      keyboardType: TextInputType.numberWithOptions(decimal: true),
+      keyboardType: TextInputType.numberWithOptions(decimal: !isInteger),
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(
+          isInteger
+              ? RegExp(r'^\d+$')
+              : RegExp(r'^\d*\.?\d{0,2}$'),
+        ),
+      ],
     );
   }
 }

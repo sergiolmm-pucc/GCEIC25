@@ -4,6 +4,7 @@ import 'consulta_eletrica_screen.dart';
 import 'consulta_hidraulica_screen.dart';  
 import 'sobre_screen.dart';
 import 'ajuda_screen.dart';
+import 'consulta_total.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -47,16 +48,42 @@ class HomeScreen extends StatelessWidget {
                           color: Colors.blue[800],
                         ),
                       ),
-                      SizedBox(height: 30),
-                      _buildMenuButton(context, 'Consulta Piscina', Icons.pool, ConsultaScreen()),
                       SizedBox(height: 16),
-                      _buildMenuButton(context, 'Consulta Elétrica', Icons.electrical_services, ConsultaEletricaScreen()),  
+                      Semantics(
+                        label: 'Consulta Elétrica',
+                        button: true,
+                        child: _buildMenuButton(context, 'Consulta Elétrica', Icons.electrical_services, ConsultaEletricaScreen()),
+                      ),
                       SizedBox(height: 16),
-                      _buildMenuButton(context, 'Consulta Hidráulica', Icons.plumbing, ConsultaHidraulicaScreen()),  
+                      Semantics(
+                        label: 'Consulta Hidráulica',
+                        button: true,
+                        child: _buildMenuButton(context, 'Consulta Hidráulica', Icons.plumbing, ConsultaHidraulicaScreen()),
+                      ),
                       SizedBox(height: 16),
-                      _buildMenuButton(context, 'Sobre', Icons.info_outline, SobreScreen()),
+                      Semantics(
+                        label: 'Consulta de Manutenção',
+                        button: true,
+                        child: _buildMenuButton(context, 'Consulta de Manutenção', Icons.build, ConsultaScreen()),
+                      ),
                       SizedBox(height: 16),
-                      _buildMenuButton(context, 'Ajuda', Icons.help_outline, AjudaScreen()),
+                      Semantics(
+                        label: 'Consulta do Preço Total',
+                        button: true,
+                        child: _buildMenuButton(context, 'Consulta do Preço Total', Icons.pool, ConsultaTotalScreen()),
+                      ),
+                      SizedBox(height: 16),
+                      Semantics(
+                        label: 'Sobre',
+                        button: true,
+                        child: _buildMenuButton(context, 'Sobre', Icons.info_outline, SobreScreen()),
+                      ),
+                      SizedBox(height: 16),
+                      Semantics(
+                        label: 'Ajuda',
+                        button: true,
+                        child: _buildMenuButton(context, 'Ajuda', Icons.help_outline, AjudaScreen()),
+                      ),
                     ],
                   ),
                 ),
