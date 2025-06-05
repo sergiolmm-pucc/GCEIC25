@@ -12,5 +12,6 @@ router.post('/agua', pool4.calcularCustoDAgua);
 router.post('/manutencao', pool4.calcularManutencaoMensal);
 router.post('/mob', pool4.calcularMob);
 router.post('/login', pool4.login);
+router.get('/calcularTotal', pool4.calcularTotal);
 
 module.exports = router;

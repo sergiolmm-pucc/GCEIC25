@@ -1,5 +1,8 @@
+import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:gcseic25/equipes/equipe2/screens/mob.dart';
 import 'package:gcseic25/equipes/equipe2/screens/water_volume.dart';
 import 'package:gcseic25/equipes/equipe2/screens/hydraulic_material.dart';
@@ -8,16 +11,60 @@ import 'package:gcseic25/equipes/equipe2/screens/water_cost.dart';
 import 'package:gcseic25/equipes/equipe2/screens/eletric_material.dart';
 import '../utils/tab_bar.dart';
 
-class HomeScreen2 extends StatelessWidget {
+class HomeScreen2 extends StatefulWidget {
   const HomeScreen2({super.key});
+
+  @override
+  State<HomeScreen2> createState() => _HomeScreen2State();
+}
+
+class _HomeScreen2State extends State<HomeScreen2> {
+  double volume = 0;
+  double custoHidraulico = 0;
+  double custoManutencao = 0;
+  double custoEletrico = 0;
+  double custoAgua = 0;
+  double custoMob = 0;
+  double custoTotal = 0;
+
+  // Método para buscar dados reais da API
+  Future<void> buscarDadosDaApi() async {
+    try {
+      final response = await http.get(
+        Uri.parse('http://localhost:3000/CCP/calcularTotal'),
+      );
+      print(response.body);
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+
+        setState(() {
+          volume = (data['valorVolume'] ?? 0).toDouble();
+          custoEletrico = (data['valorMaterialEletrico'] ?? 0).toDouble();
+          custoHidraulico = (data['valorMaterialHidraulico'] ?? 0).toDouble();
+          custoAgua = (data['valorCustoAgua'] ?? 0).toDouble();
+          custoManutencao = (data['valorManutencaoMensal'] ?? 0).toDouble();
+          custoMob = (data['valorMob'] ?? 0).toDouble();
+          custoTotal = (data['somaTotal'] ?? 0).toDouble();
+        });
+      } else {
+        print('Erro ao carregar dados da API: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Erro na conexão com a API: $e');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    buscarDadosDaApi();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
-        textTheme: Theme.of(context).textTheme.apply(
-              fontFamily: 'Montserrat',
-            ),
+        textTheme: Theme.of(context).textTheme.apply(fontFamily: 'Montserrat'),
       ),
       child: MainLayout(
         isHome: true,
@@ -26,60 +73,59 @@ class HomeScreen2 extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 70),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      
-                      Expanded(
-                        flex: 1,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 240, top: 230),
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                RichText(
-                                  text: TextSpan(
-                                    style: const TextStyle(
-                                      fontSize: 60,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.white,
-                                    ),
-                                    children: [
-                                      const TextSpan(text: 'Calcule o custo para\n'),
-                                      const TextSpan(text: 'construir '),
-                                      TextSpan(
-                                        text: 'sua piscina',
-                                        style: TextStyle(
-                                          color: Color(0xFFFB9942),
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(height: 16),
-                                const Text(
-                                  'Cálculo de volume, material elétrico, hidráulica, custo da água e gasto\n'
-                                  'mensal de manutenção.',
-                                  style: TextStyle(
-                                    fontSize: 16,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 240, top: 230),
+                        child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              RichText(
+                                text: TextSpan(
+                                  style: const TextStyle(
+                                    fontSize: 60,
+                                    fontWeight: FontWeight.w500,
                                     color: Colors.white,
                                   ),
+                                  children: [
+                                    const TextSpan(
+                                      text: 'Calcule o custo para\n',
+                                    ),
+                                    const TextSpan(text: 'construir '),
+                                    TextSpan(
+                                      text: 'sua piscina',
+                                      style: TextStyle(
+                                        color: Color(0xFFFB9942),
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                              ),
+                              const SizedBox(height: 16),
+                              const Text(
+                                'Cálculo de volume, material elétrico, hidráulica, custo da água e gasto\n'
+                                'mensal de manutenção.',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-
-                      // Coluna da direita com o container centralizado verticalmente
-                      Expanded(
-                        flex: 1,
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 190),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 190),
                         child: Align(
                           alignment: Alignment.center,
                           child: ClipRRect(
@@ -109,17 +155,15 @@ class HomeScreen2 extends StatelessWidget {
                                       ),
                                     ),
                                     const SizedBox(height: 20),
-                                    // 🔹 Duas colunas lado a lado
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        // 🔸 Primeira coluna
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
-                                          children: const [
-                                            Text(
+                                          children: [
+                                            const Text(
                                               'Volume',
                                               style: TextStyle(
                                                 color: Colors.white,
@@ -127,17 +171,17 @@ class HomeScreen2 extends StatelessWidget {
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
-                                            SizedBox(height: 4),
+                                            const SizedBox(height: 4),
                                             Text(
-                                              '0 m³',
-                                              style: TextStyle(
+                                              '${volume.toStringAsFixed(2)} m³',
+                                              style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 22,
                                                 fontWeight: FontWeight.w700,
                                               ),
                                             ),
-                                            SizedBox(height: 16),
-                                            Text(
+                                            const SizedBox(height: 16),
+                                            const Text(
                                               'Custo hidráulico',
                                               style: TextStyle(
                                                 color: Colors.white,
@@ -145,17 +189,17 @@ class HomeScreen2 extends StatelessWidget {
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
-                                            SizedBox(height: 4),
+                                            const SizedBox(height: 4),
                                             Text(
-                                              'R\$ 0',
-                                              style: TextStyle(
+                                              'R\$ ${custoHidraulico.toStringAsFixed(2)}',
+                                              style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 22,
                                                 fontWeight: FontWeight.w700,
                                               ),
                                             ),
-                                            SizedBox(height: 16),
-                                            Text(
+                                            const SizedBox(height: 16),
+                                            const Text(
                                               'Custo de manutenção',
                                               style: TextStyle(
                                                 color: Colors.white,
@@ -163,10 +207,10 @@ class HomeScreen2 extends StatelessWidget {
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
-                                            SizedBox(height: 4),
+                                            const SizedBox(height: 4),
                                             Text(
-                                              'R\$ 0',
-                                              style: TextStyle(
+                                              'R\$ ${custoManutencao.toStringAsFixed(2)}',
+                                              style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 22,
                                                 fontWeight: FontWeight.w700,
@@ -174,13 +218,11 @@ class HomeScreen2 extends StatelessWidget {
                                             ),
                                           ],
                                         ),
-
-                                        // 🔸 Segunda coluna
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
-                                          children: const [
-                                            Text(
+                                          children: [
+                                            const Text(
                                               'Custo de material elétrico',
                                               style: TextStyle(
                                                 color: Colors.white,
@@ -188,17 +230,17 @@ class HomeScreen2 extends StatelessWidget {
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
-                                            SizedBox(height: 4),
+                                            const SizedBox(height: 4),
                                             Text(
-                                              'R\$ 0',
-                                              style: TextStyle(
+                                              'R\$ ${custoEletrico.toStringAsFixed(2)}',
+                                              style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 22,
                                                 fontWeight: FontWeight.w700,
                                               ),
                                             ),
-                                            SizedBox(height: 16),
-                                            Text(
+                                            const SizedBox(height: 16),
+                                            const Text(
                                               'Custo d\'água',
                                               style: TextStyle(
                                                 color: Colors.white,
@@ -206,17 +248,17 @@ class HomeScreen2 extends StatelessWidget {
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
-                                            SizedBox(height: 4),
+                                            const SizedBox(height: 4),
                                             Text(
-                                              'R\$ 0',
-                                              style: TextStyle(
+                                              'R\$ ${custoAgua.toStringAsFixed(2)}',
+                                              style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 22,
                                                 fontWeight: FontWeight.w700,
                                               ),
                                             ),
-                                            SizedBox(height: 16),
-                                            Text(
+                                            const SizedBox(height: 16),
+                                            const Text(
                                               'MOB',
                                               style: TextStyle(
                                                 color: Colors.white,
@@ -224,10 +266,10 @@ class HomeScreen2 extends StatelessWidget {
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
-                                            SizedBox(height: 4),
+                                            const SizedBox(height: 4),
                                             Text(
-                                              'R\$ 0',
-                                              style: TextStyle(
+                                              'R\$ ${custoMob.toStringAsFixed(2)}',
+                                              style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 22,
                                                 fontWeight: FontWeight.w700,
@@ -237,9 +279,7 @@ class HomeScreen2 extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-
                                     const SizedBox(height: 30),
-
                                     const Text(
                                       'Total',
                                       style: TextStyle(
@@ -249,9 +289,9 @@ class HomeScreen2 extends StatelessWidget {
                                       ),
                                     ),
                                     const SizedBox(height: 4),
-                                    const Text(
-                                      'R\$ 0,00',
-                                      style: TextStyle(
+                                    Text(
+                                      'R\$ ${custoTotal.toStringAsFixed(2)}',
+                                      style: const TextStyle(
                                         color: Colors.blueAccent,
                                         fontSize: 26,
                                         fontWeight: FontWeight.w500,
@@ -264,15 +304,13 @@ class HomeScreen2 extends StatelessWidget {
                           ),
                         ),
                       ),
-                      ),
-                    ],
-                  ),
-
+                    ),
+                  ],
+                ),
               ),
 
               const SizedBox(height: 80),
 
-              // 🔘 Botões centralizados na parte de baixo da tela
               Wrap(
                 spacing: 40,
                 runSpacing: 16,
@@ -284,6 +322,7 @@ class HomeScreen2 extends StatelessWidget {
                     subtitle: 'Calcular o custo da manutenção.',
                     imageUrl: 'assets/equipe2/manutencao.png',
                     page: const MaintenancePage(),
+                    onReturn: buscarDadosDaApi,
                   ),
                   buildButtonCard(
                     context: context,
@@ -291,6 +330,7 @@ class HomeScreen2 extends StatelessWidget {
                     subtitle: 'Calcular o custo da água.',
                     imageUrl: 'assets/equipe2/custo_agua.png',
                     page: const WaterCostPage(),
+                    onReturn: buscarDadosDaApi,
                   ),
                   buildButtonCard(
                     context: context,
@@ -298,6 +338,7 @@ class HomeScreen2 extends StatelessWidget {
                     subtitle: 'Calcular o custo da parte hidráulica.',
                     imageUrl: 'assets/equipe2/hidraulica.png',
                     page: const HydraulicCostPage(),
+                    onReturn: buscarDadosDaApi,
                   ),
                   buildButtonCard(
                     context: context,
@@ -305,6 +346,7 @@ class HomeScreen2 extends StatelessWidget {
                     subtitle: 'Calcular o custo de mobilização.',
                     imageUrl: 'assets/equipe2/mob.png',
                     page: MOBPage(),
+                    onReturn: buscarDadosDaApi,
                   ),
                   buildButtonCard(
                     context: context,
@@ -312,6 +354,7 @@ class HomeScreen2 extends StatelessWidget {
                     subtitle: 'Calcular custo elétrico.',
                     imageUrl: 'assets/equipe2/eletrica.png',
                     page: const EletricMaterialPage(),
+                    onReturn: buscarDadosDaApi,
                   ),
                   buildButtonCard(
                     context: context,
@@ -319,10 +362,10 @@ class HomeScreen2 extends StatelessWidget {
                     subtitle: 'Calcular o volume de água.',
                     imageUrl: 'assets/equipe2/volume.png',
                     page: const WaterVolumePage(),
+                    onReturn: buscarDadosDaApi,
                   ),
                 ],
               ),
-              const SizedBox(height: 40), 
             ],
           ),
         ),
@@ -337,13 +380,15 @@ Widget buildButtonCard({
   required String subtitle,
   required String imageUrl,
   required Widget page,
+  required VoidCallback onReturn,
 }) {
   return InkWell(
     onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => page),
-      );
+      Navigator.push(context, MaterialPageRoute(builder: (_) => page)).then((
+        _,
+      ) {
+        onReturn();
+      });
     },
     borderRadius: BorderRadius.circular(16),
     child: Container(
@@ -364,12 +409,7 @@ Widget buildButtonCard({
         child: Stack(
           children: [
             // 🖼️ Imagem de fundo
-            Positioned.fill(
-              child: Image.asset(
-                imageUrl,
-                fit: BoxFit.cover,
-              ),
-            ),
+            Positioned.fill(child: Image.asset(imageUrl, fit: BoxFit.cover)),
 
             // 🔲 Gradiente no rodapé
             Positioned(
@@ -406,7 +446,7 @@ Widget buildButtonCard({
                       style: const TextStyle(
                         color: Colors.grey,
                         fontSize: 13,
-                        fontWeight: FontWeight.w600
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ],
@@ -430,4 +470,3 @@ Widget buildButtonCard({
     ),
   );
 }
-
