@@ -93,9 +93,13 @@ flutter:
     - assets/equipe2/volume.png
     - lib/equipes/CI_CD_6/assets/
     - lib/equipes/equipe5/assets/sobre.jpeg
-
     - lib/equipes/base/equipe3/assets/equipe3.jpg
     - lib/equipes/MKP1/images/
+    - lib/assets/Jessica.jpg
+    - lib/assets/Kenji.jpg
+    - lib/assets/Marcela.jpg
+    - lib/assets/Natalia.jpg
+    - lib/assets/Nicole.jpg
 
 
   # The following line ensures that the Material Icons font is

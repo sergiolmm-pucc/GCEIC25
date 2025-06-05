@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gcseic25/equipes/equipe2/screens/about.dart';
+import 'package:gcseic25/equipes/equipe2/screens/help.dart';
 
 class MainLayout extends StatelessWidget {
   final Widget child;
@@ -33,7 +34,12 @@ class MainLayout extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {
-              // Navegar para Help
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HelpPage(),
+                  ),
+                );
             },
             child: const Text(
               'Ajuda',

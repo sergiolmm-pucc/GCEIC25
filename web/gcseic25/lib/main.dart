@@ -21,11 +21,8 @@ import 'package:gcseic25/equipes/MKP1/screens/ajuda_screen.dart';
 import 'package:gcseic25/equipes/equipe5/screens/transition_screen.dart';
 
 
-
 import 'package:gcseic25/equipes/CI_CD_10/login.dart';
 import 'package:gcseic25/equipes/CI_CD_10/splashscreen.dart' as CI_CD10Splash;
-
-
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
@@ -43,52 +40,31 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.blue),
       home: HomePage(),
       routes: {
-
         '/splash_screen_equipe_2':
-
-
-        '/splash_screen_equipe_2': 
-
-            (context) => SplashScreen4(nextPage: LoginPage2()),
+            (context) => SplashScreen2(nextPage: LoginPage2()),
         '/CI_CD_8':
             (context) => CI_CD8Splash.SplashScreen(
               nextPage: const CI_CD8Login.LoginPage(),
             ),
-
-
-        //'/splash_screen_equipe_2': (context) => SplashScreen4(nextPage: LoginPage4()),
-
-        '/CI_CD_8': (context) => CI_CD8Splash.SplashScreen(nextPage: const CI_CD8Login.LoginPage()),
-
         '/CI_CD_6': (context) => SplashToLoginScreen(),
-
         '/splash1':
             (context) =>
                 SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
         '/splash2':
             (context) =>
                 SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
-
-        '/CI_CD_10_splash': 
-            (context) =>
-                CI_CD10Splash.SplashScreen(nextPage: CI_CD10LoginPage(),),
-
+        '/CI_CD_10_splash': (context) => CI_CD10Splash.SplashScreen(nextPage: CI_CD10LoginPage(),),
         '/markup': (context) => MultiplierMarkupPage(),
-        '/markupSplashScreen': (context) => const MarkupSplashScreen(),
         '/login': (context) => LoginPage(),
+        '/markupSplash': (context) => const MarkupSplashScreen(),
         '/aposSplashScreen': (context) => APOSSplashScreen(),
         '/mkp1SplashScreen': (context) => const MKP1SplashScreen(),
         '/mob3': (context) => SplashScreen3(nextPage: LoginScreen()),
         '/equipe5': (context) => TelaLogin(),
-
         '/sobre': (context) => const SobreScreen(),
         '/ajuda': (context) => const AjudaScreen(),
         '/mob3': (context) => SplashScreen3(nextPage: LoginScreen()),
         '/equipe5': (context) => TransitionScreen(nextPage: TelaLogin()),
-
-
-
-
       },
     );
   }
@@ -121,8 +97,6 @@ class HomePage extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-
-
                 Navigator.pushNamed(context, '/CI_CD_6');
               },
               child: Text('Cálculo do ETEC[CI/CD 6]'),
@@ -148,8 +122,7 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed:
-                  () => Navigator.pushNamed(context, '/markupSplashScreen'),
+              onPressed: () => Navigator.pushNamed(context, '/markupSplash'),
               child: const Text('MARKUP MULTIPLICADOR'),
             ),
             SizedBox(height: 20),
@@ -200,12 +173,10 @@ class HomePage extends StatelessWidget {
               },
               child: Text('Calculadora de Impostos 5'),
             ),
-                SizedBox(height: 20),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-
                 Navigator.pushNamed(context, '/CI_CD_10_splash');
-
               },
               child: Text('Cálculo do ETEC[CI_CD_10]'),
             ),

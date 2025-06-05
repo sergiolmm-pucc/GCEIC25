@@ -48,7 +48,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                                 const SizedBox(height: 40),
                 _GradientButton(
-                  text: 'Ir para cálculo',
+                  text: 'Sobre',
                   onPressed: () {
                     Navigator.push(
                       context,
