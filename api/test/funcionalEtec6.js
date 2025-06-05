@@ -57,8 +57,8 @@ async function preencherCampo(driver, xpath, texto, timeout = 30000) {
 
         const bridge = new FlutterSeleniumBridge(driver);
         await driver.manage().window().setRect(screen);
-        await driver.get("http://localhost:58067/");
-        //await driver.get('https://sergio.dev.br/');
+        //await driver.get("http://localhost:58067/");
+        await driver.get('https://sergio.dev.br/');
 
         console.log('Esperando 5s para o app carregar...');
         await driver.sleep(5000);
