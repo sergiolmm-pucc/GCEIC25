@@ -22,7 +22,7 @@ class _MultiplierMarkupPageState extends State<MultiplierMarkupPage> {
     if (_formKey.currentState!.validate()) {
       try {
         final response = await http.post(
-          Uri.parse('http://localhost:3000/markup'),
+          Uri.parse('https://sergio.dev.br/markup'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode({
             'custo': double.parse(_custoController.text),
