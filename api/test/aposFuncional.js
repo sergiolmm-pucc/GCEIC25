@@ -36,7 +36,7 @@ async function clickAndSearchElement(driver, xpath, timeout = 30000) {
 async function preencherCampo(driver, xpath, texto, timeout = 30000) {
     const campo = await driver.wait(until.elementLocated(By.xpath(xpath)), timeout);
     await campo.sendKeys(texto);
-    await driver.sleep(5000);
+    await driver.sleep(8500);
     return campo;
 }
 
