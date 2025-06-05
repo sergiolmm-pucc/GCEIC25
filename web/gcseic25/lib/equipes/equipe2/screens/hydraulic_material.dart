@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import '../utils/tab_bar.dart';
 
@@ -19,7 +21,6 @@ class _HydraulicCostPageState extends State<HydraulicCostPage> {
 
   String? tipoTubulacaoSelecionado;
 
-  // Mapeia os preços médios por metro para cada tipo de tubulação
   final Map<String, double> precosMedios = {
     'PVC': 10.0,
     'CPVC': 12.5,
@@ -28,20 +29,65 @@ class _HydraulicCostPageState extends State<HydraulicCostPage> {
   };
 
   double total = 0.0;
+  bool isLoading = false;
 
-  void calcularCusto() {
-    double bomba = double.tryParse(bombaController.text) ?? 0;
-    double filtro = double.tryParse(filtroController.text) ?? 0;
-    double tubos = double.tryParse(tubosController.text) ?? 0;
-    double precoMetro = double.tryParse(precoMetroController.text) ?? 0;
-    double conexoes = double.tryParse(conexoesController.text) ?? 0;
+  // Chama a API para calcular o custo
+  Future<void> calcularCustoApi() async {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
 
     setState(() {
-      total = bomba + filtro + (tubos * precoMetro) + conexoes;
+      isLoading = true;
     });
+
+    try {
+      final bomba = double.tryParse(bombaController.text) ?? 0;
+      final filtro = double.tryParse(filtroController.text) ?? 0;
+      final tubos = double.tryParse(tubosController.text) ?? 0;
+      final precoMetro = double.tryParse(precoMetroController.text) ?? 0;
+      final conexoes = double.tryParse(conexoesController.text) ?? 0;
+
+      // Substitua essa URL pela URL real da sua API
+      final uri = Uri.parse('http://localhost:3000/CCP/hidraulico');
+
+      final response = await http.post(
+        uri,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'custoBomba': bomba,
+          'custoFiltro': filtro,
+          'comprimentoTubos': tubos,
+          'custoPorMetro': precoMetro,
+          'custoValvula': conexoes,
+          'tipoTubulacao': tipoTubulacaoSelecionado,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        // Supondo que a API retorne { "total": 123.45 }
+        setState(() {
+          total = (data['total'] as num).toDouble();
+        });
+      } else {
+        // Tratar erro da API
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Erro ao calcular custo: ${response.reasonPhrase}')),
+        );
+      }
+    } catch (e) {
+      // Tratar erro de conexão ou outro
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro na requisição: $e')),
+      );
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
-  // Quando o usuário escolhe o tipo da tubulação, atualiza preço por metro automaticamente
   void onTipoTubulacaoChanged(String? value) {
     setState(() {
       tipoTubulacaoSelecionado = value;
@@ -115,7 +161,7 @@ class _HydraulicCostPageState extends State<HydraulicCostPage> {
                           ),
                           const SizedBox(height: 20),
                           ElevatedButton(
-                            onPressed: calcularCusto,
+                            onPressed: isLoading ? null : calcularCustoApi,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blue,
                               foregroundColor: Colors.white,
@@ -124,10 +170,12 @@ class _HydraulicCostPageState extends State<HydraulicCostPage> {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                             ),
-                            child: const Text(
-                              'CALCULAR',
-                              style: TextStyle(fontSize: 16),
-                            ),
+                            child: isLoading
+                                ? const CircularProgressIndicator(color: Colors.white)
+                                : const Text(
+                                    'CALCULAR',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
                           )
                         ],
                       ),
@@ -198,6 +246,15 @@ class _HydraulicCostPageState extends State<HydraulicCostPage> {
             ),
             contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
           ),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Campo obrigatório';
+            }
+            if (double.tryParse(value.replaceAll(',', '.')) == null) {
+              return 'Digite um número válido';
+            }
+            return null;
+          },
         ),
       ],
     );
@@ -230,6 +287,12 @@ class _HydraulicCostPageState extends State<HydraulicCostPage> {
             ),
             contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
           ),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Selecione um tipo';
+            }
+            return null;
+          },
         ),
       ],
     );
