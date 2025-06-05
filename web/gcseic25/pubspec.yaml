@@ -55,6 +55,10 @@ dev_dependencies:
 flutter:
 
   assets:
+    - assets/CI_CD_10/luan.jpg
+    - assets/CI_CD_10/lucas.jpg
+    - assets/CI_CD_10/vitor.jpg
+    - assets/CI_CD_10/bruno.png
     - assets/APOS/emilly.jpeg
     - assets/APOS/gabriel.png
     - assets/APOS/guilherme.jpeg
@@ -89,7 +93,15 @@ flutter:
     - assets/equipe2/volume.png
     - lib/equipes/CI_CD_6/assets/
     - lib/equipes/equipe5/assets/sobre.jpeg
+
     - lib/equipes/base/equipe3/assets/equipe3.jpg
+    - lib/equipes/MKP1/images/
+    - lib/assets/Jessica.jpg
+    - lib/assets/Kenji.jpg
+    - lib/assets/Marcela.jpg
+    - lib/assets/Natalia.jpg
+    - lib/assets/Nicole.jpg
+
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

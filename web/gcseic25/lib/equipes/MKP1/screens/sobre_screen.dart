@@ -45,11 +45,65 @@ class SobreScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    'João Pedro Giaretta\n Filipe Mota\n Caio Gandara\n Thiago Fossa\n Mel Seleghin',
-                    style: TextStyle(fontSize: 17),
-                    textAlign: TextAlign.center,
+                  SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        children: [
+                          CircleAvatar(
+                            radius: 40,
+                            backgroundImage: AssetImage('lib/equipes/MKP1/images/joao.png'),
+                          ),
+                          SizedBox(height: 8),
+                          Text('João Pedro Giaretta'),
+                        ],
+                      ),
+                      SizedBox(width: 20),
+                      Column(
+                        children: [
+                          CircleAvatar(
+                            radius: 40,
+                            backgroundImage: AssetImage('lib/equipes/MKP1/images/filipe.png'),
+                          ),
+                          SizedBox(height: 8),
+                          Text('Filipe Mota'),
+                        ],
+                      ),
+                      SizedBox(width: 20),
+                      Column(
+                        children: [
+                          CircleAvatar(
+                            radius: 40,
+                            backgroundImage: AssetImage('lib/equipes/MKP1/images/caio.png'),
+                          ),
+                          SizedBox(height: 8),
+                          Text('Caio Gandara'),
+                        ],
+                      ),
+                      SizedBox(width: 20),
+                      Column(
+                        children: [
+                          CircleAvatar(
+                            radius: 40,
+                            backgroundImage: AssetImage('lib/equipes/MKP1/images/thiago.png'),
+                          ),
+                          SizedBox(height: 8),
+                          Text('Thiago Fossa'),
+                        ],
+                      ),
+                      SizedBox(width: 20),
+                      Column(
+                        children: [
+                          CircleAvatar(
+                            radius: 40,
+                            backgroundImage: AssetImage('lib/equipes/MKP1/images/mel.png'),
+                          ),
+                          SizedBox(height: 8),
+                          Text('Mel Seleghin'),
+                        ],
+                      ),
+                    ],
                   ),
                   SizedBox(height: 24),
                   Text(
