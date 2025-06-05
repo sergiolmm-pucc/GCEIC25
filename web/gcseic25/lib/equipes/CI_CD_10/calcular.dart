@@ -215,46 +215,8 @@ class _CalcularPageState extends State<CalcularPage> {
                   _campoTexto('Salário bruto (R\$)', _salarioCtrl),
                   const SizedBox(height: 20),
                   _campoTexto('Meses trabalhados', _mesesCtrl),
-                  const SizedBox(height: 20),
-                  OutlinedButton(
-                    onPressed: () => _selecionarData(context),
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      foregroundColor: const Color(0xFF005AA7),
-                      padding: const EdgeInsets.symmetric(vertical: 18),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                      side: const BorderSide(color: Colors.white),
-                    ),
-                    child: Text(
-                      _dataAdmissao == null
-                          ? 'Selecionar data de admissão'
-                          : 'Admissão: ${_dataAdmissao!.day}/${_dataAdmissao!.month}/${_dataAdmissao!.year}',
-                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  DropdownButtonFormField<String>(
-                    value: _tipoDesligamento,
-                    dropdownColor: Colors.white,
-                    style: const TextStyle(color: Colors.black, fontSize: 16),
-                    decoration: InputDecoration(
-                      labelText: 'Tipo de desligamento',
-                      filled: true,
-                      fillColor: Colors.white,
-                      contentPadding:
-                          const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                    ),
-                    items: const [
-                      DropdownMenuItem(value: 'Não aplicável', child: Text('Não aplicável')),
-                      DropdownMenuItem(value: 'Sem justa causa', child: Text('Sem justa causa')),
-                      DropdownMenuItem(value: 'Com justa causa', child: Text('Com justa causa')),
-                      DropdownMenuItem(value: 'Pedido de demissão', child: Text('Pedido de demissão')),
-                    ],
-                    onChanged: (value) => setState(() => _tipoDesligamento = value!),
-                  ),
+
+
                   const SizedBox(height: 30),
                   _botaoCalcular(),
                   const SizedBox(height: 30),
