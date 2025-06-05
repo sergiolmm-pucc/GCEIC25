@@ -170,13 +170,19 @@ class _HydraulicCostPageState extends State<HydraulicCostPage> {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                             ),
-                            child: isLoading
-                                ? const CircularProgressIndicator(color: Colors.white)
-                                : const Text(
-                                    'CALCULAR',
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                          )
+                            child: Semantics(
+                              label: 'Botão calcular',
+                              hint: 'Pressione para calcular o custo hidráulico',
+                              button: true,
+                              enabled: !isLoading,
+                              child: isLoading
+                                  ? const CircularProgressIndicator(color: Colors.white)
+                                  : const Text(
+                                      'CALCULAR',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -269,30 +275,35 @@ class _HydraulicCostPageState extends State<HydraulicCostPage> {
           style: TextStyle(color: Color(0xFF3C3C3C), fontSize: 14),
         ),
         const SizedBox(height: 4),
-        DropdownButtonFormField<String>(
-          value: tipoTubulacaoSelecionado,
-          items: const [
-            DropdownMenuItem(value: 'PVC', child: Text('PVC')),
-            DropdownMenuItem(value: 'CPVC', child: Text('CPVC')),
-            DropdownMenuItem(value: 'Cobre', child: Text('Cobre')),
-            DropdownMenuItem(value: 'PEX', child: Text('PEX')),
-          ],
-          onChanged: onTipoTubulacaoChanged,
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: const Color(0xFFEBEBEB),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide.none,
+        Semantics(
+          label: 'Tipo da tubulação',
+          hint: 'Escolha o material da tubulação entre PVC, CPVC, Cobre ou PEX',
+          child: DropdownButtonFormField<String>(
+            key: const Key('dropdown-tipo-tubulacao'),
+            value: tipoTubulacaoSelecionado,
+            items: const [
+              DropdownMenuItem(value: 'PVC', child: Text('PVC')),
+              DropdownMenuItem(value: 'CPVC', child: Text('CPVC')),
+              DropdownMenuItem(value: 'Cobre', child: Text('Cobre')),
+              DropdownMenuItem(value: 'PEX', child: Text('PEX')),
+            ],
+            onChanged: onTipoTubulacaoChanged,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: const Color(0xFFEBEBEB),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
+              contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
             ),
-            contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Selecione um tipo';
+              }
+              return null;
+            },
           ),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Selecione um tipo';
-            }
-            return null;
-          },
         ),
       ],
     );

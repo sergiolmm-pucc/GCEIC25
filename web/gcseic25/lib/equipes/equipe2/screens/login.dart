@@ -155,19 +155,25 @@ class _LoginPageState extends State<LoginPage2> {
                             ),
                           ),
 
-                        ElevatedButton(
-                          onPressed: loading ? null : fazerLogin,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue,
-                            foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                        Semantics(
+                          label: 'LOGIN',
+                          hint: 'Pressione para entrar com suas credenciais',
+                          button: true,
+                          enabled: !loading,
+                          child: ElevatedButton(
+                            onPressed: loading ? null : fazerLogin,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                              foregroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
                             ),
+                            child: loading
+                                ? const CircularProgressIndicator(color: Colors.white)
+                                : const Text('LOGIN', style: TextStyle(fontSize: 16)),
                           ),
-                          child: loading
-                              ? const CircularProgressIndicator(color: Colors.white)
-                              : const Text('LOGIN', style: TextStyle(fontSize: 16)),
                         ),
                       ],
                     ),

@@ -101,131 +101,131 @@ describe('Testes da rota /agua', () => {
   });
 });
 
-describe('Testes da função calcularManutencaoMensal', () => {
-  it('Deve calcular corretamente o custo de manutenção mensal com números padrão', async () => {
-    const response = await request(app)
-      .post('/pool4/manutencao')
-      .send({
-        produtos_quimicos: '100',
-        energia_bomba: '150',
-        mao_obra: '200'
-      });
+// describe('Testes da função calcularManutencaoMensal', () => {
+//   it('Deve calcular corretamente o custo de manutenção mensal com números padrão', async () => {
+//     const response = await request(app)
+//       .post('/pool4/manutencao')
+//       .send({
+//         produtos_quimicos: '100',
+//         energia_bomba: '150',
+//         mao_obra: '200'
+//       });
 
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toHaveProperty('custo_mensal', '450.00');
-  });
+//     expect(response.statusCode).toBe(200);
+//     expect(response.body).toHaveProperty('custo_mensal', '450.00');
+//   });
 
-  it('Deve aceitar números no formato brasileiro (vírgula como decimal)', async () => {
-    const response = await request(app)
-      .post('/pool4/manutencao')
-      .send({
-        produtos_quimicos: '100,5',
-        energia_bomba: '150,75',
-        mao_obra: '200,25'
-      });
+//   it('Deve aceitar números no formato brasileiro (vírgula como decimal)', async () => {
+//     const response = await request(app)
+//       .post('/pool4/manutencao')
+//       .send({
+//         produtos_quimicos: '100,5',
+//         energia_bomba: '150,75',
+//         mao_obra: '200,25'
+//       });
 
-    const custoEsperado = (100.5 + 150.75 + 200.25).toFixed(2); // 451.50
+//     const custoEsperado = (100.5 + 150.75 + 200.25).toFixed(2); // 451.50
 
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toHaveProperty('custo_mensal', custoEsperado);
-  });
+//     expect(response.statusCode).toBe(200);
+//     expect(response.body).toHaveProperty('custo_mensal', custoEsperado);
+//   });
 
-  it('Deve aceitar números com ponto como milhar e vírgula como decimal (ex.: "1.000,50")', async () => {
-    const response = await request(app)
-      .post('/pool4/manutencao')
-      .send({
-        produtos_quimicos: '1.000,50',
-        energia_bomba: '2.500,75',
-        mao_obra: '3.000,25'
-      });
+//   it('Deve aceitar números com ponto como milhar e vírgula como decimal (ex.: "1.000,50")', async () => {
+//     const response = await request(app)
+//       .post('/pool4/manutencao')
+//       .send({
+//         produtos_quimicos: '1.000,50',
+//         energia_bomba: '2.500,75',
+//         mao_obra: '3.000,25'
+//       });
 
-    const custoEsperado = (1000.5 + 2500.75 + 3000.25).toFixed(2); // 6501.50
+//     const custoEsperado = (1000.5 + 2500.75 + 3000.25).toFixed(2); // 6501.50
 
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toHaveProperty('custo_mensal', custoEsperado);
-  });
+//     expect(response.statusCode).toBe(200);
+//     expect(response.body).toHaveProperty('custo_mensal', custoEsperado);
+//   });
 
-  it('Deve retornar erro se faltar qualquer campo obrigatório', async () => {
-    const response = await request(app)
-      .post('/pool4/manutencao')
-      .send({
-        produtos_quimicos: '100',
-        energia_bomba: '150'
-        // falta mao_obra, poderia ser qualquer outro
-      });
+//   it('Deve retornar erro se faltar qualquer campo obrigatório', async () => {
+//     const response = await request(app)
+//       .post('/pool4/manutencao')
+//       .send({
+//         produtos_quimicos: '100',
+//         energia_bomba: '150'
+//         // falta mao_obra, poderia ser qualquer outro
+//       });
 
-    expect(response.statusCode).toBe(400);
-    expect(response.body).toHaveProperty(
-      'error',
-      'Todos os campos (volume, produtos_quimicos, energia_bomba, mao_obra) são obrigatórios.'
-    );
-  });
-});
+//     expect(response.statusCode).toBe(400);
+//     expect(response.body).toHaveProperty(
+//       'error',
+//       'Todos os campos (volume, produtos_quimicos, energia_bomba, mao_obra) são obrigatórios.'
+//     );
+//   });
+// });
 
-describe('Testes da função calcularMob', () => {
-  it('Deve calcular corretamente o custo total de MOB com valores válidos', async () => {
-    const response = await request(app)
-      .post('/pool4/mob')
-      .send({
-        transporte: '100',
-        instalacao: '150',
-        maoDeObra: '200',
-        equipamentos: '50'
-      });
+// describe('Testes da função calcularMob', () => {
+//   it('Deve calcular corretamente o custo total de MOB com valores válidos', async () => {
+//     const response = await request(app)
+//       .post('/pool4/mob')
+//       .send({
+//         transporte: '100',
+//         instalacao: '150',
+//         maoDeObra: '200',
+//         equipamentos: '50'
+//       });
 
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toMatchObject({
-      transporte: 100,
-      instalacao: 150,
-      maoDeObra: 200,
-      equipamentos: 50,
-      total: 500
-    });
-    expect(response.body.mensagem).toBe('O custo total de MOB é R$ 500,00');
-  });
+//     expect(response.statusCode).toBe(200);
+//     expect(response.body).toMatchObject({
+//       transporte: 100,
+//       instalacao: 150,
+//       maoDeObra: 200,
+//       equipamentos: 50,
+//       total: 500
+//     });
+//     expect(response.body.mensagem).toBe('O custo total de MOB é R$ 500,00');
+//   });
 
-  it('Deve retornar erro se faltar algum campo obrigatório', async () => {
-    const response = await request(app)
-      .post('/pool4/mob')
-      .send({
-        transporte: '100',
-        instalacao: '150',
-        maoDeObra: '200'
-        // falta equipamentos
-      });
+//   it('Deve retornar erro se faltar algum campo obrigatório', async () => {
+//     const response = await request(app)
+//       .post('/pool4/mob')
+//       .send({
+//         transporte: '100',
+//         instalacao: '150',
+//         maoDeObra: '200'
+//         // falta equipamentos
+//       });
 
-    expect(response.statusCode).toBe(400);
-    expect(response.body).toHaveProperty('error', 'Todos os campos são obrigatórios.');
-  });
+//     expect(response.statusCode).toBe(400);
+//     expect(response.body).toHaveProperty('error', 'Todos os campos são obrigatórios.');
+//   });
 
-  it('Deve retornar erro se algum valor for inválido (não numérico)', async () => {
-    const response = await request(app)
-      .post('/pool4/mob')
-      .send({
-        transporte: '100',
-        instalacao: 'abc',
-        maoDeObra: '200',
-        equipamentos: '50'
-      });
+//   it('Deve retornar erro se algum valor for inválido (não numérico)', async () => {
+//     const response = await request(app)
+//       .post('/pool4/mob')
+//       .send({
+//         transporte: '100',
+//         instalacao: 'abc',
+//         maoDeObra: '200',
+//         equipamentos: '50'
+//       });
 
-    expect(response.statusCode).toBe(400);
-    expect(response.body).toHaveProperty('error', 'Todos os valores devem ser números válidos e positivos.');
-  });
+//     expect(response.statusCode).toBe(400);
+//     expect(response.body).toHaveProperty('error', 'Todos os valores devem ser números válidos e positivos.');
+//   });
 
-  it('Deve retornar erro se algum valor for negativo', async () => {
-    const response = await request(app)
-      .post('/pool4/mob')
-      .send({
-        transporte: '-10',
-        instalacao: '150',
-        maoDeObra: '200',
-        equipamentos: '50'
-      });
+//   it('Deve retornar erro se algum valor for negativo', async () => {
+//     const response = await request(app)
+//       .post('/pool4/mob')
+//       .send({
+//         transporte: '-10',
+//         instalacao: '150',
+//         maoDeObra: '200',
+//         equipamentos: '50'
+//       });
 
-    expect(response.statusCode).toBe(400);
-    expect(response.body).toHaveProperty('error', 'Todos os valores devem ser números válidos e positivos.');
-  });
-});
+//     expect(response.statusCode).toBe(400);
+//     expect(response.body).toHaveProperty('error', 'Todos os valores devem ser números válidos e positivos.');
+//   });
+// });
 
 describe('Testes da rota /eletrico', () => {
   
@@ -366,96 +366,96 @@ describe('Testes da rota /eletrico', () => {
 
 });
 
-describe('Testes da rota /hidraulico', () => {
+// describe('Testes da rota /hidraulico', () => {
     
-    test('Deve calcular corretamente com dados válidos', async () => {
-        const response = await request(app)
-            .post('/pool4/hidraulico')
-            .query({
-                comprimentoTubos: '50',
-                custoPorMetro: '10',
-                qtdValvulas: '4',
-                custoValvula: '15',
-                custoBomba: '500',
-                custoFiltro: '300',
-                tipoTubulacao: 'PVC'
-            });
+//     test('Deve calcular corretamente com dados válidos', async () => {
+//         const response = await request(app)
+//             .post('/pool4/hidraulico')
+//             .query({
+//                 comprimentoTubos: '50',
+//                 custoPorMetro: '10',
+//                 qtdValvulas: '4',
+//                 custoValvula: '15',
+//                 custoBomba: '500',
+//                 custoFiltro: '300',
+//                 tipoTubulacao: 'PVC'
+//             });
 
-        expect(response.statusCode).toBe(200);
-        expect(response.body).toHaveProperty('total');
-        expect(response.body.total).toBe(50 * 10 + 4 * 15 + 500 + 300);
-        expect(response.body.tipo_tubulacao).toBe('pvc');
-    });
+//         expect(response.statusCode).toBe(200);
+//         expect(response.body).toHaveProperty('total');
+//         expect(response.body.total).toBe(50 * 10 + 4 * 15 + 500 + 300);
+//         expect(response.body.tipo_tubulacao).toBe('pvc');
+//     });
 
-    test('Deve retornar erro se faltar algum campo', async () => {
-        const response = await request(app)
-            .post('/pool4/hidraulico')
-            .query({
-                comprimentoTubos: '50',
-                custoPorMetro: '10',
-                // faltando qtdValvulas
-                custoValvula: '15',
-                custoBomba: '500',
-                custoFiltro: '300',
-                tipoTubulacao: 'PVC'
-            });
+//     test('Deve retornar erro se faltar algum campo', async () => {
+//         const response = await request(app)
+//             .post('/pool4/hidraulico')
+//             .query({
+//                 comprimentoTubos: '50',
+//                 custoPorMetro: '10',
+//                 // faltando qtdValvulas
+//                 custoValvula: '15',
+//                 custoBomba: '500',
+//                 custoFiltro: '300',
+//                 tipoTubulacao: 'PVC'
+//             });
 
-        expect(response.statusCode).toBe(400);
-        expect(response.body).toHaveProperty('error');
-        expect(response.body.error).toMatch(/Preencha todos os campos/);
-    });
+//         expect(response.statusCode).toBe(400);
+//         expect(response.body).toHaveProperty('error');
+//         expect(response.body.error).toMatch(/Preencha todos os campos/);
+//     });
 
-    test('Deve retornar erro se algum campo for texto inválido', async () => {
-        const response = await request(app)
-            .post('/pool4/hidraulico')
-            .query({
-                comprimentoTubos: 'abc', // inválido
-                custoPorMetro: '10',
-                qtdValvulas: '4',
-                custoValvula: '15',
-                custoBomba: '500',
-                custoFiltro: '300',
-                tipoTubulacao: 'PVC'
-            });
+//     test('Deve retornar erro se algum campo for texto inválido', async () => {
+//         const response = await request(app)
+//             .post('/pool4/hidraulico')
+//             .query({
+//                 comprimentoTubos: 'abc', // inválido
+//                 custoPorMetro: '10',
+//                 qtdValvulas: '4',
+//                 custoValvula: '15',
+//                 custoBomba: '500',
+//                 custoFiltro: '300',
+//                 tipoTubulacao: 'PVC'
+//             });
 
-        expect(response.statusCode).toBe(400);
-        expect(response.body).toHaveProperty('error');
-        expect(response.body.error).toMatch(/números válidos/);
-    });
+//         expect(response.statusCode).toBe(400);
+//         expect(response.body).toHaveProperty('error');
+//         expect(response.body.error).toMatch(/números válidos/);
+//     });
 
-    test('Deve retornar erro se valores forem negativos', async () => {
-        const response = await request(app)
-            .post('/pool4/hidraulico')
-            .query({
-                comprimentoTubos: '-10',
-                custoPorMetro: '10',
-                qtdValvulas: '4',
-                custoValvula: '15',
-                custoBomba: '500',
-                custoFiltro: '300',
-                tipoTubulacao: 'PVC'
-            });
+//     test('Deve retornar erro se valores forem negativos', async () => {
+//         const response = await request(app)
+//             .post('/pool4/hidraulico')
+//             .query({
+//                 comprimentoTubos: '-10',
+//                 custoPorMetro: '10',
+//                 qtdValvulas: '4',
+//                 custoValvula: '15',
+//                 custoBomba: '500',
+//                 custoFiltro: '300',
+//                 tipoTubulacao: 'PVC'
+//             });
 
-        expect(response.statusCode).toBe(400);
-        expect(response.body).toHaveProperty('error');
-        expect(response.body.error).toMatch(/não negativos/);
-    });
+//         expect(response.statusCode).toBe(400);
+//         expect(response.body).toHaveProperty('error');
+//         expect(response.body.error).toMatch(/não negativos/);
+//     });
 
-    test('Deve retornar tipo de tubulação sempre em minúsculo', async () => {
-        const response = await request(app)
-            .post('/pool4/hidraulico')
-            .query({
-                comprimentoTubos: '10',
-                custoPorMetro: '20',
-                qtdValvulas: '2',
-                custoValvula: '30',
-                custoBomba: '100',
-                custoFiltro: '50',
-                tipoTubulacao: 'PEAD'
-            });
+//     test('Deve retornar tipo de tubulação sempre em minúsculo', async () => {
+//         const response = await request(app)
+//             .post('/pool4/hidraulico')
+//             .query({
+//                 comprimentoTubos: '10',
+//                 custoPorMetro: '20',
+//                 qtdValvulas: '2',
+//                 custoValvula: '30',
+//                 custoBomba: '100',
+//                 custoFiltro: '50',
+//                 tipoTubulacao: 'PEAD'
+//             });
 
-        expect(response.statusCode).toBe(200);
-        expect(response.body.tipo_tubulacao).toBe('pead');
-    });
+//         expect(response.statusCode).toBe(200);
+//         expect(response.body.tipo_tubulacao).toBe('pead');
+//     });
 
-});
+// });

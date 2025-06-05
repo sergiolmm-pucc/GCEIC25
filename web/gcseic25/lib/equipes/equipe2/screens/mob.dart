@@ -102,23 +102,30 @@ class _MOBPageState extends State<MOBPage> {
                       ],
                     ),
                     const SizedBox(height: 24),
-                    ElevatedButton(
-                      onPressed: calcularMOB,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blueAccent,
-                        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 40),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                    Semantics(
+                      // Descrição do botão para leitores de tela
+                      label: 'Botão calcular custo de MOB',
+                      button: true,
+                      enabled: true, // você pode condicionar conforme estiver habilitado ou não
+                      child: ElevatedButton(
+                        onPressed: calcularMOB,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blueAccent,
+                          padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 40),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                         ),
-                      ),
-                      child: const Text(
-                        'CALCULAR',
-                        style: TextStyle(
+                        child: const Text(
+                          'CALCULAR',
+                          style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 16),
+                            fontSize: 16,
+                          ),
+                        ),
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),

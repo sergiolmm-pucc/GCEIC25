@@ -7,7 +7,6 @@ let valorManutencao = 0;
 let valorMob = 0;
 
 function calcularVolume(req, res) {
-  console.log('Recebido:', req.body);
   const { tipo_piscina, 'Comprimento (m)': comprimento, 'Largura (m)': largura, 'Profundidade (m)': profundidade, 'Diâmetro (m)': diametro } = req.body;
   if (!tipo_piscina) {
     return res.status(400).json({ error: 'Tipo de piscina é obrigatório.' });
@@ -146,6 +145,7 @@ function calcularMaterialEletrico(req, res) {
     res.status(500).json({ error: 'Erro ao processar os dados.' });
   }
 }
+
 function calcularMaterialHidraulico(req, res) {
   const {
     comprimentoTubos, custoPorMetro,
@@ -173,7 +173,6 @@ function calcularMaterialHidraulico(req, res) {
   valorHidraulico = total ; 
   res.status(200).json({ total });
 }
-
 
 function calcularCustoDAgua(req, res) {
   const { volume, tarifa } = req.body;

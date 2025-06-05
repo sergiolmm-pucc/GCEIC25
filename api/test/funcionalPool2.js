@@ -1,122 +1,249 @@
-const { Builder, By, until, Key } = require('selenium-webdriver');
-const { Options } = require('selenium-webdriver/chrome');
 const fs = require('fs');
-const path = require('path');
+const { Builder, By, until } = require('selenium-webdriver');
+const { FlutterSeleniumBridge } = require('@rentready/flutter-selenium-bridge');
+const { Options } = require('selenium-webdriver/chrome');
 
+// Função para capturar prints da tela
+async function capturarPrint(driver, caminho, mensagem) {
+    const screenshot = await driver.takeScreenshot();
+    return new Promise((resolve, reject) => {
+        fs.writeFile(caminho, screenshot, 'base64', (erro) => {
+            if (erro) {
+                console.error('Falha ao salvar screenshot:', erro);
+                reject(erro);
+            } else {
+                console.log(mensagem);
+                resolve();
+            }
+        });
+    });
+}
+
+// Função para localizar e clicar em um elemento
+async function localizarEClick(driver, xpath, tempoMaximo = 30000) {
+    try {
+        const elemento = await driver.wait(until.elementLocated(By.xpath(xpath)), tempoMaximo);
+        await driver.wait(until.elementIsVisible(elemento), tempoMaximo);
+        await driver.wait(until.elementIsEnabled(elemento), tempoMaximo);
+        await elemento.click();
+    } catch (erro) {
+        console.error(`Erro ao clicar no XPath: ${xpath}`);
+        throw erro;
+    }
+}
+
+// Função para preencher campo de texto
+async function preencherTexto(driver, xpath, texto, tempoMaximo = 30000) {
+    try {
+        const campo = await driver.wait(until.elementLocated(By.xpath(xpath)), tempoMaximo);
+        await campo.sendKeys(texto);
+        await driver.sleep(500);
+        return campo;
+    } catch (erro) {
+        console.error(`Erro ao preencher campo no XPath: ${xpath}`);
+        await capturarPrint(driver, `../fotos/ERRO_INPUT_${Date.now()}.png`, `Erro no preenchimento do campo: ${xpath}`);
+        throw erro;
+    }
+}
+
+// Função principal
 (async () => {
-  const chromeOptions = new Options()
-    .addArguments('--headless=new')
-    .addArguments('--no-sandbox')
-    .addArguments('--disable-gpu')
-    .addArguments('--window-size=1920,1080');
+    const resolucaoTela = { width: 1920, height: 1080 };
 
-  const driver = await new Builder()
-    .forBrowser('chrome')
-    .setChromeOptions(chromeOptions)
-    .build();
+    try {
+        console.log('Configurando navegador Chrome...');
+        const opcoesChrome = new Options();
+        opcoesChrome.addArguments('--headless');
+        opcoesChrome.addArguments('--no-sandbox');
+        opcoesChrome.windowSize(resolucaoTela);
 
-  const dir = path.resolve(__dirname, '../fotos/Pool2');
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-  }
+        const driver = await new Builder().forBrowser('chrome').setChromeOptions(opcoesChrome).build();
+        const bridge = new FlutterSeleniumBridge(driver);
 
-  // Função para clicar em um elemento flt-semantics pelo texto (label)
-  async function clicarPorTextoSemantics(driver, textoAlvo) {
-    const elementos = await driver.findElements(By.css('flt-semantics'));
-    for (let elem of elementos) {
-      try {
-        const texto = await elem.getText();
-        if (texto.includes(textoAlvo)) {
-          await elem.click();
-          return true;
-        }
-      } catch (e) {
-        // ignora erros em elementos sem texto
-      }
+        await driver.manage().window().setRect(resolucaoTela);
+        // await driver.get('http://localhost:58313/');
+        await driver.get('https://sergio.dev.br/');
+
+        console.log('Aguardando carregamento inicial...');
+        await driver.sleep(6000);
+
+        // Tela Inicial
+        await capturarPrint(driver, '../fotos/Pool2/tela_inicial.png', 'Print da Tela Inicial');
+
+        // Clicando no card do app
+        const xpathBotaoApp = "//flt-semantics[text()='Grupo 2 - Cálculo Piscina']";
+        await localizarEClick(driver, xpathBotaoApp);
+
+        // Splash Screen
+        await driver.sleep(3000);
+        await capturarPrint(driver, '../fotos/Pool2/splash_screen.png', 'Print do Splash Screen');
+
+        // Tela de Login
+        await driver.sleep(10000);
+        await capturarPrint(driver, '../fotos/Pool2/login.png', 'Print da Tela de Login');
+
+        // Realizando login
+        await preencherTexto(driver, "//*[@aria-label='E-mail']", 'adm@adm.com');
+        await preencherTexto(driver, "//*[@aria-label='Senha']", 'adm');
+        await capturarPrint(driver, '../fotos/Pool2/login_preenchido.png', 'Print da Tela de Login preenchida');
+        await localizarEClick(driver, "//flt-semantics[text()='LOGIN']");
+
+        console.log('Login efetuado com sucesso.');
+
+        // Home
+        await driver.sleep(5000);
+        await capturarPrint(driver, '../fotos/Pool2/home_screen.png', 'Print da Home');
+
+        // Sobre
+        await localizarEClick(driver, "//flt-semantics[@role='button' and contains(text(), 'Sobre')]");
+        await driver.sleep(5000);
+        await capturarPrint(driver, '../fotos/Pool2/tela_sobre.png', 'Print Tela Sobre');
+        await localizarEClick(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
+
+        // Ajuda
+        await driver.sleep(3000);
+        await localizarEClick(driver, "//flt-semantics[@role='button' and contains(text(), 'Ajuda')]");
+        await driver.sleep(5000);
+        await capturarPrint(driver, '../fotos/Pool2/ajuda.png', 'Print Tela de Ajuda');
+        await localizarEClick(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
+
+        // Calcular Manutenção
+        await driver.sleep(3000);
+        await localizarEClick(driver, "//flt-semantics[@role='button' and contains(text(), 'Manutenção')]");
+        await capturarPrint(driver, '../fotos/Pool2/calculo_manutenção.png', 'Print Tela de Calculo de Manutenção');
+
+        // Preenchendo os campos do cálculo de manutenção
+        await preencherTexto(driver, "//*[@aria-label='Produtos químicos (R$)']", '150');
+        await preencherTexto(driver, "//*[@aria-label='Uso mensal da bomba (horas)']", '40');
+        await preencherTexto(driver, "//*[@aria-label='Preço/hora da bomba ligada (R$)']", '0.85');
+        await preencherTexto(driver, "//*[@aria-label='Mão de obra (R$)']", '200');
+
+        await capturarPrint(driver, '../fotos/Pool2/preenchido_manutencao.png', 'Campos do cálculo preenchidos');
+
+        // Clicar no botão de calcular (exemplo, ajuste o texto conforme seu app)
+        await localizarEClick(driver, "//flt-semantics[text()='CALCULAR']");
+
+        await driver.sleep(3000);
+        await capturarPrint(driver, '../fotos/Pool2/resultado_manutencao.png', 'Resultado do cálculo');
+        await localizarEClick(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
+
+        // Calcular Custo de Agua
+        await driver.sleep(3000);
+        await localizarEClick(driver, "//flt-semantics[@role='button' and contains(text(), 'Custo de água')]");
+        await driver.sleep(3000);
+        await capturarPrint(driver, '../fotos/Pool2/calculo_agua.png', 'Print Tela de Calculo de Custo de água');
+
+        // Preenchendo os campos do cálculo de custo da agua
+        await preencherTexto(driver, "//*[@aria-label='Volume (m³)']", '22.50');
+        await preencherTexto(driver, "//*[@aria-label='Tarifa por m³']", '8');
+
+        await capturarPrint(driver, '../fotos/Pool2/preenchido_agua.png', 'Campos do cálculo preenchidos');
+
+        // Clicar no botão de calcular (exemplo, ajuste o texto conforme seu app)
+        await localizarEClick(driver, "//flt-semantics[text()='CALCULAR']");
+
+        await driver.sleep(3000);
+        await capturarPrint(driver, '../fotos/Pool2/resultado_agua.png', 'Resultado do cálculo');
+        await localizarEClick(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
+
+        // Calcular Custo Hidraulico
+        await driver.sleep(3000);
+        await localizarEClick(driver, "//flt-semantics[@role='button' and contains(text(), 'Hidráulica')]");
+        await driver.sleep(3000);
+        await capturarPrint(driver, '../fotos/Pool2/calculo_hidraulico.png', 'Print Tela de Calculo de Material Hidráulico');
+        await localizarEClick(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
+
+        // Preenchendo campos de texto
+        await preencherTexto(driver, "//*[@aria-label='Bomba (R$)']", '1200');
+        await preencherTexto(driver, "//*[@aria-label='Filtro (R$)']", '850');
+        await preencherTexto(driver, "//*[@aria-label='Tubulações (m)']", '30');
+        await preencherTexto(driver, "//*[@aria-label='Preço por metro (R$)']", '15');
+        await preencherTexto(driver, "//*[@aria-label='Conexões (un)']", '12');
+
+        // Selecionar Tipo da Tubulação
+        await driver.sleep(3000);
+        await localizarEClick(driver, "//*[@data-key='dropdown-tipo-tubulacao']");
+        await driver.sleep(1000);  // Pequeno delay para abrir
+        await localizarEClick(driver, "//flt-semantics[contains(@label, 'PVC')]");
+
+        // Print dos dados preenchidos
+        await driver.sleep(3000);
+        await capturarPrint(driver, '../fotos/Pool2/hidraulica_preenchida.png', 'Campos Hidráulica preenchidos');
+
+        // Clicar no botão CALCULAR
+        await localizarEClick(driver, "//flt-semantics[contains(@label, 'CALCULAR')]");
+
+        // Aguardar processamento e capturar resultado
+        await driver.sleep(3000);
+        await capturarPrint(driver, '../fotos/Pool2/resultado_hidraulica.png', 'Resultado do cálculo hidráulico');
+        await localizarEClick(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
+
+        // Calcular Custo de MOB
+        await driver.sleep(3000);
+        await localizarEClick(driver, "//flt-semantics[@role='button' and contains(text(), 'MOB')]");
+        await driver.sleep(3000);
+        await capturarPrint(driver, '../fotos/Pool2/calculo_mob.png', 'Print Tela de Calculo de MOB');
+
+        // Preenchendo os campos do cálculo de MOB
+        await preencherTexto(driver, "//*[@aria-label='Transporte de materiais']", '500');
+        await preencherTexto(driver, "//*[@aria-label='Instalação de canteiros']", '1200');
+        await preencherTexto(driver, "//*[@aria-label='Mão de obra']", '3000');
+        await preencherTexto(driver, "//*[@aria-label='Equipamentos']", '1500');
+
+        await capturarPrint(driver, '../fotos/Pool2/preenchido_mob.png', 'Campos do cálculo MOB preenchidos');
+
+        // Clicar no botão de calcular
+        await localizarEClick(driver, "//flt-semantics[text()='CALCULAR']");
+
+        await driver.sleep(3000);
+        await capturarPrint(driver, '../fotos/Pool2/resultado_mob.png', 'Resultado do cálculo MOB');
+
+        // Voltar
+        await localizarEClick(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
+
+        // Calcular Custo de Material Elétrico
+        await driver.sleep(3000);
+        await localizarEClick(driver, "//flt-semantics[@role='button' and contains(text(), 'Material Elétrico')]");
+        await driver.sleep(3000);
+        await capturarPrint(driver, '../fotos/Pool2/calculo_mob.png', 'Print Tela de Calculo de Material Elétrico');
+
+        // Preencher Luminária subaquática
+        await preencherTexto(driver, "//*[@aria-label='Quantidade']", '4');
+        await preencherTexto(driver, "//*[@aria-label='Preço unitário (R$)']", '150.00');
+
+        // Preencher Cabo elétrico
+        await preencherTexto(driver, "//*[@aria-label='Metros de fio']", '30');
+        await preencherTexto(driver, "//*[@aria-label='Preço por metro (R$)']", '6.50');
+
+        // Preencher Quadro de comando
+        await preencherTexto(driver, "//*[@aria-label='Quantidade' and ancestor::flt-semantics[contains(., 'Quadro de comando')]]", '1');
+        await preencherTexto(driver, "//*[@aria-label='Preço unitário (R$)' and ancestor::flt-semantics[contains(., 'Quadro de comando')]]", '450.00');
+
+        // Preencher Disjuntor
+        await preencherTexto(driver, "//*[@aria-label='Quantidade' and ancestor::flt-semantics[contains(., 'Disjuntor')]]", '2');
+        await preencherTexto(driver, "//*[@aria-label='Preço unitário (R$)' and ancestor::flt-semantics[contains(., 'Disjuntor')]]", '60.00');
+
+        // Preencher Programador
+        await driver.sleep(1000);
+        await preencherTexto(driver, "//*[@aria-label='Quantidade' and ancestor::flt-semantics[contains(., 'Programador')]]", '1');
+        await preencherTexto(driver, "//*[@aria-label='Preço unitário (R$)' and ancestor::flt-semantics[contains(., 'Programador')]]", '200.00');
+
+        await capturarPrint(driver, '../fotos/Pool2/preenchido_eletrico.png', 'Campos preenchidos Cálculo Elétrico');
+
+        // Clicar no botão calcular
+        await localizarEClick(driver, "//flt-semantics[@role='button' and contains(text(), 'CALCULAR')]");
+
+        await driver.sleep(3000);
+        await capturarPrint(driver, '../fotos/Pool2/resultado_eletrico.png', 'Resultado do cálculo elétrico');
+
+        // Voltar
+        await localizarEClick(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
+
+        // await localizarEClick(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
+
+        await driver.sleep(5000);
+        await driver.quit();
+    } catch (err) {
+        console.error('Erro:', err);
     }
-    throw new Error(`Elemento com texto "${textoAlvo}" não encontrado.`);
-  }
-
-  // Função para preencher um input relacionado a um label de Semantics
-  async function preencherPorTextoSemantics(driver, label, valor) {
-    // Encontrar o flt-semantics com o label do input (textField)
-    const semanticos = await driver.findElements(By.css('flt-semantics'));
-    for (let sem of semanticos) {
-      try {
-        const semLabel = await sem.getAttribute('label');
-        if (semLabel && semLabel.includes(label)) {
-          // Dentro desse semantico, procurar input
-          const input = await sem.findElement(By.css('input'));
-          await input.clear();
-          await input.sendKeys(valor);
-          return true;
-        }
-      } catch {
-        // ignora erros, continua procurando
-      }
-    }
-    throw new Error(`Input com label "${label}" não encontrado.`);
-  }
-
-  // Função para tirar screenshot com nome específico
-  async function tirarPrint(nomeArquivo) {
-    const image = await driver.takeScreenshot();
-    fs.writeFileSync(path.join(dir, nomeArquivo), image, 'base64');
-    console.log(`Print salvo: ${nomeArquivo}`);
-  }
-
-  try {
-    // Abre a URL principal
-    await driver.get('http://localhost:54923/');
-
-    // Clique no botão "Grupo 2 - Cálculo Piscina"
-    await clicarPorTextoSemantics(driver, 'Grupo 2 - Cálculo Piscina');
-    await driver.sleep(3000);
-    await tirarPrint('splash_screen.png');
-
-    // Espera tela de login
-    await driver.wait(until.elementLocated(By.xpath("//flt-semantics[text()='LOGIN']")), 10000);
-    await tirarPrint('login_vazio.png');
-
-    // Preenche login incorreto
-    const inputs = await driver.findElements(By.css('input'));
-    await inputs[0].sendKeys('errado@teste.com');
-    await inputs[1].sendKeys('invalida');
-
-    await clicarPorTextoSemantics(driver, 'LOGIN');
-    await driver.sleep(3000);
-    await tirarPrint('login_invalido.png');
-
-    // Limpar campos e preencher login correto
-    for (let input of inputs) {
-      await input.sendKeys(Key.chord(Key.CONTROL, 'a'), Key.BACK_SPACE);
-    }
-    await inputs[0].sendKeys('adm@adm.com');
-    await inputs[1].sendKeys('adm');
-
-    await clicarPorTextoSemantics(driver, 'LOGIN');
-    await driver.sleep(5000);
-    await tirarPrint('home.png');
-
-    // Navega para Cálculo do Volume (exemplo)
-    await clicarPorTextoSemantics(driver, 'Cálculo do Volume');
-    await driver.sleep(3000);
-    await tirarPrint('volume.png');
-
-    // Voltar e ir para Manutenção
-    const backButton = await driver.wait(
-      until.elementLocated(By.xpath("//flt-semantics[contains(@label, 'Back') or @role='button']")),
-      10000
-    );
-    await backButton.click();
-
-    await driver.sleep(3000);
-    await clicarPorTextoSemantics(driver, 'Manutenção');
-    await driver.sleep(3000);
-    await tirarPrint('manutencao.png');
-
-    console.log('Teste concluído com sucesso.');
-  } finally {
-    await driver.quit();
-  }
 })();

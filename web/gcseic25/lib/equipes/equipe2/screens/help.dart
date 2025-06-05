@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gcseic25/equipes/equipe2/utils/tab_bar.dart';
 
 class HelpPage extends StatelessWidget {
   const HelpPage({super.key});
@@ -6,7 +7,8 @@ class HelpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
+    return MainLayout(
+      child:Scaffold(
       backgroundColor: const Color(0xFFF4F4F4),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -186,6 +188,7 @@ Essa tela permite revisar o orçamento total da obra antes de iniciar qualquer e
           ),
         ),
       ),
+    ),
     );
   }
 

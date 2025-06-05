@@ -111,12 +111,13 @@ class _WaterVolumePageState extends State<WaterVolumePage> {
                           ),
                         ),
                         const SizedBox(height: 8),
-                        SizedBox(
-                          height: 60,
+                        Semantics(
+                          label: 'Tipo de Piscina',
+                          hint: 'Use as setas para selecionar o tipo de piscina',
+                          button: true,
                           child: DropdownButtonFormField<String>(
                             decoration: InputDecoration(
-                              labelText:
-                                  selectedShape == null ? 'Tipo de Piscina' : null,
+                              labelText: selectedShape == null ? 'Tipo de Piscina' : null,
                               labelStyle: const TextStyle(
                                 color: Color(0xFF676767),
                                 fontSize: 14,
@@ -143,22 +144,34 @@ class _WaterVolumePageState extends State<WaterVolumePage> {
                               fontSize: 14,
                               color: Color(0xFF3C3C3C),
                             ),
-                            items: const [
+                            items: [
                               DropdownMenuItem(
                                 value: 'Retangular',
-                                child: Text('Retangular'),
+                                child: Semantics(
+                                  label: 'Piscina retangular',
+                                  child: const Text('Retangular'),
+                                ),
                               ),
                               DropdownMenuItem(
                                 value: 'Circular',
-                                child: Text('Circular'),
+                                child: Semantics(
+                                  label: 'Piscina circular',
+                                  child: const Text('Circular'),
+                                ),
                               ),
                               DropdownMenuItem(
                                 value: 'Oval',
-                                child: Text('Oval'),
+                                child: Semantics(
+                                  label: 'Piscina oval',
+                                  child: const Text('Oval'),
+                                ),
                               ),
                               DropdownMenuItem(
                                 value: 'Irregular',
-                                child: Text('Irregular'),
+                                child: Semantics(
+                                  label: 'Piscina irregular',
+                                  child: const Text('Irregular'),
+                                ),
                               ),
                             ],
                             onChanged: (value) {
@@ -273,34 +286,40 @@ class _WaterVolumePageState extends State<WaterVolumePage> {
                 SizedBox(
                   width: 110,
                   height: 30,
-                  child: ElevatedButton(
-                    onPressed: isFormValid(labels)
-                      ? () async {
-                          final inputs = <String, String>{};
-                            for (var label in labels) {
-                              inputs[label] = controllers[label]?.text ?? '';
-                            }
-                            inputs['tipo_piscina'] = selectedShape ?? '';
+                  child: Semantics(
+                    button: true,
+                    enabled: isFormValid(labels),
+                    label: 'Botão calcular volume da piscina',
+                    hint: isFormValid(labels) ? 'Clique para calcular o volume' : 'Preencha todos os campos para habilitar o botão',
+                    child: ElevatedButton(
+                      onPressed: isFormValid(labels)
+                          ? () async {
+                              final inputs = <String, String>{};
+                              for (var label in labels) {
+                                inputs[label] = controllers[label]?.text ?? '';
+                              }
+                              inputs['tipo_piscina'] = selectedShape ?? '';
 
-                          final resultado = await calcularVolume(inputs);
-                          setState(() {
-                            volumeCalculado = resultado;
-                          });
-                        }
-                      : null,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF1274F1),
-                      disabledBackgroundColor: Colors.grey.shade400,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(7),
+                              final resultado = await calcularVolume(inputs);
+                              setState(() {
+                                volumeCalculado = resultado;
+                              });
+                            }
+                          : null,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF1274F1),
+                        disabledBackgroundColor: Colors.grey.shade400,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(7),
+                        ),
                       ),
-                    ),
-                    child: const Text(
-                      'CALCULAR',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
+                      child: const Text(
+                        'CALCULAR',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),

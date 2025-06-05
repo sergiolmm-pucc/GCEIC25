@@ -134,28 +134,30 @@ class _WaterCostPageState extends State<WaterCostPage> {
                             SizedBox(
                               width: 140,
                               height: 40,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFF1274F1),
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 20),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8)),
-                                ),
-                                onPressed:
-                                    isLoading || !camposPreenchidos ? null : calcularGasto,
-                                child: isLoading
-                                    ? const CircularProgressIndicator(
-                                        color: Colors.white, strokeWidth: 2)
-                                    : const Text(
-                                        "CALCULAR",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontFamily: 'Montserrat',
-                                          color: Colors.white,
-                                          letterSpacing: 1,
+                              child: Semantics(
+                                button: true,
+                                enabled: !(isLoading || !camposPreenchidos),
+                                label: 'Botão calcular custo da água',
+                                hint: isLoading ? 'Calculando, aguarde' : 'Clique para calcular o custo da água',
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xFF1274F1),
+                                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                  ),
+                                  onPressed: isLoading || !camposPreenchidos ? null : calcularGasto,
+                                  child: isLoading
+                                      ? const CircularProgressIndicator(color: Colors.white, strokeWidth: 2)
+                                      : const Text(
+                                          "CALCULAR",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: 'Montserrat',
+                                            color: Colors.white,
+                                            letterSpacing: 1,
+                                          ),
                                         ),
-                                      ),
+                                ),
                               ),
                             ),
                           ],

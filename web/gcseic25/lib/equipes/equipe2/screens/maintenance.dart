@@ -200,30 +200,32 @@ class _MaintenancePageState extends State<MaintenancePage> {
                             SizedBox(
                               width: 140,
                               height: 40,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFF1274F1),
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 20),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8)),
-                                ),
-                                onPressed:
-                                    (isLoading || !_todosCamposPreenchidos)
-                                        ? null
-                                        : calcularCusto,
-                                child: isLoading
-                                    ? const CircularProgressIndicator(
-                                        color: Colors.white, strokeWidth: 2)
-                                    : const Text(
-                                        "CALCULAR",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontFamily: 'Montserrat',
-                                          color: Colors.white,
-                                          letterSpacing: 1,
+                              child: Semantics(
+                                label: 'Botão calcular custo mensal de manutenção',
+                                hint: _todosCamposPreenchidos
+                                    ? 'Pressione para calcular o custo mensal'
+                                    : 'Preencha todos os campos para habilitar o botão',
+                                button: true,
+                                enabled: !_todosCamposPreenchidos ? false : !isLoading,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xFF1274F1),
+                                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                  ),
+                                  onPressed: (isLoading || !_todosCamposPreenchidos) ? null : calcularCusto,
+                                  child: isLoading
+                                      ? const CircularProgressIndicator(color: Colors.white, strokeWidth: 2)
+                                      : const Text(
+                                          "CALCULAR",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: 'Montserrat',
+                                            color: Colors.white,
+                                            letterSpacing: 1,
+                                          ),
                                         ),
-                                      ),
+                                ),
                               ),
                             ),
                           ],

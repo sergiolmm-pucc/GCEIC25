@@ -196,33 +196,39 @@ class _EletricMaterialPageState extends State<EletricMaterialPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            SizedBox(
-                              width: 140,
-                              height: 40,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFF1274F1),
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 20),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8)),
-                                ),
-                                onPressed:
-                                    (isLoading || !_todosCamposPreenchidos)
-                                        ? null
-                                        : calcularCustoEletrico,
-                                child: isLoading
-                                    ? const CircularProgressIndicator(
-                                        color: Colors.white, strokeWidth: 2)
-                                    : const Text(
-                                        "CALCULAR",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontFamily: 'Montserrat',
+                            Semantics(
+                              label: 'botao_calcular_custo_eletrico',
+                              hint: 'Botão para calcular o custo total do material elétrico',
+                              button: true,
+                              child: SizedBox(
+                                width: 140,
+                                height: 40,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xFF1274F1),
+                                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                  ),
+                                  onPressed: (isLoading || !_todosCamposPreenchidos)
+                                      ? null
+                                      : calcularCustoEletrico,
+                                  child: isLoading
+                                      ? const CircularProgressIndicator(
                                           color: Colors.white,
-                                          letterSpacing: 1,
+                                          strokeWidth: 2,
+                                        )
+                                      : const Text(
+                                          "CALCULAR",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: 'Montserrat',
+                                            color: Colors.white,
+                                            letterSpacing: 1,
+                                          ),
                                         ),
-                                      ),
+                                ),
                               ),
                             ),
                           ],

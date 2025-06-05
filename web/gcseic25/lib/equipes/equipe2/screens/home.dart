@@ -326,7 +326,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
                   ),
                   buildButtonCard(
                     context: context,
-                    title: 'Custo d\'água',
+                    title: 'Custo de água',
                     subtitle: 'Calcular o custo da água.',
                     imageUrl: 'assets/equipe2/custo_agua.png',
                     page: const WaterCostPage(),
@@ -382,89 +382,90 @@ Widget buildButtonCard({
   required Widget page,
   required VoidCallback onReturn,
 }) {
-  return InkWell(
-    onTap: () {
-      Navigator.push(context, MaterialPageRoute(builder: (_) => page)).then((
-        _,
-      ) {
-        onReturn();
-      });
-    },
-    borderRadius: BorderRadius.circular(16),
-    child: Container(
-      width: 180,
-      height: 220,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.white.withOpacity(0.2),
-            blurRadius: 8,
-            offset: const Offset(2, 4),
-          ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
-        child: Stack(
-          children: [
-            // 🖼️ Imagem de fundo
-            Positioned.fill(child: Image.asset(imageUrl, fit: BoxFit.cover)),
-
-            // 🔲 Gradiente no rodapé
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.white.withOpacity(0.8),
-                      Colors.white.withOpacity(0.6),
-                    ],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                  ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      subtitle,
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            // ➡️ Ícone de seta no canto inferior direito
-            const Positioned(
-              bottom: 12,
-              right: 12,
-              child: Icon(
-                Icons.arrow_forward_ios_rounded,
-                color: Colors.white70,
-                size: 18,
-              ),
+  return Semantics(
+    label: 'card_$title'.toLowerCase().replaceAll(' ', '_'),
+    hint: 'Abrir página de $title para $subtitle',
+    button: true,
+    child: InkWell(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (_) => page))
+            .then((_) {
+          onReturn();
+        });
+      },
+      borderRadius: BorderRadius.circular(16),
+      child: Container(
+        width: 180,
+        height: 220,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.white.withOpacity(0.2),
+              blurRadius: 8,
+              offset: const Offset(2, 4),
             ),
           ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: Image.asset(imageUrl, fit: BoxFit.cover),
+              ),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.white.withOpacity(0.8),
+                        Colors.white.withOpacity(0.6),
+                      ],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        subtitle,
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const Positioned(
+                bottom: 12,
+                right: 12,
+                child: Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  color: Colors.white70,
+                  size: 18,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     ),

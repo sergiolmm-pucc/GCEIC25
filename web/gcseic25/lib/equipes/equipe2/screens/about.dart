@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gcseic25/equipes/equipe2/utils/tab_bar.dart';
 
 void main() {
   runApp(MaterialApp(home: About()));
@@ -15,7 +16,8 @@ class About extends StatelessWidget {
       height: 0.9, // espaçamento entre linhas reduzido
     );
 
-    return Scaffold(
+    return MainLayout(
+      child: Scaffold(
       backgroundColor: const Color(0xFFF4F4F4),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -96,6 +98,7 @@ class About extends StatelessWidget {
           ),
         ),
       ),
+    ),
     );
   }
 }
