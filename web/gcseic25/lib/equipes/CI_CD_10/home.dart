@@ -38,7 +38,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 40),
                 _GradientButton(
-                  text: 'Ir para cálculo',
+                  text: 'Ir para calculo',
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -81,9 +81,12 @@ class _GradientButton extends StatefulWidget {
 class _GradientButtonState extends State<_GradientButton> {
   bool _hovering = false;
 
-  @override
-  Widget build(BuildContext context) {
-    return MouseRegion(
+@override
+Widget build(BuildContext context) {
+  return Semantics(
+    label: widget.text, // Isso define o aria-label dinamicamente
+    button: true,
+    child: MouseRegion(
       onEnter: (_) => setState(() => _hovering = true),
       onExit: (_) => setState(() => _hovering = false),
       child: AnimatedContainer(
@@ -92,9 +95,8 @@ class _GradientButtonState extends State<_GradientButton> {
         height: 55,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             colors: [Color(0xFF005AA7), Color(0xFF00CDAC)],
-
           ),
           boxShadow: _hovering
               ? [
@@ -120,6 +122,7 @@ class _GradientButtonState extends State<_GradientButton> {
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }

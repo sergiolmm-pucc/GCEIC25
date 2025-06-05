@@ -40,6 +40,7 @@ class _CalcularPageState extends State<CalcularPage> {
     final salario = double.tryParse(_salarioCtrl.text) ?? 0;
     final meses = int.tryParse(_mesesCtrl.text) ?? 0;
     const baseUrl = 'https://animated-occipital-buckthorn.glitch.me/etec2';
+    const urlLocalhost = 'http://localhost:3000/etec2';
 
     try {
       final headers = {'Content-Type': 'application/json'};
@@ -48,23 +49,26 @@ class _CalcularPageState extends State<CalcularPage> {
         'mesesTrabalhados': meses,
       });
 
+
       final responses = await Future.wait([
-        http.post(
-          Uri.parse('$baseUrl/salario-liquido'),
-          headers: headers,
-          body: body,
-        ),
+        http.post(Uri.parse('$urlLocalhost/salario-liquido'),headers: headers,body: body,),
+        http.post(Uri.parse('$urlLocalhost/inss'), headers: headers, body: body),
+        http.post(Uri.parse('$urlLocalhost/fgts'), headers: headers, body: body),
+        http.post(Uri.parse('$urlLocalhost/decimo'), headers: headers, body: body),
+        http.post(Uri.parse('$urlLocalhost/ferias'), headers: headers, body: body),
+        http.post(Uri.parse('$urlLocalhost/total-mensal'),headers: headers,body: body,),
+      ]);
+
+       /*
+      final responses = await Future.wait([
+        http.post(Uri.parse('$baseUrl/salario-liquido'),headers: headers,body: body,),
         http.post(Uri.parse('$baseUrl/inss'), headers: headers, body: body),
         http.post(Uri.parse('$baseUrl/fgts'), headers: headers, body: body),
         http.post(Uri.parse('$baseUrl/decimo'), headers: headers, body: body),
         http.post(Uri.parse('$baseUrl/ferias'), headers: headers, body: body),
-        http.post(
-          Uri.parse('$baseUrl/total-mensal'),
-          headers: headers,
-          body: body,
-        ),
+        http.post(Uri.parse('$baseUrl/total-mensal'),headers: headers,body: body,),
       ]);
-
+       */
       setState(() {
         salarioLiquido = double.parse(
           jsonDecode(responses[0].body)['salarioLiquido'],
@@ -137,64 +141,67 @@ class _CalcularPageState extends State<CalcularPage> {
     );
   }
 
-  Widget _botaoCalcular() {
-    return AnimatedSwitcher(
+Widget _botaoCalcular() {
+  return Semantics(
+    label: 'Calcular',
+    button: true,
+    child: AnimatedSwitcher(
       duration: const Duration(milliseconds: 300),
-      child:
-          _carregando
-              ? const SizedBox(
-                height: 56,
-                child: Center(
-                  child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+      child: _carregando
+          ? const SizedBox(
+              height: 56,
+              child: Center(
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
+              ),
+            )
+          : Container(
+              width: double.infinity,
+              height: 56,
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF005AA7), Color(0xFF00CDAC)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 6,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: ElevatedButton(
+                onPressed: _calcular,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
                   ),
                 ),
-              )
-              : Container(
-                width: double.infinity,
-                height: 56,
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFF005AA7), Color(0xFF00CDAC)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 6,
-                      offset: Offset(0, 3),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.auto_graph),
+                    SizedBox(width: 10),
+                    Text(
+                      'Calcular',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
-                child: ElevatedButton(
-                  onPressed: _calcular,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent,
-                    shadowColor: Colors.transparent,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.auto_graph),
-                      SizedBox(width: 10),
-                      Text(
-                        'Calcular',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
               ),
-    );
-  }
+            ),
+    ),
+  );
+}
 
   @override
   Widget build(BuildContext context) {

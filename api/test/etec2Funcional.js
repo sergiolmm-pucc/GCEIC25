@@ -42,35 +42,43 @@ const fs = require('fs');
   const inputs = await driver.findElements(By.css('input'));
   await inputs[0].sendKeys('admin@gmail.com'); // campo de email
   await inputs[1].sendKeys('admin');  
-
-  await takeShot(driver, '03_login_preenchido.png');
-
+  await driver.sleep(5000);
+  await takeShot(driver, '04_login_preenchido.png');
+  await driver.sleep(5000);
   const btnEntrar = await driver.findElement(By.css('flt-semantics[aria-label="Botao Entrar"]'));
 
   await btnEntrar.click();
   await driver.sleep(3000);
-  await takeShot(driver, '04_home.png');
+  await takeShot(driver, '05_home.png');
 
   // Grupo de Fotos
-  const btnFotos = await driver.findElement(By.xpath("//*[contains(text(),'Grupo de Fotos')]"));
+  const btnFotos = await driver.findElement(By.css('flt-semantics[aria-label="Sobre"]'));
   await btnFotos.click();
   await driver.sleep(2000);
-  await takeShot(driver, '05_fotos.png');
+  await takeShot(driver, '06_fotos.png');
   await driver.navigate().back();
   await driver.sleep(1000);
 
   // Calculadora
-  const btnCalc = await driver.findElement(By.xpath("//*[contains(text(),'Ir para Calculadora')]"));
+  const btnCalc = await driver.findElement(By.css('flt-semantics[aria-label="Ir para calculo"]'));
   await btnCalc.click();
+  await driver.sleep(3000);
+  await takeShot(driver, '07_calculo_vazio.png');
   await driver.sleep(1000);
-  const inputValor = await driver.findElement(By.xpath("//label[text()='Valor']/following::input[1]"));
-  await inputValor.sendKeys('123');
-  await takeShot(driver, '06_valor_preenchido.png');
+  const inputsCalculo = await driver.findElements(By.css('input'));
+  await driver.sleep(1000);
+  await inputsCalculo[0].sendKeys('12000'); 
+  await driver.sleep(1000);
+  await inputsCalculo[1].sendKeys('12');  
+  await driver.sleep(1000);
+  await takeShot(driver, '08_calculo_preenchido.png');
 
-  const btnCalcular = await driver.findElement(By.xpath("//*[contains(text(),'Calcular')]"));
+  await driver.sleep(1000);
+  const btnCalcular = await driver.findElement(By.css('flt-semantics[aria-label="Calcular"]'));
+
   await btnCalcular.click();
-  await driver.sleep(2000);
-  await takeShot(driver, '07_resultado.png');
+  await driver.sleep(5000);
+  await takeShot(driver, '09_resultado.png');
 
   await driver.quit();
 })();
