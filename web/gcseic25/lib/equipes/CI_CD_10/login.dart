@@ -134,26 +134,31 @@ class _CI_CD10LoginPageState extends State<CI_CD10LoginPage> {
                       _error!,
                       style: const TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold),
                     ),
-                  if (_error != null) const SizedBox(height: 16),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: _login,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        foregroundColor: const Color(0xFF1A2980),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        textStyle: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                    if (_error != null) const SizedBox(height: 16),
+
+                    Semantics(
+                      label: 'Botao Entrar',
+                      button: true,
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: 50,
+                        child: ElevatedButton(
+                          onPressed: _login,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            foregroundColor: const Color(0xFF1A2980),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            textStyle: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          child: const Text('Entrar'),
                         ),
                       ),
-                      child: const Text('Entrar'),
                     ),
-                  ),
                 ],
               ),
             ),
