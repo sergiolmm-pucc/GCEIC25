@@ -215,16 +215,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           const Spacer(),
                           // Modern menu buttons
                           _buildModernButton(
+                            semanticLabel: 'Sobre',
                             icon: Icons.info_outline,
                             onTap: () => _navigateTo(context, const SobreScreen()),
                           ),
                           const SizedBox(width: 8),
                           _buildModernButton(
+                            semanticLabel: 'Ajuda',
                             icon: Icons.help_outline,
                             onTap: () => _navigateTo(context, const HelpScreen()),
                           ),
                           const SizedBox(width: 8),
                           _buildModernButton(
+                            semanticLabel: 'Logout',
                             icon: Icons.logout,
                             onTap: () => Navigator.pop(context),
                           ),
@@ -458,8 +461,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget _buildModernButton({
     required IconData icon,
     required VoidCallback onTap,
+    required String semanticLabel,
   }) {
-    return GestureDetector(
+    return Semantics(
+    label: semanticLabel,
+    button: true,
+    child: GestureDetector(
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.all(8),
@@ -477,6 +484,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           size: 20,
         ),
       ),
+    )
     );
   }
 }
