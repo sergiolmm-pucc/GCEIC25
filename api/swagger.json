@@ -11,6 +11,241 @@
     }
   ],
   "paths": {
+
+
+    "/etec2/salario-liquido": {
+  "post": {
+    "tags": ["ETEC2"],
+    "summary": "Calcula o salário líquido",
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "salarioBruto": {
+                "type": "number"
+              }
+            },
+            "required": ["salarioBruto"]
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Salário líquido calculado",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "salarioLiquido": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},
+"/etec2/total-mensal": {
+  "post": {
+    "tags": ["ETEC2"],
+    "summary": "Calcula o custo total mensal",
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "salarioBruto": {
+                "type": "number"
+              }
+            },
+            "required": ["salarioBruto"]
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Custo total mensal calculado",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "totalMensal": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},
+"/etec2/inss": {
+  "post": {
+    "tags": ["ETEC2"],
+    "summary": "Calcula INSS empregado e empregador",
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "salarioBruto": {
+                "type": "number"
+              }
+            },
+            "required": ["salarioBruto"]
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Valores de INSS retornados",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "inssEmpregado": { "type": "string" },
+                "inssEmpregador": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},
+"/etec2/fgts": {
+  "post": {
+    "tags": ["ETEC2"],
+    "summary": "Calcula FGTS mensal e rescisório",
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "salarioBruto": {
+                "type": "number"
+              }
+            },
+            "required": ["salarioBruto"]
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Valores de FGTS retornados",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "fgtsMensal": { "type": "string" },
+                "fgtsRescisorio": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},
+"/etec2/decimo": {
+  "post": {
+    "tags": ["ETEC2"],
+    "summary": "Calcula o décimo terceiro salário",
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "salarioBruto": {
+                "type": "number"
+              },
+              "mesesTrabalhados": {
+                "type": "number"
+              }
+            },
+            "required": ["salarioBruto", "mesesTrabalhados"]
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Valor do décimo terceiro calculado",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "decimoTerceiro": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},
+"/etec2/ferias": {
+  "post": {
+    "tags": ["ETEC2"],
+    "summary": "Calcula o valor das férias com 1/3 adicional",
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "salarioBruto": {
+                "type": "number"
+              },
+              "mesesTrabalhados": {
+                "type": "number"
+              }
+            },
+            "required": ["salarioBruto", "mesesTrabalhados"]
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Valor das férias calculado",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ferias": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},
+
+
+    
     "/datetime": {
       "get": {
         "summary": "Retorna data e hora do servidor",

@@ -22,6 +22,10 @@ const icmsRoutes = require('./routes/icmsRoutes5');
 const irpjRoutes = require('./routes/irpjRoutes5');
 const issRoutes = require('./routes/issRoutes5');
 const ipiRoutes = require('./routes/ipiRoutes5');
+const icms7Routes = require('./routes/icms');
+const cofins7Routes = require('./routes/cofins');
+const ipi7Routes = require('./routes/ipi');
+const pis7Routes = require('./routes/pis');
 
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json());
@@ -41,6 +45,10 @@ app.use('/impostos', icmsRoutes);
 app.use('/impostos', irpjRoutes);
 app.use('/impostos', issRoutes);
 app.use('/etec2', etec2Routes); //Grupo 10 - ETEC
+app.use('/impostos2', icms7Routes); //Grupo 07 - Calculo de impostos
+app.use('/impostos2', cofins7Routes); 
+app.use('/impostos2', ipi7Routes); 
+app.use('/impostos2', pis7Routes); 
 
 
 
