@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       home: HomePage(),
       routes: {
         '/splash_screen_equipe_2': 
-            (context) => SplashScreen4(nextPage: LoginPage2()),
+            (context) => SplashScreen2(nextPage: LoginPage2()),
         '/CI_CD_8':
             (context) => CI_CD8Splash.SplashScreen(
               nextPage: const CI_CD8Login.LoginPage(),
@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
         '/equipe5': (context) => TelaLogin(),
         '/sobre': (context) => const SobreScreen(),
         '/ajuda': (context) => const AjudaScreen(),
-        '/mob3': (context) => SplashScreen3(nextPage:  LoginScreen()), 
+        '/mob3': (context) => SplashScreen3(nextPage:  LoginScreen()),  
         '/equipe5': (context) => TransitionScreen(nextPage: TelaLogin()),
       },
     );
