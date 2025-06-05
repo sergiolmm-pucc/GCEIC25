@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'sobre_page.dart';
+import 'help.dart';
 
 class MultiplierMarkupPage extends StatefulWidget {
   @override
@@ -152,6 +153,22 @@ class _MultiplierMarkupPageState extends State<MultiplierMarkupPage> {
                   },
                   child: const Text(
                     'Sobre o App',
+                    style: TextStyle(
+                      fontSize: 16,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HelpPage()),
+                    );
+                  },
+                  child: const Text(
+                    'Help',
                     style: TextStyle(
                       fontSize: 16,
                       decoration: TextDecoration.underline,
