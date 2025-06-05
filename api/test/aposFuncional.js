@@ -168,37 +168,45 @@ async function preencherCampo(driver, xpath, texto, timeout = 30000) {
         await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
 
         // Histórico de Simulações Screen
-        await driver.sleep(1500);
         await clickAndSearchElement(driver, "//flt-semantics[text()='Histórico de simulações']");
+        await driver.sleep(30000);
         await takeScreenshot(driver, '../fotos/APOS/historico_screen.png', 'Gravou Foto da Tela de Histórico de Simulações');
 
         // Usando Filtros
-        await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Escolha um tipo')]");
-        await driver.sleep(15000);
-        await clickAndSearchElement(driver, "//flt-semantics[@role='menuitem' and @aria-label='/calculoAposentadoria']");
+        let dropdown = await driver.wait(until.elementLocated(By.xpath("//flt-semantics[@role='button' and contains(text(), 'Escolha um tipo')]")), 10000);
+        await driver.executeScript("arguments[0].click();", dropdown);
+        let item1 = await driver.wait(until.elementLocated(By.xpath("//flt-semantics[@role='menuitem' and @aria-label='/calculoAposentadoria']")), 10000);
+        await driver.executeScript("arguments[0].click();", item1);
         await driver.sleep(15000);
         await takeScreenshot(driver, '../fotos/APOS/historico_filtro1.png', 'Gravou Foto da Tela de Histórico - Filtro 1');
 
-        await clickAndSearchElement(driver, "//flt-semantics[@role='menuitem' and contains(text(), '/calculoAposentadoria')]");
-        await driver.sleep(15000);
-        await clickAndSearchElement(driver, "//flt-semantics[@role='menuitem' and contains(text(), '/calculoRegra')]");
+        let dropdown2 = await driver.wait(until.elementLocated(By.xpath("//flt-semantics[@role='button' and contains(text(), '/calculoAposentadoria')]")), 10000);
+        await driver.executeScript("arguments[0].click();", dropdown2);
+        let item2 = await driver.wait(until.elementLocated(By.xpath("//flt-semantics[@role='menuitem' and @aria-label='/calculoRegra']")), 10000);
+        await driver.executeScript("arguments[0].click();", item2);
         await driver.sleep(15000);
         await takeScreenshot(driver, '../fotos/APOS/historico_filtro2.png', 'Gravou Foto da Tela de Histórico - Filtro 2');
 
-        await clickAndSearchElement(driver, "//flt-semantics[@role='menuitem' and contains(text(), '/calculoRegra')]");
-        await driver.sleep(15000);
-        await clickAndSearchElement(driver, "//flt-semantics[@role='menuitem' and contains(text(), '/calculoPontuacao')]");
+        let dropdown3 = await driver.wait(until.elementLocated(By.xpath("//flt-semantics[@role='button' and contains(text(), '/calculoRegra')]")), 10000);
+        await driver.executeScript("arguments[0].click();", dropdown3);
+        let item3 = await driver.wait(until.elementLocated(By.xpath("//flt-semantics[@role='menuitem' and @aria-label='/calculoPontuacao']")), 10000);
+        await driver.executeScript("arguments[0].click();", item3);
         await driver.sleep(15000);
         await takeScreenshot(driver, '../fotos/APOS/historico_filtro3.png', 'Gravou Foto da Tela de Histórico - Filtro 3');
 
-        await clickAndSearchElement(driver, "//flt-semantics[@role='menuitem' and contains(text(), '/calculoPontuacao')]");
-        await driver.sleep(15000);
-        await clickAndSearchElement(driver, "//flt-semantics[@role='menuitem' and contains(text(), '/calculoTempoAposentadoria')]");
+        let dropdown4 = await driver.wait(until.elementLocated(By.xpath("//flt-semantics[@role='button' and contains(text(), '/calculoPontuacao')]")), 10000);
+        await driver.executeScript("arguments[0].click();", dropdown4);
+        let item4 = await driver.wait(until.elementLocated(By.xpath("//flt-semantics[@role='menuitem' and @aria-label='/calculoTempoAposentadoria']")), 10000);
+        await driver.executeScript("arguments[0].click();", item4);
         await driver.sleep(15000);
         await takeScreenshot(driver, '../fotos/APOS/historico_filtro4.png', 'Gravou Foto da Tela de Histórico - Filtro 4');
 
         // Voltando
         await clickAndSearchElement(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
+
+        // Sucesso
+        console.log("Fim do Teste! Sucesso!")
+        console.log("Saindo...")
 
         // Saindo
         await driver.sleep(8000);
