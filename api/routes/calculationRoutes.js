@@ -6,5 +6,6 @@ const calculationController = require('../controllers/calculationController');
 
 // Define rotas usando as funções do controller
 router.post('/calcular', calculationController.calcular);
+router.post('/impacto-ambiental', calculationController.impactoAmbiental);
 
 module.exports = router;
