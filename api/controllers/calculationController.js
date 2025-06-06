@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 function calcularPotenciaNecessaria(consumoMensalKwh, horasSolDia) {
     return consumoMensalKwh / (30 * horasSolDia);
 }
@@ -6,8 +8,48 @@ function calcularAreaNecessaria(qtdPaineis, areaPainelM2 = 1.6) {
     return qtdPaineis * areaPainelM2;
 }
 
+async function buscarCidadeEstadoPorCEP(cep) {
+    const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+    if (response.data.erro) {
+        throw new Error('CEP inválido.');
+    }
+
+    return {
+        cidade: response.data.localidade,
+        estado: response.data.uf
+    };
+}
+
+async function obterCoordenadas(cep) {
+    const { cidade, estado } = await buscarCidadeEstadoPorCEP(cep);
+
+    const query1 = `${cep}, ${cidade}, ${estado}, Brazil`;
+    const url1 = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query1)}&format=json`;
+    let resposta = await axios.get(url1, {
+        headers: {
+            'User-Agent': 'sistema-solar-app (test@test.com)'
+        }
+    });
+    
+    if (resposta.data.length === 0) {
+        const query2 = `${cidade}, ${estado}, Brazil`;
+        const url2 = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query2)}&format=json`;
+        resposta = await axios.get(url2, {
+            headers: {
+                'User-Agent': 'sistema-solar-app (test@test.com)'
+            }
+        });
+        if (resposta.data.length === 0) {
+            throw new Error(`Não foi possível obter coordenadas para o CEP ${cep}`);
+        }
+    }
+
+    const { lat, lon } = resposta.data[0];
+    return { latitude: Math.abs(parseFloat(lat)), longitude: parseFloat(lon) };
+}
+
 // POST /calcular
-exports.calcular = (req, res) => {
+export const calcular = (req, res) => {
   const dados = req.body;
   const VALOR_PAINEL = 3000;
 
@@ -47,7 +89,7 @@ exports.calcular = (req, res) => {
 }
 
 //POST /impacto-ambiental
-exports.impactoAmbiental = (req, res) => {
+export const impactoAmbiental = (req, res) => {
     const dados = req.body;
 
     try {
@@ -96,3 +138,32 @@ exports.impactoAmbiental = (req, res) => {
         res.status(400).json({ erro: 'Valores inválidos ou ausentes.' });
     }
 }
+
+// POST /orientacao
+export const orientacao = async (req, res) => {
+    try {
+        const { cep, potencia_kwp, sombra } = req.body;
+        const { latitude } = await obterCoordenadas(cep);
+        const inclinacao_ideal_graus = Math.round(latitude);
+        const orientacao_ideal = "Norte geográfico (ideal para o hemisfério sul)";
+        const tipo_inversor_recomendado = sombra 
+        ? "Microinversor (ótimo para locais com sombreamento parcial)" 
+        : "Inversor string (eficiente para áreas sem sombra)";
+        const tecnologias_paineis_sugeridas = potencia_kwp < 3
+        ? [
+            "Painéis Monocristalinos (alta eficiência, bom para pouco espaço)", 
+            "Painéis Policristalinos (custo-benefício se houver espaço de sobra)"]
+        : [
+            "Painéis Policristalinos (custo-benefício)",
+            "Thin-film (para áreas muito grandes e baixa eficiência exigida)"];
+
+        return res.json({
+            inclinacao_ideal_graus,
+            orientacao_ideal,
+            tipo_inversor_recomendado,
+            tecnologias_paineis_sugeridas
+        });
+    } catch (error) {
+        return res.status(500).json({ erro: 'Erro ao processar os dados.', detalhes: error.message });
+    }
+};

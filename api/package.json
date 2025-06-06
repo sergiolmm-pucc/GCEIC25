@@ -8,6 +8,7 @@
         "funcional2": "node ./test/funcionalExemplo2"
     },
     "dependencies": {
+        "axios": "^1.9.0",
         "cors": "^2.8.5",
         "express": "^4.21.2",
         "swagger-ui-express": "^4.6.3"
