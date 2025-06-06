@@ -19,8 +19,8 @@ const fs = require('fs');
 
 
   console.log('https://sergio.dev.br/');
-  //await driver.get('https://sergio.dev.br/'); // Replace with your Flutter Web app URL
-  await driver.get('http://localhost:3030/'); // Replace with your Flutter Web app URL
+  await driver.get('https://sergio.dev.br/'); // Replace with your Flutter Web app URL
+  //await driver.get('http://localhost:3030/'); // Replace with your Flutter Web app URL
   //await bridge.enableAccessibility();
   // Wait for 5 secs to let the dynamic content to load
   await driver.sleep(10000);
