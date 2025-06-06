@@ -5,6 +5,7 @@ const cors = require('cors');
 
 
 const app = express();
+app.use(express.json());
 const port = 5000;
 
 // importa as rotas
