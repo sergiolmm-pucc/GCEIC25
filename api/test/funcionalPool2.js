@@ -108,23 +108,29 @@ async function preencherTexto(driver, xpath, texto, tempoMaximo = 30000) {
         await localizarEClick(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
 
         // Calcular Manutenção
-        await driver.sleep(3000);
         await localizarEClick(driver, "//flt-semantics[@role='button' and contains(text(), 'Manutenção')]");
+        await driver.sleep(5000);
         await capturarPrint(driver, '../fotos/Pool2/calculo_manutenção.png', 'Print Tela de Calculo de Manutenção');
 
         // Preenchendo os campos do cálculo de manutenção
         await preencherTexto(driver, "//*[@aria-label='Produtos químicos (R$)']", '150');
+        await driver.sleep(1000);
         await preencherTexto(driver, "//*[@aria-label='Uso mensal da bomba (horas)']", '40');
+        await driver.sleep(1000);
         await preencherTexto(driver, "//*[@aria-label='Preço/hora da bomba ligada (R$)']", '0.85');
+        await driver.sleep(1000);
         await preencherTexto(driver, "//*[@aria-label='Mão de obra (R$)']", '200');
+        await driver.sleep(3000);
 
         await capturarPrint(driver, '../fotos/Pool2/preenchido_manutencao.png', 'Campos do cálculo preenchidos');
 
         // Clicar no botão de calcular (exemplo, ajuste o texto conforme seu app)
+        await driver.sleep(3000);
         await localizarEClick(driver, "//flt-semantics[text()='CALCULAR']");
 
         await driver.sleep(3000);
         await capturarPrint(driver, '../fotos/Pool2/resultado_manutencao.png', 'Resultado do cálculo');
+        await driver.sleep(3000);
         await localizarEClick(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
 
         // Calcular Custo de Agua
@@ -238,8 +244,6 @@ async function preencherTexto(driver, xpath, texto, tempoMaximo = 30000) {
 
         // Voltar
         await localizarEClick(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
-
-        // await localizarEClick(driver, "//flt-semantics[@role='button' and contains(text(), 'Back')]");
 
         await driver.sleep(5000);
         await driver.quit();

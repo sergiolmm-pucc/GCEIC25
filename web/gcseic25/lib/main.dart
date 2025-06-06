@@ -57,12 +57,11 @@ class MyApp extends StatelessWidget {
         '/markupSplash': (context) => const MarkupSplashScreen(),
         '/aposSplashScreen': (context) => APOSSplashScreen(),
         '/mkp1SplashScreen': (context) => const MKP1SplashScreen(),
-        '/mob3': (context) => SplashScreen3(nextPage: LoginScreen()),
         '/equipe5': (context) => TelaLogin(),
         '/sobre': (context) => const SobreScreen(),
         '/ajuda': (context) => const AjudaScreen(),
         '/mob3': (context) => SplashScreen3(nextPage: LoginScreen()),
-        '/equipe5': (context) => TransitionScreen(nextPage: TelaLogin()),
+        // '/equipe5': (context) => TransitionScreen(nextPage: TelaLogin()),
       },
     );
   }
