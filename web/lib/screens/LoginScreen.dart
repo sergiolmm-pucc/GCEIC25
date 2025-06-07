@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../data/user_data.dart';
 import 'MainMenu.dart';
+import 'splash_screen.dart';
 
 void main() => runApp(SolarLoginApp());
 
@@ -15,7 +16,7 @@ class SolarLoginApp extends StatelessWidget {
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => SplashScreen(),
+        builder: (context, state) => LoginScreen(),
       ),
       GoRoute(
         path: '/login',

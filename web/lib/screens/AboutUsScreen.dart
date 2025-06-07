@@ -9,7 +9,7 @@ class AboutUsScreen extends StatelessWidget {
     },
     {
       'nome': 'Lucas Bertola',
-      'descricao': 'RA',
+      'descricao': '22005810',
       'foto': 'assets/integrante2.png',
     },
     {
@@ -19,7 +19,7 @@ class AboutUsScreen extends StatelessWidget {
     },
     {
       'nome': 'Pedro Vieira',
-      'descricao': 'RA',
+      'descricao': '23008779',
       'foto': 'assets/integrante4.png',
     },
   ];
