@@ -65,7 +65,10 @@ flutter:
   assets:
     - assets/solar_background1.jpg
     - assets/solar_background2.jpg
-    - assets/82097-200.png
+    - assets/integrante1.png
+    - assets/integrante2.png
+    - assets/integrante3.png
+    - assets/integrante4.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
