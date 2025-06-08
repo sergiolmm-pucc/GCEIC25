@@ -7,7 +7,7 @@
     },
     "servers": [
       {
-        "url": "http://localhost:3000"
+        "url": "http://localhost:5000"
       }
     ],
     "paths": {
@@ -75,6 +75,216 @@
             "400": {
               "description": "Erro - valor não fornecido"
             }
+          }
+        }
+      },
+      "/calculation/calcular": {
+        "post": {
+          "summary": "Calcula o dimensionamento do sistema fotovoltaico.",
+          "description": "Calcula potência, quantidade de painéis, área necessária, custo e payback com base nos dados fornecidos.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "consumo_mensal_kwh": { "type": "number", "example": 300 },
+                    "horas_sol_dia": { "type": "number", "example": 5 },
+                    "tarifa_energia": { "type": "number", "example": 0.7 },
+                    "preco_medio_conta": { "type": "number", "example": 200 },
+                    "espaco_disponivel_m2": { "type": "number", "example": 20 }
+                  },
+                  "required": ["consumo_mensal_kwh", "horas_sol_dia", "tarifa_energia", "preco_medio_conta", "espaco_disponivel_m2"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Resultado do cálculo do sistema.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "potencia_necessaria_kwp": { "type": "number" },
+                      "quantidade_paineis": { "type": "integer" },
+                      "area_necessaria_m2": { "type": "number" },
+                      "espaco_disponivel_m2": { "type": "number" },
+                      "espaco_suficiente": { "type": "boolean" },
+                      "area_extra_necessaria_m2": { "type": "number" },
+                      "custo_total_r$": { "type": "number" },
+                      "payback_anos": { "type": "number", "nullable": true }
+                    }
+                  }
+                }
+              }
+            },
+            "400": { "description": "Dados ausentes ou inválidos." }
+          }
+        }
+      },
+      "/calculation/impacto-ambiental": {
+        "post": {
+          "summary": "Calcula o impacto ambiental do sistema fotovoltaico.",
+          "description": "Retorna CO2 evitado, árvores equivalentes e distância de carro evitada.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "potencia_kwp": { "type": "number", "example": 3 },
+                    "cidade_estado": { "type": "string", "example": "São Paulo - SP" }
+                  },
+                  "required": ["potencia_kwp", "cidade_estado"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Impacto ambiental calculado.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "co2_evitado_anual_kg": { "type": "number" },
+                      "arvores_equivalentes": { "type": "integer" },
+                      "distancia_carro_evitada_km": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            },
+            "400": { "description": "Dados ausentes ou inválidos." }
+          }
+        }
+      },
+      "/calculation/orientacao": {
+        "post": {
+          "summary": "Sugere inclinação, orientação e tecnologias para instalação solar.",
+          "description": "Sugere inclinação ideal, orientação, tipo de inversor e tecnologias de painéis com base no CEP, potência e sombra.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "cep": { "type": "string", "example": "01001-000" },
+                    "potencia_kwp": { "type": "number", "example": 2.5 },
+                    "sombra": { "type": "boolean", "example": false }
+                  },
+                  "required": ["cep", "potencia_kwp", "sombra"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Sugestão de instalação solar.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "inclinacao_ideal_graus": { "type": "integer" },
+                      "orientacao_ideal": { "type": "string" },
+                      "tipo_inversor_recomendado": { "type": "string" },
+                      "tecnologias_paineis_sugeridas": { "type": "array", "items": { "type": "string" } }
+                    }
+                  }
+                }
+              }
+            },
+            "500": { "description": "Erro ao processar os dados." }
+          }
+        }
+      },
+      "/users": {
+        "get": {
+          "summary": "Lista informações do usuário.",
+          "responses": {
+            "200": {
+              "description": "Informações do usuário.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "datetime": { "type": "string", "format": "date-time" },
+                      "usuario": { "type": "string" },
+                      "turma": { "type": "string" },
+                      "aula": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Cria um novo usuário.",
+          "responses": {
+            "200": { "description": "Usuário criado." }
+          }
+        }
+      },
+      "/users/{id}": {
+        "get": {
+          "summary": "Busca usuário pelo ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "responses": {
+            "200": { "description": "Usuário encontrado." }
+          }
+        }
+      },
+      "/users/login": {
+        "post": {
+          "summary": "Realiza login do usuário.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "username": { "type": "string", "example": "admin" },
+                    "password": { "type": "string", "example": "1234" }
+                  },
+                  "required": ["username", "password"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Login bem-sucedido.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": { "type": "boolean" },
+                      "message": { "type": "string" },
+                      "usuario": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            },
+            "401": { "description": "Usuário ou senha inválidos." }
           }
         }
       }
