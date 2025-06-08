@@ -5,7 +5,7 @@
     "main": "server.js",
     "scripts": {
         "start": "node server.js",
-        "funcional2": "node ./test/funcionalExemplo2"
+        "test": "jest"
     },
     "dependencies": {
         "axios": "^1.9.0",
@@ -25,6 +25,8 @@
         "glitch"
     ],
     "devDependencies": {
-        "@rentready/flutter-selenium-bridge": "^1.0.5"
+        "@rentready/flutter-selenium-bridge": "^1.0.5",
+        "jest": "^29.7.0",
+        "supertest": "^7.1.1"
     }
 }
