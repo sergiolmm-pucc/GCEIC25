@@ -5,6 +5,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../data/user_data.dart';
+import 'MainMenu.dart';
+import 'splash_screen.dart';
 
 void main() => runApp(SolarLoginApp());
 
@@ -14,6 +16,10 @@ class SolarLoginApp extends StatelessWidget {
     routes: [
       GoRoute(
         path: '/',
+        builder: (context, state) => LoginScreen(),
+      ),
+      GoRoute(
+        path: '/login',
         builder: (context, state) => LoginScreen(),
       ),
       GoRoute(
@@ -47,215 +53,127 @@ class SolarLoginApp extends StatelessWidget {
   }
 }
 
-class LoginScreen extends StatelessWidget {
-  final Color primaryColor = Color(0xFFFFB703);
-  final Color accentColor = Color(0xFF219EBC);
-  final Color darkBlue = Color(0xFF023047);
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
-  LoginScreen({super.key});
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _userController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _loading = false;
+
+  Future<void> _login() async {
+    final username = _userController.text.trim();
+    final password = _passwordController.text.trim();
+    if (username.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Preencha todos os campos')),
+      );
+      return;
+    }
+    setState(() => _loading = true);
+    try {
+      final resp = await http.post(
+        Uri.parse('http://localhost:5000/users/login'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'username': username, 'password': password}),
+      );
+      if (resp.statusCode == 200) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => MainMenu()),
+        );
+      } else {
+        final msg = jsonDecode(resp.body)['message'] ?? 'Erro ao fazer login';
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(msg)),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro de conexão: $e')),
+      );
+    } finally {
+      setState(() => _loading = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Image.asset(
-            'assets/solar_background1.jpg',
-            fit: BoxFit.cover,
-            color: Colors.black.withOpacity(0.4),
-            colorBlendMode: BlendMode.darken,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF7B1FA2), Color(0xFF2196F3)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-          SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 60),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: 80),
-                Text(
-                  "Nome da Empresa",
-                  style: GoogleFonts.poppins(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "Slogan",
-                  style: GoogleFonts.poppins(
-                    fontSize: 16,
-                    color: Colors.white70,
-                  ),
-                ),
-                SizedBox(height: 60),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black26,
-                        blurRadius: 10,
-                        offset: Offset(0, 4),
-                      )
-                    ],
-                  ),
-                  padding: const EdgeInsets.all(24),
-                  child: Column(
-                    children: [
-                      Text(
-                        "Logo",
-                        style: GoogleFonts.poppins(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+        ),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Card(
+              elevation: 12,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+              margin: EdgeInsets.symmetric(horizontal: 24),
+              child: Padding(
+                padding: const EdgeInsets.all(32),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.lock_outline, size: 60, color: Color(0xFF7B1FA2)),
+                    SizedBox(height: 16),
+                    Text(
+                      'Bem-vindo!',
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF7B1FA2),
+                        letterSpacing: 1.2,
                       ),
-                      SizedBox(height: 16),
-                      Text(
-                        "Login",
-                        style: GoogleFonts.poppins(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
+                    ),
+                    SizedBox(height: 24),
+                    TextField(
+                      controller: _userController,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.person, color: Color(0xFF2196F3)),
+                        labelText: 'Usuário',
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                       ),
-                      SizedBox(height: 24),
-                      TextField(
-                        controller: _emailController,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.email, color: accentColor),
-                          labelText: 'Email',
-                          labelStyle: TextStyle(color: darkBlue),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
+                    ),
+                    SizedBox(height: 16),
+                    TextField(
+                      controller: _passwordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.lock, color: Color(0xFF2196F3)),
+                        labelText: 'Senha',
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                       ),
-                      SizedBox(height: 16),
-                      TextField(
-                        controller: _passwordController,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.lock, color: accentColor),
-                          labelText: 'Senha',
-                          labelStyle: TextStyle(color: darkBlue),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      SizedBox(height: 8),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          onPressed: () {
-                            context.go('/forgot');
-                          },
-                          child: Text(
-                            "Forgot Password?",
-                            style: TextStyle(color: accentColor),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 16),
-                      ElevatedButton(
+                    ),
+                    SizedBox(height: 24),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: _loading ? null : _login,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: primaryColor,
-                          padding: EdgeInsets.symmetric(horizontal: 80, vertical: 16),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          elevation: 8,
+                          backgroundColor: Color(0xFF7B1FA2),
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                          padding: EdgeInsets.symmetric(vertical: 16),
                         ),
-                        onPressed: () {
-                          final  email = _emailController.text;
-                          final password = _passwordController.text;
-                          if (email.isEmpty || password.isEmpty) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Por favor, preencha todos os campos')),
-                            );
-                            return;
-                          }
-                          if (UserData().email != email || UserData().username == null) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Usuário ou senha inválidos')),
-                            );
-                            return;
-                          }
-                          context.go('/home');
-                        },
-                        child: Center(
-                          child: Text(
-                            "Sign in",
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
-                        ),
+                        child: _loading
+                            ? CircularProgressIndicator(color: Colors.white)
+                            : Text('Entrar', style: TextStyle(fontSize: 18)),
                       ),
-                      SizedBox(height: 16),
-                      Row(
-                        children: [
-                          Expanded(child: Divider(color: Colors.grey)),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: Text(
-                              "or continue with",
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                          ),
-                          Expanded(child: Divider(color: Colors.grey)),
-                        ],
-                      ),
-                      SizedBox(height: 16),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            icon: FaIcon(FontAwesomeIcons.google, color: accentColor),
-                            iconSize: 40,
-                            onPressed: () {
-                              // Ação para login com Google
-                            },
-                          ),
-                          SizedBox(width: 16),
-                          IconButton(
-                            icon: FaIcon(FontAwesomeIcons.github, color: accentColor),
-                            iconSize: 40,
-                            onPressed: () {
-                              // Ação para login com GitHub
-                            },
-                          ),
-                          SizedBox(width: 16),
-                          IconButton(
-                            icon: FaIcon(FontAwesomeIcons.facebook, color: accentColor),
-                            iconSize: 40,
-                            onPressed: () {
-                              // Ação para login com Facebook
-                            },
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 16),
-                      TextButton(
-                        onPressed: () {
-                          context.go('/create-account');
-                        },
-                        child: Text(
-                          "Não tem uma conta? Crie agora",
-                          style: TextStyle(color: accentColor),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
@@ -536,7 +454,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
           TextButton(
             onPressed: () {
               Navigator.of(context).pop(); // Fecha o popup
-              if (sucesso) context.go('/'); // Redireciona para login se sucesso
+              if (sucesso) context.go('/login'); // Redireciona para login se sucesso
             },
             child: Text('Entendido'),
           ),
