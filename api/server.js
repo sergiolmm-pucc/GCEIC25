@@ -20,8 +20,11 @@ app.use('/', baseRoutes);
 app.use('/users', userRoutes);
 app.use('/calculation', calculationRoutes);
 
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`Servidor rodando em http://localhost:${port}`);
+    console.log(`Swagger em http://localhost:${port}/api-docs`);
+  });
+}
 
-app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}`);
-  console.log(`Swagger em http://localhost:${port}/api-docs`);
-});
+module.exports = app;

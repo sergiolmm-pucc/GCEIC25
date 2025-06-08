@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');;
 
 function calcularPotenciaNecessaria(consumoMensalKwh, horasSolDia) {
     return consumoMensalKwh / (30 * horasSolDia);
@@ -49,11 +49,22 @@ async function obterCoordenadas(cep) {
 }
 
 // POST /calcular
-export const calcular = (req, res) => {
-  const dados = req.body;
-  const VALOR_PAINEL = 3000;
-
+exports.calcular = (req, res) => {
     try {
+        const dados = req.body;
+        if (!dados.consumo_mensal_kwh) {
+            return res.status(400).json({ erro: 'Consumo mensal em kWh é obrigatório.' });
+        }
+        if (!dados.horas_sol_dia) {
+            return res.status(400).json({ erro: 'Horas de sol por dia é obrigatório.' });
+        }
+        if (!dados.tarifa_energia) {
+            return res.status(400).json({ erro: 'Tarifa de energia é obrigatório.' });
+        }
+        if (!dados.preco_medio_conta) {
+            return res.status(400).json({ erro: 'Preço médio da conta é obrigatório.' });
+        }
+        const VALOR_PAINEL = 3000;
         const consumoMensalKwh = parseFloat(dados.consumo_mensal_kwh);
         const horasSolDia = parseFloat(dados.horas_sol_dia);
         const tarifaEnergia = parseFloat(dados.tarifa_energia);
@@ -89,7 +100,7 @@ export const calcular = (req, res) => {
 }
 
 //POST /impacto-ambiental
-export const impactoAmbiental = (req, res) => {
+exports.impactoAmbiental = (req, res) => {
     const dados = req.body;
 
     try {
@@ -140,7 +151,7 @@ export const impactoAmbiental = (req, res) => {
 }
 
 // POST /orientacao
-export const orientacao = async (req, res) => {
+exports.orientacao = async (req, res) => {
     try {
         const { cep, potencia_kwp, sombra } = req.body;
         const { latitude } = await obterCoordenadas(cep);
