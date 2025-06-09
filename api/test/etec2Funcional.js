@@ -5,9 +5,10 @@ const { Options } = require('selenium-webdriver/chrome');
 const fs = require('fs');
 
 (async () => {
-  const screen = { width: 1024, height: 720 };
+  const screen = { width: 1280, height: 720 };
   const chromeOptions = new Options();
   chromeOptions.addArguments('--no-sandbox');
+  chromeOptions.addArguments('--headless');
   chromeOptions.windowSize(screen);
 
   const builder = new Builder()
