@@ -45,10 +45,10 @@ app.use('/impostos', icmsRoutes);
 app.use('/impostos', irpjRoutes);
 app.use('/impostos', issRoutes);
 app.use('/etec2', etec2Routes); //Grupo 10 - ETEC
-app.use('/impostos2', icms7Routes); //Grupo 07 - Calculo de impostos
-app.use('/impostos2', cofins7Routes); 
-app.use('/impostos2', ipi7Routes); 
-app.use('/impostos2', pis7Routes); 
+app.use('/CI_CD_7', icms7Routes); //Grupo 07 - Calculo de impostos
+app.use('/CI_CD_7', cofins7Routes); 
+app.use('/CI_CD_7', ipi7Routes); 
+app.use('/CI_CD_7', pis7Routes);
 
 
 

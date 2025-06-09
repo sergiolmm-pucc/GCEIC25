@@ -17,7 +17,7 @@ class _CofinsScreenState extends State<CofinsScreen> {
     final percentual = double.tryParse(_percentualController.text.replaceAll(',', '.'));
 
     if (valor != null && percentual != null) {
-      final url = Uri.parse('https://animated-occipital-buckthorn.glitch.me/impostos2/cofins');
+      final url = Uri.parse('https://animated-occipital-buckthorn.glitch.me/CI_CD_7/cofins');
 
 
 
