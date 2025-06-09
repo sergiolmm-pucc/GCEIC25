@@ -22,10 +22,10 @@ const icmsRoutes = require('./routes/icmsRoutes5');
 const irpjRoutes = require('./routes/irpjRoutes5');
 const issRoutes = require('./routes/issRoutes5');
 const ipiRoutes = require('./routes/ipiRoutes5');
-const icms7Routes = require('./routes/icms');
-const cofins7Routes = require('./routes/cofins');
 const ipi7Routes = require('./routes/ipi');
+const icms7Routes = require('./routes/icms');
 const pis7Routes = require('./routes/pis');
+const cofins7Routes = require('./routes/cofins');
 const cpfValidatorRoutes = require('./routes/cpfValidatorRoutes');
 const cnhValidatorRoutes = require('./routes/cnhValidatorRoutes');
 const calculatePremiumRoutes = require('./routes/calculatePremiumRoutes');
@@ -48,10 +48,10 @@ app.use('/impostos', icmsRoutes);
 app.use('/impostos', irpjRoutes);
 app.use('/impostos', issRoutes);
 app.use('/etec2', etec2Routes); //Grupo 10 - ETEC
-app.use('/CI_CD_7', icms7Routes); //Grupo 07 - Calculo de impostos
-app.use('/CI_CD_7', cofins7Routes); 
-app.use('/CI_CD_7', ipi7Routes); 
-app.use('/CI_CD_7', pis7Routes); 
+app.use('/CI_CD_7/ipi', ipi7Routes); //Grupo 7 - Imposto
+app.use('/CI_CD_7/icms', icms7Routes);
+app.use('/CI_CD_7/pis', pis7Routes);
+app.use('/CI_CD_7/cofins', cofins7Routes); 
 app.use('/cpf', cpfValidatorRoutes);
 app.use('/cnh', cnhValidatorRoutes);
 app.use('/calculatepremium', calculatePremiumRoutes);

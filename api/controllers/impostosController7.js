@@ -1,4 +1,5 @@
 exports.calcularIPI = (req, res) => {
+  console.log('⚙️  Requisição IPI recebida');
   const { valorProduto, percentualIPI } = req.body;
 
   if (typeof valorProduto !== 'number' || typeof percentualIPI !== 'number') {
@@ -10,6 +11,7 @@ exports.calcularIPI = (req, res) => {
 };
 
 exports.calcularICMS = (req, res) => {
+  console.log('⚙️  Requisição ICMS recebida');
   const { valorProduto, percentualICMS } = req.body;
 
   if (typeof valorProduto !== 'number' || typeof percentualICMS !== 'number') {
@@ -21,6 +23,7 @@ exports.calcularICMS = (req, res) => {
 };
 
 exports.calcularPIS = (req, res) => {
+  console.log('⚙️  Requisição PIS recebida');
   const { valorProduto, percentualPIS } = req.body;
 
   if (typeof valorProduto !== 'number' || typeof percentualPIS !== 'number') {
@@ -32,6 +35,7 @@ exports.calcularPIS = (req, res) => {
 };
 
 exports.calcularCOFINS = (req, res) => {
+  console.log('⚙️  Requisição COFINS recebida');
   const { valorProduto, percentualCOFINS } = req.body;
 
   if (typeof valorProduto !== 'number' || typeof percentualCOFINS !== 'number') {
