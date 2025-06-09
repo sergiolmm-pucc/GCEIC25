@@ -25,6 +25,8 @@ import 'package:gcseic25/equipes/CI_CD_7/home_screen.dart';
 import 'package:gcseic25/equipes/CI_CD_10/login.dart';
 import 'package:gcseic25/equipes/CI_CD_10/splashscreen.dart' as CI_CD10Splash;
 
+import 'equipes/CI_CD_7/login_screen.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
   SemanticsBinding.instance.ensureSemantics();
@@ -61,7 +63,8 @@ class MyApp extends StatelessWidget {
         '/sobre': (context) => const SobreScreen(),
         '/ajuda': (context) => const AjudaScreen(),
         '/mob3': (context) => SplashScreen3(nextPage: LoginScreen()),
-        // '/equipe5': (context) => TransitionScreen(nextPage: TelaLogin()),
+        //'/equipe5': (context) => TransitionScreen(nextPage: TelaLogin()),
+        '/equipe7': (context) => LoginScreen(),
       },
     );
   }
@@ -169,6 +172,13 @@ class HomePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/equipe5');
               },
               child: Text('Calculadora de Impostos 5'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/equipe7');
+              },
+              child: Text('Calculadora de Impostos 7'),
             ),
             SizedBox(height: 20),
             Semantics(
