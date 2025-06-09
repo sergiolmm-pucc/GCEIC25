@@ -28,4 +28,3 @@ exports.concat = (req, res) => {
     result: result
   });
 };
-

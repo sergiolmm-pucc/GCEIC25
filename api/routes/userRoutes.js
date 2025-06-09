@@ -9,7 +9,4 @@ router.get('/', userController.listUsers);
 router.get('/:id', userController.getUserById);
 router.post('/', userController.createUser);
 
-// Rota para login
-router.post('/login', userController.login);
-
 module.exports = router;
