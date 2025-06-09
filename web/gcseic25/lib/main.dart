@@ -72,6 +72,7 @@ class MyApp extends StatelessWidget {
         '/mob3': (context) => SplashScreen3(nextPage: LoginScreen()),
         //'/equipe5': (context) => TransitionScreen(nextPage: TelaLogin()),
         '/equipe7': (context) => Equipe7.LoginScreen(),
+        '/Equipe_04/splash_screen': (context) => SplashScreen(nextPage: HomeScreen()),
       },
     );
   }
