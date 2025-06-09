@@ -29,6 +29,7 @@ const cofins7Routes = require('./routes/cofins');
 const cpfValidatorRoutes = require('./routes/cpfValidatorRoutes');
 const cnhValidatorRoutes = require('./routes/cnhValidatorRoutes');
 const calculatePremiumRoutes = require('./routes/calculatePremiumRoutes');
+const solarPanelRoutes = require('./routes/solarPanelRoutes')
 
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json());
@@ -55,6 +56,7 @@ app.use('/CI_CD_7/cofins', cofins7Routes);
 app.use('/cpf', cpfValidatorRoutes);
 app.use('/cnh', cnhValidatorRoutes);
 app.use('/calculatepremium', calculatePremiumRoutes);
+app.use('/solar-panel', solarPanelRoutes); // Grupo 12 - Painéis solares
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);

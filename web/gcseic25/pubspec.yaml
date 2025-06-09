@@ -32,7 +32,12 @@ dependencies:
     sdk: flutter
 
   http: ^1.3.0
-    
+  google_fonts: ^6.1.0
+  go_router: ^13.0.0
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  font_awesome_flutter: ^10.8.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
@@ -101,6 +106,10 @@ flutter:
     - lib/assets/Natalia.jpg
     - lib/assets/Nicole.jpg
     - assets/equipe4/
+    - lib/equipes/Solar_Panel/assets/integrante1.png
+    - lib/equipes/Solar_Panel/assets/integrante2.png
+    - lib/equipes/Solar_Panel/assets/integrante3.png
+    - lib/equipes/Solar_Panel/assets/integrante4.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

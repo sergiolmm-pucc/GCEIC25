@@ -33,6 +33,7 @@ import 'package:gcseic25/equipes/Equipe_04/calculate_premium_screen.dart';
 
 import 'package:gcseic25/equipes/CI_CD_10/login.dart';
 import 'package:gcseic25/equipes/CI_CD_10/splashscreen.dart' as CI_CD10Splash;
+import 'package:gcseic25/equipes/Solar_Panel/screens/splash_screen.dart' as solar_panel;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
@@ -76,6 +77,7 @@ class MyApp extends StatelessWidget {
         '/cpf': (context) => CPFScreen(),
         '/cnh': (context) => CNHScreen(),
         '/calculate-premium': (context) => CalculatePremiumScreen(),
+        '/solar-panel': (context) => solar_panel.SplashScreen()
       },
     );
   }
@@ -98,40 +100,40 @@ class HomePage extends StatelessWidget {
               },
               child: Text('Abrir Base 1'),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/splash2');
               },
               child: Text('Abrir Consulta 2'),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/CI_CD_6');
               },
               child: Text('Cálculo do ETEC[CI/CD 6]'),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/splash_screen_equipe_2');
               },
               child: Text('Grupo 2 - Cálculo Piscina'),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             ElevatedButton(
               onPressed: () => Navigator.pushNamed(context, '/CI_CD_8'),
               child: const Text('Grupo CI_CD_8'),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/mob3');
               },
               child: Text('MOB3'),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () => Navigator.pushNamed(context, '/markupSplash'),
               child: const Text('MARKUP MULTIPLICADOR'),
@@ -141,13 +143,13 @@ class HomePage extends StatelessWidget {
                   Navigator.pushNamed(context, '/Equipe_04/splash_screen'),
               child: const Text('Grupo 04 - AutoSegura'),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Semantics(
               // identifier: 'Entrar',
               label: 'Entrar',
               button: true,
               child: SizedBox(
-                width: 220,
+                width: 210,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/splash1');
@@ -156,13 +158,13 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Semantics(
               identifier: 'Calculadora de Aposentadoria',
               label: 'Calculadora de Aposentadoria',
               button: true,
               child: SizedBox(
-                width: 320,
+                width: 310,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/aposSplashScreen');
@@ -171,7 +173,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Semantics(
               label: 'Botão Calculadora de Markup',
               button: true,
@@ -182,21 +184,21 @@ class HomePage extends StatelessWidget {
                 child: Text('Calculadora de Markup'),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/equipe5');
               },
               child: Text('Calculadora de Impostos 5'),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/CI_CD_7');
               },
               child: Text('Calculadora de Impostos 7'),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Semantics(
               label: 'Botao CI_CD_10',
               button: true,
@@ -205,6 +207,17 @@ class HomePage extends StatelessWidget {
                   Navigator.pushNamed(context, '/CI_CD_10_splash');
                 },
                 child: Text('Calculo do ETEC[CI_CD_10]'),
+              ),
+            ),
+            SizedBox(height: 10),
+            Semantics(
+              label: 'Botao Solar Panel',
+              button: true,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/solar-panel');
+                },
+                child: Text('Painéis Solares'),
               ),
             ),
           ],
@@ -262,7 +275,7 @@ class _ConsultaPageState extends State<ConsultaPage> {
     final response = await http.get(
       Uri.parse('https://animated-occipital-buckthorn.glitch.me/datetime'),
     );
-    if (response.statusCode == 200) {
+    if (response.statusCode == 100) {
       setState(() {
         _responseText = response.body;
       });
@@ -282,7 +295,7 @@ class _ConsultaPageState extends State<ConsultaPage> {
         child: Column(
           children: [
             ElevatedButton(onPressed: _fetchData, child: Text('Consultar API')),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Container(
               width: double.infinity,
               padding: EdgeInsets.all(16.0),
