@@ -1,15 +1,17 @@
 const express = require('express');
 const request = require('supertest');
-const ipiRoutes = require('../routes/ipiRoutes7'); // ajuste para o nome correto
+
+// Ajuste o caminho para refletir o nome correto da rota
+const ipiRoutes7 = require('../CI_CD_7/routes/ipiRoutes7');  // Caminho ajustado para a rota correta
 
 const app = express();
 app.use(express.json());
-app.use('/impostos/ipi', ipiRoutes);
+app.use('/CI_CD_7/ipi', ipiRoutes7);  // Usando a base de rota /CI_CD_7 corretamente
 
-describe('POST /impostos/ipi', () => {
+describe('POST /CI_CD_7/ipi', () => {
   test('Retorna valor do IPI corretamente', async () => {
     const res = await request(app)
-      .post('/impostos/ipi')
+      .post('/CI_CD_7/ipi')
       .send({ valorProduto: 200, percentualIPI: 5 })
       .expect(200);
 
@@ -18,7 +20,7 @@ describe('POST /impostos/ipi', () => {
 
   test('Retorna erro se campos estiverem inválidos', async () => {
     const res = await request(app)
-      .post('/impostos/ipi')
+      .post('/CI_CD_7/ipi')
       .send({ valorProduto: 'abc', percentualIPI: 5 })
       .expect(400);
 
