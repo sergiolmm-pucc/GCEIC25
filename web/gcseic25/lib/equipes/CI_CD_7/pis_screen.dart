@@ -17,7 +17,7 @@ class _PisScreenState extends State<PisScreen> {
     final percentual = double.tryParse(_percentualController.text.replaceAll(',', '.'));
 
     if (valor != null && percentual != null) {
-      final url = Uri.parse('http://localhost:3000/api/pis');
+      final url = Uri.parse('https://animated-occipital-buckthorn.glitch.me/impostos2/pis');
 
 
       final response = await http.post(

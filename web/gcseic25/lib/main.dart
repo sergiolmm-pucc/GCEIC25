@@ -174,12 +174,12 @@ class HomePage extends StatelessWidget {
               child: Text('Calculadora de Impostos 5'),
             ),
             SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/equipe7');
-              },
-              child: Text('Calculadora de Impostos 7'),
-            ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/equipe7');
+                },
+                child: Text('Calculadora de Impostos 7'),
+              )
             SizedBox(height: 20),
             Semantics(
               label: 'Botao CI_CD_10',

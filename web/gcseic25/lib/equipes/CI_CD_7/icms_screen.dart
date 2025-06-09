@@ -17,7 +17,7 @@ class _IcmsScreenState extends State<IcmsScreen> {
     final percentual = double.tryParse(_percentualController.text.replaceAll(',', '.'));
 
     if (valor != null && percentual != null) {
-      final url = Uri.parse('http://localhost:3000/api/icms');
+      final url = Uri.parse('https://animated-occipital-buckthorn.glitch.me/impostos2/icms');
 
 
 
