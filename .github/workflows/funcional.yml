@@ -39,7 +39,7 @@ jobs:
       - name: instala bridge
         run: npm i @rentready/flutter-selenium-bridge
       - name: Roda os testes
-        run: npm run funcional2
+        run: npm run funcional-CICD10
       - name: fotos da tela
         uses: actions/upload-artifact@v4
         with:
