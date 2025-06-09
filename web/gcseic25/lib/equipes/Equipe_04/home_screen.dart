@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),
-            _buildMenuButton(context, 'Validar CPF', Icons.assignment_ind, '/cpf'),
+            _buildMenuButton(context, 'Validar CPF', Icons.assignment_ind, '\api\controllers\cpfValidatorController.js'),
             const SizedBox(height: 20),
             _buildMenuButton(context, 'Validar CNH', Icons.credit_card, '/cnh'),
             const SizedBox(height: 20),
