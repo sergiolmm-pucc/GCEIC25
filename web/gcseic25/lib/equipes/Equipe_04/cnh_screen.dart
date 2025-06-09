@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+const String apiBaseUrl = 'https://animated-occipital-buckthorn.glitch.me';
+
 class CNHScreen extends StatefulWidget {
   @override
   _CNHScreenState createState() => _CNHScreenState();
@@ -19,7 +21,7 @@ class _CNHScreenState extends State<CNHScreen> {
     });
 
     final cnh = _cnhController.text.trim();
-    final url = Uri.parse('http://localhost:3000/cnh/validate-cnh');
+    final url = Uri.parse('$apiBaseUrl/cnh/validate-cnh');
 
     try {
       final response = await http.post(
