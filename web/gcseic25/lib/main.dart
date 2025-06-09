@@ -19,7 +19,7 @@ import 'package:gcseic25/equipes/equipe5/screens/login.dart';
 import 'package:gcseic25/equipes/MKP1/screens/sobre_screen.dart';
 import 'package:gcseic25/equipes/MKP1/screens/ajuda_screen.dart';
 import 'package:gcseic25/equipes/equipe5/screens/transition_screen.dart';
-import 'package:gcseic25/equipes/CI_CD_7/login_screen.dart';
+import 'package:gcseic25/equipes/CI_CD_7/login_screen_equipe7.dart' as Equipe7;
 import 'package:gcseic25/equipes/CI_CD_7/home_screen.dart';
 import 'package:gcseic25/equipes/Equipe_04/splash_screen.dart';
 import 'package:gcseic25/equipes/Equipe_04/login_screen.dart';
@@ -32,7 +32,7 @@ import 'package:gcseic25/equipes/Equipe_04/sobre_screen.dart';
 import 'package:gcseic25/equipes/CI_CD_10/login.dart';
 import 'package:gcseic25/equipes/CI_CD_10/splashscreen.dart' as CI_CD10Splash;
 
-import 'equipes/CI_CD_7/login_screen.dart';
+import 'equipes/CI_CD_7/login_screen_equipe7.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
         '/ajuda': (context) => const AjudaScreen(),
         '/mob3': (context) => SplashScreen3(nextPage: LoginScreen()),
         //'/equipe5': (context) => TransitionScreen(nextPage: TelaLogin()),
-        '/equipe7': (context) => LoginScreen(),
+        '/equipe7': (context) => Equipe7.LoginScreen(),
       },
     );
   }
@@ -185,12 +185,12 @@ class HomePage extends StatelessWidget {
               child: Text('Calculadora de Impostos 5'),
             ),
             SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/equipe7');
-                },
-                child: Text('Calculadora de Impostos 7'),
-              )
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/equipe7');
+              },
+              child: Text('Calculadora de Impostos 7'),
+            ),
             SizedBox(height: 20),
             Semantics(
               label: 'Botao CI_CD_10',
