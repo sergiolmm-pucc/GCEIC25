@@ -19,7 +19,7 @@ import 'package:gcseic25/equipes/equipe5/screens/login.dart';
 import 'package:gcseic25/equipes/MKP1/screens/sobre_screen.dart' as SobreMKP1;
 import 'package:gcseic25/equipes/MKP1/screens/ajuda_screen.dart';
 import 'package:gcseic25/equipes/equipe5/screens/transition_screen.dart';
-import 'package:gcseic25/equipes/CI_CD_7/login_screen_equipe7.dart' as Login7;
+import 'package:gcseic25/equipes/CI_CD_7/login_screen_equipe7.dart' as Equipe7;
 import 'package:gcseic25/equipes/CI_CD_7/home_screen_equipe7.dart';
 import 'package:gcseic25/equipes/Equipe_04/splash_screen.dart';
 import 'package:gcseic25/equipes/Equipe_04/login_screen.dart' as Login04;
@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
         '/mob3': (context) => SplashScreen3(nextPage: Login04.LoginScreen()),
         //'/equipe5': (context) => TransitionScreen(nextPage: TelaLogin()),
         '/CI_CD_7login_screen_equipe7': (context) =>
-            Login7.LoginScreenEquipe7(),
+            Equipe7.LoginScreenEquipe7(),
         '/Equipe_04/splash_screen': (context) =>
             SplashScreen(nextPage: Home04.HomeScreen()),
       },
