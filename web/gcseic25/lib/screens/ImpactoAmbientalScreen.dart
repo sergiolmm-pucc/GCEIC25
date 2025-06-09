@@ -25,7 +25,7 @@ class _ImpactoAmbientalScreenState extends State<ImpactoAmbientalScreen> {
       _resultado = null;
     });
     try {
-      final url = Uri.parse('http://localhost:3000/solar-panel/impacto-ambiental');
+      final url = Uri.parse('https://animated-occipital-buckthorn.glitch.me/solar-panel/impacto-ambiental');
       final body = {
         'potencia_kwp': double.parse(_potenciaController.text),
         'cidade_estado': _cidadeEstadoController.text,

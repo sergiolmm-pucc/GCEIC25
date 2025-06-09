@@ -77,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() => _loading = true);
     try {
       final resp = await http.post(
-        Uri.parse('http://localhost:3000/solar-panel/login'),
+        Uri.parse('https://animated-occipital-buckthorn.glitch.me/solar-panel/login'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'username': username, 'password': password}),
       );
@@ -215,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
 
     try {
-      final url = Uri.parse('http://localhost:3000/solar-panel'); 
+      final url = Uri.parse('https://animated-occipital-buckthorn.glitch.me/solar-panel'); 
       final body = {
         'consumo_mensal_kwh':    double.parse(_consumoController.text),
         'horas_sol_dia':         double.parse(_horasSolController.text),

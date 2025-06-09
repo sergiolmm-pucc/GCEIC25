@@ -26,7 +26,7 @@ class _OrientacaoScreenState extends State<OrientacaoScreen> {
       _resultado = null;
     });
     try {
-      final url = Uri.parse('http://localhost:3000/solar-panel/orientacao');
+      final url = Uri.parse('https://animated-occipital-buckthorn.glitch.me/solar-panel/orientacao');
       final body = {
         'cep': _cepController.text,
         'potencia_kwp': double.parse(_potenciaController.text),

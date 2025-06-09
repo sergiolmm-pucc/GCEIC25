@@ -37,7 +37,7 @@ class _CalcularScreenState extends State<CalcularScreen> {
     });
 
     try {
-      final url = Uri.parse('http://localhost:3000/solar-panel/calcular');
+      final url = Uri.parse('https://animated-occipital-buckthorn.glitch.me/solar-panel/calcular');
       final body = {
         'consumo_mensal_kwh':    double.parse(_consumoController.text),
         'horas_sol_dia':         double.parse(_horasSolController.text),
