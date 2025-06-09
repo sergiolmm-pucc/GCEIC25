@@ -1,293 +1,624 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-      "title": "API Exemplo com Swagger",
-      "version": "1.0.0",
-      "description": "API para retornar data/hora e concatenar valores"
-    },
-    "servers": [
-      {
-        "url": "http://localhost:5000"
-      }
-    ],
-    "paths": {
-      "/datetime": {
-        "get": {
-          "summary": "Retorna data e hora do servidor",
-          "responses": {
-            "200": {
-              "description": "Data e hora atual",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "datetime": {
-                        "type": "string",
-                        "format": "date-time"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/concat": {
-        "post": {
-          "summary": "Concatena valor com frase fixa",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "value": {
-                      "type": "string"
-                    }
-                  },
-                  "required": ["value"]
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Resultado da concatenação",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "success": {
-                        "type": "boolean"
-                      },
-                      "result": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Erro - valor não fornecido"
-            }
-          }
-        }
-      },
-      "/calculation/calcular": {
-        "post": {
-          "summary": "Calcula o dimensionamento do sistema fotovoltaico.",
-          "description": "Calcula potência, quantidade de painéis, área necessária, custo e payback com base nos dados fornecidos.",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "consumo_mensal_kwh": { "type": "number", "example": 300 },
-                    "horas_sol_dia": { "type": "number", "example": 5 },
-                    "tarifa_energia": { "type": "number", "example": 0.7 },
-                    "preco_medio_conta": { "type": "number", "example": 200 },
-                    "espaco_disponivel_m2": { "type": "number", "example": 20 }
-                  },
-                  "required": ["consumo_mensal_kwh", "horas_sol_dia", "tarifa_energia", "preco_medio_conta", "espaco_disponivel_m2"]
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Resultado do cálculo do sistema.",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "potencia_necessaria_kwp": { "type": "number" },
-                      "quantidade_paineis": { "type": "integer" },
-                      "area_necessaria_m2": { "type": "number" },
-                      "espaco_disponivel_m2": { "type": "number" },
-                      "espaco_suficiente": { "type": "boolean" },
-                      "area_extra_necessaria_m2": { "type": "number" },
-                      "custo_total_r$": { "type": "number" },
-                      "payback_anos": { "type": "number", "nullable": true }
-                    }
-                  }
-                }
-              }
-            },
-            "400": { "description": "Dados ausentes ou inválidos." }
-          }
-        }
-      },
-      "/calculation/impacto-ambiental": {
-        "post": {
-          "summary": "Calcula o impacto ambiental do sistema fotovoltaico.",
-          "description": "Retorna CO2 evitado, árvores equivalentes e distância de carro evitada.",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "potencia_kwp": { "type": "number", "example": 3 },
-                    "cidade_estado": { "type": "string", "example": "São Paulo - SP" }
-                  },
-                  "required": ["potencia_kwp", "cidade_estado"]
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Impacto ambiental calculado.",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "co2_evitado_anual_kg": { "type": "number" },
-                      "arvores_equivalentes": { "type": "integer" },
-                      "distancia_carro_evitada_km": { "type": "number" }
-                    }
-                  }
-                }
-              }
-            },
-            "400": { "description": "Dados ausentes ou inválidos." }
-          }
-        }
-      },
-      "/calculation/orientacao": {
-        "post": {
-          "summary": "Sugere inclinação, orientação e tecnologias para instalação solar.",
-          "description": "Sugere inclinação ideal, orientação, tipo de inversor e tecnologias de painéis com base no CEP, potência e sombra.",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "cep": { "type": "string", "example": "01001-000" },
-                    "potencia_kwp": { "type": "number", "example": 2.5 },
-                    "sombra": { "type": "boolean", "example": false }
-                  },
-                  "required": ["cep", "potencia_kwp", "sombra"]
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Sugestão de instalação solar.",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "inclinacao_ideal_graus": { "type": "integer" },
-                      "orientacao_ideal": { "type": "string" },
-                      "tipo_inversor_recomendado": { "type": "string" },
-                      "tecnologias_paineis_sugeridas": { "type": "array", "items": { "type": "string" } }
-                    }
-                  }
-                }
-              }
-            },
-            "500": { "description": "Erro ao processar os dados." }
-          }
-        }
-      },
-      "/users": {
-        "get": {
-          "summary": "Lista informações do usuário.",
-          "responses": {
-            "200": {
-              "description": "Informações do usuário.",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "datetime": { "type": "string", "format": "date-time" },
-                      "usuario": { "type": "string" },
-                      "turma": { "type": "string" },
-                      "aula": { "type": "string" }
-                    }
-                  }
-                }
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Exemplo com Swagger",
+    "version": "1.0.0",
+    "description": "API para retornar data/hora e concatenar valores"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/etec2/salario-liquido": {
+      "post": {
+        "tags": ["ETEC2"],
+        "summary": "Calcula o salário líquido",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "salarioBruto": { "type": "number" }
+                },
+                "required": ["salarioBruto"]
               }
             }
           }
         },
-        "post": {
-          "summary": "Cria um novo usuário.",
-          "responses": {
-            "200": { "description": "Usuário criado." }
-          }
-        }
-      },
-      "/users/{id}": {
-        "get": {
-          "summary": "Busca usuário pelo ID.",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "schema": { "type": "string" }
-            }
-          ],
-          "responses": {
-            "200": { "description": "Usuário encontrado." }
-          }
-        }
-      },
-      "/users/login": {
-        "post": {
-          "summary": "Realiza login do usuário.",
-          "requestBody": {
-            "required": true,
+        "responses": {
+          "200": {
+            "description": "Salário líquido calculado",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "username": { "type": "string", "example": "admin" },
-                    "password": { "type": "string", "example": "1234" }
-                  },
-                  "required": ["username", "password"]
+                    "salarioLiquido": { "type": "string" }
+                  }
                 }
               }
             }
-          },
-          "responses": {
-            "200": {
-              "description": "Login bem-sucedido.",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "success": { "type": "boolean" },
-                      "message": { "type": "string" },
-                      "usuario": { "type": "string" }
+          }
+        }
+      }
+    },
+
+    "/etec2/total-mensal": {
+      "post": {
+        "tags": ["ETEC2"],
+        "summary": "Calcula o custo total mensal",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "salarioBruto": { "type": "number" }
+                },
+                "required": ["salarioBruto"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Custo total mensal calculado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "totalMensal": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/etec2/inss": {
+      "post": {
+        "tags": ["ETEC2"],
+        "summary": "Calcula INSS empregado e empregador",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "salarioBruto": { "type": "number" }
+                },
+                "required": ["salarioBruto"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Valores de INSS retornados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "inssEmpregado": { "type": "string" },
+                    "inssEmpregador": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/etec2/fgts": {
+      "post": {
+        "tags": ["ETEC2"],
+        "summary": "Calcula FGTS mensal e rescisório",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "salarioBruto": { "type": "number" }
+                },
+                "required": ["salarioBruto"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Valores de FGTS retornados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "fgtsMensal": { "type": "string" },
+                    "fgtsRescisorio": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/etec2/decimo": {
+      "post": {
+        "tags": ["ETEC2"],
+        "summary": "Calcula o décimo terceiro salário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "salarioBruto": { "type": "number" },
+                  "mesesTrabalhados": { "type": "number" }
+                },
+                "required": ["salarioBruto", "mesesTrabalhados"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Valor do décimo terceiro calculado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "decimoTerceiro": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/etec2/ferias": {
+      "post": {
+        "tags": ["ETEC2"],
+        "summary": "Calcula o valor das férias com 1/3 adicional",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "salarioBruto": { "type": "number" },
+                  "mesesTrabalhados": { "type": "number" }
+                },
+                "required": ["salarioBruto", "mesesTrabalhados"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Valor das férias calculado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ferias": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/datetime": {
+      "get": {
+        "summary": "Retorna data e hora do servidor",
+        "responses": {
+          "200": {
+            "description": "Data e hora atual",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "datetime": {
+                      "type": "string",
+                      "format": "date-time"
                     }
                   }
                 }
               }
-            },
-            "401": { "description": "Usuário ou senha inválidos." }
+            }
+          }
+        }
+      }
+    },
+
+    "/concat": {
+      "post": {
+        "summary": "Concatena valor com frase fixa",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  }
+                },
+                "required": ["value"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado da concatenação",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "result": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro - valor não fornecido"
+          }
+        }
+      }
+    },
+
+    "/ETEC/calcularCustoMensal": {
+      "post": {
+        "tags": ["ETEC"],
+        "summary": "Calcula o salário mensal",
+        "description": "Calcula o salário mensal bruto com base no salário líquido informado",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "salario": { "type": "number" }
+                },
+                "required": ["salario"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado do cálculo do salário mensal",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "salarioMensal": { "type": "number" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro - valor não fornecido"
+          }
+        }
+      }
+    },
+
+    "/ETEC/calcularFerias": {
+      "post": {
+        "tags": ["ETEC"],
+        "summary": "Calcula férias mensal",
+        "description": "Calcula férias mensal com base no salário informado",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "salario": { "type": "number" }
+                },
+                "required": ["salario"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado do cálculo das férias",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "feriasMensal": { "type": "number" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro - valor não fornecido"
+          }
+        }
+      }
+    },
+
+    "/ETEC/calcularDecimoTerceiro": {
+      "post": {
+        "tags": ["ETEC"],
+        "summary": "Calcula décimo terceiro",
+        "description": "Calcula o décimo terceiro com base no salário e na quantidade de meses trabalhados",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "salario": { "type": "number" },
+                  "mesesTrabalhados": { "type": "number" }
+                },
+                "required": ["salario", "mesesTrabalhados"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado do cálculo do décimo terceiro",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "bruto": { "type": "number" },
+                        "inss": { "type": "number" },
+                        "liquido": { "type": "number" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro - valor não fornecido"
+          }
+        }
+      }
+    },
+    "/solar-panel/calcular": {
+      "post": {
+        "tags": ["SolarPanel"],
+        "summary": "Calcula a viabilidade da instalação de painéis solares",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "consumo_mensal_kwh": { "type": "number" },
+                  "horas_sol_dia": { "type": "number" },
+                  "tarifa_energia": { "type": "number" },
+                  "preco_medio_conta": { "type": "number" },
+                  "espaco_disponivel_m2": { "type": "number" }
+                },
+                "required": [
+                  "consumo_mensal_kwh",
+                  "horas_sol_dia",
+                  "tarifa_energia",
+                  "preco_medio_conta"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cálculo da instalação retornado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "potencia_necessaria_kwp": { "type": "number" },
+                    "quantidade_paineis": { "type": "number" },
+                    "area_necessaria_m2": { "type": "number" },
+                    "espaco_disponivel_m2": { "type": "number" },
+                    "espaco_suficiente": { "type": "boolean" },
+                    "area_extra_necessaria_m2": { "type": "number" },
+                    "custo_total_r$": { "type": "number" },
+                    "payback_anos": { "type": "number", "nullable": true }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro nos parâmetros fornecidos"
+          }
+        }
+      }
+    },
+
+    "/solar-panel/impacto-ambiental": {
+      "post": {
+        "tags": ["SolarPanel"],
+        "summary": "Calcula impacto ambiental evitado pela geração solar",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "potencia_kwp": { "type": "number" },
+                  "cidade_estado": { "type": "string" }
+                },
+                "required": ["potencia_kwp", "cidade_estado"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Impacto ambiental calculado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "co2_evitado_anual_kg": { "type": "number" },
+                    "arvores_equivalentes": { "type": "integer" },
+                    "distancia_carro_evitada_km": { "type": "number" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro nos parâmetros fornecidos"
+          }
+        }
+      }
+    },
+
+    "/solar-panel/orientacao": {
+      "post": {
+        "tags": ["SolarPanel"],
+        "summary": "Calcula a orientação e inclinação ideais para os painéis",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cep": { "type": "string" },
+                  "potencia_kwp": { "type": "number" },
+                  "sombra": { "type": "boolean" }
+                },
+                "required": ["cep", "potencia_kwp"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Dados de orientação calculados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "inclinacao_ideal_graus": { "type": "integer" },
+                    "orientacao_ideal": { "type": "string" },
+                    "tipo_inversor_recomendado": { "type": "string" },
+                    "tecnologias_paineis_sugeridas": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro nos parâmetros fornecidos"
+          }
+        }
+      }
+    },
+
+    "/solar-panel/login": {
+      "post": {
+        "tags": ["SolarPanel"],
+        "summary": "Login simples para acesso ao sistema",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string" },
+                  "password": { "type": "string" }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login bem-sucedido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "message": { "type": "string" },
+                    "usuario": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Credenciais inválidas"
           }
         }
       }
     }
   }
-  
+}
