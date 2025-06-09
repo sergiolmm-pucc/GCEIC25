@@ -1,6 +1,6 @@
 const express = require('express');
 const request = require('supertest');
-const icmsRoutes = require('../routes/icms'); // CAMINHO CORRETO
+const icmsRoutes = require('../routes/icms');
 
 const app = express();
 app.use(express.json());

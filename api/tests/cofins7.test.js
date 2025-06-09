@@ -1,6 +1,6 @@
 const express = require('express');
 const request = require('supertest');
-const cofinsRoutes = require('../routes/cofins'); // CAMINHO CORRETO
+const cofinsRoutes = require('../routes/cofins');
 
 const app = express();
 app.use(express.json());

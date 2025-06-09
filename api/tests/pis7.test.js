@@ -1,6 +1,6 @@
 const express = require('express');
 const request = require('supertest');
-const pisRoutes = require('../routes/pis'); // CAMINHO CORRETO
+const pisRoutes = require('../routes/pis');
 
 const app = express();
 app.use(express.json());

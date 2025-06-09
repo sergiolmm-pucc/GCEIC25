@@ -1,6 +1,6 @@
 const express = require('express');
 const request = require('supertest');
-const ipiRoutes = require('../routes/ipi'); // CAMINHO CORRETO
+const ipiRoutes = require('../routes/ipi');
 
 const app = express();
 app.use(express.json());
