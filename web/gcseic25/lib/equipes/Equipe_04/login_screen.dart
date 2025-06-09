@@ -37,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/images/black_logo.png',
+              'assets/equipe4/black_logo.png',
               height: 300,
             ),
             const SizedBox(height: 32),
@@ -105,6 +105,26 @@ class _LoginScreenState extends State<LoginScreen> {
                 'Signup!',
                 style: TextStyle(color: Colors.white70),
               ),
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(bottom: 16.0, top: 8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Text(
+              'Login de teste',
+              style: TextStyle(color: Colors.white70, fontSize: 14),
+            ),
+            Text(
+              'Login : user',
+              style: TextStyle(color: Colors.white70, fontSize: 14),
+            ),
+            Text(
+              'senha: 1234',
+              style: TextStyle(color: Colors.white70, fontSize: 14),
             ),
           ],
         ),

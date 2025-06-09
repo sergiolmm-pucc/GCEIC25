@@ -27,6 +27,9 @@ import 'package:gcseic25/equipes/Equipe_04/home_screen.dart' as Home04;
 import 'package:gcseic25/equipes/Equipe_04/signup_screen.dart';
 import 'package:gcseic25/equipes/Equipe_04/forgotpassword_screen.dart';
 import 'package:gcseic25/equipes/Equipe_04/sobre_screen.dart' as Sobre04;
+import 'package:gcseic25/equipes/Equipe_04/cpf_screen.dart';
+import 'package:gcseic25/equipes/Equipe_04/cnh_screen.dart';
+import 'package:gcseic25/equipes/Equipe_04/calculate_premium_screen.dart';
 
 import 'package:gcseic25/equipes/CI_CD_10/login.dart';
 import 'package:gcseic25/equipes/CI_CD_10/splashscreen.dart' as CI_CD10Splash;
@@ -68,8 +71,12 @@ class MyApp extends StatelessWidget {
         '/ajuda': (context) => const AjudaScreen(),
         '/mob3': (context) => SplashScreen3(nextPage: Login04.LoginScreen()),
         //'/equipe5': (context) => TransitionScreen(nextPage: TelaLogin()),
-        '/equipe7': (context) => Equipe7.LoginScreenEquipe7(),
+        '/CI_CD_7login_screen_equipe7': (context) =>
+            Login7.LoginScreenEquipe7(),
         '/Equipe_04/splash_screen': (context) => SplashScreen(nextPage: Login04.LoginScreen()),
+        '/cpf': (context) => CPFScreen(),
+        '/cnh': (context) => CNHScreen(),
+        '/calculate-premium': (context) => CalculatePremiumScreen(),
       },
     );
   }

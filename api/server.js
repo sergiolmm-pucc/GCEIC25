@@ -26,6 +26,9 @@ const icms7Routes = require('./routes/icms');
 const cofins7Routes = require('./routes/cofins');
 const ipi7Routes = require('./routes/ipi');
 const pis7Routes = require('./routes/pis');
+const cpfValidatorRoutes = require('./routes/cpfValidatorRoutes');
+const cnhValidatorRoutes = require('./routes/cnhValidatorRoutes');
+const calculatePremiumRoutes = require('./routes/calculatePremiumRoutes');
 
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json());
@@ -49,8 +52,9 @@ app.use('/impostos2', icms7Routes); //Grupo 07 - Calculo de impostos
 app.use('/impostos2', cofins7Routes); 
 app.use('/impostos2', ipi7Routes); 
 app.use('/impostos2', pis7Routes); 
-
-
+app.use('/cpf', cpfValidatorRoutes);
+app.use('/cnh', cnhValidatorRoutes);
+app.use('/calculatepremium', calculatePremiumRoutes);
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
