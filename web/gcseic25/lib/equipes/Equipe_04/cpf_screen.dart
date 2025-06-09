@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+const String apiBaseUrl = 'https://animated-occipital-buckthorn.glitch.me';
+
 class CPFScreen extends StatefulWidget {
   @override
   _CPFScreenState createState() => _CPFScreenState();
@@ -19,7 +21,7 @@ class _CPFScreenState extends State<CPFScreen> {
     });
 
     final cpf = _cpfController.text.trim();
-    final url = Uri.parse('http://localhost:3000/cpf/validar/$cpf');
+    final url = Uri.parse('$apiBaseUrl/cpf/validar/$cpf');
 
     try {
       final response = await http.get(url);

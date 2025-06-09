@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+const String apiBaseUrl = 'https://animated-occipital-buckthorn.glitch.me';
+
 class CalculatePremiumScreen extends StatefulWidget {
   @override
   _CalculatePremiumScreenState createState() => _CalculatePremiumScreenState();
@@ -22,17 +24,17 @@ class _CalculatePremiumScreenState extends State<CalculatePremiumScreen> {
       _resultado = null;
     });
 
-    final url = Uri.parse('http://localhost:3000/calculatepremium/');
+    final url = Uri.parse('$apiBaseUrl/calculatepremium/');
     try {
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
-          'year': _anoController.text.trim(),
+          'year': int.tryParse(_anoController.text.trim()),
           'make': _marcaController.text.trim(),
           'model': _modeloController.text.trim(),
-          'driverAge': _idadeController.text.trim(),
-          'licenseDuration': _tempoHabilitacaoController.text.trim(),
+          'driverAge': int.tryParse(_idadeController.text.trim()),
+          'licenseDuration': int.tryParse(_tempoHabilitacaoController.text.trim()),
         }),
       );
       if (response.statusCode == 200) {

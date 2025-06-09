@@ -2,7 +2,7 @@ const { Builder, By, Key, until } = require('selenium-webdriver');
 const fs = require('fs');
 const path = require('path');
 
-const URL_APP = 'http://localhost:8080'; // Ajuste para a URL correta do seu app
+const URL_APP = 'https://animated-occipital-buckthorn.glitch.me/'; // Endereço de produção do app
 const TIMEOUT = 15000;
 
 (async () => {
@@ -13,13 +13,18 @@ const TIMEOUT = 15000;
     await pause(4000);
     await saveShot(driver, '01_splash.png');
 
+    // Novo passo: clicar no botão da Equipe 4 no menu inicial
+    await driver.wait(until.elementLocated(By.xpath("//*[contains(text(),'Grupo 04') or contains(text(),'AutoSegura') or contains(text(),'Segura Auto') or contains(text(),'Equipe 04') or contains(text(),'AutoSegura') or contains(text(),'Auto Segura') or contains(text(),'AutoSegura')]")), TIMEOUT);
+    await driver.findElement(By.xpath("//*[contains(text(),'Grupo 04') or contains(text(),'AutoSegura') or contains(text(),'Segura Auto') or contains(text(),'Equipe 04') or contains(text(),'AutoSegura') or contains(text(),'Auto Segura') or contains(text(),'AutoSegura')]")).click();
+    await pause(4000); // Aguarda splash/login carregar
+
     // Login
-    await driver.wait(until.elementLocated(By.xpath("//input[@label='Usuário' or @aria-label='Usuário']")), TIMEOUT);
+    await driver.wait(until.elementLocated(By.xpath("//input")), TIMEOUT);
     await saveShot(driver, '02_login_vazio.png');
-    await driver.findElement(By.xpath("//input[@label='Usuário' or @aria-label='Usuário']")).sendKeys('user');
-    await driver.findElement(By.xpath("//input[@label='Senha' or @aria-label='Senha']")).sendKeys('1234');
+    await driver.findElement(By.xpath("(//input)[1]")).sendKeys('user');
+    await driver.findElement(By.xpath("(//input)[2]")).sendKeys('1234');
     await saveShot(driver, '03_login_preenchido.png');
-    await driver.findElement(By.xpath("//button[contains(.,'Log in') or contains(.,'Entrar') or contains(.,'Log In') or contains(.,'Login') or contains(.,'LOG IN') or contains(.,'LOGAR') or contains(.,'log in') or contains(.,'logar') or contains(.,'Acessar') or contains(.,'Acessar')]" )).click();
+    await driver.findElement(By.xpath("//*[contains(text(),'Log in')]")).click();
     await driver.wait(until.elementLocated(By.xpath("//*[contains(text(),'Escolha uma opção') or contains(text(),'Validar CPF')]")), TIMEOUT);
     await saveShot(driver, '04_home.png');
 
@@ -28,7 +33,7 @@ const TIMEOUT = 15000;
     await saveShot(driver, '05_cpf_vazio.png');
     await fillInput(driver, 'CPF', '52998224725');
     await saveShot(driver, '06_cpf_preenchido.png');
-    await clickByText(driver, 'Validar');
+    await clickByText(driver, 'Validar CPF');
     await pause(1000);
     await saveShot(driver, '07_cpf_resultado.png');
     await driver.navigate().back();
@@ -39,7 +44,7 @@ const TIMEOUT = 15000;
     await saveShot(driver, '08_cnh_vazio.png');
     await fillInput(driver, 'CNH', '12345678900');
     await saveShot(driver, '09_cnh_preenchido.png');
-    await clickByText(driver, 'Validar');
+    await clickByText(driver, 'Validar CNH');
     await pause(1000);
     await saveShot(driver, '10_cnh_resultado.png');
     await driver.navigate().back();
@@ -78,7 +83,7 @@ async function pause(ms = 1000) {
 }
 
 async function saveShot(driver, name) {
-  const dir = './fotos/Equipe04';
+  const dir = '../fotos/Equipe4';
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(
     path.join(dir, name),
