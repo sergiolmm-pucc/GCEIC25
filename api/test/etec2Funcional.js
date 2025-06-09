@@ -5,9 +5,10 @@ const { Options } = require('selenium-webdriver/chrome');
 const fs = require('fs');
 
 (async () => {
-  const screen = { width: 1024, height: 720 };
+  const screen = { width: 1280, height: 1280 };
   const chromeOptions = new Options();
   chromeOptions.addArguments('--no-sandbox');
+  chromeOptions.addArguments('--headless');
   chromeOptions.windowSize(screen);
 
   const builder = new Builder()
@@ -50,35 +51,6 @@ const fs = require('fs');
   await btnEntrar.click();
   await driver.sleep(3000);
   await takeShot(driver, '05_home.png');
-
-  // Grupo de Fotos
-  const btnFotos = await driver.findElement(By.css('flt-semantics[aria-label="Sobre"]'));
-  await btnFotos.click();
-  await driver.sleep(2000);
-  await takeShot(driver, '06_fotos.png');
-  await driver.navigate().back();
-  await driver.sleep(1000);
-
-  // Calculadora
-  const btnCalc = await driver.findElement(By.css('flt-semantics[aria-label="Ir para calculo"]'));
-  await btnCalc.click();
-  await driver.sleep(3000);
-  await takeShot(driver, '07_calculo_vazio.png');
-  await driver.sleep(1000);
-  const inputsCalculo = await driver.findElements(By.css('input'));
-  await driver.sleep(1000);
-  await inputsCalculo[0].sendKeys('12000'); 
-  await driver.sleep(1000);
-  await inputsCalculo[1].sendKeys('12');  
-  await driver.sleep(1000);
-  await takeShot(driver, '08_calculo_preenchido.png');
-
-  await driver.sleep(1000);
-  const btnCalcular = await driver.findElement(By.css('flt-semantics[aria-label="Calcular"]'));
-
-  await btnCalcular.click();
-  await driver.sleep(5000);
-  await takeShot(driver, '09_resultado.png');
 
   await driver.quit();
 })();
