@@ -40,7 +40,9 @@ class _CalculatePremiumScreenState extends State<CalculatePremiumScreen> {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         setState(() {
-          _resultado = data['mensagem'] ?? 'Cálculo realizado!';
+          _resultado = data['premio'] != null
+              ? 'Valor do seguro: R\$ ${data['premio']}'
+              : 'Cálculo realizado!';
         });
       } else {
         setState(() {
