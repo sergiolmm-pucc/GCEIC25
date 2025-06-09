@@ -8,6 +8,7 @@
     "funcional2": "node ./test/funcionalExemplo2",
     "funcional5": "node ./test/funcionalImposto5",
     "funcional-CICD6": "node ./test/funcionalEtec6",
+    "funcional-CICD10": "node ./test/etec2Funcional",
     "test": "jest --no-coverage --ci --reporters=default --testResultsProcessor=jest-junit",
     "testEquipe2": "jest --ci --reporters=default --reporters=jest-junit",
     "lint": "eslint ."
