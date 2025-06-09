@@ -4,7 +4,7 @@ import 'icms_screen.dart';
 import 'pis_screen.dart';
 import 'cofins_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreenEquipe7 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

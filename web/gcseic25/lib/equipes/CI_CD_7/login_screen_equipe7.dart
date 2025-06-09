@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home_screen.dart';
+import 'home_screen_equipe7.dart';
 
 class LoginScreenEquipe7 extends StatefulWidget {
   @override
@@ -20,7 +20,7 @@ class _LoginScreenState extends State<LoginScreenEquipe7> {
     if (user == _fixedUser && pass == _fixedPass) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => HomeScreen()),
+        MaterialPageRoute(builder: (_) => HomeScreenEquipe7()),
       );
     } else {
       setState(() {

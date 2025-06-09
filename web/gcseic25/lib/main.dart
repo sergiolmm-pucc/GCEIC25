@@ -19,8 +19,8 @@ import 'package:gcseic25/equipes/equipe5/screens/login.dart';
 import 'package:gcseic25/equipes/MKP1/screens/sobre_screen.dart' as SobreMKP1;
 import 'package:gcseic25/equipes/MKP1/screens/ajuda_screen.dart';
 import 'package:gcseic25/equipes/equipe5/screens/transition_screen.dart';
-import 'package:gcseic25/equipes/CI_CD_7/login_screen_equipe7.dart' as Equipe7;
-import 'package:gcseic25/equipes/CI_CD_7/home_screen.dart' as Home7;
+import 'package:gcseic25/equipes/CI_CD_7/login_screen_equipe7.dart' as Login7;
+import 'package:gcseic25/equipes/CI_CD_7/home_screen_equipe7.dart';
 import 'package:gcseic25/equipes/Equipe_04/splash_screen.dart';
 import 'package:gcseic25/equipes/Equipe_04/login_screen.dart' as Login04;
 import 'package:gcseic25/equipes/Equipe_04/home_screen.dart' as Home04;
@@ -28,11 +28,8 @@ import 'package:gcseic25/equipes/Equipe_04/signup_screen.dart';
 import 'package:gcseic25/equipes/Equipe_04/forgotpassword_screen.dart';
 import 'package:gcseic25/equipes/Equipe_04/sobre_screen.dart' as Sobre04;
 
-
 import 'package:gcseic25/equipes/CI_CD_10/login.dart';
 import 'package:gcseic25/equipes/CI_CD_10/splashscreen.dart' as CI_CD10Splash;
-
-import 'equipes/CI_CD_7/login_screen_equipe7.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
@@ -134,7 +131,8 @@ class HomePage extends StatelessWidget {
               child: const Text('MARKUP MULTIPLICADOR'),
             ),
             ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, '/Equipe_04/splash_screen'),
+              onPressed: () =>
+                  Navigator.pushNamed(context, '/Equipe_04/splash_screen'),
               child: const Text('Grupo 04 - AutoSegura'),
             ),
             SizedBox(height: 20),
@@ -188,7 +186,7 @@ class HomePage extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/equipe7');
+                Navigator.pushNamed(context, '/CI_CD_7');
               },
               child: Text('Calculadora de Impostos 7'),
             ),
