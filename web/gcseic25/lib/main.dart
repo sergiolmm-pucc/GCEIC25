@@ -21,6 +21,13 @@ import 'package:gcseic25/equipes/MKP1/screens/ajuda_screen.dart';
 import 'package:gcseic25/equipes/equipe5/screens/transition_screen.dart';
 import 'package:gcseic25/equipes/CI_CD_7/login_screen.dart';
 import 'package:gcseic25/equipes/CI_CD_7/home_screen.dart';
+import 'package:gcseic25/equipes/Equipe_04/splash_screen.dart';
+import 'package:gcseic25/equipes/Equipe_04/login_screen.dart';
+import 'package:gcseic25/equipes/Equipe_04/home_screen.dart';
+import 'package:gcseic25/equipes/Equipe_04/signup_screen.dart';
+import 'package:gcseic25/equipes/Equipe_04/forgotpassword_screen.dart';
+import 'package:gcseic25/equipes/Equipe_04/sobre_screen.dart';
+
 
 import 'package:gcseic25/equipes/CI_CD_10/login.dart';
 import 'package:gcseic25/equipes/CI_CD_10/splashscreen.dart' as CI_CD10Splash;
@@ -124,6 +131,10 @@ class HomePage extends StatelessWidget {
             ElevatedButton(
               onPressed: () => Navigator.pushNamed(context, '/markupSplash'),
               child: const Text('MARKUP MULTIPLICADOR'),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.pushNamed(context, '/Equipe_04/splash_screen'),
+              child: const Text('Grupo 04 - AutoSegura'),
             ),
             SizedBox(height: 20),
             Semantics(
