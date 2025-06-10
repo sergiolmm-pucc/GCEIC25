@@ -4,6 +4,7 @@
 // Pedro Simões 23008779
 
 const axios = require('axios');
+const fetch = require("node-fetch");
 
 function calcularPotenciaNecessaria(consumoMensalKwh, horasSolDia) {
     return consumoMensalKwh / (30 * horasSolDia);
