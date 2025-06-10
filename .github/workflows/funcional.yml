@@ -36,8 +36,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Instala Dependencias
         run: npm install
-      - name: instala bridge
-        run: npm i @rentready/flutter-selenium-bridge
+  
       - name: Roda os testes
         run: npm run funcional-CICD10
       - name: fotos da tela
