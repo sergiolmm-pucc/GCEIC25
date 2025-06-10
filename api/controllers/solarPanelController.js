@@ -3,6 +3,8 @@
 // Marcos Miotto 23004827
 // Pedro Simões 23008779
 
+const axios = require('axios');
+
 function calcularPotenciaNecessaria(consumoMensalKwh, horasSolDia) {
     return consumoMensalKwh / (30 * horasSolDia);
 }
@@ -10,6 +12,7 @@ function calcularPotenciaNecessaria(consumoMensalKwh, horasSolDia) {
 function calcularAreaNecessaria(qtdPaineis, areaPainelM2 = 1.6) {
     return qtdPaineis * areaPainelM2;
 }
+
 
 async function pegarLatitudePorCep(cep) {
     const cepLimpo = cep.replace(/\D/g, '');
@@ -19,11 +22,13 @@ async function pegarLatitudePorCep(cep) {
 
     try {
         const viaCepUrl = `https://viacep.com.br/ws/${cepLimpo}/json/`;
-        const viaCepResponse = await fetch(viaCepUrl);
-        const viaCepData = await viaCepResponse.json();
+        const viaCepResponse = await axios.get(viaCepUrl);
+        const viaCepData = viaCepResponse.data;
+
         if (viaCepData.erro) {
             throw new Error("CEP não encontrado pelo ViaCEP.");
         }
+
         const endereco = [
             viaCepData.logradouro,
             viaCepData.bairro,
@@ -31,10 +36,10 @@ async function pegarLatitudePorCep(cep) {
             viaCepData.uf,
             'Brasil'
         ].filter(Boolean).join(', ');
-        // Substitua pela sua chave real:
+
         const googleGeocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(endereco)}&key=AIzaSyDb9KYzzxefFH29dufLkdtH8fVsdXVDaGs`;
-        const googleResponse = await fetch(googleGeocodingUrl);
-        const googleData = await googleResponse.json();
+        const googleResponse = await axios.get(googleGeocodingUrl);
+        const googleData = googleResponse.data;
 
         if (googleData.status === 'OK' && googleData.results.length > 0) {
             const location = googleData.results[0].geometry.location;
@@ -48,7 +53,6 @@ async function pegarLatitudePorCep(cep) {
         throw error;
     }
 }
-
 
 // POST /calcular
 exports.calcular = (req, res) => {
